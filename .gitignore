@@ -24,6 +24,8 @@ media
 *.so
 
 # Distribution / packaging
+Pipfile
+Pipfile.lock
 .Python
 build/
 develop-eggs/
