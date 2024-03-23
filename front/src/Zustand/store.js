@@ -161,14 +161,14 @@ set({
     }))
    },
   addNewNode:async(newNode)=>{
-    let tempNode = {"name": newNode.data.label, "id": newNode.id}
+    let tempNode = {"name": newNode.data.label, "id": newNode.id, "bgColor": newNode.bgColor, "type": newNode.type}
     console.log(tempNode);
-    const res = await axios.post(`http://localhost:8000/`,tempNode);
+    const res = await axios.post(`http://localhost:8000/api/createComponent`,tempNode);
    console.log('res', res)
   },
 
   deleteNode:async(id)=>{
-    const res=await axios.delete(`${configuration.apiBaseUrl}sidebarNode/${id}`)
+    const res=await axios.delete(`http://localhost:8000/api/deleteComponent/${id}`)
     console.log('res', res)
   },
 
