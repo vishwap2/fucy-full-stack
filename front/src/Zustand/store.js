@@ -10,6 +10,8 @@ import axios from "axios";
 import { configuration } from "../services/baseApiService";
 
 const useStore = createWithEqualityFn((set, get) => ({
+  attackNodes:[],
+  attackEdges:[],
   nodes:[],
   edges: [],
   sidebarNodes:[],
@@ -30,9 +32,24 @@ const useStore = createWithEqualityFn((set, get) => ({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
+  onAttackNodesChange: (changes) => {
+    set({
+      attackNodes: applyNodeChanges(changes, get().attackNodes),
+    });
+  },
+  onAttckEdgesChange: (changes) => {
+    set({
+      attackEdges: applyEdgeChanges(changes, get().attackEdges),
+    });
+  },
   onConnect: (connection) => {
     set({
       edges: addEdge(connection, get().edges),
+    });
+  },
+  onAttackConnect: (connection) => {
+    set({
+      attackEdges: addEdge(connection, get().attackEdges),
     });
   },
   fetchAPI: async () => {
@@ -53,6 +70,17 @@ set({
 })
   },
 
+
+  setAttackNodes:(newNodes)=>{
+    set({
+     attackNodes:newNodes
+    })
+   },
+   setAttackEdges:(newEdges)=>{
+ set({
+  attackEdges:newEdges
+ })
+   },
   getSidebarNode:async()=>{
     const res = await axios.get(`${configuration.apiBaseUrl}sidebarNode`);
     set({
@@ -78,6 +106,7 @@ set({
 
   getModalById:async(id)=>{
     const res = await axios.get(`${configuration.apiBaseUrl}Modals/${id}`);
+    console.log('res.data ...', res.data)
     set({
    modal:res.data
     })
@@ -104,8 +133,13 @@ set({
     console.log('newModal', newModal);
     const res = await axios.patch(`${configuration.apiBaseUrl}Modals/${newModal?.id}`,newModal);
     console.log('res', res);
-    if(res) return res
+    if(res) {
+      alert('Updated')
+      window.location.reload();
+      return res;
+    }
   } ,
+
 
   
   addTemplate:async(newTemplate)=>{
@@ -145,12 +179,36 @@ set({
     }
   },
   dragAdd:(newNode)=>{
+    console.log('newNode', newNode)
    set(state=>({
     nodes:[
       ...state.nodes,
       newNode
     ]
    }))
+  },
+
+  addAttackNode:(newNode)=>{
+    console.log('newNode', newNode)
+   set(state=>({
+    attackNodes:[
+      ...state.attackNodes,
+      newNode
+    ]
+   }))
+  },
+  updateAttackNode:(nodeId,name)=>{
+    set(state=>{
+     let node = state.attackNodes.find(ite=>ite.id === nodeId);
+     const ind = state.attackNodes.findIndex(ite=>ite.id === nodeId);
+      node.data.label=name
+     state.attackNodes[ind]=node
+     return({
+      attackNodes:[
+      ...state.attackNodes
+     ]})
+    })
+  
   },
 
   dragAddNode:(newNode,newEdge)=>{

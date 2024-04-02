@@ -1,55 +1,65 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { 
+  // useState,
+  //  useCallback, 
+   useEffect } from 'react';
 import ReactFlow, {
-  MiniMap,
-  Controls,
-  Background,
   ReactFlowProvider,
+  // MarkerType,
+  Controls,
+  MiniMap,
   Panel,
-  getRectOfNodes,
-  getTransformForBounds,
-  MarkerType,
 } from 'reactflow';
 import '../index.css';
 import 'reactflow/dist/style.css';
-import { v4 as uid } from "uuid";
+// import { v4 as uid } from "uuid";
 import CustomNode from '../../ui-component/custom/CustomNode';
 import DefaultNode from "../../ui-component/custom/DefaultNode";
 import InputNode from "../../ui-component/custom/InputNode";
 import OutputNode from "../../ui-component/custom/OutputNode";
 import CircularNode from "../../ui-component/custom/CircularNode";
 import DiagonalNode from "../../ui-component/custom/DiagonalNode ";
+import AttackTreeNode from '../../ui-component/CustomGates/AttackTreeNode';
 import useStore from '../../Zustand/store';
 import { shallow } from "zustand/shallow";
-import { toPng } from "html-to-image";
+// import { useSelector } from 'react-redux';
+import ORGate from '../../ui-component/CustomGates/ORGate';
+import ANDGate from '../../ui-component/CustomGates/ANDGate';
+import TransferGate from '../../ui-component/CustomGates/TransferGate';
+import VotingGate from '../../ui-component/CustomGates/VotingGate';
 import { Button } from '@mui/material';
-import AddLibrary from '../../ui-component/Modal/AddLibrary';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { v4 as uid } from 'uuid';
+import Event from '../../ui-component/CustomGates/Event';
+import { useDispatch } from 'react-redux';
+import { setAttackScene } from '../../store/slices/CurrentIdSlice';
+
 
 const selector = (state) => ({
-  nodes: state.nodes,
-  edges: state.edges,
-  onNodesChange: state.onNodesChange,
-  onEdgesChange: state.onEdgesChange,
-  onConnect: state.onConnect,
+  nodes:state.attackNodes,
+  edges:state.attackEdges,
+  onNodesChange: state.onAttackNodesChange,
+  onEdgesChange: state.onAttackEdgesChange,
+  onConnect: state.onAttackConnect,
   dragAdd: state.dragAdd,
+  addAttackNode: state.addAttackNode,
   dragAddNode: state.dragAddNode,
-  setNodes: state.setNodes,
-  setEdges: state.setEdges,
+  setNodes:state.setAttackNodes,
+  setEdges: state.setAttackEdges,
   modal: state.modal,
   getModalById:state.getModalById,
-  updateModal:state.updateModal,
+  update:state.updateModal,
 });
 
 //Edge line styling
 const connectionLineStyle = { stroke: "black" };
 const edgeOptions = {
-  type: "smoothstep",
-  markerEnd: {
-    type: MarkerType.ArrowClosed,
-    width: 20,
-    height: 20,
-    color: "black",
-  },
+  type: "step",
+  // markerEnd: {
+  //   type: MarkerType.ArrowClosed,
+  //   width: 20,
+  //   height: 20,
+  //   color: "black",
+  // },
   // markerStart: {
   //   type: MarkerType.ArrowClosed,
   //   width: 20,
@@ -58,7 +68,7 @@ const edgeOptions = {
   // },
   animated: false,
   style: {
-    stroke: "aqua",
+    stroke: "gray",
   },
 };
 
@@ -70,239 +80,90 @@ const nodetypes = {
   signal: CustomNode,
   transmitter: CircularNode,
   transceiver: DiagonalNode,
+  attack_tree_node:AttackTreeNode,
+  Event:Event,
+  [`OR Gate`]:ORGate,
+  [`AND Gate`]:ANDGate,
+  [`Transfer Gate`]:TransferGate,
+  [`Voting Gate`]:VotingGate,
 };
-const flowKey = "example-flow";
+// const flowKey = "example-flow";
 
-export default function Home() {
+export default function Home({attackScene}) {
   const {
     nodes,
     edges,
     onNodesChange,
     onEdgesChange,
     onConnect,
-    dragAdd,
-    dragAddNode,
+    // dragAdd,
+    // dragAddNode,
+    addAttackNode,
     setNodes,
     setEdges,
     getModalById,
     modal,
-    updateModal,
+    update
   } = useStore(selector, shallow);
+  const dispatch = useDispatch();
+  const { id } = useParams();
   // const reactFlowWrapper = useRef(null);
-  const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [openTemplate, setOpenTemplate] = useState(false);
-  const [savedTemplate, setSavedTemplate] = useState({});
-  const currentId = useSelector(state=>state?.currentId?.currentId);
-  console.log('currentId', currentId);
+  // const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  // const [savedTemplate, setSavedTemplate] = useState({});
+  // const currentId = useSelector(state=>state?.currentId?.currentId);
+  console.log('attackScene', attackScene);
 console.log('modal', modal)
 
   useEffect(()=>{
-    getModalById(currentId);
-    onSave();
-    onRestore();
-  },[currentId])
+    setNodes([]);
+    setEdges([]);
+    getModalById(id);
+    if(attackScene?.template){
+      setNodes(attackScene?.template?.nodes);
+      setEdges(attackScene?.template?.edges);
 
-  console.log(openTemplate);
-  console.log(savedTemplate);
-  //for downloading the circuit and image
-  function downloadImage(dataUrl) {
-    const a = document.createElement("a");
-
-    a.setAttribute("download", "reactflow.png");
-    a.setAttribute("href", dataUrl);
-    a.click();
-  }
-
-  const imageWidth = 1024;
-  const imageHeight = 768;
-
-  const handleDownload = () => {
-    const nodesBounds = getRectOfNodes(nodes);
-    const transform = getTransformForBounds(
-      nodesBounds,
-      imageWidth,
-      imageHeight,
-      0.5,
-      2
-    );
-
-    toPng(document.querySelector(".react-flow__viewport"), {
-      backgroundColor: "#1a365d",
-      width: imageWidth,
-      height: imageHeight,
-      style: {
-        width: imageWidth,
-        height: imageHeight,
-        transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
-      },
-    }).then(downloadImage);
-  };
-
-  // useEffect(() => {
-  //   setNodes([]);
-  //   setEdges([]);
-  // }, []);
-
-  //fn for Drag and drop
-  const onDragOver = useCallback((event) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-  }, []);
-
-  const onDrop = useCallback(
-    (event) => {
-      event.preventDefault();
-      const file = event.dataTransfer.getData("application/parseFile");
-      const template = event.dataTransfer.getData("application/template");
-      let parsedNode;
-      let parsedTemplate;
-      if (file) {
-        parsedNode = JSON.parse(file);
-      } else {
-        parsedTemplate = JSON.parse(template);
-      }
-
-      // if (typeof parsedNode === "undefined" || !parsedNode || typeof parsedTemplate === "undefined" || !parsedTemplate) {
-      //   return;
-      // }
-
-      const position = reactFlowInstance.screenToFlowPosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
-      if (parsedNode) {
-        const newNode = {
-          id: uid(),
-          type: parsedNode.type,
-          position,
-          properties: parsedNode.properties,
-          data: {
-            label: parsedNode.data["label"],
-            bgColor: parsedNode.data["bgColor"],
-          },
-        };
-        dragAdd(newNode);
-      }
-
-      if (parsedTemplate) {
-        let newNodes = [];
-        let newEdges = [];
-        const randomId = Math.floor(Math.random() * 1000);
-        const randomPos = Math.floor(Math.random() * 500);
-
-        parsedTemplate["nodes"].map((node) => {
-          newNodes.push({
-            id: `${node.id + randomId}`,
-            data: node.data,
-            type: node.type,
-            position: {
-              x: node["position"]["x"] + randomPos,
-              y: node["position"]["y"] + randomPos,
-            },
-            properties: node.properties,
-          });
-        });
-
-        parsedTemplate["edges"].map((edge) =>
-          newEdges.push({
-            id: uid(),
-            source: `${edge.source + randomId}`,
-            target: `${edge.target + randomId}`,
-            ...edgeOptions,
-          })
-        );
-
-        dragAddNode(newNodes, newEdges);
-      }
-    },
-    [reactFlowInstance]
-  );
-
-  // console.log("nodes",nodes);
-  // console.log('edges', edges);
-  //fn for save & restore
-  const onSave = useCallback(() => {
-    if (reactFlowInstance) {
-      const flow = reactFlowInstance.toObject();
-      localStorage.setItem(flowKey, JSON.stringify(flow));
     }
-  }, [reactFlowInstance]);
+    else{
+      const newNode = {
+        id: attackScene?.id,
+        type:'attack_tree_node' ,
+        position:{
+          x:100,y:100
+        },
+        data: {
+          label: attackScene?.name,
+        },
+      };
+      setTimeout(() => {
+        addAttackNode(newNode);
+      }, 500);
+    }
+  },[attackScene])
 
-  const onRestore = useCallback(() => {
-    const restoreFlow = async () => {
-      const flow = JSON.parse(localStorage.getItem(flowKey));
-      if (flow) {
-        setSavedTemplate(flow);
-        // const { x = 0, y = 0, zoom = 1 } = flow.viewport;
-        setNodes(flow.nodes || []);
-        setEdges(flow.edges || []);
-      }
-    };
-    restoreFlow();
-  }, [reactFlowInstance]);
-
+  
+  console.log("nodes",nodes);
+  
   const handleSave = () => {
-    setOpenTemplate(true);
-    onSave();
-    onRestore();
-  };
-
-  const handleSaveToModal = () => {
-    let mod = {...modal};
+    console.log('nodes', nodes);
+    console.log('edges', edges);
+    const atScene = { ...attackScene };
+    const mod = {...modal};
+    const selected = mod?.scenarios[3]?.subs[0]?.scenes?.find(ite=>ite.id===atScene?.id);
+    selected.template = {
+      id:uid(),
+      nodes:nodes,
+      edges:edges,
+    }
+    dispatch(setAttackScene(selected));
     console.log('mod', mod)
-      let Details = nodes?.map(node=>({
-          name:node?.data?.label,
-          props:node?.properties,
-      }));
-      console.log('Details', Details);
-//       let md = newMod?.scenarios?.map(item=>item.Details=Details);
-//   console.log('Details', Details)
-// console.log('md', md);
-// updateModal(newMod);
-    mod.template = {nodes,edges}
-    // console.log('nodes', nodes);
-    // console.log('edges', edges)
-    mod.scenarios = [
-      {
-        id:uid(),
-          name: 'Item Modal & Assets',  
-          Details:Details
-      },
-      {
-        id:uid(),
-          name: 'Damage Scenarios Identification and Impact Ratings',
-          subs:[
-              {
-                 name: 'Damage Scenarios Derivations',
-                 Details:Details
-              },
-              {
-                  name: 'Damage Scenarios - Impact Ratings',
-                  Details:Details
-               }
-          ] 
-      },
-      {
-        id:uid(),
-          name: 'Threat Scenarios',
-          Details:Details
-
-      },
-  ]
-
-  console.log('mod', mod)
-    updateModal(mod)
+    update(mod);
   }
-
-  const handleClose = () => {
-    setOpenTemplate(false);
-  };
 
   return (
-    <div style={{ width: '100%', height: '90%',border:'1px solid',marginTop:'1.2rem',background:'white' }}>
+    <div style={{ height: '70svh',background:'white' }}>
         <ReactFlowProvider>
         {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
-          <ReactFlow
+        <ReactFlow
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
@@ -311,59 +172,30 @@ console.log('modal', modal)
             nodeTypes={nodetypes}
             connectionLineStyle={connectionLineStyle}
             defaultEdgeOptions={edgeOptions}
-            onInit={setReactFlowInstance}
-            onDrop={onDrop}
-            onDragOver={onDragOver}
+            // onInit={setReactFlowInstance}
+            // onDrop={onDrop}
+            // onDragOver={onDragOver}
             fitView
-            style={{
-              " .react-flow__node": {
-                backgroundColor: "black",
-              },
-            }}
           >
-            <Panel
+          <Panel
               position="top-left"
               style={{
                 display: "flex",
                 gap: 5,
                 background: "white",
-                marginLeft: "2rem",
-                marginTop: "2rem",
+                // marginLeft: "2rem",
+                // marginTop: "2rem",
               }}
             >
-              <Button variant="outlined" onClick={onSave}>
-                Save
-              </Button>
-              <Button variant="outlined" onClick={onRestore}>
-                Restore
-              </Button>
               <Button variant="outlined" onClick={handleSave}>
                 Add
               </Button>
-              <Button variant="outlined" onClick={handleSaveToModal}>
-                Add to Modal
-              </Button>
-              <Button
-                variant="outlined"
-                className="download-btn"
-                onClick={handleDownload}
-              >
-                Download Image
-              </Button>
             </Panel>
+           <MiniMap/>
             <Controls />
-            <MiniMap zoomable pannable />
-            <Background variant="dots" gap={12} size={1} />
           </ReactFlow>
         {/* </div> */}
       </ReactFlowProvider>
-      <AddLibrary
-        open={openTemplate}
-        handleClose={handleClose}
-        savedTemplate={savedTemplate}
-        setNodes={setNodes}
-        setEdges={setEdges}
-      />
     </div>
   );
 }

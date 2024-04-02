@@ -22,7 +22,7 @@ import { v4 as uid } from 'uuid';
 import { shallow } from 'zustand/shallow';
 import { storeCurrentId } from '../../store/slices/CurrentIdSlice';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -51,7 +51,7 @@ const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorizati
 
 export default function AddModal({ open, handleClose }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const { create } = useStore(selector, shallow);
     const theme = useTheme();
     const [templateDetails, setTemplateDetails] = React.useState({
@@ -82,8 +82,8 @@ export default function AddModal({ open, handleClose }) {
                     
                     setTimeout(() => {
                         alert('Added Succesfully');
-                        navigate(`/Modals/${id}`);
-                        // window.location.reload();
+                        // navigate(`/Modals/${id}`);
+                        window.location.href = `/Modals/${id}`;
                     }, 500);
                 }
             })

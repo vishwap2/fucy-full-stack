@@ -26,6 +26,8 @@ import AddLibrary from '../../ui-component/Modal/AddLibrary';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import DsTable from '../../ui-component/Table/DSTable';
+import Tstable from '../../ui-component/Table/TSTable';
+import AttackTree from '../AttackTree';
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -60,7 +62,7 @@ const edgeOptions = {
   // },
   animated: false,
   style: {
-    stroke: "aqua",
+    stroke: "grey",
   },
 };
 
@@ -95,8 +97,9 @@ export default function Edit() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openTemplate, setOpenTemplate] = useState(false);
   const [savedTemplate, setSavedTemplate] = useState({});
-  const { isTableOpen } = useSelector(state =>state?.currentId);
-  console.log('isTableOpen', isTableOpen)
+  const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen } = useSelector(state =>state?.currentId);
+  // console.log('isDsTableOpen', isDsTableOpen);
+  // console.log('isTsTableOpen', isTsTableOpen);
   console.log('id edit', id)
   
   useEffect(()=>{
@@ -104,6 +107,8 @@ export default function Edit() {
   },[id ]);
   
   useEffect(()=>{
+    setEdges([]);
+    setNodes([]);
     const template = modal?.template;
     setSavedTemplate(template);
     onSaveInitial(template); 
@@ -307,10 +312,12 @@ export default function Edit() {
           name: 'Damage Scenarios Identification and Impact Ratings',
           subs:[
               {
+                id:uid(),
                  name: 'Damage Scenarios Derivations',
                  Details:Details
               },
               {
+                id:uid(),
                   name: 'Damage Scenarios - Impact Ratings',
                   scenes:[]
                }
@@ -318,8 +325,36 @@ export default function Edit() {
       },
       {
         id:uid(),
-          name: 'Threat Scenarios',
-          Details:Details
+          name: 'Threat Scenarios Identification',
+          subs:[
+            {
+              id:uid(),
+               name: 'Threat Scenarios',
+               Details:Details
+            },
+            {
+              id:uid(),
+                name: 'Derived Threat Scenarios',
+                scenes:[]
+             }
+        ] 
+
+      },
+      {
+        id:uid(),
+          name: 'Attack Path Analysis and Attack Feasability Rating',
+          subs:[
+            {
+              id:uid(),
+               name: 'Attack Trees',
+               scenes:[]
+            },
+            {
+              id:uid(),
+                name: 'Vulnerability Analysis',
+                scenes:[]
+             }
+        ] 
 
       },
   ]
@@ -334,7 +369,8 @@ export default function Edit() {
 
   return (
     <>
-    {!isTableOpen ? <div style={{ width: '100%', height: '90%',border:'1px solid',marginTop:'1.2rem',background:'white' }}>
+    {isDsTableOpen? <DsTable/> : isTsTableOpen ? <Tstable/>: isAttackTreeOpen ? <AttackTree modal={modal}/>:
+    <div style={{ width: '100%', height: '90%',border:'1px solid',marginTop:'1.2rem',background:'white' }}>
         <ReactFlowProvider>
         {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
           <ReactFlow
@@ -373,7 +409,7 @@ export default function Edit() {
                 Restore
               </Button>
               <Button variant="outlined" onClick={handleSave}>
-                Add12
+                Add
               </Button>
               <Button variant="outlined" onClick={handleSaveToModal}>
                 Add to Modal
@@ -399,7 +435,7 @@ export default function Edit() {
         setNodes={setNodes}
         setEdges={setEdges}
       />
-    </div>:<DsTable/>}
+    </div>}
     </>
   );
 }

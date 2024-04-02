@@ -3,8 +3,6 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
 .dndnode {
     height: 20px;
     padding: 4px 8px;
-    /* border: 2px solid #16c260;
-    box-shadow: 0px 0px 5px #16c260; */
     border-radius: 20px;
     margin-bottom: 10px;
     display: flex;
@@ -14,14 +12,6 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     width: fit-content;
     font-family:'Inter', sans-serif;
     font-size: 16px;   
-
-   /* &.input:before{
-     content: '';
-     border: 5px solid black;
-     border-radius: 50%; 
-     position: relative;
-     left: -4px;
-   } */
   }
   
    .reactflow-wrapper {
@@ -42,9 +32,9 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
   }
   
   .react-flow .react-flow__handle {
-    width: 15px;
-    height: 10px;
-    border-radius: 3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
     background-color: #784be8;
   }
 
@@ -97,4 +87,15 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
   padding-top: 15%;
   align-items: start ;
   justify-content: center;
+}
+
+.attack_tree_node,.level_node{
+ border: 1px solid black;
+ border-radius: 4px;
+ color: black;
+ text-shadow:none;
+ padding: 5px;
+ & .react-flow__handle{
+  opacity: 0
+ }
 }

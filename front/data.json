@@ -2061,198 +2061,132 @@
         "Integrity",
         "Non-repudiation"
       ]
-    },
-    {
-      "id": "ba8f5974-4791-4d51-ac05-56c6fe57dbd6",
-      "data": {
-        "label": "microcontroller",
-        "bgColor": "#000"
-      },
-      "type": "receiver",
-      "properties": [
-        "Confidentiality",
-        "Authenticity",
-        "Non-repudiation"
-      ]
     }
   ],
   "Modals": [
     {
-      "name": "Test",
+      "name": "test2",
       "properties": [
         "Confidentiality",
         "Integrity"
       ],
-      "id": "43ad9d27-5f66-4d0a-aec6-4e0e2c70a9a5"
-    },
-    {
-      "name": "New",
-      "properties": [
-        "Confidentiality",
-        "Integrity"
-      ],
-      "id": "c9588e21-6bab-4b0e-8ddb-e820133ae1a6",
+      "id": "ba48adec-466f-4287-a2e0-49b5a2b2d02a",
       "template": {
         "nodes": [
           {
-            "width": 150,
-            "height": 40,
-            "id": "f8155ccc-ba39-4839-bd1a-161500ed6fd6236",
+            "id": "f8155ccc-ba39-4839-bd1a-161500ed6fd6556",
             "data": {
               "label": "Power Manage",
               "bgColor": "rgb(233, 233, 85)"
             },
             "type": "input",
             "position": {
-              "x": 184.2524072400253,
-              "y": 131.67284914047977
+              "x": 565.2524072400253,
+              "y": 512.6728491404798
             },
             "properties": [
               "Integrity",
               "Authorization"
             ],
-            "positionAbsolute": {
-              "x": 184.2524072400253,
-              "y": 131.67284914047977
-            }
+            "width": 150,
+            "height": 40
           },
           {
-            "width": 150,
-            "height": 40,
-            "id": "7e3fd44c-521c-49cc-8241-ceb966b66ef7236",
+            "id": "7e3fd44c-521c-49cc-8241-ceb966b66ef7556",
             "data": {
               "label": "MCU",
               "bgColor": "#06f9f5"
             },
             "type": "default",
             "position": {
-              "x": 131.08648721151985,
-              "y": 275.81156566220557
+              "x": 512.0864872115199,
+              "y": 656.8115656622056
             },
             "properties": [
               "Integrity",
               "Authorization"
             ],
-            "positionAbsolute": {
-              "x": 131.08648721151985,
-              "y": 275.81156566220557
-            }
+            "width": 150,
+            "height": 40
           },
           {
-            "width": 150,
-            "height": 40,
-            "id": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64236",
+            "id": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64556",
             "data": {
               "label": "PHY",
               "bgColor": "#16c260"
             },
             "type": "default",
             "position": {
-              "x": 214.2827291942765,
-              "y": 384.2017601154038
+              "x": 595.2827291942765,
+              "y": 765.2017601154038
             },
             "properties": [
               "Integrity",
               "Authenticity"
             ],
-            "positionAbsolute": {
-              "x": 214.2827291942765,
-              "y": 384.2017601154038
-            }
+            "width": 150,
+            "height": 40
           },
           {
-            "width": 150,
-            "height": 40,
-            "id": "212528af-2aca-4df6-bc01-9b3e4b6e7507236",
+            "id": "212528af-2aca-4df6-bc01-9b3e4b6e7507556",
             "data": {
               "label": "Vehicle",
               "bgColor": "#ff0072"
             },
             "type": "output",
             "position": {
-              "x": 817.0505308576976,
-              "y": 398.7296316643992
+              "x": 1198.0505308576976,
+              "y": 779.7296316643992
             },
             "properties": [
               "Authenticity",
               "Availability"
             ],
-            "positionAbsolute": {
-              "x": 817.0505308576976,
-              "y": 398.7296316643992
-            }
+            "width": 150,
+            "height": 40
           },
           {
-            "width": 150,
-            "height": 40,
-            "id": "2a4df59e-0856-466f-852f-fbff39d0d899236",
+            "id": "2a4df59e-0856-466f-852f-fbff39d0d899556",
             "data": {
               "label": "Receiver",
               "bgColor": "#124faf"
             },
             "type": "receiver",
             "position": {
-              "x": 600.4122355507128,
-              "y": 346.3695543428532
+              "x": 981.4122355507128,
+              "y": 727.3695543428532
             },
             "properties": [
               "Confidentiality",
               "Availability"
             ],
-            "positionAbsolute": {
-              "x": 600.4122355507128,
-              "y": 346.3695543428532
-            }
+            "width": 150,
+            "height": 40
           },
           {
-            "width": 150,
-            "height": 40,
-            "id": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0236",
+            "id": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0556",
             "data": {
               "label": "signal",
               "bgColor": "#f59b00"
             },
             "type": "signal",
             "position": {
-              "x": 423.98320961350225,
-              "y": 274.82810595598187
+              "x": 804.9832096135023,
+              "y": 655.8281059559819
             },
             "properties": [
               "Non-repudiation",
               "Authenticity"
             ],
-            "positionAbsolute": {
-              "x": 423.98320961350225,
-              "y": 274.82810595598187
-            }
-          },
-          {
             "width": 150,
-            "height": 40,
-            "id": "94c6e5f9-2dfb-4165-a69b-e1d72e61dbd3",
-            "type": "receiver",
-            "position": {
-              "x": 637.2440422682654,
-              "y": 213.88212184507285
-            },
-            "properties": [
-              "Integrity",
-              "Non-repudiation"
-            ],
-            "data": {
-              "label": "circuit",
-              "bgColor": "#de7878"
-            },
-            "selected": false,
-            "positionAbsolute": {
-              "x": 637.2440422682654,
-              "y": 213.88212184507285
-            },
-            "dragging": false
+            "height": 40
           }
         ],
         "edges": [
           {
+            "id": "8d8cc250-ffb9-4095-bf86-52b72dcf9d00",
+            "source": "f8155ccc-ba39-4839-bd1a-161500ed6fd6556",
+            "target": "7e3fd44c-521c-49cc-8241-ceb966b66ef7556",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2263,12 +2197,12 @@
             "animated": false,
             "style": {
               "stroke": "aqua"
-            },
-            "id": "b21f59d6-ec32-480e-8593-1c0345d1e0fc",
-            "source": "f8155ccc-ba39-4839-bd1a-161500ed6fd6236",
-            "target": "7e3fd44c-521c-49cc-8241-ceb966b66ef7236"
+            }
           },
           {
+            "id": "b558ab49-e6e4-4193-88ad-3384dd82559d",
+            "source": "7e3fd44c-521c-49cc-8241-ceb966b66ef7556",
+            "target": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64556",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2279,12 +2213,12 @@
             "animated": false,
             "style": {
               "stroke": "aqua"
-            },
-            "id": "7d0a1668-4f69-4744-a9a1-998cc4fb8c48",
-            "source": "7e3fd44c-521c-49cc-8241-ceb966b66ef7236",
-            "target": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64236"
+            }
           },
           {
+            "id": "81be7a74-38ba-4663-8ab4-c8c0e1c6673c",
+            "source": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64556",
+            "target": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0556",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2295,12 +2229,12 @@
             "animated": false,
             "style": {
               "stroke": "aqua"
-            },
-            "id": "e6993ba9-1d5f-4ea3-9bb2-613c625e014a",
-            "source": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64236",
-            "target": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0236"
+            }
           },
           {
+            "id": "84852aef-77ce-4b34-a85b-0b31e5815dfd",
+            "source": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0556",
+            "target": "2a4df59e-0856-466f-852f-fbff39d0d899556",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2311,12 +2245,12 @@
             "animated": false,
             "style": {
               "stroke": "aqua"
-            },
-            "id": "d7ff5727-7d9b-4750-905f-194178445787",
-            "source": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0236",
-            "target": "2a4df59e-0856-466f-852f-fbff39d0d899236"
+            }
           },
           {
+            "id": "48ca8286-77cb-49b6-95c8-0bf2efd50914",
+            "source": "2a4df59e-0856-466f-852f-fbff39d0d899556",
+            "target": "212528af-2aca-4df6-bc01-9b3e4b6e7507556",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2327,52 +2261,13 @@
             "animated": false,
             "style": {
               "stroke": "aqua"
-            },
-            "id": "d0f25b70-3fd3-4ebc-a121-e0355c37ca38",
-            "source": "2a4df59e-0856-466f-852f-fbff39d0d899236",
-            "target": "212528af-2aca-4df6-bc01-9b3e4b6e7507236"
-          },
-          {
-            "type": "smoothstep",
-            "markerEnd": {
-              "type": "arrowclosed",
-              "width": 20,
-              "height": 20,
-              "color": "black"
-            },
-            "animated": false,
-            "style": {
-              "stroke": "aqua"
-            },
-            "source": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0236",
-            "sourceHandle": null,
-            "target": "94c6e5f9-2dfb-4165-a69b-e1d72e61dbd3",
-            "targetHandle": null,
-            "id": "reactflow__edge-bce619fc-0c32-4c42-ac0a-2b1b75a01fc0236-94c6e5f9-2dfb-4165-a69b-e1d72e61dbd3"
-          },
-          {
-            "type": "smoothstep",
-            "markerEnd": {
-              "type": "arrowclosed",
-              "width": 20,
-              "height": 20,
-              "color": "black"
-            },
-            "animated": false,
-            "style": {
-              "stroke": "aqua"
-            },
-            "source": "94c6e5f9-2dfb-4165-a69b-e1d72e61dbd3",
-            "sourceHandle": null,
-            "target": "212528af-2aca-4df6-bc01-9b3e4b6e7507236",
-            "targetHandle": null,
-            "id": "reactflow__edge-94c6e5f9-2dfb-4165-a69b-e1d72e61dbd3-212528af-2aca-4df6-bc01-9b3e4b6e7507236"
+            }
           }
         ]
       },
       "scenarios": [
         {
-          "id": "9117e691-d19d-4bad-aa46-fef1fa58ac7b",
+          "id": "ff6e1e32-aac4-42f6-a456-99c7ff54fa49",
           "name": "Item Modal & Assets",
           "Details": [
             {
@@ -2416,18 +2311,11 @@
                 "Non-repudiation",
                 "Authenticity"
               ]
-            },
-            {
-              "name": "circuit",
-              "props": [
-                "Integrity",
-                "Non-repudiation"
-              ]
             }
           ]
         },
         {
-          "id": "67b522f1-60e0-4b46-b1d7-13829ad3987d",
+          "id": "9b40c49d-2f38-4d7e-9d9b-fa3ba5088c95",
           "name": "Damage Scenarios Identification and Impact Ratings",
           "subs": [
             {
@@ -2474,47 +2362,292 @@
                     "Non-repudiation",
                     "Authenticity"
                   ]
-                },
-                {
-                  "name": "circuit",
-                  "props": [
-                    "Integrity",
-                    "Non-repudiation"
-                  ]
                 }
               ]
             },
             {
               "name": "Damage Scenarios - Impact Ratings",
-              "scenes": [
-                {
-                  "id": "748746c1-dba7-4bdb-b5f3-00873b8838f8",
-                  "name": "test3",
-                  "scalability": "",
-                  "Description": "jkhv",
-                  "losses": [],
-                  "modalId": "c9588e21-6bab-4b0e-8ddb-e820133ae1a6",
-                  "impacts": {
-                    "Safety": "Severe",
-                    "Financial": "Negligible",
-                    "Operational": "Moderate"
-                  }
-                },
-                {
-                  "id": "a6e48f5b-80ac-43ef-8989-4f16dcc746c3",
-                  "name": "test12",
-                  "scalability": "",
-                  "Description": "hgj",
-                  "losses": [],
-                  "modalId": "c9588e21-6bab-4b0e-8ddb-e820133ae1a6"
-                }
-              ]
+              "scenes": []
             }
           ]
         },
         {
-          "id": "554585d0-9d61-4aff-83c7-060356290d19",
-          "name": "Threat Scenarios",
+          "id": "00068e69-928d-495d-9268-7fb2bb60671b",
+          "name": "Threat Scenarios Identification",
+          "subs": [
+            {
+              "name": "Threat Scenarios",
+              "Details": [
+                {
+                  "name": "Power Manage",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "MCU",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "PHY",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
+                  "name": "Vehicle",
+                  "props": [
+                    "Authenticity",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "Receiver",
+                  "props": [
+                    "Confidentiality",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "signal",
+                  "props": [
+                    "Non-repudiation",
+                    "Authenticity"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Derived Threat Scenarios",
+              "scenes": [
+                {
+                  "id": "06c05357-f8c1-43e9-9c6e-f528fd1815e4",
+                  "name": "New Threat Scene",
+                  "Description": "This is a Test",
+                  "modalId": "ba48adec-466f-4287-a2e0-49b5a2b2d02a"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9",
+      "name": "Test1",
+      "properties": [
+        "Confidentiality",
+        "Integrity"
+      ],
+      "template": {
+        "nodes": [
+          {
+            "id": "f8155ccc-ba39-4839-bd1a-161500ed6fd6832",
+            "data": {
+              "label": "Power Manage",
+              "bgColor": "rgb(233, 233, 85)"
+            },
+            "type": "input",
+            "position": {
+              "x": 407.25240724002526,
+              "y": 354.6728491404798
+            },
+            "properties": [
+              "Integrity",
+              "Authorization"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "7e3fd44c-521c-49cc-8241-ceb966b66ef7832",
+            "data": {
+              "label": "MCU",
+              "bgColor": "#06f9f5"
+            },
+            "type": "default",
+            "position": {
+              "x": 354.08648721151985,
+              "y": 498.81156566220557
+            },
+            "properties": [
+              "Integrity",
+              "Authorization"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64832",
+            "data": {
+              "label": "PHY",
+              "bgColor": "#16c260"
+            },
+            "type": "default",
+            "position": {
+              "x": 437.2827291942765,
+              "y": 607.2017601154038
+            },
+            "properties": [
+              "Integrity",
+              "Authenticity"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "212528af-2aca-4df6-bc01-9b3e4b6e7507832",
+            "data": {
+              "label": "Vehicle",
+              "bgColor": "#ff0072"
+            },
+            "type": "output",
+            "position": {
+              "x": 1040.0505308576976,
+              "y": 621.7296316643992
+            },
+            "properties": [
+              "Authenticity",
+              "Availability"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "2a4df59e-0856-466f-852f-fbff39d0d899832",
+            "data": {
+              "label": "Receiver",
+              "bgColor": "#124faf"
+            },
+            "type": "receiver",
+            "position": {
+              "x": 823.4122355507128,
+              "y": 569.3695543428532
+            },
+            "properties": [
+              "Confidentiality",
+              "Availability"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0832",
+            "data": {
+              "label": "signal",
+              "bgColor": "#f59b00"
+            },
+            "type": "signal",
+            "position": {
+              "x": 638.2573697960621,
+              "y": 502.8143001373762
+            },
+            "properties": [
+              "Non-repudiation",
+              "Authenticity"
+            ],
+            "width": 150,
+            "height": 40,
+            "selected": true,
+            "positionAbsolute": {
+              "x": 638.2573697960621,
+              "y": 502.8143001373762
+            },
+            "dragging": false
+          }
+        ],
+        "edges": [
+          {
+            "id": "6e3864fa-e30d-47e8-a1c8-7a8e4426839b",
+            "source": "f8155ccc-ba39-4839-bd1a-161500ed6fd6832",
+            "target": "7e3fd44c-521c-49cc-8241-ceb966b66ef7832",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "aqua"
+            }
+          },
+          {
+            "id": "b90d4fc6-1938-48d4-9bc1-0233bb7d91c5",
+            "source": "7e3fd44c-521c-49cc-8241-ceb966b66ef7832",
+            "target": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64832",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "aqua"
+            }
+          },
+          {
+            "id": "82d90519-bd91-45ec-ae64-d256ad8084c0",
+            "source": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64832",
+            "target": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0832",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "aqua"
+            }
+          },
+          {
+            "id": "27672b30-d926-4211-a57e-a7624f66f114",
+            "source": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0832",
+            "target": "2a4df59e-0856-466f-852f-fbff39d0d899832",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "aqua"
+            }
+          },
+          {
+            "id": "7ff94e73-1046-462e-9c39-02ebe38dbd8b",
+            "source": "2a4df59e-0856-466f-852f-fbff39d0d899832",
+            "target": "212528af-2aca-4df6-bc01-9b3e4b6e7507832",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "aqua"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "d0294fa6-fc1f-42d5-ae04-aaf3e0253527",
+          "name": "Item Modal & Assets",
           "Details": [
             {
               "name": "Power Manage",
@@ -2557,13 +2690,306 @@
                 "Non-repudiation",
                 "Authenticity"
               ]
+            }
+          ]
+        },
+        {
+          "id": "a030b788-d4a5-49e7-96a6-9d4cf465b59f",
+          "name": "Damage Scenarios Identification and Impact Ratings",
+          "subs": [
+            {
+              "name": "Damage Scenarios Derivations",
+              "Details": [
+                {
+                  "name": "Power Manage",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "MCU",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "PHY",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
+                  "name": "Vehicle",
+                  "props": [
+                    "Authenticity",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "Receiver",
+                  "props": [
+                    "Confidentiality",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "signal",
+                  "props": [
+                    "Non-repudiation",
+                    "Authenticity"
+                  ]
+                }
+              ]
             },
             {
-              "name": "circuit",
-              "props": [
-                "Integrity",
-                "Non-repudiation"
+              "name": "Damage Scenarios - Impact Ratings",
+              "scenes": [
+                {
+                  "id": "c2298c6d-e000-4cdf-b65d-b60c549778c2",
+                  "name": "Dm scene",
+                  "scalability": "",
+                  "Description": "Test",
+                  "losses": [],
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                }
               ]
+            }
+          ]
+        },
+        {
+          "id": "5584543c-3d33-4c1d-bbea-838f048d4059",
+          "name": "Threat Scenarios Identification",
+          "subs": [
+            {
+              "name": "Threat Scenarios",
+              "Details": [
+                {
+                  "name": "Power Manage",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "MCU",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "PHY",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
+                  "name": "Vehicle",
+                  "props": [
+                    "Authenticity",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "Receiver",
+                  "props": [
+                    "Confidentiality",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "signal",
+                  "props": [
+                    "Non-repudiation",
+                    "Authenticity"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Derived Threat Scenarios",
+              "scenes": [
+                {
+                  "id": "4cb590d6-7398-4269-b0ad-19269dcf07ee",
+                  "name": "New Scene",
+                  "Description": "This is a test",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                },
+                {
+                  "id": "5861a98b-1c77-4ad1-9d81-057c4b31d933",
+                  "name": "Test Scene",
+                  "Description": "This is also a Test",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                },
+                {
+                  "id": "601893f1-8d33-4a9e-b211-9161fe2abe7e",
+                  "name": "Test Scene 1",
+                  "Description": "test",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                },
+                {
+                  "id": "f16aba04-f54a-4e1d-9fb1-6f9f2459b183",
+                  "name": "test Scenario",
+                  "Description": "this is a test ",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "4d1ba979-90ab-4b39-ac12-50eea077885d",
+          "name": "Attack Path Analysis and Attack Feasability Rating",
+          "subs": [
+            {
+              "name": "Attack Trees",
+              "scenes": [
+                {
+                  "id": "5861a98b-1c77-4ad1-9d81-057c4b31d933",
+                  "name": "Test Scene",
+                  "Description": "This is also a Test",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9",
+                  "template": {
+                    "id": "1280906a-fe74-4b53-9083-21c2ba4c3b25",
+                    "nodes": [
+                      {
+                        "id": "5861a98b-1c77-4ad1-9d81-057c4b31d933",
+                        "type": "attack_tree_node",
+                        "position": {
+                          "x": 76,
+                          "y": 59
+                        },
+                        "data": {
+                          "label": "Test Scene"
+                        },
+                        "width": 80,
+                        "height": 30,
+                        "selected": false,
+                        "positionAbsolute": {
+                          "x": 76,
+                          "y": 59
+                        },
+                        "dragging": false
+                      },
+                      {
+                        "id": "e261f01d-5dfa-4b8e-aa2b-fe7911d3e3ee",
+                        "type": "OR Gate",
+                        "position": {
+                          "x": 31,
+                          "y": 126
+                        },
+                        "data": {
+                          "label": "OR Gate"
+                        },
+                        "width": 100,
+                        "height": 104,
+                        "selected": false,
+                        "positionAbsolute": {
+                          "x": 31,
+                          "y": 126
+                        },
+                        "dragging": false
+                      },
+                      {
+                        "id": "33bed888-7abb-43e1-b4a8-6efa60a47b00",
+                        "type": "Event",
+                        "position": {
+                          "x": 31,
+                          "y": 273.7799560546873
+                        },
+                        "data": {
+                          "label": "testing node"
+                        },
+                        "width": 100,
+                        "height": 20,
+                        "selected": false,
+                        "positionAbsolute": {
+                          "x": 31,
+                          "y": 273.7799560546873
+                        },
+                        "dragging": false
+                      },
+                      {
+                        "id": "951ea312-1dc3-4b02-b655-ff66b7c5142b",
+                        "type": "Transfer Gate",
+                        "position": {
+                          "x": 159.9586951857343,
+                          "y": 218.4663457563829
+                        },
+                        "data": {
+                          "label": "Level"
+                        },
+                        "width": 100,
+                        "height": 120,
+                        "selected": true,
+                        "positionAbsolute": {
+                          "x": 159.9586951857343,
+                          "y": 218.4663457563829
+                        },
+                        "dragging": false
+                      }
+                    ],
+                    "edges": [
+                      {
+                        "type": "step",
+                        "animated": false,
+                        "style": {
+                          "stroke": "gray"
+                        },
+                        "source": "5861a98b-1c77-4ad1-9d81-057c4b31d933",
+                        "sourceHandle": null,
+                        "target": "e261f01d-5dfa-4b8e-aa2b-fe7911d3e3ee",
+                        "targetHandle": null,
+                        "id": "reactflow__edge-5861a98b-1c77-4ad1-9d81-057c4b31d933-e261f01d-5dfa-4b8e-aa2b-fe7911d3e3ee"
+                      },
+                      {
+                        "type": "step",
+                        "animated": false,
+                        "style": {
+                          "stroke": "gray"
+                        },
+                        "source": "e261f01d-5dfa-4b8e-aa2b-fe7911d3e3ee",
+                        "sourceHandle": null,
+                        "target": "33bed888-7abb-43e1-b4a8-6efa60a47b00",
+                        "targetHandle": null,
+                        "id": "reactflow__edge-e261f01d-5dfa-4b8e-aa2b-fe7911d3e3ee-33bed888-7abb-43e1-b4a8-6efa60a47b00"
+                      },
+                      {
+                        "type": "step",
+                        "animated": false,
+                        "style": {
+                          "stroke": "gray"
+                        },
+                        "source": "5861a98b-1c77-4ad1-9d81-057c4b31d933",
+                        "sourceHandle": null,
+                        "target": "951ea312-1dc3-4b02-b655-ff66b7c5142b",
+                        "targetHandle": null,
+                        "id": "reactflow__edge-5861a98b-1c77-4ad1-9d81-057c4b31d933-951ea312-1dc3-4b02-b655-ff66b7c5142b"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "601893f1-8d33-4a9e-b211-9161fe2abe7e",
+                  "name": "Test Scene 1",
+                  "Description": "test",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                },
+                {
+                  "id": "f16aba04-f54a-4e1d-9fb1-6f9f2459b183",
+                  "name": "test Scenario",
+                  "Description": "this is a test ",
+                  "modalId": "8aec806d-f433-4fb3-ae5c-57cb90eaf2d9"
+                }
+              ]
+            },
+            {
+              "name": "Vulnerability Analysis",
+              "scenes": []
             }
           ]
         }
