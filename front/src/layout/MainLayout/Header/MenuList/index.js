@@ -34,7 +34,7 @@ export default function MenuList() {
             value: '4'
         },
         {
-            label: 'Attach Tree',
+            label: 'Attack Tree',
             value: '5'
         },
         {
