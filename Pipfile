@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 djangorestframework = "*"
 django-cors-headers = "*"
+django-truncate = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
