@@ -39,6 +39,8 @@ const names = [
 const selector = (state) => ({
   nodeState: state.sidebarNodes,
   addNode: state.addNewNode,
+  create:state.createComponent,
+
 });
 
 function getStyles(name, nodes, theme) {
@@ -58,7 +60,7 @@ const AddNewNode = ({ open, handleClose, getSidebarNode }) => {
     properties: [],
     bgColor: "#000",
   });
-  const { addNode } = useStore(selector);
+  const { create} = useStore(selector);
 
   //Name & type for the new Node
   const handleChangeName = (event) => {
@@ -88,14 +90,27 @@ const AddNewNode = ({ open, handleClose, getSidebarNode }) => {
   // For Adding new Node
   const handleSubmit = (e) => {
     e.preventDefault();
-    const dataNode = {
-      id: uid(),
-      data: { label: newNode.nodeName,bgColor:newNode.bgColor },
-      type: newNode.type,
-      properties: newNode.properties,
-    };
+    // const dataNode = {
+    //   id: uid(),
+    //   data: { label: newNode.nodeName,bgColor:newNode.bgColor },
+    //   type: newNode.type,
+    //   properties: newNode.properties,
+    // };
 
-    addNode(dataNode);
+    const data ={
+      id: uid(),
+      data:{
+        label:newNode.nodeName,
+        bgColor:newNode.bgColor
+      },
+      // name:  newNode.nodeName ,
+      // bgColor:newNode.bgColor
+      type: newNode.type,
+      // properties: newNode.properties,
+    }
+
+    // addNode(dataNode);
+    create(data);
     setTimeout(() => {
       getSidebarNode();
     }, []);
@@ -105,7 +120,7 @@ const AddNewNode = ({ open, handleClose, getSidebarNode }) => {
       nodeName: "",
       type: "",
       properties: [],
-      bgColor: "#000",
+
     });
   };
 

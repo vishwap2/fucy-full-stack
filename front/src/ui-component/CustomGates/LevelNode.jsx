@@ -1,6 +1,6 @@
 import React from 'react'
 import { Handle, Position } from 'reactflow';
-import { levelClose } from '../../store/slices/CurrentIdSlice';
+import { closeAll } from '../../store/slices/CurrentIdSlice';
 import { useDispatch } from 'react-redux';
 
 const LevelNode = ({data,isConnectable}) => {
@@ -9,7 +9,7 @@ const LevelNode = ({data,isConnectable}) => {
     <>
     <div
     className={`level_node`}
-    onDoubleClick={()=>dispatch(levelClose())}
+    onDoubleClick={()=>dispatch(closeAll())}
     // style={{ 
     //   backgroundColor:`${data['bgColor']}`
     //   }}

@@ -17,7 +17,7 @@ export default function MenuList() {
 
     const tabs = [
         {
-            label: 'Modal',
+            label: 'Item Definition',
             value: '1',
 
         },
@@ -34,37 +34,33 @@ export default function MenuList() {
             value: '4'
         },
         {
-            label: 'Attack Tree',
+            label: 'Attack Path Analysis',
             value: '5'
         },
         {
-            label: 'Traceability',
+            label: 'Risk Treatment and Determination',
             value: '6'
         },
         {
-            label: 'Risk Analyser',
+            label: 'Cybersecurity Goals and Requirements',
             value: '7'
         },
-        {
-            label: 'config Management',
-            value: '8'
-        },
-        {
-            label: 'User Authorization',
-            value: '9'
-        },
-        {
-            label: 'Collaboration',
-            value: '10'
-        },
-        {
-            label: 'Project Management',
-            value: '11'
-        },
-        {
-            label: 'Reports',
-            value: '12'
-        }
+        // {
+        //     label: 'User Authorization',
+        //     value: '9'
+        // },
+        // {
+        //     label: 'Collaboration',
+        //     value: '10'
+        // },
+        // {
+        //     label: 'Project Management',
+        //     value: '11'
+        // },
+        // {
+        //     label: 'Reports',
+        //     value: '12'
+        // }
     ];
 
     return (
@@ -103,7 +99,7 @@ export default function MenuList() {
                 </Box>
                 {tabs.map((item, i) => (
                   <TabPanel key={i} value={item?.value}>
-                        {item?.label === 'Modal' ? <Components /> : item?.label === "MCU's Networks"?<ComponentList/> : item?.label}
+                        {item?.label === 'Item Definition' ? <Components /> : item?.label === "MCU's Networks"?<ComponentList/> : item?.label}
                     </TabPanel>
                 ))}
             </TabContext>

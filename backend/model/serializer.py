@@ -5,4 +5,4 @@ from.models import *
 class PartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Part
-        fields = ['id','name']
+        fields = ['id','data','type']

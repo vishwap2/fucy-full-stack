@@ -18,7 +18,7 @@ import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import AddModal from '../../../../ui-component/Modal/AddModal';
 // import { v4 as uid} from 'uuid'
 import { useNavigate } from 'react-router';
-import { AttackTreePageOpen, DsTableClose, DsTableOpen,TsTableClose, TsTableOpen, setAttackScene } from '../../../../store/slices/CurrentIdSlice';
+import { AttackTreePageOpen, DsTableOpen, TsTableOpen, closeAll, setAttackScene } from '../../../../store/slices/CurrentIdSlice';
 import { useDispatch } from 'react-redux';
 
 const CardStyle = styled(Card)(() =>
@@ -68,13 +68,9 @@ const BrowserCard = ({ modals, template, handleClick, nodes }) => {
 
     const handleNavigate = (id) => {
         navigate(`/Modals/${id}`, { replace: true });
-        dispatch(DsTableClose());
-        dispatch(TsTableClose());
-        // console.log('id', id)
+        dispatch(closeAll());
     };
-    console.log('ModalDetails', ModalDetails);
     const handleSwicthDsTable = () => {
-        console.log('clicked');
         dispatch(DsTableOpen());
     };
 
@@ -84,7 +80,6 @@ const BrowserCard = ({ modals, template, handleClick, nodes }) => {
     };
 
     const handleOpenActionTree =()=>{
-        console.log("attack tree")
         dispatch(AttackTreePageOpen())
     }
 

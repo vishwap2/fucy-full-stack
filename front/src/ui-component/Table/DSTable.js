@@ -14,7 +14,7 @@ import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceR
 import { Button, FormControl, MenuItem, Select, styled } from '@mui/material';
 import AddDamageScenarios from '../Modal/AddDamageScenario';
 import { useDispatch } from 'react-redux';
-import { DsTableClose } from '../../store/slices/CurrentIdSlice';
+import { closeAll } from '../../store/slices/CurrentIdSlice';
 import SelectLosses from '../Modal/SelectLosses';
 import { makeStyles } from '@mui/styles';
 
@@ -165,7 +165,7 @@ export default function DsTable() {
         { value: 'Negligible', label: 'Negligible' }
     ];
     const handleBack = () => {
-        dispatch(DsTableClose());
+        dispatch(closeAll());
     };
     // console.log('selectedRow', selectedRow)
     return (

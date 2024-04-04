@@ -27,7 +27,7 @@ import React, {
   import VotingGate from '../../ui-component/CustomGates/VotingGate';
 import LevelNode from '../../ui-component/CustomGates/LevelNode';
   import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
-import { levelClose } from '../../store/slices/CurrentIdSlice';
+import { closeAll } from '../../store/slices/CurrentIdSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
   
@@ -118,7 +118,7 @@ import { useDispatch, useSelector } from 'react-redux';
       }, 500);
     },[levelDts])
     console.log("nodes",nodes);
-    const handleBack = () => dispatch(levelClose());
+    const handleBack = () => dispatch(closeAll());
 
     return (
       <div style={{ height: '70svh',background:'white' }}>

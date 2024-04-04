@@ -13,7 +13,7 @@ import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceR
 import { Button, styled } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
-import { TsTableClose } from '../../store/slices/CurrentIdSlice';
+import { closeAll } from '../../store/slices/CurrentIdSlice';
 import AddThreatScenarios from '../Modal/AddThreatScenario';
 
 const selector = (state) => ({
@@ -93,7 +93,7 @@ export default function Tstable() {
     console.log('modal12', modal);
 
     const handleBack = () => {
-        dispatch(TsTableClose());
+        dispatch(closeAll());
     };
     // console.log('selectedRow', selectedRow)
     return (

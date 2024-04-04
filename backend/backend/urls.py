@@ -22,6 +22,7 @@ from model.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', PartView.as_view(),name="anything")
-    
+    path('api/createComponent', PartView.as_view(), name="anything"),
+    path('api/getComponent', PartView.as_view(), name="anything"),
+    path('api/deleteComponent/<id>', PartView.as_view(), name="anything")
 ]

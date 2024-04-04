@@ -29,6 +29,7 @@ const selector = (state) => ({
   sidebarNodes: state.sidebarNodes,
   getSidebarNode: state.getSidebarNode,
   deleteNode: state.deleteNode,
+  getComponent:state.getComponent
 });
 
 const iconComponents = {
@@ -51,9 +52,10 @@ const iconComponents = {
   
 const Components = () => {
   const [open, setOpen] = useState(false);
-  const { sidebarNodes, getSidebarNode } = useStore(selector);
+  const { sidebarNodes, getSidebarNode,getComponent } = useStore(selector);
   useEffect(() => {
     getSidebarNode();
+    getComponent();
   }, []);
 
   // open & closing fn for Dialog

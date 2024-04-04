@@ -1,7 +1,7 @@
 import React from 'react';
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 import { useDispatch, useSelector } from 'react-redux';
-import { AttackTreePageClose } from '../../store/slices/CurrentIdSlice';
+import {  closeAll } from '../../store/slices/CurrentIdSlice';
 import { Box, Grid, Paper } from '@mui/material';
 import Home from '../Home';
 import Properties from './Properties';
@@ -14,7 +14,7 @@ const AttackTree = ({modal}) => {
     const dispatch = useDispatch();
 
     const handleBack = () => {
-        dispatch(AttackTreePageClose());
+        dispatch(closeAll());
     };
   return (
    <>

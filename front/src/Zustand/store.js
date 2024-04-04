@@ -21,6 +21,7 @@ const useStore = createWithEqualityFn((set, get) => ({
   modal:{},
   DamageScenaris:[],
   scenerio:{},
+  component:[],
   
   onNodesChange: (changes) => {
     set({
@@ -76,17 +77,21 @@ set({
      attackNodes:newNodes
     })
    },
+
    setAttackEdges:(newEdges)=>{
  set({
   attackEdges:newEdges
  })
    },
+
   getSidebarNode:async()=>{
     const res = await axios.get(`${configuration.apiBaseUrl}sidebarNode`);
     set({
      sidebarNodes:res.data,
     })
   },
+
+  // createComponent
 
   getTemplate:async(id)=>{
     const res = await axios.get(`${configuration.apiBaseUrl}template?id=${id}`);
@@ -141,7 +146,21 @@ set({
   } ,
 
 
-  
+   createComponent:async(newTemplate)=>{
+    // const res = await axios.post(`${configuration.backendUrl}createComponent`,newTemplate)
+    const res = await axios.post(`${configuration.backendUrl}createComponent`,newTemplate) 
+    console.log('res', res)
+
+   },
+
+
+   getComponent:async()=>{
+    const res = await axios.get(`${configuration.backendUrl}getComponent`);
+    console.log('res', res);
+    // set({
+    //   component:res.data,
+    // })
+  },
   addTemplate:async(newTemplate)=>{
     try{
       const res = await axios.post(`${configuration.apiBaseUrl}template`,newTemplate)
@@ -197,6 +216,7 @@ set({
     ]
    }))
   },
+
   updateAttackNode:(nodeId,name)=>{
     set(state=>{
      let node = state.attackNodes.find(ite=>ite.id === nodeId);
@@ -218,6 +238,7 @@ set({
      edges:state.edges.concat(newEdge)
     }))
    },
+
   addNewNode:async(newNode)=>{
     let tempNode = {"name": newNode.data.label, "id": newNode.id}
     console.log(tempNode);
