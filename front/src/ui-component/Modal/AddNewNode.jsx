@@ -106,7 +106,7 @@ const AddNewNode = ({ open, handleClose, getSidebarNode }) => {
       // name:  newNode.nodeName ,
       // bgColor:newNode.bgColor
       type: newNode.type,
-      // properties: newNode.properties,
+      properties: newNode.properties,
     }
 
     // addNode(dataNode);

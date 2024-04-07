@@ -28,6 +28,7 @@ import { useSelector } from 'react-redux';
 import DsTable from '../../ui-component/Table/DSTable';
 import Tstable from '../../ui-component/Table/TSTable';
 import AttackTree from '../AttackTree';
+import CyberSecurityBlock from '../CyberSecurityBlock';
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -97,7 +98,7 @@ export default function Edit() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openTemplate, setOpenTemplate] = useState(false);
   const [savedTemplate, setSavedTemplate] = useState({});
-  const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen } = useSelector(state =>state?.currentId);
+  const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen } = useSelector(state =>state?.currentId);
   // console.log('isDsTableOpen', isDsTableOpen);
   // console.log('isTsTableOpen', isTsTableOpen);
   console.log('id edit', id)
@@ -357,6 +358,61 @@ export default function Edit() {
         ] 
 
       },
+      {
+        id:uid(),
+        name:'CyberSecurity Goals, Claims and Requirements',  
+        subs:[
+          {
+            id:uid(),
+             name: 'CyberSecurity Goals and Requirements',
+             goals:[],
+             requirements:[]
+          },
+        ]
+
+      },
+      {
+        id:uid(),
+        name:'System Design',  
+        subs:[
+          {
+            id:uid(),
+             name: 'Hardware Models',
+          },
+          {
+            id:uid(),
+             name: 'Software Models',
+          },
+        ]
+      },
+      {
+        id:uid(),
+         name: 'Catalogs',
+         subs:[
+          {
+            name:"UNICE R.155 Annex 5(WP.29)",
+            scenes:[]
+          }
+         ]
+      },
+      {
+        id:uid(),
+         name: 'Risk Determination and Risk Treatment Decision',
+      },
+      {
+        id:uid(),
+         name: 'Documents',
+      },
+      {
+        id:uid(),
+         name: 'Reporting',
+         scenes:[]
+      },
+      {
+        id:uid(),
+         name: 'Layouts',
+         scenes:[]
+      },
   ]
 
   console.log('mod', mod)
@@ -366,10 +422,13 @@ export default function Edit() {
   const handleClose = () => {
     setOpenTemplate(false);
   };
+  if(isDsTableOpen) return <DsTable/>
+  if(isTsTableOpen) return <Tstable/>
+  if(isAttackTreeOpen) return <AttackTree modal={modal}/>
+  if(isCyberBlockOpen) return <CyberSecurityBlock/>
 
   return (
     <>
-    {isDsTableOpen? <DsTable/> : isTsTableOpen ? <Tstable/>: isAttackTreeOpen ? <AttackTree modal={modal}/>:
     <div style={{ width: '100%', height: '90%',border:'1px solid',marginTop:'1.2rem',background:'white' }}>
         <ReactFlowProvider>
         {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
@@ -435,7 +494,7 @@ export default function Edit() {
         setNodes={setNodes}
         setEdges={setEdges}
       />
-    </div>}
+    </div>
     </>
   );
 }

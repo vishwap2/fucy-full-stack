@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window breakpoint Error*/
+
 .dndnode {
     height: 20px;
     padding: 4px 8px;
