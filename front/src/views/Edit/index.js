@@ -29,6 +29,8 @@ import DsTable from '../../ui-component/Table/DSTable';
 import Tstable from '../../ui-component/Table/TSTable';
 import AttackTree from '../AttackTree';
 import CyberSecurityBlock from '../CyberSecurityBlock';
+import CyberSecurityTable from '../../ui-component/Table/CybersecurityTable';
+
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -98,7 +100,7 @@ export default function Edit() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [openTemplate, setOpenTemplate] = useState(false);
   const [savedTemplate, setSavedTemplate] = useState({});
-  const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen } = useSelector(state =>state?.currentId);
+  const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen } = useSelector(state =>state?.currentId);
   // console.log('isDsTableOpen', isDsTableOpen);
   // console.log('isTsTableOpen', isTsTableOpen);
   console.log('id edit', id)
@@ -365,8 +367,23 @@ export default function Edit() {
           {
             id:uid(),
              name: 'CyberSecurity Goals and Requirements',
-             goals:[],
-             requirements:[]
+             subs:[
+              {
+                id:uid(),
+                name:"CyberSecurity Goals",
+                scenes:[]
+              },
+              {
+                id:uid(),
+                name:"CyberSecurity Requirements",
+                scenes:[]
+              }
+             ]
+          },
+          {
+            id:uid(),
+             name: 'CyberSecurity Controls',
+             scenes:[]
           },
         ]
 
@@ -426,6 +443,7 @@ export default function Edit() {
   if(isTsTableOpen) return <Tstable/>
   if(isAttackTreeOpen) return <AttackTree modal={modal}/>
   if(isCyberBlockOpen) return <CyberSecurityBlock/>
+  if(isCyberTableOpen) return <CyberSecurityTable/>
 
   return (
     <>

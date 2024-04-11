@@ -29,7 +29,8 @@ const selector = (state) => ({
 export default function CyberSecurityModal({ open, handleClose, name }) {
     const { update, getModal, modal } = useStore(selector, shallow);
     const [templateDetails, setTemplateDetails] = React.useState({
-        name: ''
+        name: '',
+        Description:''
     });
 
     const { id } = useParams();
@@ -43,16 +44,17 @@ export default function CyberSecurityModal({ open, handleClose, name }) {
         const mod = { ...modal };
        let cyber =  mod.scenarios[4].subs[0];
         if (name === 'Goals') {
-            cyber?.goals.push({
+            cyber?.subs[0]?.scenes.push({
                 id: uid(),
-                name: templateDetails.name
+                ...templateDetails
             });
         } else {
-            cyber?.requirements.push({
+            cyber?.subs[1]?.scenes.push({
                 id: uid(),
-                name: templateDetails.name
+                ...templateDetails
             });
         }
+        console.log('cyber', cyber)
         update(mod)
         // .then(res=>
         //     {
@@ -92,6 +94,17 @@ export default function CyberSecurityModal({ open, handleClose, name }) {
                                 variant="outlined"
                                 placeholder="Name"
                                 onChange={(e) => setTemplateDetails({ ...templateDetails, name: e.target.value })}
+                            />
+                             <InputLabel>Description :</InputLabel>
+                            <TextField 
+                            id="outlined-multiline-static" 
+                            // label="Multiline" 
+                            value={templateDetails?.Description}
+                            multiline rows={4}
+                            placeholder='Description'
+                            onChange={(e) => setTemplateDetails({ ...templateDetails, Description: e.target.value })}
+
+                            // defaultValue="Default Value" 
                             />
                         </Box>
                     </DialogContentText>

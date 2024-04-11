@@ -2367,7 +2367,16 @@
             },
             {
               "name": "Damage Scenarios - Impact Ratings",
-              "scenes": []
+              "scenes": [
+                {
+                  "id": "3ab3a7b6-bc0b-4c7d-9d90-1068058ab886",
+                  "name": "Unit Damage",
+                  "scalability": "",
+                  "Description": "This is a test  Desc fro Damage",
+                  "losses": [],
+                  "modalId": "ba48adec-466f-4287-a2e0-49b5a2b2d02a"
+                }
+              ]
             }
           ]
         },
@@ -3636,7 +3645,16 @@
             {
               "id": "f6d0a839-92ae-457a-97e5-40e208320b2d",
               "name": "Damage Scenarios - Impact Ratings",
-              "scenes": []
+              "scenes": [
+                {
+                  "id": "2c09228c-ac55-4585-b257-c1ac3c213152",
+                  "name": "Damage Scene",
+                  "scalability": "",
+                  "Description": "this is a test",
+                  "losses": [],
+                  "modalId": "be96c3c6-3a43-493f-a99b-8b196cf33f0b"
+                }
+              ]
             }
           ]
         },
@@ -3771,20 +3789,40 @@
             {
               "id": "566234b0-19f2-4f1e-9bca-6bcea6454ead",
               "name": "CyberSecurity Goals and Requirements",
-              "goals": [
+              "subs": [
                 {
-                  "id": "88a5a18e-d3e3-4ea5-ae3c-23b47d479d5f",
-                  "name": "Test Goals"
+                  "id": "566234b0-19f2-4f1e-9bca-6bcea6454e55",
+                  "name": "CyberSecurity Goals",
+                  "scenes": [
+                    {
+                      "id": "9d68203a-eb39-4add-90c0-69625a954cd6",
+                      "name": "Test Goals",
+                      "Description": "this is a test"
+                    }
+                  ]
                 },
                 {
-                  "id": "db944695-2241-4d9a-aa88-bdc52c4bfc79",
-                  "name": "Test 1 Goals"
+                  "id": "566234b0-19f2-4f1e-9bca-6bcea6454e12",
+                  "name": "CyberSecurity Requirements",
+                  "scenes": [
+                    {
+                      "id": "873bad52-6aa3-41fd-9f27-05d647104528",
+                      "name": "Test Requirements",
+                      "Description": "this is a test"
+                    }
+                  ]
                 }
-              ],
-              "requirements": [
+              ]
+            },
+            {
+              "id": "7932cfed-15bc-4a9b-8d56-682be5181b711",
+              "name": "CyberSecurity Controls",
+              "scenes": [
                 {
-                  "id": "7932cfed-15bc-4a9b-8d56-682be5181b76",
-                  "name": "Test Require"
+                  "id": "7a58431a-a172-4944-b6c4-604ebfab9791",
+                  "name": "Cyber Attack",
+                  "Description": "this is a test attack for Cybersecurity contrrol",
+                  "modalId": "be96c3c6-3a43-493f-a99b-8b196cf33f0b"
                 }
               ]
             }
