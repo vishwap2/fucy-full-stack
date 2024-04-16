@@ -84,6 +84,7 @@ const selector = (state) => ({
     setNodes: state.setNodes,
     setEdges: state.setEdges,
     modal: state.modal,
+    getModals:state.getModals,
     getModalById: state.getModalById,
     updateModal: state.updateModal
 });
@@ -134,6 +135,7 @@ export default function Edit() {
         setEdges,
         getModalById,
         modal,
+        getModals,
         updateModal
     } = useStore(selector, shallow);
     const { id } = useParams();
@@ -472,7 +474,16 @@ export default function Edit() {
         ];
 
         console.log('mod', mod);
-        updateModal(mod);
+        updateModal(mod)
+        .then(res=>{
+            if(res){
+             setTimeout(() => {
+                alert("Updated Successfully");
+                getModals()
+             }, 500);
+            }
+        })
+        .catch(err=>console.log('err', err))
     };
 
     const handleClose = () => {

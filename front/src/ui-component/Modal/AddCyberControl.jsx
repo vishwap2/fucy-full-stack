@@ -46,6 +46,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const selector =(state)=>({
     // create:state.addDamageScenario,
     update:state.updateModal,
+    getModals:state.getModals,
+
 })
 
 export default function AddCyberControl({ open, handleClose, modal }) {
@@ -84,8 +86,9 @@ export default function AddCyberControl({ open, handleClose, modal }) {
             {
                 if(res){
                     setTimeout(() => {
-                        alert('Added');
-                        window.location.reload();
+                        alert('Added successfully');
+                        // window.location.reload();
+                        getModals();
                     }, 500);
                 }
             })

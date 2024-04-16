@@ -123,7 +123,6 @@ const selector = (state) => ({
 
 const BrowserCard = ({ modals, template, handleClick }) => {
     const { addNode } = useStore(selector);
-
     const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -262,7 +261,7 @@ const BrowserCard = ({ modals, template, handleClick }) => {
     };
     return (
         <>
-            <Typography variant="h4">Modals</Typography>
+            <Typography variant="h4">Models</Typography>
             <CardStyle sx={{ overflowY: 'auto' }}>
                 <CardContent sx={{ p: 2 }}>
                     <TreeView

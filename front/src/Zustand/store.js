@@ -176,8 +176,8 @@ const useStore = createWithEqualityFn((set, get) => ({
         const res = await axios.patch(`${configuration.apiBaseUrl}Modals/${newModal?.id}`, newModal);
         console.log('res', res);
         if (res) {
-            alert('Updated');
-            window.location.reload();
+            // alert('Updated');
+            // window.location.reload();
             return res;
         }
     },
@@ -227,10 +227,7 @@ const useStore = createWithEqualityFn((set, get) => ({
             const res = await axios.post(`${configuration.apiBaseUrl}Damage-scenarios`, newTemplate);
             // console.log('res store', res)
             if (res) {
-                setTimeout(() => {
-                    // alert("Added Succesfully")
-                    // window.location.reload();
-                }, 500);
+              return res;
             }
         } catch (err) {
             // console.log('err', err)
@@ -261,13 +258,6 @@ const useStore = createWithEqualityFn((set, get) => ({
             edges: state.edges.concat(newEdge)
         }));
     },
-
-    // addNewNode: async (newNode) => {
-    //     let tempNode = { name: newNode.data.label, id: newNode.id };
-    //     console.log(tempNode);
-    //     const res = await axios.post(`http://localhost:8000/`, tempNode);
-    //     console.log('res', res);
-    // },
     
     addNewNode: async (newNode) => {
         console.log(tempNode);

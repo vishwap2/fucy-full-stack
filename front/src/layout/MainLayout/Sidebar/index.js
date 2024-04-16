@@ -19,18 +19,15 @@ import { useEffect, useState } from 'react';
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
 const selector = (state) => ({
-    nodes: state.nodes,
     template: state.template,
     modals: state.Modals,
-    modal: state.modal,
     fetchAPI: state.fetchAPI,
     fetchModals: state.getModals,
-    updateModal: state.updateModal
 
 });
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const [properties, setProperties] = useState([]);
-    const { nodes, template, fetchAPI, fetchModals, modals, modal, updateModal } = useStore(selector);
+    const {  template, fetchAPI, fetchModals, modals } = useStore(selector);
     const theme = useTheme();
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
     console.log('modals', modals);
@@ -65,9 +62,6 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         template={template}
                         modals={modals}
                         handleClick={handleClick}
-                        nodes={nodes}
-                        modal={modal}
-                        updateModal={updateModal}
                     />
                     <MenuCard properties={properties} />
                 </PerfectScrollbar>

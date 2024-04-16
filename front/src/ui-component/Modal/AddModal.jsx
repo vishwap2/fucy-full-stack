@@ -81,7 +81,7 @@ export default function AddModal({ open, handleClose }) {
                     dispatch (storeCurrentId(id));
                     
                     setTimeout(() => {
-                        alert('Added Succesfully');
+                        alert('Modal Created Succesfully');
                         // navigate(`/Modals/${id}`);
                         window.location.href = `/Modals/${id}`;
                     }, 500);
