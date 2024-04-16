@@ -33,10 +33,39 @@ import FolderIcon from '@mui/icons-material/Folder';
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import TopicIcon from '@mui/icons-material/Topic';
 import SwipeRightAltIcon from '@mui/icons-material/SwipeRightAlt';
-import ReportIcon from '@mui/icons-material/Report';
+// import ReportIcon from '@mui/icons-material/Report';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import SecurityIcon from '@mui/icons-material/Security';
 import { ReceiptItem } from 'iconsax-react';
+import AttackIcon from '../../../../assets/icons/attack.png';
+import ItemIcon from '../../../../assets/icons/item.png';
+import DamageIcon from '../../../../assets/icons/damage.png';
+import ThreatIcon from '../../../../assets/icons/threat.png';
+import CybersecurityIcon from '../../../../assets/icons/cybersecurity.png';
+import SystemIcon from '../../../../assets/icons/system.png';
+import CatalogIcon from '../../../../assets/icons/catalog.png';
+import RiskIcon from '../../../../assets/icons/risk.png';
+import DocumentIcon from '../../../../assets/icons/document.png';
+import ReportIcon from '../../../../assets/icons/report.png';
+import LayoutIcon from '../../../../assets/icons/layout.png';
+import ModelIcon from '../../../../assets/icons/model.png';
+
+
+const imageComponents = {
+    AttackIcon,
+    ItemIcon,
+    DamageIcon,
+    ThreatIcon,
+    CybersecurityIcon,
+    SystemIcon,
+    CatalogIcon,
+    RiskIcon,
+    DocumentIcon,
+    ReportIcon,
+    LayoutIcon,
+    ModelIcon
+};
+
 
 
 const iconComponents = {
@@ -45,7 +74,7 @@ const iconComponents = {
     FolderIcon,
     TopicIcon,
     SwipeRightAltIcon,
-    ReportIcon,
+    // ReportIcon,
     DangerousIcon,
     BrightnessLowIcon,
     CalendarMonthIcon,
@@ -110,6 +139,17 @@ const BrowserCard = ({ modals, template, handleClick }) => {
         return (
             <div className={classes.labelRoot}>
                 {IconComponent ? <IconComponent color="inherit" sx={{ fontSize: 16 }} /> : null}
+                <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
+                    {name}
+                </Typography>
+            </div>
+        );
+    };
+    const getImageLabel = (icon, name) => {
+        const Image = imageComponents[icon];
+        return (
+            <div className={classes.labelRoot}>
+                {Image ? <img src={Image} alt={name} style={{height:'18px', width:'18px'}}/> : null}
                 <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
                     {name}
                 </Typography>
@@ -237,14 +277,16 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                     <TreeItem
                                         key={modal?.id}
                                         nodeId={modal?.id}
-                                        label={getLabel('DriveFileMoveIcon', modal?.name)}
+                                        // label={getLabel('DriveFileMoveIcon', modal?.name)}
+                                        label ={getImageLabel('ModelIcon',modal?.name)}
                                         onClick={() => handleNavigate(modal?.id)}
                                     >
                                         {modal?.scenarios?.map((scene) => (
                                             <TreeItem
                                                 key={scene?.name}
                                                 nodeId={scene?.id}
-                                                label={getLabel('FolderIcon', scene?.name)}
+                                                // label={getLabel('FolderIcon', scene?.name)}
+                                                label ={getImageLabel(scene?.icon, scene?.name)}
                                                 onClick={() => handleClick(scene)}
                                                 sx={{
                                                     ml: -0.8,
@@ -388,11 +430,11 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                       ></TreeItem>
                                                                   ))} */}
                                                               {sub?.name === 'Derived Threat Scenarios' &&
-                                                                  sub?.scenes?.map((th_scene) => {
+                                                                  sub?.scenes?.map((th_scene,i) => {
                                                                       return (
                                                                           <TreeItem
-                                                                              key={th_scene?.id}
-                                                                              nodeId={th_scene?.id}
+                                                                              key={`${th_scene?.id}${i}`}
+                                                                              nodeId={`${th_scene?.id}${i}`}
                                                                               label={getLabel('ReportIcon', th_scene?.name)}
                                                                           ></TreeItem>
                                                                       );

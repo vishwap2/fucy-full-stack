@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Handle, Position } from 'reactflow';
-export default function ORGate() {
-// {
-//     //  data, isConnectable,type
-// }
+import CustomHandle from './CustomHandle';
+import { colorPickerTab } from './colorPicker';
+import AddPropertiesGate from '../Modal/AddPropertiesGate';
+export default function ORGate(props) {
+    const [open ,setOpen ] = useState(false);
+    const handleopenModal = (e) => {
+        e.preventDefault();
+    // console.log('props', props)
+      setOpen(true)
+    }
+
+    const handleClose = ()=> {
+        setOpen(false);
+    }
     return (
         <>
-            <div>
-                <Handle type="target" position={Position.Top} style={{ top: '15px', opacity: 0 }} />
+            <div onContextMenu={handleopenModal}>
+                <CustomHandle type="target" position={Position.Top} style={{ top: '15px', opacity: 0 }} isConnectable={1}/>
                 <svg width="100px" height="100px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                     <path
                         fill="none"
-                        stroke="#000"
+                        stroke={colorPickerTab(props?.data?.status)}
                         //eslint-disable-next-line
                         stroke-width="6"
                         transform="rotate(-90 256 256)"
@@ -19,6 +29,7 @@ export default function ORGate() {
                     />
                 </svg>
                 <Handle type="source" position={Position.Bottom} style={{ bottom: '25px',opacity:0}} />
+            {open && <AddPropertiesGate open={open} handleClose={handleClose} updateNode={props}/>}
             </div>
         </>
     );

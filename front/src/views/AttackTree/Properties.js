@@ -42,7 +42,6 @@ const { addAttackNode } = useStore(selector,shallow);
                 <TreeItem nodeId='OR Gate' label='OR Gate'  onClick={(e)=>handleAdd(e,'OR Gate')}></TreeItem>
                 <TreeItem nodeId='AND Gate' label='AND Gate' onClick={(e)=>handleAdd(e,'AND Gate')}></TreeItem>
                 <TreeItem nodeId='Voting Gate' label='Voting Gate' onClick={(e)=>handleAdd(e,'Voting Gate')}></TreeItem>
-                <TreeItem nodeId='Connect' label='Connect'></TreeItem>
                 <TreeItem nodeId='Transfer Gate' label='Transfer Gate' onClick={(e)=>handleAdd(e,'Transfer Gate')}></TreeItem>
                 </TreeItem>
                 
