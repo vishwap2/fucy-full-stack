@@ -2706,17 +2706,8 @@
             },
             {
               "id": "f6d0a839-92ae-457a-97e5-40e208320b2d",
-              "name": "Damage Scenarios - Impact Ratings",
-              "scenes": [
-                {
-                  "id": "2c09228c-ac55-4585-b257-c1ac3c213152",
-                  "name": "Damage Scene",
-                  "scalability": "",
-                  "Description": "this is a test",
-                  "losses": [],
-                  "modalId": "be96c3c6-3a43-493f-a99b-8b196cf33f0b"
-                }
-              ]
+              "name": "Damage Scenarios - Collection & Impact Ratings",
+              "scenes": []
             }
           ]
         },
@@ -2829,8 +2820,12 @@
                 {
                   "id": "ff8a42a8-7333-4a56-b2ba-27308b89cfa0",
                   "name": "New Threat Scene",
-                  "Description": "This is a test",
-                  "modalId": "be96c3c6-3a43-493f-a99b-8b196cf33f0b"
+                  "Description": "This is a test"
+                },
+                {
+                  "id": "bebf2a63-b394-4b00-8c1a-0d9b93e1dcad",
+                  "name": "Test ",
+                  "Description": "mnbjgc"
                 }
               ]
             }
@@ -2938,6 +2933,11 @@
                       }
                     ]
                   }
+                },
+                {
+                  "id": "bebf2a63-b394-4b00-8c1a-0d9b93e1dcad",
+                  "name": "Test ",
+                  "Description": "mnbjgc"
                 }
               ]
             },
@@ -3039,6 +3039,424 @@
         },
         {
           "id": "e254b0af-ef9a-4358-b4f0-a52c67a6cf55",
+          "name": "Layouts",
+          "icon": "LayoutIcon",
+          "scenes": []
+        }
+      ]
+    },
+    {
+      "id": "b887a3df-fe16-4681-ae55-c4d431bba10c",
+      "name": "New",
+      "properties": [
+        "Integrity",
+        "Authorization"
+      ],
+      "template": {
+        "nodes": [
+          {
+            "id": "98627b79-96ac-4226-ab08-ab5e3019bd3b875",
+            "data": {
+              "label": "Power Manage",
+              "bgColor": "rgb(233, 233, 85)"
+            },
+            "type": "input",
+            "position": {
+              "x": 629.8625030517578,
+              "y": 504.07500076293945
+            },
+            "properties": [
+              "Integrity",
+              "Authorization"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "e25bdc35-67b0-4869-b6a7-a7782cf1249d875",
+            "data": {
+              "label": "Vehicle",
+              "bgColor": "#ff0072"
+            },
+            "type": "output",
+            "position": {
+              "x": 956.2937545776367,
+              "y": 666.6125011444092
+            },
+            "properties": [
+              "Authenticity",
+              "Availability"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "583f8758-c0c8-4529-ae61-6f55eda88a73875",
+            "data": {
+              "label": "transceiver",
+              "bgColor": "#000"
+            },
+            "type": "transceiver",
+            "position": {
+              "x": 702.3417041781067,
+              "y": 681.8952950379927
+            },
+            "properties": [
+              "Authenticity",
+              "Authorization"
+            ],
+            "width": 120,
+            "height": 150
+          },
+          {
+            "id": "16f89daa-0aab-4147-9e7d-671699e6da52875",
+            "data": {
+              "label": "circuit",
+              "bgColor": "#8ea9fb"
+            },
+            "type": "output",
+            "position": {
+              "x": 988.8096085461679,
+              "y": 788.9339344384438
+            },
+            "properties": [
+              "Integrity",
+              "Authenticity"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "c36579ed-b437-46e9-979d-d32f56b27f44875",
+            "data": {
+              "label": "signal",
+              "bgColor": "#f59b00"
+            },
+            "type": "signal",
+            "position": {
+              "x": 866.9438834159793,
+              "y": 561.755731285401
+            },
+            "properties": [
+              "Non-repudiation",
+              "Authenticity"
+            ],
+            "width": 150,
+            "height": 40
+          }
+        ],
+        "edges": [
+          {
+            "id": "376bc400-492a-4ece-be9c-5ef69dbfe009",
+            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b875",
+            "target": "583f8758-c0c8-4529-ae61-6f55eda88a73875",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "grey"
+            }
+          },
+          {
+            "id": "d8d51862-581d-4047-bab0-aaee0b6ca12f",
+            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b875",
+            "target": "c36579ed-b437-46e9-979d-d32f56b27f44875",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "grey"
+            }
+          },
+          {
+            "id": "9410b707-5ab7-45c6-89b1-d117ab36faf6",
+            "source": "c36579ed-b437-46e9-979d-d32f56b27f44875",
+            "target": "e25bdc35-67b0-4869-b6a7-a7782cf1249d875",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "grey"
+            }
+          },
+          {
+            "id": "3210b4d8-5e21-4f06-9e23-6b3882e8f8d5",
+            "source": "583f8758-c0c8-4529-ae61-6f55eda88a73875",
+            "target": "16f89daa-0aab-4147-9e7d-671699e6da52875",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "grey"
+            }
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "66a5b9cf-7a6a-4832-b12d-417b8e09b4a5",
+          "name": "Item Modal & Assets",
+          "icon": "ItemIcon",
+          "Details": [
+            {
+              "name": "Power Manage",
+              "props": [
+                "Integrity",
+                "Authorization"
+              ]
+            },
+            {
+              "name": "Vehicle",
+              "props": [
+                "Authenticity",
+                "Availability"
+              ]
+            },
+            {
+              "name": "transceiver",
+              "props": [
+                "Authenticity",
+                "Authorization"
+              ]
+            },
+            {
+              "name": "circuit",
+              "props": [
+                "Integrity",
+                "Authenticity"
+              ]
+            },
+            {
+              "name": "signal",
+              "props": [
+                "Non-repudiation",
+                "Authenticity"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "549939f1-81b0-421d-aadd-39e12c6b4f93",
+          "name": "Damage Scenarios Identification and Impact Ratings",
+          "icon": "DamageIcon",
+          "subs": [
+            {
+              "id": "82ca242c-42f2-42ba-86c5-7c4f44bec1c5",
+              "name": "Damage Scenarios Derivations",
+              "Details": [
+                {
+                  "name": "Power Manage",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "Vehicle",
+                  "props": [
+                    "Authenticity",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "transceiver",
+                  "props": [
+                    "Authenticity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "circuit",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
+                  "name": "signal",
+                  "props": [
+                    "Non-repudiation",
+                    "Authenticity"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "d924e033-cfb9-4cb8-b973-929c673fb408",
+              "name": "Damage Scenarios - Collection & Impact Ratings",
+              "scenes": [
+                {
+                  "id": "3894710d-e425-4601-af76-5eea32105aa0",
+                  "name": "New Scene",
+                  "Description": "This is a test",
+                  "losses": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "7d0eabc2-ba51-4084-9938-ce3529a129dd",
+          "name": "Threat Scenarios Identification",
+          "icon": "ThreatIcon",
+          "subs": [
+            {
+              "id": "cbd82267-c3b0-4235-a4cd-df09580474cb",
+              "name": "Threat Scenarios",
+              "Details": [
+                {
+                  "name": "Power Manage",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "Vehicle",
+                  "props": [
+                    "Authenticity",
+                    "Availability"
+                  ]
+                },
+                {
+                  "name": "transceiver",
+                  "props": [
+                    "Authenticity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "circuit",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
+                  "name": "signal",
+                  "props": [
+                    "Non-repudiation",
+                    "Authenticity"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "646f9c90-59e1-446c-aab3-2aefd793ecda",
+              "name": "Derived Threat Scenarios",
+              "scenes": []
+            }
+          ]
+        },
+        {
+          "id": "f880f555-b00b-4e98-ad1c-48eb0385c81f",
+          "name": "Attack Path Analysis and Attack Feasability Rating",
+          "icon": "AttackIcon",
+          "subs": [
+            {
+              "id": "eaca51ac-2f2a-4af6-8101-3941606d8e08",
+              "name": "Attack Trees",
+              "scenes": []
+            },
+            {
+              "id": "3370f6c2-bcc7-4cd6-a592-b8a115a269e3",
+              "name": "Vulnerability Analysis",
+              "scenes": []
+            }
+          ]
+        },
+        {
+          "id": "ea8ac438-f5c6-41f2-a443-7219af6bfb95",
+          "name": "CyberSecurity Goals, Claims and Requirements",
+          "icon": "CybersecurityIcon",
+          "subs": [
+            {
+              "id": "36447641-0c97-4ece-8773-3f545839ff6e",
+              "name": "CyberSecurity Goals and Requirements",
+              "subs": [
+                {
+                  "id": "35c8a224-6d01-4f23-923d-7b28f675a8a1",
+                  "name": "CyberSecurity Goals",
+                  "scenes": []
+                },
+                {
+                  "id": "ef8fdee3-1dbd-49e7-8191-aa11055fc8be",
+                  "name": "CyberSecurity Requirements",
+                  "scenes": []
+                }
+              ]
+            },
+            {
+              "id": "979ea452-ee81-4534-bd44-a3f3bbedf20d",
+              "name": "CyberSecurity Controls",
+              "scenes": []
+            }
+          ]
+        },
+        {
+          "id": "cc98f0f6-15cb-47cf-8610-183186f23761",
+          "name": "System Design",
+          "icon": "SystemIcon",
+          "subs": [
+            {
+              "id": "a5a33ab8-4736-4f6e-a231-a02f19c4ce82",
+              "name": "Hardware Models"
+            },
+            {
+              "id": "796305ef-1da1-43e1-9605-6f28ea782105",
+              "name": "Software Models"
+            }
+          ]
+        },
+        {
+          "id": "b81aeb34-ee3a-4c33-a05a-1799adf6ee44",
+          "name": "Catalogs",
+          "icon": "CatalogIcon",
+          "subs": [
+            {
+              "name": "UNICE R.155 Annex 5(WP.29)",
+              "scenes": []
+            }
+          ]
+        },
+        {
+          "id": "ff0331d3-c3b3-4baa-8dcc-1a86873cccf6",
+          "name": "Risk Determination and Risk Treatment Decision",
+          "icon": "RiskIcon"
+        },
+        {
+          "id": "d66b6209-5842-432c-87c2-96db231156f5",
+          "name": "Documents",
+          "icon": "DocumentIcon"
+        },
+        {
+          "id": "877ba460-700a-4b8f-997e-8f346af6b6b1",
+          "name": "Reporting",
+          "icon": "ReportIcon",
+          "scenes": []
+        },
+        {
+          "id": "1e3b1765-eec6-4246-8d15-d4ceed4eafbe",
           "name": "Layouts",
           "icon": "LayoutIcon",
           "scenes": []

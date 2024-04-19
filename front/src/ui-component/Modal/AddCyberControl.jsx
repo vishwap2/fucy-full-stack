@@ -7,12 +7,6 @@ import {
     DialogTitle,
     Button,
     InputLabel,
-    // Chip,
-    // FormControl,
-    // MenuItem,
-    // OutlinedInput,
-    // Select,
-    // useTheme
     Box,
     TextField,
     Slide,
@@ -25,26 +19,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//     PaperProps: {
-//         style: {
-//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-//             width: 300
-//         }
-//     }
-// };
 
-// function getStyles(name, nodes, theme) {
-//     return {
-//         fontWeight: nodes.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
-//     };
-// }
-// const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorization', 'Non-repudiation', 'Availability'];
 
 const selector =(state)=>({
-    // create:state.addDamageScenario,
     update:state.updateModal,
     getModals:state.getModals,
 
@@ -52,30 +29,18 @@ const selector =(state)=>({
 
 export default function AddCyberControl({ open, handleClose, modal }) {
     const { 
-        update
-        // create
-     } = useStore(selector,shallow);
+        update,
+        getModals
 
-    // const theme = useTheme();
-    // console.log('modal in add', modal)
+     } = useStore(selector,shallow);
     const [templateDetails, setTemplateDetails] = React.useState({
         id:'',
         name: '',
         Description: '',
     });
-    // const handleChange = (event) => {
-    //     const {
-    //         target: { value }
-    //     } = event;
-    //     setTemplateDetails({
-    //         ...templateDetails,
-    //         properties: typeof value === 'string' ? value.split(',') : value
-    //     });
-    // };
 
 
     const handleCreate = () => {
-        // setTemplateDetails({...templateDetails,id:uid(),modalId:id})
         const mod = {...modal};
         const temp = {...templateDetails}
         temp.id=uid();
@@ -88,6 +53,12 @@ export default function AddCyberControl({ open, handleClose, modal }) {
                     setTimeout(() => {
                         alert('Added successfully');
                         // window.location.reload();
+                        handleClose();
+                        setTemplateDetails({
+                            id:'',
+                            name: '',
+                            Description: '',
+                        })
                         getModals();
                     }, 500);
                 }
@@ -130,8 +101,6 @@ export default function AddCyberControl({ open, handleClose, modal }) {
                             multiline rows={4}
                             placeholder='Description'
                             onChange={(e) => setTemplateDetails({ ...templateDetails, Description: e.target.value })}
-
-                            // defaultValue="Default Value" 
                             />
                            
                         </Box>

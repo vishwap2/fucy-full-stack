@@ -20,7 +20,6 @@ import { useTheme } from "@mui/material/styles";
 
 
 const selector = (state) => ({
-  // addTemplate: state.addTemplate,
   fetchAPI: state.fetchAPI,
 });
 
@@ -65,9 +64,7 @@ const AddLibrary = ({
     name: "",
     properties: [],
   });
-  const { 
-    // addTemplate, 
-    fetchAPI } = useStore(selector);
+  const { fetchAPI } = useStore(selector);
 
   const handleChange = (event) => {
     const {
@@ -87,36 +84,10 @@ const AddLibrary = ({
       name: templateDetails?.name,
       template: savedTemplate,
       properties: templateDetails?.properties,
-    //   scenarios: [
-    //     {
-    //       id:uid(),
-    //         name: 'Item Modal & Assets',  
-    //     },
-    //     {
-    //       id:uid(),
-    //         name: 'Damage Scenarios Identification and Impact Ratings',
-    //         subs:[
-    //             {
-    //                name: 'Damage Scenarios Derivations',
-    //                props:[]
-    //             },
-    //             {
-    //                 name: 'Damage Scenarios - Impact Ratings',
-    //                 props:[]
-    //              }
-    //         ]
-                
-            
-    //     },
-    //     {
-    //       id:uid(),
-    //         name: 'Threat Scenarios',   
-    //     },
-    // ]
+   
     };
 
     console.log('newTemplate', newTemplate)
-    // addTemplate(newTemplate);
     setTimeout(() => {
       fetchAPI();
     });

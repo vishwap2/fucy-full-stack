@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell,{ tableCellClasses }  from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -11,12 +11,13 @@ import { shallow } from 'zustand/shallow';
 import { useParams } from 'react-router';
 import CircleIcon from '@mui/icons-material/Circle';
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
-import { Button, FormControl, MenuItem, Select, styled } from '@mui/material';
+import { Button, Checkbox, FormControl, MenuItem, Select, Typography, styled } from '@mui/material';
 import AddDamageScenarios from '../Modal/AddDamageScenario';
 import { useDispatch } from 'react-redux';
 import { closeAll } from '../../store/slices/CurrentIdSlice';
 import SelectLosses from '../Modal/SelectLosses';
 import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/system';
 
 const selector = (state) => ({
     modal: state.modal,
@@ -25,53 +26,103 @@ const selector = (state) => ({
 const Head = [
     { id: 1, name: 'ID' },
     { id: 2, name: 'Name' },
-    { id: 3, name: 'Scalability' },
-    { id: 4, name: 'Description' },
+    { id: 3, name: 'Damage Scenario' },
+    { id: 4, name: 'Description/ Scalability' },
     { id: 5, name: 'Losses of Cybersecurity Properties' },
     { id: 6, name: 'Assets' },
     { id: 7, name: 'Component/Message' },
-    { id: 8, name: 'Safety Impact' },
-    { id: 9, name: 'Financial Impact' },
-    { id: 10, name: 'Operational Impact' },
-    { id: 11, name: 'Privacy Impact' },
-    { id: 12, name: 'Associated Threat Scenarios' },
-    { id: 13, name: 'Overall Impact' }
+    { id: 8, name: 'Safety Impact per StakeHolder' },
+    { id: 9, name: 'Financial Impact per StakeHolder' },
+    { id: 10, name: 'Operational Impact per StakeHolder' },
+    { id: 11, name: 'Privacy Impact per StakeHolder' },
+    { id: 12, name: 'Impact Justification by Stakeholder' },
+    { id: 13, name: 'Safety Impact' },
+    { id: 14, name: 'Financial Impact' },
+    { id: 15, name: 'Operational Impact' },
+    { id: 16, name: 'Privacy Impact' },
+    { id: 17, name: 'Impact Justification' },
+    { id: 18, name: 'Associated Threat Scenarios' },
+    { id: 19, name: 'Overall Impact' },
+    { id: 20, name: 'Asset is Evaluated' },
+    { id: 21, name: 'Cybersecurity Properties are Evaluated' },
+    { id: 22, name: 'Unevaluated Cybersecurity Properties' }
 ];
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const useStyles = makeStyles({
     div: {
-      width:'max-content', 
-    },
-  });
+        width: 'max-content'
+    }
+});
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+        borderRight: '1px solid rgba(224, 224, 224, 1) !important'
+
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(() => ({
+        fontSize: 14,
+        borderRight: '1px solid rgba(224, 224, 224, 1) !important'
+    }
+}));
+
+const StyledTableRow = styled(TableRow)(() => ({
     // '&:nth-of-type(odd)': {
     //   backgroundColor: theme.palette.action.hover,
     // },
     // hide last border
     '&:last-child td, &:last-child th': {
-      border: 0,
-    },
-  }));
-  
+        border: 0
+    }
+}));
+
+//   const SelectableCell = ({row, options, handleChange, colorPickerTab, impact})=>{
+//   return <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(impact) }}>
+//   <FormControl
+//   sx={{
+//       width: 130,
+//       background: 'transparent',
+//       '& .MuiInputBase-root': {
+//           backgroundColor: 'transparent'
+//       },
+//       '& .MuiSelect-select': {
+//           backgroundColor: 'transparent'
+//       },
+//       '& .MuiSvgIcon-root': {
+//           display: 'none'
+//       },
+//       '& .MuiOutlinedInput-notchedOutline': {
+//           border: 'none'
+//       }
+//   }}
+// >
+//   <Select
+//       labelId="demo-simple-select-label"
+//       id="demo-simple-select"
+//       name="Privacy"
+//       // value={impacts?.Privacy}
+//       onChange={(e) => handleChange(e, row)}
+//   >
+//       {options?.map((item) => (
+//           <MenuItem key={item?.value} value={item?.value}>
+//               {item?.label}
+//           </MenuItem>
+//       ))}
+//   </Select>
+// </FormControl>
+// </StyledTableCell>
+//   }
+
 export default function DsTable() {
+    const { modal, getModal } = useStore(selector, shallow);
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
     const [openDs, setOpenDs] = React.useState(false);
     const [openCl, setOpenCl] = React.useState(false);
-    // const [rows, setRows] = React.useState([])
-    const { modal, getModal } = useStore(selector, shallow);
     const [rows, setRows] = React.useState([]);
     const [selectedRow, setSelectedRow] = React.useState({});
 
@@ -90,11 +141,23 @@ export default function DsTable() {
     };
     React.useEffect(() => {
         if (modal.scenarios) {
-            // console.log('modal in effect', modal?.scenarios[1]?.subs[1]?.scenes)
-            setRows(modal?.scenarios[1]?.subs[1]?.scenes);
+            const mod1 = modal?.scenarios[1]?.subs[0]?.Details?.map((dt, index) =>
+                dt?.props?.map((pr, i) => ({
+                    id: `DS0${index}${i}`,
+                    name: `Damage Scenario of  ${pr} of ${dt?.name}`,
+                    Description: `This is a Damage Scenerio occured due to ${pr} in ${dt?.name}`,
+                    losses: []
+                }))
+            ).flat();
+
+            // console.log('modal in effect12', mod1)
+            const mod2 = modal?.scenarios[1]?.subs[1]?.scenes;
+            const combained = mod1.concat(mod2);
+            setRows(combained);
         }
     }, [modal]);
-    console.log('rows', rows);
+    // console.log('rows', rows);
+    console.log('modal out', modal);
 
     const handleOpenModalDs = () => {
         setOpenDs(true);
@@ -170,10 +233,15 @@ export default function DsTable() {
     // console.log('selectedRow', selectedRow)
     return (
         <>
-            <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1 }} onClick={handleBack} />
-            <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
-                Add New Scenario
-            </Button>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Box display="flex" alignItems="center" gap={1}>
+                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1 }} onClick={handleBack} />
+                    <Typography>Damage Scenario Table</Typography>
+                </Box>
+                <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
+                    Add New Scenario
+                </Button>
+            </Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -185,22 +253,22 @@ export default function DsTable() {
                     </TableHead>
                     <TableBody>
                         {rows?.map((row) => (
-                            <StyledTableRow key={row?.id} >
+                            <StyledTableRow key={row?.id}>
                                 <StyledTableCell component="th" scope="row">
                                     {row?.id?.slice(0, 6)}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    {row?.name}
+                                <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    {row?.scalability}
+                                <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                 <div className={classes.div}>{row?.Description}</div>
+                                    <div className={classes.div}>{row?.Description}</div>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row" onClick={() => handleOpenCl(row)}>
                                     {row?.losses?.map((loss) => (
-                                        <div key={loss} style={{marginBottom:'5px'}}>
+                                        <div key={loss} style={{ marginBottom: '5px' }}>
                                             {loss?.props.map((pr, i) => (
                                                 <span
                                                     key={i}
@@ -227,21 +295,42 @@ export default function DsTable() {
                                     ))}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    <div style={{
-                                        display:'flex',
-                                        flexDirection:'column',
-                                        alignItems:'flex-start',
-                                        gap:8
-                                    }}>
-                                    {row?.losses?.map((loss) => (
-                                        <span key={loss} style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}}>{loss?.name}</span>
-                                    ))}
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-start',
+                                            gap: 8,
+                                            width:'max-content'
+                                        }}
+                                    >
+                                        {row?.losses?.map((loss) => (
+                                            <span
+                                                key={loss}
+                                                style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}
+                                            >
+                                                {loss?.name}
+                                            </span>
+                                        ))}
                                     </div>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    {/* {modal?.scenarios[2]?.Details?.map((dt) => (
-                                <div key={dt.name}>{dt.name}</div>
-                            ))} */}
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Safety) }}>
                                     <FormControl
@@ -277,6 +366,9 @@ export default function DsTable() {
                                         </Select>
                                     </FormControl>
                                 </StyledTableCell>
+
+                                {/* <SelectableCell row={row} options={options} handleChange={handleChange} colorPickerTab={colorPickerTab} impact={row?.impacts?.Safety}/> */}
+
                                 <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Financial) }}>
                                     <FormControl
                                         sx={{
@@ -378,12 +470,30 @@ export default function DsTable() {
                                         </Select>
                                     </FormControl>
                                 </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    <Checkbox {...label} />
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    <Checkbox {...label} />
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    Test
+                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} />
+            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} />
             {openCl && (
                 <SelectLosses
                     open={openCl}

@@ -289,6 +289,9 @@ export default function Edit() {
         [reactFlowInstance]
     );
 
+    const handleClose = () => {
+        setOpenTemplate(false);
+    };
     // console.log("nodes",nodes);
     // console.log('edges', edges);
     //fn for save & restore
@@ -356,7 +359,7 @@ export default function Edit() {
                     },
                     {
                         id: uid(),
-                        name: 'Damage Scenarios - Impact Ratings',
+                        name: 'Damage Scenarios - Collection & Impact Ratings',
                         scenes: []
                     }
                 ]
@@ -475,20 +478,21 @@ export default function Edit() {
 
         console.log('mod', mod);
         updateModal(mod)
-        .then(res=>{
-            if(res){
-             setTimeout(() => {
-                alert("Updated Successfully");
-                getModals()
-             }, 500);
-            }
-        })
+        .then(res=>
+            {
+                if(res){
+                    setTimeout(() => {
+                        alert('Added successfully');
+                        // window.location.reload();
+                        handleClose();
+                        getModals();
+                    }, 500);
+                }
+            })
         .catch(err=>console.log('err', err))
     };
 
-    const handleClose = () => {
-        setOpenTemplate(false);
-    };
+
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
     if (isAttackTreeOpen) return <AttackTree modal={modal} />;

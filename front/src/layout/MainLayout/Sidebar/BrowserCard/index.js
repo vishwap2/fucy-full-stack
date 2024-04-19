@@ -156,6 +156,26 @@ const BrowserCard = ({ modals, template, handleClick }) => {
         );
     };
 
+
+    const threatType = (value) => {
+        // console.log('value', value)
+        switch (value) {
+            case 'Integrity':
+                return 'Tampering';
+            case 'Confidentiality':
+                return 'Information Disclosure';
+            case 'Availability':
+                return 'Denial';
+            case 'Authenticity':
+                return 'Spoofing';
+            case 'Authorization':
+                return 'Elevation of Privilage';
+            case 'Non-repudiation':
+                return 'Rejection';
+            default:
+                return '';
+        }
+    };
     const openAddModal = (name) => {
         console.log('name', name);
         setAnchorEl(null);
@@ -321,16 +341,15 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                                       ?.split(' ')
                                                                                       .map((it) => it.slice(0, 1))
                                                                                       .join('')}000${i}]`}
-                                                                                  label={`[${dt?.name
-                                                                                      ?.split(' ')
-                                                                                      .map((it) => it.slice(0, 1))
-                                                                                      .join('')
-                                                                                      .toUpperCase()}000${i}] Damage scenenorios for ${pr}`}
+                                                                                  label={`[DS00${i+1}] Damage scenenorio for ${pr} of ${dt?.name}`}
+                                                                                  sx={{
+                                                                                    ml:-2
+                                                                                  }}
                                                                               ></TreeItem>
                                                                           );
                                                                       })
                                                                   )}
-                                                              {sub?.name === 'Damage Scenarios - Impact Ratings' &&
+                                                              {sub?.name === 'Damage Scenarios - Collection & Impact Ratings' &&
                                                                   sub?.scenes?.map((dm_scene) => {
                                                                       return (
                                                                           <TreeItem
@@ -363,11 +382,7 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                                       ?.split(' ')
                                                                                       .map((it) => it.slice(0, 1))
                                                                                       .join('')}000${i}]`}
-                                                                                  label={`[${dt?.name
-                                                                                      ?.split(' ')
-                                                                                      .map((it) => it.slice(0, 1))
-                                                                                      .join('')
-                                                                                      .toUpperCase()}000${i}] Threat scenenorios for ${pr}`}
+                                                                                  label={`[TS00${i+1}] ${threatType(pr)} for ${pr} of ${dt?.name}`}
                                                                               ></TreeItem>
                                                                           );
                                                                       })
@@ -403,31 +418,7 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                       }
                                                                       </TreeItem>
                                                                   ))}
-                                                              {/* {sub?.name === 'CyberSecurity Goals and Requirements' &&
-                                                                 sub[1]?.scenes.map((req) => (
-                                                                      <TreeItem
-                                                                          key={req?.id}
-                                                                          nodeId={req?.id}
-                                                                          onDragStart={handleDragStart}
-                                                                          onClick={() => handleAddComponent('require', req)}
-                                                                          draggable
-                                                                          label={
-                                                                              <div className={classes.labelRoot}>
-                                                                                  <CalendarMonthIcon
-                                                                                      color="inherit"
-                                                                                      sx={{ fontSize: 16 }}
-                                                                                  />
-                                                                                  <Typography
-                                                                                      variant="body2"
-                                                                                      ml={0.5}
-                                                                                      className={classes.labelTypo}
-                                                                                  >
-                                                                                      {req?.name}
-                                                                                  </Typography>
-                                                                              </div>
-                                                                          }
-                                                                      ></TreeItem>
-                                                                  ))} */}
+                                                             
                                                               {sub?.name === 'Derived Threat Scenarios' &&
                                                                   sub?.scenes?.map((th_scene,i) => {
                                                                       return (
@@ -438,16 +429,6 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                           ></TreeItem>
                                                                       );
                                                                   })}
-                                                              {/* {sub?.name === 'Derived Threat Scenarios' &&
-                                                                  sub?.scenes?.map((th_scene) => {
-                                                                      return (
-                                                                          <TreeItem
-                                                                              key={th_scene?.id}
-                                                                              nodeId={th_scene?.id}
-                                                                              label={th_scene?.name}
-                                                                          ></TreeItem>
-                                                                      );
-                                                                  })} */}
                                                               {sub?.name === 'CyberSecurity Controls' &&
                                                                   sub?.scenes?.map((th_scene) => {
                                                                       return (

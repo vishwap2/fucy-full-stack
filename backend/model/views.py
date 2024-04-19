@@ -7,7 +7,7 @@ from rest_framework import status
 
 class PartView(APIView):
     def get(self,request):
-        output=[{"data": output.data, "id":output.id, "type":output.type }
+        output=[{"name": output.name, "id":output.id}
                 for output in Part.objects.all()]
         return Response(output)
     def post(self,request):

@@ -98,7 +98,7 @@ export default function MenuList() {
                     </TabList>
                 </Box>
                 {tabs.map((item, i) => (
-                  <TabPanel key={i} value={item?.value}>
+                  <TabPanel key={i} value={item?.value} sx={{overflow:'auto', scrollbarWidth:'none'}}>
                         {item?.label === 'Item Definition' ? <Components /> : item?.label === "MCU's Networks"?<ComponentList/> : item?.label}
                     </TabPanel>
                 ))}

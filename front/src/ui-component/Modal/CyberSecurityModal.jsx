@@ -22,6 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const selector = (state) => ({
     update: state.updateModal,
+    getModals:state.getModals,
     getModal: state.getModalById,
     modal: state.modal
 });
@@ -56,16 +57,22 @@ export default function CyberSecurityModal({ open, handleClose, name }) {
         }
         console.log('cyber', cyber)
         update(mod)
-        // .then(res=>
-        //     {
-        //         if(res){
-        //             setTimeout(() => {
-        //                 alert('Added successfully');
-        //                 window.location.reload();
-        //             }, 500);
-        //         }
-        //     })
-        // .catch(err=>console.log('err', err))
+        .then(res=>
+            {
+                if(res){
+                    setTimeout(() => {
+                        alert('Added successfully');
+                        // window.location.reload();
+                        handleClose();
+                        setTemplateDetails({
+                            name: '',
+                            Description: '',
+                        })
+                        getModals();
+                    }, 500);
+                }
+            })
+        .catch(err=>console.log('err', err))
     };
     return (
         <React.Fragment>

@@ -89,6 +89,7 @@ const selector = (state) => ({
     setEdges: state.setAttackEdges,
     modal: state.modal,
     getModalById: state.getModalById,
+    getModals:state.getModals,
     update: state.updateModal,
 });
 
@@ -146,6 +147,7 @@ export default function Home({ attackScene }) {
         getModalById,
         modal,
         update,
+        getModals
     } = useStore(selector, shallow);
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -215,7 +217,18 @@ export default function Home({ attackScene }) {
         };
         dispatch(setAttackScene(selected));
         console.log('mod', mod);
-        update(mod);
+        update(mod)
+        .then(res=>
+            {
+                if(res){
+                    setTimeout(() => {
+                        alert('Added successfully');
+                        // window.location.reload();
+                        getModals();
+                    }, 500);
+                }
+            })
+        .catch(err=>console.log('err', err))
     };
 
     return (
