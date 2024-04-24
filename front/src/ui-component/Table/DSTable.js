@@ -21,7 +21,8 @@ import { Box } from '@mui/system';
 
 const selector = (state) => ({
     modal: state.modal,
-    getModal: state.getModalById
+    getModal: state.getModalById,
+    update:state.updateModal,
 });
 const Head = [
     { id: 1, name: 'ID' },
@@ -117,7 +118,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 //   }
 
 export default function DsTable() {
-    const { modal, getModal } = useStore(selector, shallow);
+    const { modal, getModal, update } = useStore(selector, shallow);
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -141,14 +142,12 @@ export default function DsTable() {
     };
     React.useEffect(() => {
         if (modal.scenarios) {
-            const mod1 = modal?.scenarios[1]?.subs[0]?.Details?.map((dt, index) =>
-                dt?.props?.map((pr, i) => ({
-                    id: `DS0${index}${i}`,
-                    name: `Damage Scenario of  ${pr} of ${dt?.name}`,
-                    Description: `This is a Damage Scenerio occured due to ${pr} in ${dt?.name}`,
-                    losses: []
-                }))
-            ).flat();
+            const mod1 = modal?.scenarios[1]?.subs[0]?.losses?.map((ls) =>({
+                    id: ls?.id,
+                    name: ls?.name,
+                    Description: ls?.name,
+                    cyberLosses: ls?.cyberLosses ? ls.cyberLosses :[]
+                })).flat();
 
             // console.log('modal in effect12', mod1)
             const mod2 = modal?.scenarios[1]?.subs[1]?.scenes;
@@ -157,7 +156,7 @@ export default function DsTable() {
         }
     }, [modal]);
     // console.log('rows', rows);
-    console.log('modal out', modal);
+    // console.log('modal out', modal);
 
     const handleOpenModalDs = () => {
         setOpenDs(true);
@@ -258,16 +257,16 @@ export default function DsTable() {
                                     {row?.id?.slice(0, 6)}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
+                                <Typography sx={{width:'max-content'}}>{` Damage Scenario for the ${row?.name}`}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
+                                <Typography sx={{width:'max-content'}}>{` Damage Scenario for the ${row?.name}`}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    <div className={classes.div}>{row?.Description}</div>
+                                    <div className={classes.div}>{` This is teh Description for the ${row?.Description}`}</div>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row" onClick={() => handleOpenCl(row)}>
-                                    {row?.losses?.map((loss) => (
+                                    {row?.cyberLosses?.map((loss) => (
                                         <div key={loss} style={{ marginBottom: '5px' }}>
                                             {loss?.props.map((pr, i) => (
                                                 <span
@@ -304,7 +303,7 @@ export default function DsTable() {
                                             width:'max-content'
                                         }}
                                     >
-                                        {row?.losses?.map((loss) => (
+                                        {row?.cyberLosses?.map((loss) => (
                                             <span
                                                 key={loss}
                                                 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}
@@ -503,6 +502,9 @@ export default function DsTable() {
                     setRows={setRows}
                     selectedRow={selectedRow}
                     setSelectedRow={setSelectedRow}
+                    update={update}
+                    getModal={getModal}
+                    id={id}
                 />
             )}
         </>

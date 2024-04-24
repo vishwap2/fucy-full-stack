@@ -3046,24 +3046,23 @@
       ]
     },
     {
-      "id": "b887a3df-fe16-4681-ae55-c4d431bba10c",
-      "name": "New",
+      "id": "b41866ee-4165-4c8f-b299-a3cdb9e7cced",
+      "name": "New3",
       "properties": [
-        "Integrity",
-        "Authorization"
+        "Confidentiality"
       ],
       "template": {
         "nodes": [
           {
-            "id": "98627b79-96ac-4226-ab08-ab5e3019bd3b875",
+            "id": "f8155ccc-ba39-4839-bd1a-161500ed6fd6787",
             "data": {
               "label": "Power Manage",
               "bgColor": "rgb(233, 233, 85)"
             },
             "type": "input",
             "position": {
-              "x": 629.8625030517578,
-              "y": 504.07500076293945
+              "x": 155.2524072400253,
+              "y": 102.67284914047977
             },
             "properties": [
               "Integrity",
@@ -3073,51 +3072,33 @@
             "height": 40
           },
           {
-            "id": "e25bdc35-67b0-4869-b6a7-a7782cf1249d875",
+            "id": "7e3fd44c-521c-49cc-8241-ceb966b66ef7787",
             "data": {
-              "label": "Vehicle",
-              "bgColor": "#ff0072"
+              "label": "MCU",
+              "bgColor": "#06f9f5"
             },
-            "type": "output",
+            "type": "default",
             "position": {
-              "x": 956.2937545776367,
-              "y": 666.6125011444092
+              "x": 102.08648721151985,
+              "y": 246.81156566220557
             },
             "properties": [
-              "Authenticity",
-              "Availability"
+              "Integrity",
+              "Authorization"
             ],
             "width": 150,
             "height": 40
           },
           {
-            "id": "583f8758-c0c8-4529-ae61-6f55eda88a73875",
+            "id": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64787",
             "data": {
-              "label": "transceiver",
-              "bgColor": "#000"
+              "label": "PHY",
+              "bgColor": "#16c260"
             },
-            "type": "transceiver",
+            "type": "default",
             "position": {
-              "x": 702.3417041781067,
-              "y": 681.8952950379927
-            },
-            "properties": [
-              "Authenticity",
-              "Authorization"
-            ],
-            "width": 120,
-            "height": 150
-          },
-          {
-            "id": "16f89daa-0aab-4147-9e7d-671699e6da52875",
-            "data": {
-              "label": "circuit",
-              "bgColor": "#8ea9fb"
-            },
-            "type": "output",
-            "position": {
-              "x": 988.8096085461679,
-              "y": 788.9339344384438
+              "x": 185.2827291942765,
+              "y": 355.2017601154038
             },
             "properties": [
               "Integrity",
@@ -3127,15 +3108,51 @@
             "height": 40
           },
           {
-            "id": "c36579ed-b437-46e9-979d-d32f56b27f44875",
+            "id": "212528af-2aca-4df6-bc01-9b3e4b6e7507787",
+            "data": {
+              "label": "Vehicle",
+              "bgColor": "#ff0072"
+            },
+            "type": "output",
+            "position": {
+              "x": 788.0505308576976,
+              "y": 369.7296316643992
+            },
+            "properties": [
+              "Authenticity",
+              "Availability"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "2a4df59e-0856-466f-852f-fbff39d0d899787",
+            "data": {
+              "label": "Receiver",
+              "bgColor": "#124faf"
+            },
+            "type": "receiver",
+            "position": {
+              "x": 571.4122355507128,
+              "y": 317.3695543428532
+            },
+            "properties": [
+              "Confidentiality",
+              "Availability"
+            ],
+            "width": 150,
+            "height": 40
+          },
+          {
+            "id": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0787",
             "data": {
               "label": "signal",
               "bgColor": "#f59b00"
             },
             "type": "signal",
             "position": {
-              "x": 866.9438834159793,
-              "y": 561.755731285401
+              "x": 394.98320961350225,
+              "y": 245.82810595598187
             },
             "properties": [
               "Non-repudiation",
@@ -3147,9 +3164,9 @@
         ],
         "edges": [
           {
-            "id": "376bc400-492a-4ece-be9c-5ef69dbfe009",
-            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b875",
-            "target": "583f8758-c0c8-4529-ae61-6f55eda88a73875",
+            "id": "bd16be08-0662-425f-8924-c8f79af3401b",
+            "source": "f8155ccc-ba39-4839-bd1a-161500ed6fd6787",
+            "target": "7e3fd44c-521c-49cc-8241-ceb966b66ef7787",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3163,9 +3180,9 @@
             }
           },
           {
-            "id": "d8d51862-581d-4047-bab0-aaee0b6ca12f",
-            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b875",
-            "target": "c36579ed-b437-46e9-979d-d32f56b27f44875",
+            "id": "d4b42486-ead1-4b3e-a00c-07b8d786559e",
+            "source": "7e3fd44c-521c-49cc-8241-ceb966b66ef7787",
+            "target": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64787",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3179,9 +3196,9 @@
             }
           },
           {
-            "id": "9410b707-5ab7-45c6-89b1-d117ab36faf6",
-            "source": "c36579ed-b437-46e9-979d-d32f56b27f44875",
-            "target": "e25bdc35-67b0-4869-b6a7-a7782cf1249d875",
+            "id": "5f403c9c-457c-41c4-abbe-f0fb225dd346",
+            "source": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64787",
+            "target": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0787",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3195,9 +3212,25 @@
             }
           },
           {
-            "id": "3210b4d8-5e21-4f06-9e23-6b3882e8f8d5",
-            "source": "583f8758-c0c8-4529-ae61-6f55eda88a73875",
-            "target": "16f89daa-0aab-4147-9e7d-671699e6da52875",
+            "id": "bed9ffc0-4507-4304-bcda-92db651bc3c0",
+            "source": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0787",
+            "target": "2a4df59e-0856-466f-852f-fbff39d0d899787",
+            "type": "smoothstep",
+            "markerEnd": {
+              "type": "arrowclosed",
+              "width": 20,
+              "height": 20,
+              "color": "black"
+            },
+            "animated": false,
+            "style": {
+              "stroke": "grey"
+            }
+          },
+          {
+            "id": "afc5ab02-f09e-492f-beb8-2360bea5abe1",
+            "source": "2a4df59e-0856-466f-852f-fbff39d0d899787",
+            "target": "212528af-2aca-4df6-bc01-9b3e4b6e7507787",
             "type": "smoothstep",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3214,7 +3247,7 @@
       },
       "scenarios": [
         {
-          "id": "66a5b9cf-7a6a-4832-b12d-417b8e09b4a5",
+          "id": "b0af51af-db1e-4df4-b2ad-2fcd5d3bd7de",
           "name": "Item Modal & Assets",
           "icon": "ItemIcon",
           "Details": [
@@ -3226,6 +3259,20 @@
               ]
             },
             {
+              "name": "MCU",
+              "props": [
+                "Integrity",
+                "Authorization"
+              ]
+            },
+            {
+              "name": "PHY",
+              "props": [
+                "Integrity",
+                "Authenticity"
+              ]
+            },
+            {
               "name": "Vehicle",
               "props": [
                 "Authenticity",
@@ -3233,17 +3280,10 @@
               ]
             },
             {
-              "name": "transceiver",
+              "name": "Receiver",
               "props": [
-                "Authenticity",
-                "Authorization"
-              ]
-            },
-            {
-              "name": "circuit",
-              "props": [
-                "Integrity",
-                "Authenticity"
+                "Confidentiality",
+                "Availability"
               ]
             },
             {
@@ -3256,12 +3296,12 @@
           ]
         },
         {
-          "id": "549939f1-81b0-421d-aadd-39e12c6b4f93",
+          "id": "a71e7eee-ceb5-400f-a46b-db2edc84d20d",
           "name": "Damage Scenarios Identification and Impact Ratings",
           "icon": "DamageIcon",
           "subs": [
             {
-              "id": "82ca242c-42f2-42ba-86c5-7c4f44bec1c5",
+              "id": "358189a2-4029-4beb-bbe4-b0b58445bfd4",
               "name": "Damage Scenarios Derivations",
               "Details": [
                 {
@@ -3272,6 +3312,20 @@
                   ]
                 },
                 {
+                  "name": "MCU",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "PHY",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
                   "name": "Vehicle",
                   "props": [
                     "Authenticity",
@@ -3279,17 +3333,10 @@
                   ]
                 },
                 {
-                  "name": "transceiver",
+                  "name": "Receiver",
                   "props": [
-                    "Authenticity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "circuit",
-                  "props": [
-                    "Integrity",
-                    "Authenticity"
+                    "Confidentiality",
+                    "Availability"
                   ]
                 },
                 {
@@ -3299,29 +3346,111 @@
                     "Authenticity"
                   ]
                 }
+              ],
+              "losses": [
+                {
+                  "id": "DS001",
+                  "name": "loss of Integrity for Power Manage",
+                  "cyberLosses": [
+                    {
+                      "name": "Vehicle",
+                      "props": [
+                        "Authenticity",
+                        "Availability"
+                      ]
+                    },
+                    {
+                      "name": "Receiver",
+                      "props": [
+                        "Confidentiality"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "DS002",
+                  "name": "loss of Authorization for Power Manage",
+                  "cyberLosses": [
+                    {
+                      "name": "Power Manage",
+                      "props": [
+                        "Integrity"
+                      ]
+                    },
+                    {
+                      "name": "MCU",
+                      "props": [
+                        "Integrity"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "DS003",
+                  "name": "loss of Integrity for MCU",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS004",
+                  "name": "loss of Authorization for MCU",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS005",
+                  "name": "loss of Integrity for PHY",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS006",
+                  "name": "loss of Authenticity for PHY",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS007",
+                  "name": "loss of Authenticity for Vehicle",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS008",
+                  "name": "loss of Availability for Vehicle",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS009",
+                  "name": "loss of Confidentiality for Receiver",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS0010",
+                  "name": "loss of Availability for Receiver",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS0011",
+                  "name": "loss of Non-repudiation for signal",
+                  "cyberLosses": []
+                },
+                {
+                  "id": "DS0012",
+                  "name": "loss of Authenticity for signal",
+                  "cyberLosses": []
+                }
               ]
             },
             {
-              "id": "d924e033-cfb9-4cb8-b973-929c673fb408",
+              "id": "e195ede5-a166-4b87-9ea2-d00971ec3772",
               "name": "Damage Scenarios - Collection & Impact Ratings",
-              "scenes": [
-                {
-                  "id": "3894710d-e425-4601-af76-5eea32105aa0",
-                  "name": "New Scene",
-                  "Description": "This is a test",
-                  "losses": []
-                }
-              ]
+              "scenes": []
             }
           ]
         },
         {
-          "id": "7d0eabc2-ba51-4084-9938-ce3529a129dd",
+          "id": "a68f1f08-5a1c-4e24-8030-6e7c67461ccd",
           "name": "Threat Scenarios Identification",
           "icon": "ThreatIcon",
           "subs": [
             {
-              "id": "cbd82267-c3b0-4235-a4cd-df09580474cb",
+              "id": "f37e17ce-7e77-4e90-81f0-40ae58f962ae",
               "name": "Threat Scenarios",
               "Details": [
                 {
@@ -3332,6 +3461,20 @@
                   ]
                 },
                 {
+                  "name": "MCU",
+                  "props": [
+                    "Integrity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "PHY",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
+                  ]
+                },
+                {
                   "name": "Vehicle",
                   "props": [
                     "Authenticity",
@@ -3339,17 +3482,10 @@
                   ]
                 },
                 {
-                  "name": "transceiver",
+                  "name": "Receiver",
                   "props": [
-                    "Authenticity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "circuit",
-                  "props": [
-                    "Integrity",
-                    "Authenticity"
+                    "Confidentiality",
+                    "Availability"
                   ]
                 },
                 {
@@ -3359,77 +3495,118 @@
                     "Authenticity"
                   ]
                 }
+              ],
+              "losses": [
+                {
+                  "id": "DS001",
+                  "name": "loss of Integrity for Power Manage",
+                  "Description": "loss of Integrity for Power Manage",
+                  "cyberLosses": [
+                    {
+                      "name": "Vehicle",
+                      "props": [
+                        "Authenticity",
+                        "Availability"
+                      ]
+                    },
+                    {
+                      "name": "Receiver",
+                      "props": [
+                        "Confidentiality"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "DS002",
+                  "name": "loss of Authorization for Power Manage",
+                  "Description": "loss of Authorization for Power Manage",
+                  "cyberLosses": [
+                    {
+                      "name": "Power Manage",
+                      "props": [
+                        "Integrity"
+                      ]
+                    },
+                    {
+                      "name": "MCU",
+                      "props": [
+                        "Integrity"
+                      ]
+                    }
+                  ]
+                }
               ]
             },
             {
-              "id": "646f9c90-59e1-446c-aab3-2aefd793ecda",
+              "id": "ae6984e1-e27e-4a6e-98f9-26c611787ee8",
               "name": "Derived Threat Scenarios",
               "scenes": []
             }
           ]
         },
         {
-          "id": "f880f555-b00b-4e98-ad1c-48eb0385c81f",
+          "id": "40718846-1d72-45a0-a457-965f4af9296d",
           "name": "Attack Path Analysis and Attack Feasability Rating",
           "icon": "AttackIcon",
           "subs": [
             {
-              "id": "eaca51ac-2f2a-4af6-8101-3941606d8e08",
+              "id": "4bfe14be-e0fe-4ec5-bd6d-05d715015575",
               "name": "Attack Trees",
               "scenes": []
             },
             {
-              "id": "3370f6c2-bcc7-4cd6-a592-b8a115a269e3",
+              "id": "91352d53-bd09-4a33-b1e0-21b180ea726e",
               "name": "Vulnerability Analysis",
               "scenes": []
             }
           ]
         },
         {
-          "id": "ea8ac438-f5c6-41f2-a443-7219af6bfb95",
+          "id": "48e7f967-8422-49d3-b55e-7b8b7a7be075",
           "name": "CyberSecurity Goals, Claims and Requirements",
           "icon": "CybersecurityIcon",
           "subs": [
             {
-              "id": "36447641-0c97-4ece-8773-3f545839ff6e",
+              "id": "a5540054-8423-4aad-9cbe-203842e7aed0",
               "name": "CyberSecurity Goals and Requirements",
               "subs": [
                 {
-                  "id": "35c8a224-6d01-4f23-923d-7b28f675a8a1",
+                  "id": "72a3610d-6d45-451e-9d1a-09ffbd0a3f17",
                   "name": "CyberSecurity Goals",
                   "scenes": []
                 },
                 {
-                  "id": "ef8fdee3-1dbd-49e7-8191-aa11055fc8be",
+                  "id": "5da966e5-2cbf-4498-a76a-3e8ce9e472dd",
                   "name": "CyberSecurity Requirements",
                   "scenes": []
                 }
               ]
             },
             {
-              "id": "979ea452-ee81-4534-bd44-a3f3bbedf20d",
+              "id": "bdd47505-1ec8-4568-9a22-4171fd908820",
               "name": "CyberSecurity Controls",
               "scenes": []
             }
           ]
         },
         {
-          "id": "cc98f0f6-15cb-47cf-8610-183186f23761",
+          "id": "814f6b60-6ca9-4de9-a59c-c06394a7553c",
           "name": "System Design",
           "icon": "SystemIcon",
           "subs": [
             {
-              "id": "a5a33ab8-4736-4f6e-a231-a02f19c4ce82",
+              "id": "3e309847-3728-495f-9f6d-1d9827d2f364",
               "name": "Hardware Models"
             },
             {
-              "id": "796305ef-1da1-43e1-9605-6f28ea782105",
+              "id": "fd6ed798-4e0e-4871-9692-f61e7abf91ac",
               "name": "Software Models"
             }
           ]
         },
         {
-          "id": "b81aeb34-ee3a-4c33-a05a-1799adf6ee44",
+          "id": "0623dfa2-31c1-4094-b2e3-8c070243090d",
           "name": "Catalogs",
           "icon": "CatalogIcon",
           "subs": [
@@ -3440,23 +3617,23 @@
           ]
         },
         {
-          "id": "ff0331d3-c3b3-4baa-8dcc-1a86873cccf6",
+          "id": "7802dcc7-b683-41ef-9424-4eadff78e0a8",
           "name": "Risk Determination and Risk Treatment Decision",
           "icon": "RiskIcon"
         },
         {
-          "id": "d66b6209-5842-432c-87c2-96db231156f5",
+          "id": "caf2c23d-6c7c-4207-99ba-713c575d6ddf",
           "name": "Documents",
           "icon": "DocumentIcon"
         },
         {
-          "id": "877ba460-700a-4b8f-997e-8f346af6b6b1",
+          "id": "150c725c-a184-490a-ad36-aef2a565085e",
           "name": "Reporting",
           "icon": "ReportIcon",
           "scenes": []
         },
         {
-          "id": "1e3b1765-eec6-4246-8d15-d4ceed4eafbe",
+          "id": "48a7ce46-caef-49cb-9e18-3d2cc8a91dc3",
           "name": "Layouts",
           "icon": "LayoutIcon",
           "scenes": []

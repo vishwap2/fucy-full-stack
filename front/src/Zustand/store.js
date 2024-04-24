@@ -178,6 +178,7 @@ const useStore = createWithEqualityFn((set, get) => ({
         if (res) {
             // alert('Updated');
             // window.location.reload();
+            console.log('res', res)
             return res;
         }
     },
