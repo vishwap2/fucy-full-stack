@@ -341,6 +341,7 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                   )}
                                                               {sub?.name === 'Damage Scenarios - Collection & Impact Ratings' &&
                                                                   sub?.scenes?.map((dm_scene) => {
+                                                                    console.log('dm_scene', dm_scene)
                                                                       return (
                                                                           <TreeItem
                                                                               key={dm_scene?.id}
@@ -348,7 +349,7 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                               label={getLabel('DangerousIcon', dm_scene?.name)}
                                                                               //   label={dm_scene?.name}
                                                                           >
-                                                                              {dm_scene?.losses.map((dm) => (
+                                                                              {dm_scene?.cyberLosses.map((dm) => (
                                                                                   <TreeItem
                                                                                       key={dm?.name}
                                                                                       nodeId={dm?.name}

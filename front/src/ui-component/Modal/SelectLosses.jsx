@@ -79,40 +79,55 @@ export default function SelectLosses({
         }
     };
 
-
     const handleClick = () => {
-        // console.log('selectedRow', selectedRow);
-        // console.log('modal', modal)
-        const mod={...modal};
+        const mod = { ...modal };
         const Rows = [...rows];
-        // console.log('Rows', Rows)
-        const losses = mod?.scenarios[1]?.subs[0];
+        const losses = mod?.scenarios[1]?.subs[0].losses;
+        const lossesEdit = mod?.scenarios[1]?.subs[1]?.scenes;
         const Index = Rows.findIndex((rw) => rw.id === selectedRow.id);
         Rows[Index] = selectedRow;
-        const changes = Rows.map(rw=>{
+        const changes = Rows.map((rw) => {
             //eslint-disable-next-line
-            const {Description, ...rest} = rw;
-            return rest
-        })
-         
-        const threat = mod?.scenarios[2]?.subs[0];
-        const cybersec = Rows.filter((rw)=>{
-            if(rw.cyberLosses.length>0){
-                return rw
-            }
-        })
-        // const props= cybersec?.map(cs=>
-        //     cs.cyberLosses?.map(pr=>
-        //         console.log('pr', pr)
-        // ))
+            const { Description, ...rest } = rw;
+            return rest;
+        });
 
-        threat.losses=cybersec,
-        // console.log('props', props)
-        // console.log('mod', mod)
-        losses.losses = changes
-        setRows(Rows);
+        const threat = mod?.scenarios[2]?.subs[0];
+        const cybersec = Rows.filter((rw) => {
+            if (rw.cyberLosses.length > 0) {
+                return rw;
+            }
+        });
+
+        const updatedLoss = losses
+            .map((loss) =>
+                changes.filter((update) => {
+                    if (loss.id === update.id) {
+                        return { ...loss, cyberLosses: update.cyberLosses };
+                    }
+                })
+            )
+            .flat();
+
+        const updatedLossEdit = lossesEdit
+            .map((loss) =>
+                changes.filter((update) => {
+                    if (loss.id === update.id) {
+                        return { ...loss, cyberLosses: update.cyberLosses };
+                    }
+                })
+            )
+            .flat();
+
+        mod.scenarios[1].subs[0].losses = updatedLoss;
+        mod.scenarios[1].subs[1].scenes = updatedLossEdit;
+        //     console.log('updatedLoss', updatedLoss)
+        // console.log('updatedLossEdit', updatedLossEdit)
+
+        threat.losses = cybersec,
+            setRows(Rows);
         // console.log('threat', threat)
-        console.log('mod', mod)
+        // console.log('mod', mod);
         update(mod)
         .then(res=>{
             if(res){
@@ -174,8 +189,10 @@ export default function SelectLosses({
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined' color='warning' onClick={handleClose}>close</Button>
-                    <Button variant='contained' onClick={handleClick} autoFocus>
+                    <Button variant="outlined" color="warning" onClick={handleClose}>
+                        close
+                    </Button>
+                    <Button variant="contained" onClick={handleClick} autoFocus>
                         Okay
                     </Button>
                 </DialogActions>

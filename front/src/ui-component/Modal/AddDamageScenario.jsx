@@ -33,7 +33,7 @@ export default function AddDamageScenarios({ open, handleClose, modal, id }) {
         id:'',
         name: '',
         Description: '',
-        losses:[],
+        cyberLosses:[],
     });
 
     const handleCreate = () => {

@@ -3365,7 +3365,13 @@
                         "Confidentiality"
                       ]
                     }
-                  ]
+                  ],
+                  "impacts": {
+                    "Financial": "Negligible",
+                    "Safety": "Major",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS002",
@@ -3383,64 +3389,141 @@
                         "Integrity"
                       ]
                     }
-                  ]
+                  ],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS003",
                   "name": "loss of Integrity for MCU",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS004",
                   "name": "loss of Authorization for MCU",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS005",
                   "name": "loss of Integrity for PHY",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS006",
                   "name": "loss of Authenticity for PHY",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS007",
                   "name": "loss of Authenticity for Vehicle",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS008",
                   "name": "loss of Availability for Vehicle",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS009",
                   "name": "loss of Confidentiality for Receiver",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS0010",
                   "name": "loss of Availability for Receiver",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS0011",
                   "name": "loss of Non-repudiation for signal",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS0012",
                   "name": "loss of Authenticity for signal",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 }
+               
               ]
             },
             {
               "id": "e195ede5-a166-4b87-9ea2-d00971ec3772",
               "name": "Damage Scenarios - Collection & Impact Ratings",
-              "scenes": []
+              "scenes": [
+                {
+                  "id": "38cefa22-ee71-4a72-b8de-2b00bcfb8f9b",
+                  "name": "test Scene",
+                  "Description": "this is a test Scene",
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Safety": "Major"
+                  }
+                }
+              ]
             }
           ]
         },

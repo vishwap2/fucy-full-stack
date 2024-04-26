@@ -357,7 +357,8 @@ export default function Edit() {
         ))
         losses=losses.flat().map((loss,i)=>({
             ...loss,
-            id:`DS00${i+1}`
+            id:`DS00${i+1}`,
+            
         }))
         console.log('Details', Details);
         mod.template = { nodes, edges };
