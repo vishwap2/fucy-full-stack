@@ -199,7 +199,7 @@ export default function DsTable() {
             const { Description, ...rest } = rw;
             return rest;
         });
-        console.log('updated', updated);
+        // console.log('updated', updated);
         const mod = { ...modal };
         const losses = mod?.scenarios[1]?.subs[0].losses
         const lossesEdit = mod?.scenarios[1]?.subs[1]?.scenes;
@@ -221,7 +221,7 @@ export default function DsTable() {
         mod.scenarios[1].subs[0].losses = updatedLoss;
         mod.scenarios[1].subs[1].scenes = updatedLossEdit;
         // losses.losses = updated;
-        console.log('modal121232', mod)
+        // console.log('modal121232', mod)
         update(mod)
             .then((res) => {
                 if (res) {
@@ -232,7 +232,7 @@ export default function DsTable() {
             })
             .catch((err) => console.log('err', err));
     };
-    console.log('rows', rows);
+    // console.log('rows', rows);
 
     const colorPickerTab = (value) => {
         if (value === 'Severe') {
@@ -250,7 +250,7 @@ export default function DsTable() {
         return 'white';
     };
 
-    console.log('modal12', modal);
+    // console.log('modal12', modal);
     const colorPicker = (pr) => {
         // console.log('pr', pr);
         switch (pr) {
@@ -544,7 +544,7 @@ export default function DsTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} />
+            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} rows={rows}/>
             {openCl && (
                 <SelectLosses
                     open={openCl}

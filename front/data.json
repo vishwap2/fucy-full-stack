@@ -3507,7 +3507,6 @@
                     "Privacy": ""
                   }
                 }
-               
               ]
             },
             {
@@ -3515,12 +3514,39 @@
               "name": "Damage Scenarios - Collection & Impact Ratings",
               "scenes": [
                 {
-                  "id": "38cefa22-ee71-4a72-b8de-2b00bcfb8f9b",
+                  "id": "DS0013",
                   "name": "test Scene",
-                  "Description": "this is a test Scene",
-                  "cyberLosses": [],
+                  "cyberLosses": [
+                    {
+                      "name": "Receiver",
+                      "props": [
+                        "Confidentiality"
+                      ]
+                    }
+                  ],
                   "impacts": {
-                    "Safety": "Major"
+                    "Financial": "",
+                    "Safety": "Major",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
+                },
+                {
+                  "id": "DS0014",
+                  "name": "New 1",
+                  "cyberLosses": [
+                    {
+                      "name": "Receiver",
+                      "props": [
+                        "Confidentiality"
+                      ]
+                    }
+                  ],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
                   }
                 }
               ]
@@ -3598,7 +3624,13 @@
                         "Confidentiality"
                       ]
                     }
-                  ]
+                  ],
+                  "impacts": {
+                    "Financial": "Negligible",
+                    "Safety": "Major",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 },
                 {
                   "id": "DS002",
@@ -3617,7 +3649,51 @@
                         "Integrity"
                       ]
                     }
-                  ]
+                  ],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
+                },
+                {
+                  "id": "DS0013",
+                  "name": "test Scene",
+                  "Description": "test Scene",
+                  "cyberLosses": [
+                    {
+                      "name": "Receiver",
+                      "props": [
+                        "Confidentiality"
+                      ]
+                    }
+                  ],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "Major",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
+                },
+                {
+                  "id": "DS0014",
+                  "name": "New 1",
+                  "Description": "New 1",
+                  "cyberLosses": [
+                    {
+                      "name": "Receiver",
+                      "props": [
+                        "Confidentiality"
+                      ]
+                    }
+                  ],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 }
               ]
             },
