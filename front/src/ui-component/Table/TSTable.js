@@ -21,6 +21,7 @@ const selector = (state) => ({
     modal: state.modal,
     getModal: state.getModalById
 });
+
 const Head = [
     { id: 1, name: 'ID' },
     { id: 2, name: 'Name' },
@@ -67,7 +68,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
         borderRight: '1px solid rgba(224, 224, 224, 1) !important'
-
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -98,17 +98,20 @@ export default function Tstable() {
 
     React.useEffect(() => {
         if (modal.scenarios) {
-            // console.log('modal in effect', modal?.scenarios[1]?.subs[1]?.scenes)
-            const mod1 = modal?.scenarios[2]?.subs[0]?.Details?.map((dt, index) =>
-                dt?.props?.map((pr, i) => ({
-                    id: `TS0${index}${i}`,
-                    name: `${threatType(pr)}  ${pr} of ${dt?.name}`,
-                    Description: `This is ${threatType(pr)} occured due to ${pr} in ${dt?.name}`,
+            const mod1 = modal?.scenarios[2]?.subs[0]?.losses?.map((dt) =>
+            dt?.cyberLosses?.map((pr, prin) =>
+                pr?.props?.map((pp, pin) => {
+                    console.log('pp', pp)
+                    return({
+                    id: `TS0${prin}${pin}`,
+                    name: `${threatType(pp)}  ${pp} of ${pr?.name} for Damage Scene ${dt?.id}`,
+                    Description: `This is ${threatType(pp)} occured due to ${pp} in ${pr?.name} for Damage Scene ${dt?.id}`,
                     losses: []
-                }))
-            ).flat();
+                })}
+            ))
+        ).flat(2)
 
-            // console.log('modal in effect12', mod1)
+            console.log('modal in effect12', mod1)
             const mod2 = modal?.scenarios[2]?.subs[1]?.scenes;
             // console.log('mod2', mod2)
             const combained = mod1.concat(mod2);
@@ -159,11 +162,9 @@ export default function Tstable() {
                                     {row?.id?.slice(0, 6)}
                                 </StyledTableCell>
                                 <StyledTableCell component="td" scope="row">
-                                    <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
+                                    <Typography sx={{ width: 'max-content' }}>{row?.name}</Typography>
                                 </StyledTableCell>
-                                <StyledTableCell component="td" scope="row">
-                                    
-                                </StyledTableCell>
+                                <StyledTableCell component="td" scope="row"></StyledTableCell>
                                 <StyledTableCell component="td" scope="row">
                                     <div className={classes.div}>{row?.Description}</div>
                                 </StyledTableCell>
@@ -172,7 +173,7 @@ export default function Tstable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <AddThreatScenarios open={openTs} handleClose={handleCloseTs} modal={modal} id={id}/>
+            <AddThreatScenarios open={openTs} handleClose={handleCloseTs} modal={modal} id={id} />
         </>
     );
 }

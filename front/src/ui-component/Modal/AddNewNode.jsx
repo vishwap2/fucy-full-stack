@@ -168,7 +168,8 @@ const AddNewNode = ({ open, handleClose, getSidebarNode }) => {
               <MenuItem value="output">Output</MenuItem>
               <MenuItem value="transceiver">Transceiver</MenuItem>
               <MenuItem value="transmitter">Transmitter</MenuItem>
-
+              <MenuItem value="mcu">MicroController</MenuItem>
+              <MenuItem value="memory">Memory</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{ width: 350 }}>

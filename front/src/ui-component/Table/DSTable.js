@@ -21,7 +21,8 @@ import { Box } from '@mui/system';
 
 const selector = (state) => ({
     modal: state.modal,
-    getModal: state.getModalById
+    getModal: state.getModalById,
+    update: state.updateModal
 });
 const Head = [
     { id: 1, name: 'ID' },
@@ -61,7 +62,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
         borderRight: '1px solid rgba(224, 224, 224, 1) !important'
-
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -117,7 +117,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 //   }
 
 export default function DsTable() {
-    const { modal, getModal } = useStore(selector, shallow);
+    const { modal, getModal, update } = useStore(selector, shallow);
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -141,23 +141,40 @@ export default function DsTable() {
     };
     React.useEffect(() => {
         if (modal.scenarios) {
-            const mod1 = modal?.scenarios[1]?.subs[0]?.Details?.map((dt, index) =>
-                dt?.props?.map((pr, i) => ({
-                    id: `DS0${index}${i}`,
-                    name: `Damage Scenario of  ${pr} of ${dt?.name}`,
-                    Description: `This is a Damage Scenerio occured due to ${pr} in ${dt?.name}`,
-                    losses: []
+            const mod1 = modal?.scenarios[1]?.subs[0]?.losses
+                ?.map((ls) => ({
+                    id: ls?.id,
+                    name: ls?.name,
+                    Description: ls?.name,
+                    cyberLosses: ls?.cyberLosses ? ls.cyberLosses : [],
+                    impacts: {
+                        Financial: ls?.impacts?.Financial ? ls?.impacts?.Financial : '',
+                        Safety: ls?.impacts?.Safety ? ls?.impacts?.Safety : '',
+                        Operational: ls?.impacts?.Operational ? ls?.impacts?.Operational : '',
+                        Privacy: ls?.impacts?.Privacy ? ls?.impacts?.Privacy : ''
+                    }
                 }))
-            ).flat();
+                .flat();
 
-            // console.log('modal in effect12', mod1)
-            const mod2 = modal?.scenarios[1]?.subs[1]?.scenes;
-            const combained = mod1.concat(mod2);
+            const mod2 = modal?.scenarios[1]?.subs[1]?.scenes
+            ?.map((ls) => ({
+                id: ls?.id,
+                name: ls?.name,
+                Description: ls?.name,  
+                cyberLosses: ls?.cyberLosses ? ls.cyberLosses : [],
+                impacts: {
+                    Financial: ls?.impacts?.Financial ? ls?.impacts?.Financial : '',
+                    Safety: ls?.impacts?.Safety ? ls?.impacts?.Safety : '',
+                    Operational: ls?.impacts?.Operational ? ls?.impacts?.Operational : '',
+                    Privacy: ls?.impacts?.Privacy ? ls?.impacts?.Privacy : ''
+                }
+            }))
+            // console.log('mod2', mod2)
+            const combained = mod1.concat(mod2)
+            // console.log('combained', combained)
             setRows(combained);
         }
     }, [modal]);
-    // console.log('rows', rows);
-    console.log('modal out', modal);
 
     const handleOpenModalDs = () => {
         setOpenDs(true);
@@ -169,11 +186,6 @@ export default function DsTable() {
     const handleChange = (e, row) => {
         const Rows = [...rows];
         const editRow = Rows.find((ele) => ele.id === row.id);
-        // console.log('editRow', editRow);
-        if (!editRow.impacts) {
-            editRow.impacts = {};
-        }
-
         const { name, value } = e.target;
         if (name) {
             editRow.impacts = { ...editRow.impacts, [`${name}`]: value };
@@ -181,8 +193,46 @@ export default function DsTable() {
         const Index = Rows.findIndex((it) => it.id === editRow.id);
         Rows[Index] = editRow;
         setRows(Rows);
+        // console.log('Rows', Rows)
+        const updated = Rows?.map((rw) => {
+            //eslint-disable-next-line
+            const { Description, ...rest } = rw;
+            return rest;
+        });
+        // console.log('updated', updated);
+        const mod = { ...modal };
+        const losses = mod?.scenarios[1]?.subs[0].losses
+        const lossesEdit = mod?.scenarios[1]?.subs[1]?.scenes;
+        // console.log('lossesEdit', lossesEdit);
+        const updatedLoss = losses.map(loss=>
+        updated.filter(update=>{
+            if(loss.id===update.id){
+             return{ ...loss,impacts:update.impacts }  
+            }
+        })).flat();
+        const updatedLossEdit = lossesEdit.map(loss=>
+            updated.filter(update=>{
+                if(loss.id===update.id){
+                 return{ ...loss, impacts:update.impacts }  
+                }
+            })).flat();
+        //     console.log('updatedLoss', updatedLoss)
+        // console.log('updatedLossEdit', updatedLossEdit)
+        mod.scenarios[1].subs[0].losses = updatedLoss;
+        mod.scenarios[1].subs[1].scenes = updatedLossEdit;
+        // losses.losses = updated;
+        // console.log('modal121232', mod)
+        update(mod)
+            .then((res) => {
+                if (res) {
+                    setTimeout(() => {
+                        getModal(id);
+                    }, 500);
+                }
+            })
+            .catch((err) => console.log('err', err));
     };
-    console.log('rows', rows);
+    // console.log('rows', rows);
 
     const colorPickerTab = (value) => {
         if (value === 'Severe') {
@@ -200,7 +250,7 @@ export default function DsTable() {
         return 'white';
     };
 
-    console.log('modal12', modal);
+    // console.log('modal12', modal);
     const colorPicker = (pr) => {
         // console.log('pr', pr);
         switch (pr) {
@@ -258,16 +308,16 @@ export default function DsTable() {
                                     {row?.id?.slice(0, 6)}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
+                                    <Typography sx={{ width: 'max-content' }}>{` Damage Scenario for the ${row?.name}`}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                <Typography sx={{width:'max-content'}}>{row?.name}</Typography>
+                                    <Typography sx={{ width: 'max-content' }}>{` Damage Scenario for the ${row?.name}`}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    <div className={classes.div}>{row?.Description}</div>
+                                    <div className={classes.div}>{` This is the Description for the ${row?.Description}`}</div>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row" onClick={() => handleOpenCl(row)}>
-                                    {row?.losses?.map((loss) => (
+                                    {row?.cyberLosses?.map((loss) => (
                                         <div key={loss} style={{ marginBottom: '5px' }}>
                                             {loss?.props.map((pr, i) => (
                                                 <span
@@ -301,10 +351,10 @@ export default function DsTable() {
                                             flexDirection: 'column',
                                             alignItems: 'flex-start',
                                             gap: 8,
-                                            width:'max-content'
+                                            width: 'max-content'
                                         }}
                                     >
-                                        {row?.losses?.map((loss) => (
+                                        {row?.cyberLosses?.map((loss) => (
                                             <span
                                                 key={loss}
                                                 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}
@@ -355,7 +405,7 @@ export default function DsTable() {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             name="Safety"
-                                            // value={impacts?.Safety}
+                                            value={row?.impacts?.Safety}
                                             onChange={(e) => handleChange(e, row)}
                                         >
                                             {options.map((item) => (
@@ -392,6 +442,7 @@ export default function DsTable() {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             name="Financial"
+                                            value={row?.impacts?.Financial}
                                             onChange={(e) => handleChange(e, row)}
                                         >
                                             {options.map((item) => (
@@ -425,7 +476,7 @@ export default function DsTable() {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             name="Operational"
-                                            // value={impacts?.Operational}
+                                            value={row?.impacts?.Operational}
                                             onChange={(e) => handleChange(e, row)}
                                         >
                                             {options.map((item) => (
@@ -459,7 +510,7 @@ export default function DsTable() {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             name="Privacy"
-                                            // value={impacts?.Privacy}
+                                            value={row?.impacts?.Privacy}
                                             onChange={(e) => handleChange(e, row)}
                                         >
                                             {options.map((item) => (
@@ -493,7 +544,7 @@ export default function DsTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} />
+            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} rows={rows}/>
             {openCl && (
                 <SelectLosses
                     open={openCl}
@@ -503,6 +554,9 @@ export default function DsTable() {
                     setRows={setRows}
                     selectedRow={selectedRow}
                     setSelectedRow={setSelectedRow}
+                    update={update}
+                    getModal={getModal}
+                    id={id}
                 />
             )}
         </>

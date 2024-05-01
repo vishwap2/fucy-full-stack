@@ -328,29 +328,20 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                               onClick={() => handleOpenTable(sub?.name)}
                                                           >
                                                               {sub?.name === 'Damage Scenarios Derivations' &&
-                                                                  sub?.Details?.map((dt) =>
-                                                                      dt?.props?.map((pr, i) => {
-                                                                          // console.log('pr',dt.name.slice(0,1), pr)
-                                                                          return (
+                                                                  sub?.losses?.map((ls) =>(
                                                                               <TreeItem
-                                                                                  key={`[${dt?.name
-                                                                                      ?.split(' ')
-                                                                                      .map((it) => it.slice(0, 1))
-                                                                                      .join('')}000${i}]`}
-                                                                                  nodeId={`[${dt?.name
-                                                                                      ?.split(' ')
-                                                                                      .map((it) => it.slice(0, 1))
-                                                                                      .join('')}000${i}]`}
-                                                                                  label={`[DS00${i+1}] Damage scenenorio for ${pr} of ${dt?.name}`}
+                                                                                  key={ls?.id}
+                                                                                  nodeId={ls.id}
+                                                                                  label={`[${ls?.id}] Damage Scenario for the ${ls?.name}`}
                                                                                   sx={{
                                                                                     ml:-2
                                                                                   }}
                                                                               ></TreeItem>
-                                                                          );
-                                                                      })
+                                                                          )                                                             
                                                                   )}
                                                               {sub?.name === 'Damage Scenarios - Collection & Impact Ratings' &&
                                                                   sub?.scenes?.map((dm_scene) => {
+                                                                    // console.log('dm_scene', dm_scene)
                                                                       return (
                                                                           <TreeItem
                                                                               key={dm_scene?.id}
@@ -358,35 +349,28 @@ const BrowserCard = ({ modals, template, handleClick }) => {
                                                                               label={getLabel('DangerousIcon', dm_scene?.name)}
                                                                               //   label={dm_scene?.name}
                                                                           >
-                                                                              {dm_scene?.losses.map((dm) => (
+                                                                              {/* {dm_scene?.cyberLosses.map((dm) => (
                                                                                   <TreeItem
                                                                                       key={dm?.name}
                                                                                       nodeId={dm?.name}
                                                                                       label={dm?.name}
                                                                                   ></TreeItem>
-                                                                              ))}
+                                                                              ))} */}
                                                                           </TreeItem>
                                                                       );
                                                                   })}
                                                               {sub?.name === 'Threat Scenarios' &&
-                                                                  sub?.Details?.map((dt) =>
-                                                                      dt?.props?.map((pr, i) => {
-                                                                          // console.log('pr',dt.name.slice(0,1), pr)
-                                                                          return (
+                                                                  sub?.losses?.map((dt) =>
+                                                                      dt?.cyberLosses?.map((pr,prin) => 
+                                                                          pr?.props?.map((pp,pin)=> (
                                                                               <TreeItem
-                                                                                  key={`[${dt?.name
-                                                                                      ?.split(' ')
-                                                                                      .map((it) => it.slice(0, 1))
-                                                                                      .join('')}000${i}]`}
-                                                                                  nodeId={`[${dt?.name
-                                                                                      ?.split(' ')
-                                                                                      .map((it) => it.slice(0, 1))
-                                                                                      .join('')}000${i}]`}
-                                                                                  label={`[TS00${i+1}] ${threatType(pr)} for ${pr} of ${dt?.name}`}
+                                                                                  key={`${dt?.id}${prin}${pin}`}
+                                                                                  nodeId={`${dt?.id}${prin}${pin}`}
+                                                                                  label={`[TS00${prin}${pin}] ${threatType(pp)} for the loss of ${pp} of ${pr?.name} for Damage Scene ${dt?.id}`}
                                                                               ></TreeItem>
-                                                                          );
-                                                                      })
-                                                                  )}
+                                                                          )
+                                                                      )
+                                                                  ))}
                                                               {sub?.name === 'CyberSecurity Goals and Requirements' &&
                                                                   sub?.subs?.map((s_sub) => (
                                                                       <TreeItem

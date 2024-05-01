@@ -40,7 +40,7 @@ export default function CyberSecurityModal({ open, handleClose, name }) {
         getModal(id);
     }, [id]);
 
-    console.log('name', name);
+    // console.log('name', name);
     const handleCreate = () => {
         const mod = { ...modal };
        let cyber =  mod.scenarios[4].subs[0];
@@ -55,7 +55,7 @@ export default function CyberSecurityModal({ open, handleClose, name }) {
                 ...templateDetails
             });
         }
-        console.log('cyber', cyber)
+        // console.log('cyber', cyber)
         update(mod)
         .then(res=>
             {

@@ -14,61 +14,62 @@ export default function SelectLosses({
     open,
     handleClose,
     modal,
-    // selected,
-    // setSelected,
     rows,
     setRows,
     selectedRow,
-    setSelectedRow
+    setSelectedRow,
+    getModal,
+    id,
+    update
 }) {
     const handleChange = (e, prop, item) => {
         if (e.target.checked) {
-            if (Object.keys(selectedRow?.losses).length === 0) {
-                let select = [...selectedRow.losses];
+            if (Object.keys(selectedRow?.cyberLosses).length === 0) {
+                let select = [...selectedRow.cyberLosses];
                 const Details = {
                     name: item?.name,
                     props: [prop]
                 };
                 select.push(Details);
                 let row = { ...selectedRow };
-                row.losses = select;
+                row.cyberLosses = select;
                 setSelectedRow(row);
             } else {
-                let select = [...selectedRow.losses];
-                const ele = selectedRow?.losses.find((it) => it.name === item?.name);
-                const Index = selectedRow?.losses.findIndex((it) => it.name === item?.name);
+                let select = [...selectedRow.cyberLosses];
+                const ele = selectedRow?.cyberLosses.find((it) => it.name === item?.name);
+                const Index = selectedRow?.cyberLosses.findIndex((it) => it.name === item?.name);
                 if (ele) {
                     if (!ele.props.includes(prop)) {
                         ele.props.push(prop);
                     }
                     select[Index] = ele;
                     let row = { ...selectedRow };
-                    row.losses = select;
+                    row.cyberLosses = select;
                     setSelectedRow(row);
                 } else {
-                    let select = [...selectedRow.losses];
+                    let select = [...selectedRow.cyberLosses];
                     const Details = {
                         name: item?.name,
                         props: [prop]
                     };
                     select.push(Details);
                     let row = { ...selectedRow };
-                    row.losses = select;
+                    row.cyberLosses = select;
                     setSelectedRow(row);
                 }
             }
         } else {
             // console.log('here')
-            let select = [...selectedRow.losses];
-            const ele = selectedRow?.losses.find((it) => it.name === item?.name);
-            const Index = selectedRow?.losses.findIndex((it) => it.name === item?.name);
+            let select = [...selectedRow.cyberLosses];
+            const ele = selectedRow?.cyberLosses.find((it) => it.name === item?.name);
+            const Index = selectedRow?.cyberLosses.findIndex((it) => it.name === item?.name);
             if (ele) {
                 if (ele.props.includes(prop)) {
                     const filt = ele.props.filter((it) => it !== prop);
                     ele.props = filt;
                     select[Index] = ele;
                     let row = { ...selectedRow };
-                    row.losses = select;
+                    row.cyberLosses = select;
                     setSelectedRow(row);
                 }
                 if (ele.props.length === 0) {
@@ -79,12 +80,63 @@ export default function SelectLosses({
     };
 
     const handleClick = () => {
-        console.log('selectedRow', selectedRow);
-        console.log('rows', rows);
+        const mod = { ...modal };
         const Rows = [...rows];
+        const losses = mod?.scenarios[1]?.subs[0].losses;
+        const lossesEdit = mod?.scenarios[1]?.subs[1]?.scenes;
         const Index = Rows.findIndex((rw) => rw.id === selectedRow.id);
         Rows[Index] = selectedRow;
-        setRows(Rows);
+        const changes = Rows.map((rw) => {
+            //eslint-disable-next-line
+            const { Description, ...rest } = rw;
+            return rest;
+        });
+
+        const threat = mod?.scenarios[2]?.subs[0];
+        const cybersec = Rows.filter((rw) => {
+            if (rw.cyberLosses.length > 0) {
+                return rw;
+            }
+        });
+
+        const updatedLoss = losses
+            .map((loss) =>
+                changes.filter((update) => {
+                    if (loss.id === update.id) {
+                        return { ...loss, cyberLosses: update.cyberLosses };
+                    }
+                })
+            )
+            .flat();
+
+        const updatedLossEdit = lossesEdit
+            .map((loss) =>
+                changes.filter((update) => {
+                    if (loss.id === update.id) {
+                        return { ...loss, cyberLosses: update.cyberLosses };
+                    }
+                })
+            )
+            .flat();
+
+        mod.scenarios[1].subs[0].losses = updatedLoss;
+        mod.scenarios[1].subs[1].scenes = updatedLossEdit;
+        //     console.log('updatedLoss', updatedLoss)
+        // console.log('updatedLossEdit', updatedLossEdit)
+
+        threat.losses = cybersec,
+            setRows(Rows);
+        // console.log('threat', threat)
+        // console.log('mod', mod);
+        update(mod)
+        .then(res=>{
+            if(res){
+             setTimeout(() => {
+                getModal(id)
+             }, 500);
+            }
+        })
+        .catch(err=>console.log('err', err))
         handleClose();
     };
     return (
@@ -137,8 +189,10 @@ export default function SelectLosses({
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined' color='warning' onClick={handleClose}>close</Button>
-                    <Button variant='contained' onClick={handleClick} autoFocus>
+                    <Button variant="outlined" color="warning" onClick={handleClose}>
+                        close
+                    </Button>
+                    <Button variant="contained" onClick={handleClick} autoFocus>
                         Okay
                     </Button>
                 </DialogActions>

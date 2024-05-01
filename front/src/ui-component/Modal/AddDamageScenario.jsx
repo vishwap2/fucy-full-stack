@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import useStore from '../../Zustand/store';
 import { shallow } from 'zustand/shallow';
-import { v4 as uid } from 'uuid';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -22,24 +21,28 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const selector =(state)=>({
     update:state.updateModal,
     getModalById:state.getModalById,
+    getModals:state.getModals,
 })
 
-export default function AddDamageScenarios({ open, handleClose, modal, id }) {
+export default function AddDamageScenarios({ open, handleClose, modal, id, rows }) {
+    console.log('rows', rows)
     const { 
         update,
-        getModalById
+        getModalById,
+        getModals
      } = useStore(selector,shallow);
     const [templateDetails, setTemplateDetails] = React.useState({
         id:'',
         name: '',
         Description: '',
-        losses:[],
+        cyberLosses:[],
     });
 
     const handleCreate = () => {
         const mod = {...modal};
         const temp = {...templateDetails}
-        temp.id=uid();
+        const len = rows.length;
+        temp.id=`DS00${len+1}`;
         mod.scenarios[1].subs[1].scenes.push(temp);
         update(mod)
         .then(res=>
@@ -50,6 +53,7 @@ export default function AddDamageScenarios({ open, handleClose, modal, id }) {
                         // window.location.reload();
                         handleClose();
                         getModalById(id);
+                        getModals()
                         setTemplateDetails({
                             id:'',
                             name: '',

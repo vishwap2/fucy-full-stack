@@ -31,6 +31,8 @@ import AttackTree from '../AttackTree';
 import CyberSecurityBlock from '../CyberSecurityBlock';
 import CyberSecurityTable from '../../ui-component/Table/CybersecurityTable';
 import ELK from 'elkjs/lib/elk.bundled';
+import MicroController from '../../ui-component/custom/Microcontroller';
+import Memory from '../../ui-component/custom/Memory';
 
 const elk = new ELK();
 
@@ -118,7 +120,9 @@ const nodetypes = {
     receiver: CustomNode,
     signal: CustomNode,
     transmitter: CircularNode,
-    transceiver: DiagonalNode
+    transceiver: DiagonalNode,
+    mcu:MicroController,
+    memory:Memory,
 };
 const flowKey = 'example-flow';
 
@@ -295,6 +299,18 @@ export default function Edit() {
     // console.log("nodes",nodes);
     // console.log('edges', edges);
     //fn for save & restore
+
+    // let losses= nodes?.map(nd=>(
+    //     nd?.properties.map(pr=>(
+    //        {name: `loss of ${pr} for ${nd?.data?.label}`}
+    //     ))
+    // ))
+    // losses=losses.flat().map((loss,i)=>({
+    //     ...loss,
+    //     id:i+1
+    // }))
+    // console.log('losses', losses)
+
     const onSave = useCallback(() => {
         if (reactFlowInstance) {
             const flow = reactFlowInstance.toObject();
@@ -338,6 +354,16 @@ export default function Edit() {
             name: node?.data?.label,
             props: node?.properties
         }));
+        let losses= nodes?.map(nd=>(
+            nd?.properties.map(pr=>(
+               {name: `loss of ${pr} for ${nd?.data?.label}`}
+            ))
+        ))
+        losses=losses.flat().map((loss,i)=>({
+            ...loss,
+            id:`DS00${i+1}`,
+            
+        }))
         console.log('Details', Details);
         mod.template = { nodes, edges };
         mod.scenarios = [
@@ -355,7 +381,8 @@ export default function Edit() {
                     {
                         id: uid(),
                         name: 'Damage Scenarios Derivations',
-                        Details: Details
+                        Details: Details,
+                        losses:losses
                     },
                     {
                         id: uid(),
@@ -372,7 +399,8 @@ export default function Edit() {
                     {
                         id: uid(),
                         name: 'Threat Scenarios',
-                        Details: Details
+                        Details: Details,
+                        losses:[]
                     },
                     {
                         id: uid(),

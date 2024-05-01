@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'model',
-    'django_truncate',
+    'Modals.apps.ModalsConfig',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -91,13 +91,14 @@ DATABASES = {
     }
 }
 
-DATABASES = {   
+DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'fucy_db',
-        'CLIENT': {
-           'host': 'localhost:27017',
-        }
+        'CLIENT':{
+            "host":"mongodb+srv://dinesh:uCkQ7HxTO2wexOO5@cluster1.npyn085.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1",
+            "name":"fucy_db",
+            "authMechanism":"SCRAM-SHA-1" # fro atlas cloud db
+        } ,
     }
 }
 
