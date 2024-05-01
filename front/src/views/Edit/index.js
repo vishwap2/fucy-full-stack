@@ -31,8 +31,8 @@ import AttackTree from '../AttackTree';
 import CyberSecurityBlock from '../CyberSecurityBlock';
 import CyberSecurityTable from '../../ui-component/Table/CybersecurityTable';
 import ELK from 'elkjs/lib/elk.bundled';
-import MicroController from '../../ui-component/custom/Microcontroller';
 import Memory from '../../ui-component/custom/Memory';
+import MicroController from '../../ui-component/custom/Microcontroller';
 
 const elk = new ELK();
 
