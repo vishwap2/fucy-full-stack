@@ -31,6 +31,8 @@ import AttackTree from '../AttackTree';
 import CyberSecurityBlock from '../CyberSecurityBlock';
 import CyberSecurityTable from '../../ui-component/Table/CybersecurityTable';
 import ELK from 'elkjs/lib/elk.bundled';
+import MicroController from '../../ui-component/custom/Microcontroller';
+import Memory from '../../ui-component/custom/Memory';
 
 const elk = new ELK();
 
@@ -118,7 +120,9 @@ const nodetypes = {
     receiver: CustomNode,
     signal: CustomNode,
     transmitter: CircularNode,
-    transceiver: DiagonalNode
+    transceiver: DiagonalNode,
+    mcu:MicroController,
+    memory:Memory,
 };
 const flowKey = 'example-flow';
 

@@ -2061,6 +2061,28 @@
         "Integrity",
         "Non-repudiation"
       ]
+    },
+    {
+      "id": "0cd6e5a1-6af8-4e71-ad25-8efd18851ba2",
+      "data": {
+        "label": "Micro",
+        "bgColor": "#000"
+      },
+      "type": "mcu",
+      "properties": [
+        "Availability"
+      ]
+    },
+    {
+      "id": "e2818c56-b1da-49c9-8791-663879dddd4d",
+      "data": {
+        "label": "Memory",
+        "bgColor": "#000"
+      },
+      "type": "memory",
+      "properties": [
+        "Confidentiality"
+      ]
     }
   ],
   "Modals": [

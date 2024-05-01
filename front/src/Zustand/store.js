@@ -261,7 +261,7 @@ const useStore = createWithEqualityFn((set, get) => ({
     },
     
     addNewNode: async (newNode) => {
-        console.log(tempNode);
+        console.log('newNode',newNode);
         const res = await axios.post(`${configuration.apiBaseUrl}sidebarNode`, newNode);
         console.log('res', res);
     },

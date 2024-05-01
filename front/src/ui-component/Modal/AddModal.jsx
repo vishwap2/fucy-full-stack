@@ -6,16 +6,16 @@ import {
     DialogContentText,
     DialogTitle,
     Button,
-    Chip,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    OutlinedInput,
-    Select,
+    // Chip,
+    // FormControl,
+    // InputLabel,
+    // MenuItem,
+    // OutlinedInput,
+    // Select,
     Box,
     TextField,
     Slide,
-    useTheme
+    // useTheme
 } from '@mui/material';
 import useStore from '../../Zustand/store';
 import { v4 as uid } from 'uuid';
@@ -31,42 +31,42 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const selector = (state) => ({
     create: state.createModal
 });
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 300
-        }
-    }
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//     PaperProps: {
+//         style: {
+//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//             width: 300
+//         }
+//     }
+// };
 
-function getStyles(name, nodes, theme) {
-    return {
-        fontWeight: nodes.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
-    };
-}
-const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorization', 'Non-repudiation', 'Availability'];
+// function getStyles(name, nodes, theme) {
+//     return {
+//         fontWeight: nodes.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
+//     };
+// }
+// const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorization', 'Non-repudiation', 'Availability'];
 
 export default function AddModal({ open, handleClose }) {
     const dispatch = useDispatch();
     // const navigate = useNavigate();
     const { create } = useStore(selector, shallow);
-    const theme = useTheme();
+    // const theme = useTheme();
     const [templateDetails, setTemplateDetails] = React.useState({
         name: '',
-        properties: []
+        // properties: []
     });
-    const handleChange = (event) => {
-        const {
-            target: { value }
-        } = event;
-        setTemplateDetails({
-            ...templateDetails,
-            properties: typeof value === 'string' ? value.split(',') : value
-        });
-    };
+    // const handleChange = (event) => {
+    //     const {
+    //         target: { value }
+    //     } = event;
+    //     setTemplateDetails({
+    //         ...templateDetails,
+    //         properties: typeof value === 'string' ? value.split(',') : value
+    //     });
+    // };
 
     const handleCreate = () => {
         const newModal = {
@@ -98,17 +98,21 @@ export default function AddModal({ open, handleClose }) {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle sx={{ fontSize: 20, fontFamily: 'Inter' }}>{'Add Model'}</DialogTitle>
+                <DialogTitle sx={{ fontSize: 20, fontFamily: 'Inter' }}>{'Add Project'}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, my: 1 }}>
                             <TextField
+                            
                                 id="outlined-basic"
                                 label="Name"
                                 variant="outlined"
                                 onChange={(e) => setTemplateDetails({ ...templateDetails, name: e.target.value })}
+                                sx={{
+                                    width:'300px'
+                                }}
                             />
-                            <FormControl sx={{ width: 350 }}>
+                            {/* <FormControl sx={{ width: 350 }}>
                                 <InputLabel notched id="demo-multiple-chip-label">
                                     Properties
                                 </InputLabel>
@@ -134,7 +138,7 @@ export default function AddModal({ open, handleClose }) {
                                         </MenuItem>
                                     ))}
                                 </Select>
-                            </FormControl>
+                            </FormControl> */}
                         </Box>
                     </DialogContentText>
                 </DialogContent>
