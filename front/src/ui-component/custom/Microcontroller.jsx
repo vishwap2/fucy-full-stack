@@ -3,6 +3,7 @@ import { Handle, Position } from 'reactflow';
 import CustomHandle from '../CustomGates/CustomHandle';
 
 export default function MicroController({data}) {
+	console.log('data', data)
     return (
         <div>
             <CustomHandle type="target" position={Position.Top} style={{ top: '15px', opacity: 0 }} isConnectable={1} />
@@ -142,7 +143,7 @@ M470.635162,310.500061
 	C470.602692,379.147522 470.616211,345.323792 470.635162,310.500061 
 z"
                 />
-                <text x="0" y="35" style={{fontSize:'10rem', textAlign:'center'}} >{data?.label}</text>
+                <text x="200" y="255" style={{fontSize:'3rem', textShadow:'none',maxWidth:'100px'}} >{data?.label}</text>
             </svg>
             <Handle type="source" position={Position.Bottom} style={{ bottom: '10px', opacity: 0 }} />
         </div>

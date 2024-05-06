@@ -12,7 +12,7 @@ import Breadcrumbs from '../../ui-component/extended/Breadcrumbs';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import navigation from '../../menu-items';
-import { navbarHeight, drawerWidth } from '../../store/constant';
+import { navbarHeight, drawerWidth, colorTheme } from '../../store/constant';
 import { SET_MENU } from '../../store/actions';
 
 // assets
@@ -21,7 +21,7 @@ import { IconChevronRight } from '@tabler/icons';
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     ...theme.typography.mainContent,
-    background:'#f5f9ee',
+    background:colorTheme.canvasBG,
     maxWidth:'auto',
     marginTop:navbarHeight,
     marginRight:0,
@@ -95,7 +95,7 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
-                    bgcolor: '#f2d8b5',
+                    bgcolor: colorTheme.navBG,
                     height:navbarHeight,
                     border:'1px solid',
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'

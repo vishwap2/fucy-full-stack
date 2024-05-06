@@ -244,8 +244,8 @@ const BrowserCard = ({ modals, template, handleClick }) => {
     };
 
     const onDragStart = (event, item) => {
-        console.log('event', event);
-        console.log('item', item);
+        // console.log('event', event);
+        // console.log('item', item);
         const parseFile = JSON.stringify(item);
         event.dataTransfer.setData('application/cyber', parseFile);
         event.dataTransfer.effectAllowed = 'move';
@@ -256,8 +256,8 @@ const BrowserCard = ({ modals, template, handleClick }) => {
         onDragStart(event, req);
     };
     const handleAddComponent = (name, comp) => {
-        console.log('name', name);
-        console.log('comp', comp);
+        // console.log('name', name);
+        // console.log('comp', comp);
         if (isCyberBlockOpen) {
             const newNode = {
                 id: uid(),

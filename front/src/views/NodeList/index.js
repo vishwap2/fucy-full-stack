@@ -85,7 +85,7 @@ const Icon = ({ name, ...rest }) => {
       <Box
         component="nav"
         aria-label="sidebar"
-        sx={{display:'flex', gap:1.5, alignItems:'center'}}
+        sx={{display:'flex',gap:0.5, flexDirection:'column', alignItems:'start'}}
       >
         
           {sidebarNodes.map((item, i) => (

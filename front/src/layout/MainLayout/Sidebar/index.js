@@ -11,7 +11,7 @@ import { BrowserView, MobileView } from 'react-device-detect';
 // project imports
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
-import { drawerWidth, navbarHeight } from '../../../store/constant';
+import { colorTheme, drawerWidth, navbarHeight } from '../../../store/constant';
 import BrowserCard from './BrowserCard';
 import useStore from '../../../Zustand/store';
 import { useEffect, useState } from 'react';
@@ -88,7 +88,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         // background: theme.palette.background.default,
-                        background: '#eef2e2',
+                        background: colorTheme.sidebarBG,
                         color: theme.palette.text.primary,
                         borderRight: 'none',
                         [theme.breakpoints.up('md')]: {

@@ -4,8 +4,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Components from '../../../../views/NodeList';
-import ComponentList from '../../../../views/Libraries';
+import { colorTheme } from '../../../../store/constant';
 
 
 export default function MenuList() {
@@ -20,10 +19,6 @@ export default function MenuList() {
             label: 'Item Definition',
             value: '1',
 
-        },
-        {
-            label: "MCU's Networks",
-            value: '2'
         },
         {
             label: 'Damage Scenarios',
@@ -66,17 +61,17 @@ export default function MenuList() {
     return (
         <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex' }}>
+                <Box sx={{ borderBottom: 1, display: 'flex' , borderColor:'transparent !important'}}>
                     <TabList
                         sx={{
                           color:'black',
                             '& .MuiTabs-scroller': {
                                 overflowX: 'auto !important',
                                 scrollbarWidth: 'none',
-                                background: 'antiquewhite',
+                                background: colorTheme.tabBG,
                                 color:'black',
                                 '& .Mui-selected': {
-                                    background: ' #ffba3a',
+                                    background: colorTheme.selectedTab,
                                     // border: '2px solid red',
                                     color: 'whitesmoke !important',
                                 },
@@ -93,13 +88,13 @@ export default function MenuList() {
                         aria-label="lab API tabs example"
                     >
                         {tabs.map((item, i) => (
-                          <Tab key={i} label={item?.label} value={item?.value} />
+                          <Tab key={i} label={item?.label} value={item?.value}  sx={{ width: item?.label.length < 25 ?'200px' :'300px'}}/>
                           ))}
                     </TabList>
                 </Box>
                 {tabs.map((item, i) => (
-                  <TabPanel key={i} value={item?.value} sx={{overflow:'auto', scrollbarWidth:'none'}}>
-                        {item?.label === 'Item Definition' ? <Components /> : item?.label === "MCU's Networks"?<ComponentList/> : item?.label}
+                  <TabPanel key={i} value={item?.value} sx={{overflow:'auto', scrollbarWidth:'none', color:colorTheme.tabContentClr}}>
+                        {item?.label}
                     </TabPanel>
                 ))}
             </TabContext>

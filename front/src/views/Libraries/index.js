@@ -35,7 +35,7 @@ export default function ComponentList() {
       <Box
       component="nav"
       aria-label="sidebar"
-      sx={{display:'flex', gap:1.5, alignItems:'center'}}
+      sx={{display:'flex',flexDirection:'column', alignItems:'start'}}
       >
         {template.map((text, index) => (
           <div

@@ -33,6 +33,7 @@ import CyberSecurityTable from '../../ui-component/Table/CybersecurityTable';
 import ELK from 'elkjs/lib/elk.bundled';
 import Memory from '../../ui-component/custom/Memory';
 import MicroController from '../../ui-component/custom/Microcontroller';
+import RightDrawer from '../../layout/MainLayout/RightSidebar';
 
 const elk = new ELK();
 
@@ -147,11 +148,11 @@ export default function Edit() {
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const [openTemplate, setOpenTemplate] = useState(false);
     const [savedTemplate, setSavedTemplate] = useState({});
+    const [state, setState] = React.useState(false);
     const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen } = useSelector((state) => state?.currentId);
     // console.log('isDsTableOpen', isDsTableOpen);
     // console.log('isTsTableOpen', isTsTableOpen);
     // console.log('id edit', id)
-
     const onLayout = useCallback(
         ({ direction, useInitialNodes = false }) => {
             const opts = { 'elk.direction': direction, ...elkOptions };
@@ -341,6 +342,11 @@ export default function Edit() {
         restoreFlow();
     }, [reactFlowInstance]);
 
+
+    const handleClear=()=>{
+        setNodes([]);
+        setEdges([]);
+    }
     const handleSave = () => {
         setOpenTemplate(true);
         onSave();
@@ -521,6 +527,11 @@ export default function Edit() {
     };
 
 
+    const toggleDrawer = () => {
+        console.log('clicked')
+        setState((pre) => !pre);
+      };
+
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
     if (isAttackTreeOpen) return <AttackTree modal={modal} />;
@@ -561,23 +572,18 @@ export default function Edit() {
                                 marginTop: '2rem'
                             }}
                         >
-                            <Button variant="outlined" onClick={onSave}>
-                                Save
-                            </Button>
-                            <Button variant="outlined" onClick={onRestore}>
-                                Restore
+                            <Button variant="outlined" onClick={handleClear}>
+                                Clear
                             </Button>
                             <Button variant="outlined" onClick={handleSave}>
-                                Add
+                            Add 
                             </Button>
                             <Button variant="outlined" onClick={handleSaveToModal}>
-                                Add to Modal
+                            Save System
                             </Button>
                             <Button variant="outlined" className="download-btn" onClick={handleDownload}>
                                 Download Image
                             </Button>
-                        </Panel>
-                        <Panel position="top-right" style={{ display: 'flex', gap: '10px', marginTop: '2rem' }}>
                             <Button variant="outlined" onClick={() => onLayout({ direction: 'DOWN' })}>
                                 vertical layout
                             </Button>
@@ -586,9 +592,11 @@ export default function Edit() {
                                 horizontal layout
                             </Button>
                         </Panel>
+
                         <Controls />
                         <MiniMap zoomable pannable />
                         <Background variant="dots" gap={12} size={1} />
+                           <RightDrawer state={state} toggleDrawer={toggleDrawer}/>
                     </ReactFlow>
                     {/* </div> */}
                 </ReactFlowProvider>
