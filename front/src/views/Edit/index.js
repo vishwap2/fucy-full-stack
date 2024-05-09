@@ -34,6 +34,7 @@ import ELK from 'elkjs/lib/elk.bundled';
 import Memory from '../../ui-component/custom/Memory';
 import MicroController from '../../ui-component/custom/Microcontroller';
 import RightDrawer from '../../layout/MainLayout/RightSidebar';
+import CustomGroupNode from '../../ui-component/custom/GroupNode';
 
 const elk = new ELK();
 
@@ -124,6 +125,7 @@ const nodetypes = {
     transceiver: DiagonalNode,
     mcu:MicroController,
     memory:Memory,
+    group:CustomGroupNode,
 };
 const flowKey = 'example-flow';
 
@@ -177,6 +179,34 @@ export default function Edit() {
         getModalById(id);
     }, [id]);
 
+    const onNodeDrag = (event, node) => {
+        const updatedNodes = nodes.map((n) => {
+          if (n.id === node.id) {
+            const deltaX = node.position.x - n.position.x;
+            const deltaY = node.position.y - n.position.y;
+    
+            const updatedChildNodes = nodes.filter((child) => child.parentId === node.id);
+            updatedChildNodes.forEach((child) => {
+              child.position = {
+                x: child.position.x + deltaX,
+                y: child.position.y + deltaY
+              };
+            });
+    
+            return {
+              ...n,
+              position: {
+                x: node.position.x,
+                y: node.position.y
+              }
+            };
+          }
+          return n;
+        });
+    
+        setNodes(updatedNodes);
+      };
+
     useEffect(() => {
         setEdges([]);
         setNodes([]);
@@ -185,7 +215,7 @@ export default function Edit() {
         onSaveInitial(template);
         onRestore();
     }, [modal]);
-    console.log('savedTemplate', savedTemplate);
+    // console.log('savedTemplate', savedTemplate);
     //for downloading the circuit and image
     function downloadImage(dataUrl) {
         const a = document.createElement('a');
@@ -275,7 +305,9 @@ export default function Edit() {
                             x: node['position']['x'] + randomPos,
                             y: node['position']['y'] + randomPos
                         },
-                        properties: node.properties
+                        properties: node.properties,
+                        parentId:node.parentId ? `${node.parentId + randomId}` :null,
+                        extent: node?.extent ? node?.extent : null
                     });
                 });
 
@@ -355,7 +387,7 @@ export default function Edit() {
 
     const handleSaveToModal = () => {
         let mod = { ...modal };
-        console.log('mod', mod);
+        // console.log('mod', mod);
         let Details = nodes?.map((node) => ({
             name: node?.data?.label,
             props: node?.properties
@@ -370,7 +402,7 @@ export default function Edit() {
             id:`DS00${i+1}`,
             
         }))
-        console.log('Details', Details);
+        // console.log('Details', Details);
         mod.template = { nodes, edges };
         mod.scenarios = [
             {
@@ -510,7 +542,7 @@ export default function Edit() {
             }
         ];
 
-        console.log('mod', mod);
+        // console.log('mod', mod);
         updateModal(mod)
         .then(res=>
             {
@@ -528,9 +560,10 @@ export default function Edit() {
 
 
     const toggleDrawer = () => {
-        console.log('clicked')
         setState((pre) => !pre);
       };
+
+    const onLoad = (reactFlowInstance) => reactFlowInstance.fitView()
 
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
@@ -540,7 +573,7 @@ export default function Edit() {
 
     return (
         <>
-            <div style={{ width: '100%', height: '90%', border: '1px solid', marginTop: '1.2rem', background: 'white' }}>
+            <div style={{ width: '100%', height: '90%', border: '1px solid', background: 'white' }}>
                 <ReactFlowProvider>
                     {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
                     <ReactFlow
@@ -550,6 +583,8 @@ export default function Edit() {
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
                         nodeTypes={nodetypes}
+                        onLoad={onLoad}
+                        onNodeDrag={onNodeDrag}
                         connectionLineStyle={connectionLineStyle}
                         defaultEdgeOptions={edgeOptions}
                         onInit={setReactFlowInstance}

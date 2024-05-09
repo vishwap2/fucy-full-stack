@@ -14,7 +14,7 @@ const selector = (state) => ({
 export default function ComponentList() {
   const { template, fetchAPI } = useStore(selector,shallow);
  
-  console.log('template', template)
+  // console.log('template', template)
 //   const navigate = useNavigate();
 
   useEffect(() => {

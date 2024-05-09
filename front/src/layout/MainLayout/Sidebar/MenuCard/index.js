@@ -17,6 +17,7 @@ import {
     ListItemText,
     // linearProgressClasses
 } from '@mui/material';
+import { colorTheme } from '../../../../store/constant';
 
 // assets
 // import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -91,7 +92,7 @@ const MenuCard = ({properties}) => {
 
     return (
         <>
-            <Typography variant='h4'>Properties </Typography>
+            <Typography variant='h4' sx={{color:colorTheme.tabContentClr}}>Properties </Typography>
         <CardStyle>
             <CardContent sx={{ p: 2 }}>
                 

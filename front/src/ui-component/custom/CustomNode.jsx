@@ -11,14 +11,14 @@ const CustomNode = ({ data, isConnectable,type}) => {
           }}
       >
         <Handle
-          classname="handle"
+          className="handle"
           type="target"
           position={Position.Left}
           isConnectable={isConnectable}
         />
           <div>{data?.label}</div>
         <Handle
-          classname="handle"
+          className="handle"
           type="range"
           position={Position.Right}
           isConnectable={isConnectable}

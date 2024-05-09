@@ -3,132 +3,84 @@ import {
     styled
     // , useTheme
 } from '@mui/material/styles';
-import { Card, CardContent,
-    //  Menu, MenuItem,
-      Typography } from '@mui/material';
-// import { TreeView } from '@mui/x-tree-view/TreeView';
-// import { TreeItem } from '@mui/x-tree-view/TreeItem';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-// import AddIcon from '@mui/icons-material/Add';
+import { Card, CardContent, Menu, MenuItem, Typography } from '@mui/material';
+import { TreeView } from '@mui/x-tree-view/TreeView';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from 'react';
-// import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
+import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import AddModal from '../../../../ui-component/Modal/AddModal';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-// import { v4 as uid } from 'uuid';
-// import { useNavigate } from 'react-router';
-// import {
-//     AttackTreePageOpen,
-//     DsTableOpen,
-//     TsTableOpen,
-//     closeAll,
-//     cyberBlockOpen,
-//     cyberTableOpen,
-//     setAttackScene
-// } from '../../../../store/slices/CurrentIdSlice';
-// import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uid } from 'uuid';
+import { useNavigate } from 'react-router';
+import {
+    AttackTreePageOpen,
+    DsTableOpen,
+    TsTableOpen,
+    closeAll,
+    cyberBlockOpen,
+    cyberTableOpen,
+    setAttackScene
+} from '../../../../store/slices/CurrentIdSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import CyberSecurityModal from '../../../../ui-component/Modal/CyberSecurityModal';
-// import { makeStyles } from '@mui/styles';
-// import BrightnessLowIcon from '@mui/icons-material/BrightnessLow';
-// import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-// import useStore from '../../../../Zustand/store';
-// import FolderIcon from '@mui/icons-material/Folder';
-// import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
-// import TopicIcon from '@mui/icons-material/Topic';
-// import SwipeRightAltIcon from '@mui/icons-material/SwipeRightAlt';
-// // import ReportIcon from '@mui/icons-material/Report';
-// import DangerousIcon from '@mui/icons-material/Dangerous';
-// import SecurityIcon from '@mui/icons-material/Security';
-// import { ReceiptItem } from 'iconsax-react';
-// import AttackIcon from '../../../../assets/icons/attack.png';
-// import ItemIcon from '../../../../assets/icons/item.png';
-// import DamageIcon from '../../../../assets/icons/damage.png';
-// import ThreatIcon from '../../../../assets/icons/threat.png';
-// import CybersecurityIcon from '../../../../assets/icons/cybersecurity.png';
-// import SystemIcon from '../../../../assets/icons/system.png';
-// import CatalogIcon from '../../../../assets/icons/catalog.png';
-// import RiskIcon from '../../../../assets/icons/risk.png';
-// import DocumentIcon from '../../../../assets/icons/document.png';
-// import ReportIcon from '../../../../assets/icons/report.png';
-// import LayoutIcon from '../../../../assets/icons/layout.png';
-// import ModelIcon from '../../../../assets/icons/model.png';
-// import { makeStyles } from '@mui/styles';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-const Accordion = styled((props) => (
-    <MuiAccordion disableGutters elevation={0} square {...props} />
-  ))(() => ({
-    // border: `1px solid ${theme.palette.divider}`,
-    '&:not(:last-child)': {
-      borderBottom: 0,
-    },
-    '&::before': {
-      display: 'none',
-    },
-  }));
-  
-  const AccordionSummary = styled((props) => (
-    <MuiAccordionSummary
-      expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-      {...props}
-    />
-  ))(() => ({
-    flexDirection: 'row-reverse',
-    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-      transform: 'rotate(90deg)',
-    },
-    '& .MuiAccordionSummary-content': {
-      marginLeft: 1,
-    },
-  }));
-  
-  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-    padding: theme.spacing(2),
-    // borderTop: '1px solid rgba(0, 0, 0, .125)',
-  }));
-// const useStyles = makeStyles(() => ({
-//     accordion: {
-//         width: 'auto',
-//         backgroundColor:'transparent',
-//         '&.MuiPaper-root ': {
-//             margin: '0px !important'
-//         }
-//     },
-// }));
+import { makeStyles } from '@mui/styles';
+import BrightnessLowIcon from '@mui/icons-material/BrightnessLow';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import useStore from '../../../../Zustand/store';
+import FolderIcon from '@mui/icons-material/Folder';
+import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
+import TopicIcon from '@mui/icons-material/Topic';
+import SwipeRightAltIcon from '@mui/icons-material/SwipeRightAlt';
+// import ReportIcon from '@mui/icons-material/Report';
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import SecurityIcon from '@mui/icons-material/Security';
+import { ReceiptItem } from 'iconsax-react';
+import AttackIcon from '../../../../assets/icons/attack.png';
+import ItemIcon from '../../../../assets/icons/item.png';
+import DamageIcon from '../../../../assets/icons/damage.png';
+import ThreatIcon from '../../../../assets/icons/threat.png';
+import CybersecurityIcon from '../../../../assets/icons/cybersecurity.png';
+import SystemIcon from '../../../../assets/icons/system.png';
+import CatalogIcon from '../../../../assets/icons/catalog.png';
+import RiskIcon from '../../../../assets/icons/risk.png';
+import DocumentIcon from '../../../../assets/icons/document.png';
+import ReportIcon from '../../../../assets/icons/report.png';
+import LayoutIcon from '../../../../assets/icons/layout.png';
+import ModelIcon from '../../../../assets/icons/model.png';
+import { colorTheme } from '../../../../store/constant';
 
 
-// const imageComponents = {
-//     AttackIcon,
-//     ItemIcon,
-//     DamageIcon,
-//     ThreatIcon,
-//     CybersecurityIcon,
-//     SystemIcon,
-//     CatalogIcon,
-//     RiskIcon,
-//     DocumentIcon,
-//     ReportIcon,
-//     LayoutIcon,
-//     ModelIcon
-// };
+const imageComponents = {
+    AttackIcon,
+    ItemIcon,
+    DamageIcon,
+    ThreatIcon,
+    CybersecurityIcon,
+    SystemIcon,
+    CatalogIcon,
+    RiskIcon,
+    DocumentIcon,
+    ReportIcon,
+    LayoutIcon,
+    ModelIcon
+};
 
 
 
-// const iconComponents = {
-//     SecurityIcon,
-//     DriveFileMoveIcon,
-//     FolderIcon,
-//     TopicIcon,
-//     SwipeRightAltIcon,
-//     // ReportIcon,
-//     DangerousIcon,
-//     BrightnessLowIcon,
-//     CalendarMonthIcon,
-//     ReceiptItem
-// };
+const iconComponents = {
+    SecurityIcon,
+    DriveFileMoveIcon,
+    FolderIcon,
+    TopicIcon,
+    SwipeRightAltIcon,
+    // ReportIcon,
+    DangerousIcon,
+    BrightnessLowIcon,
+    CalendarMonthIcon,
+    ReceiptItem
+};
 
 const CardStyle = styled(Card)(() =>
     // { theme }
@@ -152,104 +104,92 @@ const CardStyle = styled(Card)(() =>
     })
 );
 
-// const useStyles = makeStyles((theme) => ({
-//     labelRoot: {
-//         display: 'flex',
-//         alignItems: 'center',
-//         padding: theme.spacing(0, 0),
-//         marginLeft: '-7px'
-//     },
-//     labelTypo: {
-//         fontSize: 12,
-//         fontWeight: 600
-//     }
-// }));
+const useStyles = makeStyles((theme) => ({
+    labelRoot: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 0),
+        marginLeft: '-7px'
+    },
+    labelTypo: {
+        fontSize: 12,
+        fontWeight: 600
+    }
+}));
 
-// const selector = (state) => ({
-//     addNode: state.addCyberNode
-// });
+const selector = (state) => ({
+    addNode: state.addCyberNode
+});
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
-const BrowserCard = ({ modals,
-     template,
-    //   handleClick
-     }) => {
-        // const classes = useStyles();
-        const [expanded, setExpanded] = useState('');
-
-  const handleChange = (newExpanded) => {
-    console.log('newExpanded', newExpanded)
-    setExpanded(newExpanded);
-  };
-    // const { addNode } = useStore(selector);
-    // const classes = useStyles();
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch();
-    // const { isCyberBlockOpen } = useSelector((state) => state?.currentId);
+const BrowserCard = ({ modals, handleClick }) => {
+    const { addNode } = useStore(selector);
+    const classes = useStyles();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isCyberBlockOpen } = useSelector((state) => state?.currentId);
     const [name, setName] = useState('');
     const [ModalDetails, setModalDetails] = useState([]);
-    // const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const [openCyberModal, setOpenCyberModal] = useState(false);
+    const openRight = Boolean(anchorEl);
 
-    // console.log('ModalDetails', ModalDetails)
-    // const openRight = Boolean(anchorEl);
-
-    // const getLabel = (icon, name) => {
-    //     const IconComponent = iconComponents[icon];
-    //     return (
-    //         <div className={classes.labelRoot}>
-    //             {IconComponent ? <IconComponent color="inherit" sx={{ fontSize: 16 }} /> : null}
-    //             <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
-    //                 {name}
-    //             </Typography>
-    //         </div>
-    //     );
-    // };
-    // const getImageLabel = (icon, name) => {
-    //     const Image = imageComponents[icon];
-    //     return (
-    //         <div className={classes.labelRoot}>
-    //             {Image ? <img src={Image} alt={name} style={{height:'18px', width:'18px'}}/> : null}
-    //             <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
-    //                 {name}
-    //             </Typography>
-    //         </div>
-    //     );
-    // };
+    const getLabel = (icon, name) => {
+        const IconComponent = iconComponents[icon];
+        return (
+            <div className={classes.labelRoot}>
+                {IconComponent ? <IconComponent color="inherit" sx={{ fontSize: 16 }} /> : null}
+                <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
+                    {name}
+                </Typography>
+            </div>
+        );
+    };
+    const getImageLabel = (icon, name) => {
+        const Image = imageComponents[icon];
+        return (
+            <div className={classes.labelRoot}>
+                {Image ? <img src={Image} alt={name} style={{height:'18px', width:'18px'}}/> : null}
+                <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
+                    {name}
+                </Typography>
+            </div>
+        );
+    };
 
 
-    // const threatType = (value) => {
-    //     // console.log('value', value)
-    //     switch (value) {
-    //         case 'Integrity':
-    //             return 'Tampering';
-    //         case 'Confidentiality':
-    //             return 'Information Disclosure';
-    //         case 'Availability':
-    //             return 'Denial';
-    //         case 'Authenticity':
-    //             return 'Spoofing';
-    //         case 'Authorization':
-    //             return 'Elevation of Privilage';
-    //         case 'Non-repudiation':
-    //             return 'Rejection';
-    //         default:
-    //             return '';
-    //     }
-    // };
-    // const openAddModal = (name) => {
-    //     console.log('name', name);
-    //     setAnchorEl(null);
-    //     setName(name);
-    //     setOpenCyberModal(true);
-    // };
+    const threatType = (value) => {
+        // console.log('value', value)
+        switch (value) {
+            case 'Integrity':
+                return 'Tampering';
+            case 'Confidentiality':
+                return 'Information Disclosure';
+            case 'Availability':
+                return 'Denial';
+            case 'Authenticity':
+                return 'Spoofing';
+            case 'Authorization':
+                return 'Elevation of Privilage';
+            case 'Non-repudiation':
+                return 'Rejection';
+            default:
+                return '';
+        }
+    };
+    const openAddModal = (name) => {
+        console.log('name', name);
+        setAnchorEl(null);
+        setName(name);
+        setOpenCyberModal(true);
+    };
     const handleCloseCyberModal = () => {
         setOpenCyberModal(false);
         setName('');
     };
-    // const handleCloseRight = () => {
-    //     setAnchorEl(null);
-    // };
+    const handleCloseRight = () => {
+        setAnchorEl(null);
+    };
     // const [Modal,setModal] = useState([]);
     const [open, setOpen] = useState(false);
 
@@ -259,104 +199,105 @@ const BrowserCard = ({ modals,
         setModalDetails(modals);
     }, [modals]);
     // const theme = useTheme();
-    // const handleOpenModal = () => {
-    //     setOpen(true);
-    // };
-
+    const handleOpenModal = () => {
+        setOpen(true);
+    };
     const handleClose = () => {
         setOpen(false);
     };
 
-    // const handleNavigate = (id) => {
-    //     navigate(`/Modals/${id}`, { replace: true });
-    //     dispatch(closeAll());
-    // };
-    // const handleSwicthDsTable = (name) => {
-    //     console.log('name', name);
-    //     if (name.includes('Damage')) {
-    //         dispatch(DsTableOpen());
-    //     }
-    //     if (name.includes('Threat')) {
-    //         dispatch(TsTableOpen());
-    //     }
-    //     if (name.includes('CyberSecurity')) {
-    //         dispatch(cyberBlockOpen());
-    //     }
-    // };
+    const handleNavigate = (id) => {
+        navigate(`/Modals/${id}`, { replace: true });
+        dispatch(closeAll());
+    };
+    const handleSwicthDsTable = (name) => {
+        console.log('name', name);
+        if (name.includes('Damage')) {
+            dispatch(DsTableOpen());
+        }
+        if (name.includes('Threat')) {
+            dispatch(TsTableOpen());
+        }
+        if (name.includes('CyberSecurity')) {
+            dispatch(cyberBlockOpen());
+        }
+    };
 
     // const handleSwicthTsTable = () => {
     //     // console.log('clicked');
     // };
 
-    // const handleOpenActionTree = () => {
-    //     dispatch(AttackTreePageOpen());
-    // };
+    const handleOpenActionTree = () => {
+        dispatch(AttackTreePageOpen());
+    };
 
-    // const handleAttackTree = (at_scene) => {
-    //     // console.log('at_scene', at_scene);
-    //     dispatch(setAttackScene(at_scene));
-    // };
+    const handleAttackTree = (at_scene) => {
+        // console.log('at_scene', at_scene);
+        dispatch(setAttackScene(at_scene));
+    };
 
-    // const handleRightClick = (e, name) => {
-    //     console.log('e', e);
-    //     e.preventDefault();
-    //     if (name.toLowerCase().includes('cybersecurity')) {
-    //         setAnchorEl(name);
-    //     }
-    // };
+    const handleRightClick = (e, name) => {
+        console.log('e', e);
+        e.preventDefault();
+        if (name.toLowerCase().includes('cybersecurity')) {
+            setAnchorEl(name);
+        }
+    };
 
-    // const onDragStart = (event, item) => {
-    //     // console.log('event', event);
-    //     // console.log('item', item);
-    //     const parseFile = JSON.stringify(item);
-    //     event.dataTransfer.setData('application/cyber', parseFile);
-    //     event.dataTransfer.effectAllowed = 'move';
-    // };
+    const onDragStart = (event, item) => {
+        // console.log('event', event);
+        // console.log('item', item);
+        const parseFile = JSON.stringify(item);
+        event.dataTransfer.setData('application/cyber', parseFile);
+        event.dataTransfer.effectAllowed = 'move';
+    };
 
-    // const handleDragStart = (event,req) => {
-    //     // Initiating drag with req data
-    //     onDragStart(event, req);
-    // };
-    // const handleAddComponent = (name, comp) => {
-    //     // console.log('name', name);
-    //     // console.log('comp', comp);
-    //     if (isCyberBlockOpen) {
-    //         const newNode = {
-    //             id: uid(),
-    //             type: `cyber_${name}`,
-    //             position: {
-    //                 x: 100,
-    //                 y: 100
-    //             },
-    //             data: {
-    //                 label: comp?.name
-    //             }
-    //         };
-    //         addNode(newNode);
-    //     }
-    // };
-    // const handleOpenTable = (name) => {
-    //     // console.log('name', name)
-    //     if (name.includes('CyberSecurity Controls')) {
-    //         dispatch(cyberTableOpen());
-    //     }
-    // };
+    const handleDragStart = (event,req) => {
+        // Initiating drag with req data
+        onDragStart(event, req);
+    };
+    const handleAddComponent = (name, comp) => {
+        // console.log('name', name);
+        // console.log('comp', comp);
+        if (isCyberBlockOpen) {
+            const newNode = {
+                id: uid(),
+                type: `cyber_${name}`,
+                position: {
+                    x: 100,
+                    y: 100
+                },
+                data: {
+                    label: comp?.name
+                }
+            };
+            addNode(newNode);
+        }
+    };
+    const handleOpenTable = (name) => {
+        // console.log('name', name)
+        if (name.includes('CyberSecurity Controls')) {
+            dispatch(cyberTableOpen());
+        }
+    };
     return (
         <>
             <Typography variant="h4" sx={{color:colorTheme.tabContentClr}}>Models</Typography>
             <CardStyle sx={{ overflowY: 'auto' }}>
                 <CardContent sx={{ p: 2 }}>
-                    {/* <TreeView
+                    <TreeView
                         aria-label="file system navigator"
                         defaultCollapseIcon={<ExpandMoreIcon />}
                         defaultExpandIcon={<ChevronRightIcon />}
                     >
                         {ModalDetails &&
                             ModalDetails?.map((modal) => {
+                                // console.log('item', Object.values(modal?.scenarios))
                                 return (
                                     <TreeItem
                                         key={modal?.id}
                                         nodeId={modal?.id}
+                                        // label={getLabel('DriveFileMoveIcon', modal?.name)}
                                         label ={getImageLabel('ModelIcon',modal?.name)}
                                         onClick={() => handleNavigate(modal?.id)}
                                     >
@@ -364,6 +305,7 @@ const BrowserCard = ({ modals,
                                             <TreeItem
                                                 key={scene?.name}
                                                 nodeId={scene?.id}
+                                                // label={getLabel('FolderIcon', scene?.name)}
                                                 label ={getImageLabel(scene?.icon, scene?.name)}
                                                 onClick={() => handleClick(scene)}
                                                 sx={{
@@ -381,6 +323,7 @@ const BrowserCard = ({ modals,
                                                           <TreeItem
                                                               key={`1${sub?.name}`}
                                                               nodeId={`1${sub?.name}`} //change to id
+                                                              //   label={sub?.name}
                                                               label={getLabel('TopicIcon', sub?.name)}
                                                               onDoubleClick={() => handleSwicthDsTable(sub?.name)}
                                                               onClick={() => handleOpenTable(sub?.name)}
@@ -399,6 +342,7 @@ const BrowserCard = ({ modals,
                                                                   )}
                                                               {sub?.name === 'Damage Scenarios - Collection & Impact Ratings' &&
                                                                   sub?.scenes?.map((dm_scene) => {
+                                                                    // console.log('dm_scene', dm_scene)
                                                                       return (
                                                                           <TreeItem
                                                                               key={dm_scene?.id}
@@ -406,6 +350,13 @@ const BrowserCard = ({ modals,
                                                                               label={getLabel('DangerousIcon', dm_scene?.name)}
                                                                               //   label={dm_scene?.name}
                                                                           >
+                                                                              {/* {dm_scene?.cyberLosses.map((dm) => (
+                                                                                  <TreeItem
+                                                                                      key={dm?.name}
+                                                                                      nodeId={dm?.name}
+                                                                                      label={dm?.name}
+                                                                                  ></TreeItem>
+                                                                              ))} */}
                                                                           </TreeItem>
                                                                       );
                                                                   })}
@@ -547,24 +498,7 @@ const BrowserCard = ({ modals,
                             <MenuItem onClick={() => openAddModal('Require')}>Add Requirements</MenuItem>
                         </Menu>
                         <TreeItem icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} />
-                    </TreeView> */}
-                        {ModalDetails &&
-                            ModalDetails?.map((modal) => {
-                                return (
-                                <Accordion
-                                key={modal?.id}
-                                expanded={expanded === modal?.id} 
-                                onChange={()=>handleChange(modal?.id)}
-                        >
-                            <AccordionSummary sx={{
-                                '& .MuiAccordionSummary-content':{ margin:'0px'}}} aria-controls="panel1bh-content" id="panel1bh-header">
-                                <Typography sx={{ width: '50%', flexShrink: 0 }}>{modal?.name} </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-
-                            </AccordionDetails>
-                        </Accordion>
-                                )})}
+                    </TreeView>
                 </CardContent>
             </CardStyle>
             <AddModal open={open} handleClose={handleClose} />

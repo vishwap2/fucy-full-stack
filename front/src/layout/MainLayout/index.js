@@ -22,6 +22,7 @@ import { IconChevronRight } from '@tabler/icons';
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     ...theme.typography.mainContent,
     background:colorTheme.canvasBG,
+    border:'1px solid gray',
     maxWidth:'auto',
     marginTop:navbarHeight,
     marginRight:0,
@@ -37,7 +38,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
             width: `calc(100% - ${drawerWidth}px)`
         },
         [theme.breakpoints.down('md')]: {
-            marginLeft: '20px',
+            // marginLeft: '20px',
             width: `calc(100% - ${drawerWidth}px)`,
             padding: '16px'
         },

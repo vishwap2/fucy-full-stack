@@ -71,16 +71,16 @@ export default function MenuList() {
                                 background: colorTheme.tabBG,
                                 color:'black',
                                 '& .Mui-selected': {
-                                    background: colorTheme.selectedTab,
+                                    // background: colorTheme.selectedTab,
                                     // border: '2px solid red',
-                                    color: 'whitesmoke !important',
+                                    color: colorTheme.tabContentClr,
                                 },
                                 '& .MuiTabs-indicator ': {
-                                      // backgroundColor:'#390000 !important'
-                                      display:'none'
+                                      backgroundColor:`${colorTheme.selectedTab} !important`
+                                    //   display:'none'
                                     },
                                 '& .MuiButtonBase-root':{
-                                    color:'black'
+                                    // color:'black'
                                 }
                             }
                         }}

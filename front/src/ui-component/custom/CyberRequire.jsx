@@ -9,13 +9,13 @@ export default function CyberRequire ({ data, isConnectable,type}) {
           <div style={{color:'white'}}>{data?.label}</div>
           </div>
           <Handle
-          classname="handle"
+          className="handle"
           type="target"
           position={Position.Top}
           isConnectable={isConnectable}
         />
         <Handle
-          classname="handle"
+          className="handle"
           type="range"
           position={Position.Bottom}
           isConnectable={isConnectable}

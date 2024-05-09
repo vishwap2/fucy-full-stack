@@ -11,14 +11,14 @@ const DefaultNode = ({ data, isConnectable,type}) => {
           }}
       >
         <Handle
-          classname="handle"
+          className="handle"
           type="target"
           position={Position.Top}
           isConnectable={isConnectable}
         />
           <div>{data?.label}</div>
         <Handle
-          classname="handle"
+          className="handle"
           type="range"
           position={Position.Bottom}
           isConnectable={isConnectable}

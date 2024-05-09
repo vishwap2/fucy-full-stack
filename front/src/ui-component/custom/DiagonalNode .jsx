@@ -12,7 +12,7 @@ const DiagonalNode = ({ data, isConnectable,type}) => {
       >
        
         <Handle
-          classname="handle"
+          className="handle"
           type="target"
           position={Position.Top}
           isConnectable={isConnectable}
@@ -21,7 +21,7 @@ const DiagonalNode = ({ data, isConnectable,type}) => {
 
 
         <Handle
-          classname="handle"
+          className="handle"
           type="source"
           position={Position.Bottom}
           isConnectable={isConnectable}

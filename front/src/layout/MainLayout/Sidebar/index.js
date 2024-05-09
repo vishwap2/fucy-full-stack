@@ -12,7 +12,8 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
 import { colorTheme, drawerWidth, navbarHeight } from '../../../store/constant';
-import BrowserCard from './BrowserCard';
+// import BrowserCard from './BrowserCard';
+import BrowserCard from './BrowserCard/index1';
 import useStore from '../../../Zustand/store';
 import { useEffect, useState } from 'react';
 
@@ -30,7 +31,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const {  template, fetchAPI, fetchModals, modals } = useStore(selector);
     const theme = useTheme();
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
-    console.log('modals', modals);
+    // console.log('modals', modals);
     const handleClick = (node) => {
         // console.log('node', )
         setProperties(node?.properties);
@@ -77,7 +78,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const container = window !== undefined ? () => window.document.body : undefined;
 
     return (
-        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto' }} aria-label="mailbox folders">
+        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto', background:colorTheme.sidebarBG }} aria-label="mailbox folders">
             <Drawer
                 container={container}
                 variant={matchUpMd ? 'persistent' : 'temporary'}

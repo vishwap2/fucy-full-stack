@@ -23,7 +23,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <Box
                 sx={{
                     width: 228,
-                    display: { xs: 'block', md: 'none' },
+                    marginBottom:'4.5rem',
+                    // display: { xs: 'block', md: 'none' },
                     [theme.breakpoints.down('md')]: {
                         width: 'auto',
                         mb: 8,
@@ -41,11 +42,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                             ...theme.typography.commonAvatar,
                             ...theme.typography.mediumAvatar,
                             transition: 'all .2s ease-in-out',
-                            background: theme.palette.secondary.light,
-                            color: theme.palette.secondary.dark,
+                            background: 'white',
+                            color: 'black',
                             '&:hover': {
-                                background: theme.palette.secondary.dark,
-                                color: theme.palette.secondary.light
+                                background: 'black',
+                                color: 'white'
                             }
                         }}
                         onClick={handleLeftDrawerToggle}

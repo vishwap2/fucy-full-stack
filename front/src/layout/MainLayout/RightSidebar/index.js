@@ -38,19 +38,20 @@ export default function RightDrawer({ state, toggleDrawer }) {
                     position: 'sticky',
                     float:'right',
                     // left: '50rem',
+                    transition: 'width 0.8s',
                     width: state ? '250px' : '0px',
                     height: '75svh',
                     zIndex: 1000,
                     display: 'flex'
                 }}
             >
-               {!state && <Box onClick={toggleDrawer} sx={{ cursor: 'pointer', position: 'relative',right:'1rem',height: 'fit-content' }}>
+               {!state ? <Box onClick={toggleDrawer} sx={{ cursor: 'pointer', position: 'relative',right:'1rem',height: 'fit-content' }}>
                      <ArrowLeft2 size="16px" />
-                </Box>}
-                {state && <Box onClick={toggleDrawer} sx={{ cursor: 'pointer', marginTop:'0.5rem', marginLeft:'0.5rem' }}>
+                </Box> :
+                state && <Box onClick={toggleDrawer} sx={{ cursor: 'pointer', marginTop:'0.5rem', marginLeft:'0.5rem', height: 'fit-content' }}>
                    <CloseCircle size="18px" />
                 </Box>}
-                <Box sx={{ display: state ? 'block' : 'none', width: state ? 'inherit' : '0px' , marginTop:'2rem'}}>
+                <Box sx={{ display: state ? 'block' : 'none', width: state ? 'inherit' : '0px' , marginTop:'2rem', overflow:'auto'}}>
                     <>
                         <Accordion
                         className={classes.accordion}

@@ -39,15 +39,28 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     background-color: #784be8;
   }
 
+  .react-flow__node-group{
+    height: auto !important;
+    width: initial !important;
+    align-items: flex-start;
+    border: 1px solid black !important;
+  }
+
    .react-flow__node{
     padding: 0 !important;
     color: white !important;
-    text-shadow: 1px 1px 1px black  !important;
+    /* text-shadow: 1px 1px 1px black  !important; */
     display: flex ;
     align-items: center;
     justify-content: center;
     border: none !important;
+    
    }
+   .selected{
+    border: 2px solid black !important;
+    border-radius: 5px !important;
+    box-shadow: black 1px 4px 15px !important;
+  }
 
    .library{
     padding: 0.5rem 0;
@@ -129,3 +142,4 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
   justify-content: center;
   align-items: center;
 }
+

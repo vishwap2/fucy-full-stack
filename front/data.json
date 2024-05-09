@@ -1917,7 +1917,98 @@
         "Confidentiality",
         "Non-repudiation"
       ]
+    },
+    {
+      "id": "ea2adb86-5ad0-42e4-b99a-ee6787b457567",
+      "name": "RADAR",
+      "template": {
+        "nodes": [
+          {
+            "id": "4",
+            "data": {
+              "label": "RADAR"
+            },
+            "type":"group",
+            "position": {
+              "x": 320,
+              "y": 200
+            },
+            "className": "light",
+            "style": {
+              "backgroundColor": "rgba(255, 0, 0, 0.2)",
+              "width": 300,
+              "height": 300
+            }
+          },
+          {
+            "id": "4a",
+            "data": {
+              "label": "HSM",
+              "bgColor":"aqua"
+
+            },
+            "type":"default",
+            "position": {
+              "x": 375,
+              "y": 245
+            },
+            "className": "light",
+            "parentId": "4",
+            "extent": "parent",
+            "isAsset":true
+          },
+          {
+            "id": "4r",
+            "data": {
+              "label": "AP",
+              "bgColor":"lightgreen"
+            },
+            "type":"default",
+            "position": {
+              "x": 375,
+              "y": 325
+            },
+            "className": "light",
+            "style": {
+              "backgroundColor": "rgba(255, 0, 255, 0.2)"
+            },
+            "parentId": "4",
+            "extent": "parent",
+            "isAsset":true
+          },
+          {
+            "id": "4rd",
+            "data": {
+              "label": "BL",
+              "bgColor":"lightyellow"
+            },
+            "type":"default",
+            "position": {
+              "x": 375,
+              "y": 405
+            },
+            "className": "light",
+            "style": {
+              "backgroundColor": "rgba(255, 0, 255, 0.2)"
+            },
+            "parentId": "4",
+            "extent": "parent",
+            "isAsset":true
+          }
+        ],
+        "edges": [],
+        "viewport": {
+          "x": -425.4819861335054,
+          "y": -544.4776834101579,
+          "zoom": 1.3245458769293443
+        }
+      },
+      "properties": [
+        "Confidentiality",
+        "Non-repudiation"
+      ]
     }
+
   ],
   "sidebarNode": [
     {
@@ -2528,7 +2619,7 @@
       "scenarios": [
         {
           "id": "dc4b8d1b-7338-463a-ba9f-4c99960cdcb1",
-          "name": "Item Modal & Assets",
+          "name": "Item Model & Assets",
           "icon": "ItemIcon",
           "Details": [
             {
@@ -3270,7 +3361,7 @@
       "scenarios": [
         {
           "id": "b0af51af-db1e-4df4-b2ad-2fcd5d3bd7de",
-          "name": "Item Modal & Assets",
+          "name": "Item Model & Assets",
           "icon": "ItemIcon",
           "Details": [
             {
