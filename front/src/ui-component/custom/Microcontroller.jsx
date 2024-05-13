@@ -1,10 +1,12 @@
 import React from 'react';
-import { Handle, Position } from 'reactflow';
+import { Handle, NodeResizer, Position } from 'reactflow';
 import CustomHandle from '../CustomGates/CustomHandle';
 
 export default function MicroController({data}) {
 	console.log('data', data)
     return (
+		<>
+        <NodeResizer  />
         <div>
             <CustomHandle type="target" position={Position.Top} style={{ top: '15px', opacity: 0 }} isConnectable={1} />
             {/* <div>{data?.label}</div> */}
@@ -145,7 +147,9 @@ z"
                 />
                 <text x="200" y="255" style={{fontSize:'3rem', textShadow:'none',maxWidth:'100px'}} >{data?.label}</text>
             </svg>
-            <Handle type="source" position={Position.Bottom} style={{ bottom: '10px', opacity: 0 }} />
+            <Handle 
+			type="source" position={Position.Bottom} style={{ bottom: '10px', opacity: 0 }} />
         </div>
+		</>
     );
 }

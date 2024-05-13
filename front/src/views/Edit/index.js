@@ -35,6 +35,7 @@ import Memory from '../../ui-component/custom/Memory';
 import MicroController from '../../ui-component/custom/Microcontroller';
 import RightDrawer from '../../layout/MainLayout/RightSidebar';
 import CustomGroupNode from '../../ui-component/custom/GroupNode';
+import CustomEdge from '../../ui-component/custom/CustomEdge';
 
 const elk = new ELK();
 
@@ -127,6 +128,9 @@ const nodetypes = {
     memory:Memory,
     group:CustomGroupNode,
 };
+const edgeTypes={
+   ' react-flow__edge':CustomEdge
+}
 const flowKey = 'example-flow';
 
 export default function Edit() {
@@ -583,6 +587,7 @@ export default function Edit() {
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
                         nodeTypes={nodetypes}
+                        edgeTypes={edgeTypes}
                         onLoad={onLoad}
                         onNodeDrag={onNodeDrag}
                         connectionLineStyle={connectionLineStyle}

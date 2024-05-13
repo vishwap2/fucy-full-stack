@@ -1,8 +1,11 @@
 import React from 'react';
+import { NodeResizer } from 'reactflow';
 
 const CustomGroupNode = ({ data }) => {
     // console.log('data', data)
     return (
+      <>
+      <NodeResizer  />
         <div
             style={{
                 padding: '10px',
@@ -18,6 +21,7 @@ const CustomGroupNode = ({ data }) => {
               fontWeight:600
             }}>{data?.label}</div>
         </div>
+        </>
     );
 };
 

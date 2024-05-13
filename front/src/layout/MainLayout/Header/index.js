@@ -29,6 +29,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                         width: 'auto',
                         mb: 8,
                         mr: 2
+                    },
+                    [theme.breakpoints.up('md')]: {
+                        width: 'auto',
+                        mb: 8,
+                        mr: 2
                     }
                 }}
             >

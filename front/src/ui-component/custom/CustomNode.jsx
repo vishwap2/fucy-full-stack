@@ -1,9 +1,10 @@
 import React from "react";
-import { Handle, Position } from 'reactflow';
+import { Handle, NodeResizer, Position } from 'reactflow';
 
 const CustomNode = ({ data, isConnectable,type}) => {
   return (
     <>
+        <NodeResizer  />
       <div
         className={`my-custom-node ${type}`}
         style={{ 

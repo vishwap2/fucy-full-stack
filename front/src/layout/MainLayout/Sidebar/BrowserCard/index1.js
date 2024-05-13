@@ -113,7 +113,8 @@ const useStyles = makeStyles((theme) => ({
     },
     labelTypo: {
         fontSize: 12,
-        fontWeight: 600
+        fontWeight: 600,
+        fontFamily:'Inter'
     }
 }));
 
@@ -497,7 +498,7 @@ const BrowserCard = ({ modals, handleClick }) => {
                             <MenuItem onClick={() => openAddModal('Goals')}>Add Goals</MenuItem>
                             <MenuItem onClick={() => openAddModal('Require')}>Add Requirements</MenuItem>
                         </Menu>
-                        <TreeItem icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} />
+                        <TreeItem icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} className={classes.labelTypo}/>
                     </TreeView>
                 </CardContent>
             </CardStyle>

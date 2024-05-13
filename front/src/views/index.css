@@ -54,6 +54,8 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     align-items: center;
     justify-content: center;
     border: none !important;
+    background-color: inherit;
+    font-family: 'Inter', sans-serif ;
     
    }
    .selected{

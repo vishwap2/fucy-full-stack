@@ -1,9 +1,10 @@
 import React from "react";
-import { Handle, Position } from 'reactflow';
+import { Handle, NodeResizer, Position } from 'reactflow';
 
 export default function CyberGoal ({ data, isConnectable,type}) {
   return (
     <>
+        <NodeResizer  />
       <div
         className={`${type}`}
         style={{ 
