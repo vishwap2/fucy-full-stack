@@ -210,15 +210,15 @@ const useStore = createWithEqualityFn((set, get) => ({
             // console.log('res store', res)
             if (res) {
                 setTimeout(() => {
-                    alert('Added Succesfully');
+                    // alert('Added Succesfully');
                     window.location.reload();
                 }, 500);
             }
         } catch (err) {
-            // console.log('err', err)
-            setTimeout(() => {
-                alert('Something went Wrong');
-            }, 1000);
+            console.log('err', err)
+            // setTimeout(() => {
+                // alert('Something went Wrong');
+            // }, 1000);
         }
     },
 
@@ -231,10 +231,10 @@ const useStore = createWithEqualityFn((set, get) => ({
               return res;
             }
         } catch (err) {
-            // console.log('err', err)
-            setTimeout(() => {
-                alert('Something went Wrong');
-            }, 1000);
+            console.log('err', err)
+            // setTimeout(() => {
+            //     alert('Something went Wrong');
+            // }, 1000);
         }
     },
 
@@ -276,9 +276,9 @@ const useStore = createWithEqualityFn((set, get) => ({
               }
           } catch (err) {
               console.log('err', err);
-              if (err) {
-                  alert('Something went Wrong');
-              }
+            //   if (err) {
+            //       alert('Something went Wrong');
+            //   }
           }
       },
 

@@ -11,11 +11,15 @@ import { BrowserView, MobileView } from 'react-device-detect';
 // project imports
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
-import { colorTheme, drawerWidth, navbarHeight } from '../../../store/constant';
+import { drawerWidth, navbarHeight } from '../../../store/constant';
+import ColorTheme from '../../../store/ColorTheme';
 // import BrowserCard from './BrowserCard';
 import BrowserCard from './BrowserCard/index1';
 import useStore from '../../../Zustand/store';
 import { useEffect, useState } from 'react';
+import CustomizedSwitches from '../../../ui-component/Buttons/Switch';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeMode } from '../../../store/slices/CurrentIdSlice';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
@@ -27,6 +31,8 @@ const selector = (state) => ({
 
 });
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
+    const dispatch = useDispatch();
+    const { isDark } = useSelector(state=>state?.currentId)
     const [properties, setProperties] = useState([]);
     const {  template, fetchAPI, fetchModals, modals } = useStore(selector);
     const theme = useTheme();
@@ -41,7 +47,10 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         fetchModals();
     }, []);
 
-
+    const handleChange=()=>{
+    dispatch(changeMode())
+    }
+    
     const drawer = (
         <>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -53,12 +62,13 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                 <PerfectScrollbar
                     component="div"
                     style={{
-                        marginTop: '3rem',
+                        // marginTop: '3rem',
                         height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
                         paddingLeft: '16px',
                         paddingRight: '16px'
                     }}
                 >
+                    <CustomizedSwitches handleChange={handleChange} checked={isDark}/>
                     <BrowserCard
                         template={template}
                         modals={modals}
@@ -78,7 +88,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const container = window !== undefined ? () => window.document.body : undefined;
 
     return (
-        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto', background:colorTheme.sidebarBG }} aria-label="mailbox folders">
+        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto', background:ColorTheme().sidebarBG }} aria-label="mailbox folders">
             <Drawer
                 container={container}
                 variant={matchUpMd ? 'persistent' : 'temporary'}
@@ -89,7 +99,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         // background: theme.palette.background.default,
-                        background: colorTheme.sidebarBG,
+                        background: ColorTheme().sidebarBG,
                         color: theme.palette.text.primary,
                         borderRight: 'none',
                         [theme.breakpoints.up('md')]: {

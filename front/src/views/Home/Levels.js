@@ -121,7 +121,7 @@ import { useDispatch, useSelector } from 'react-redux';
     const handleBack = () => dispatch(closeAll());
 
     return (
-      <div style={{ height: '70svh',background:'white' }}>
+      <div style={{ height: '75svh',background:'white' }}>
           <ReactFlowProvider>
           {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
           <ReactFlow

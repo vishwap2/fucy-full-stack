@@ -17,7 +17,7 @@ import {
     ListItemText,
     // linearProgressClasses
 } from '@mui/material';
-import { colorTheme } from '../../../../store/constant';
+import  ColorTheme  from '../../../../store/ColorTheme';
 
 // assets
 // import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -87,12 +87,14 @@ const CardStyle = styled(Card)((
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const MenuCard = ({properties}) => {
+// console.log('ColorTheme', ColorTheme())
+
     // console.log('properties here', properties)
     const theme = useTheme();
 
     return (
         <>
-            <Typography variant='h4' sx={{color:colorTheme.tabContentClr}}>Properties </Typography>
+            <Typography variant='h4' sx={{color:ColorTheme().tabContentClr}}>Properties </Typography>
         <CardStyle>
             <CardContent sx={{ p: 2 }}>
                 

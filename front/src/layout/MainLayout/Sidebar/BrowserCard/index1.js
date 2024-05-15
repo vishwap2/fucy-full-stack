@@ -49,7 +49,7 @@ import DocumentIcon from '../../../../assets/icons/document.png';
 import ReportIcon from '../../../../assets/icons/report.png';
 import LayoutIcon from '../../../../assets/icons/layout.png';
 import ModelIcon from '../../../../assets/icons/model.png';
-import { colorTheme } from '../../../../store/constant';
+import  ColorTheme  from '../../../../store/ColorTheme';
 
 
 const imageComponents = {
@@ -283,7 +283,7 @@ const BrowserCard = ({ modals, handleClick }) => {
     };
     return (
         <>
-            <Typography variant="h4" sx={{color:colorTheme.tabContentClr}}>Models</Typography>
+            <Typography variant="h4" sx={{color:ColorTheme().tabContentClr}}>Models</Typography>
             <CardStyle sx={{ overflowY: 'auto' }}>
                 <CardContent sx={{ p: 2 }}>
                     <TreeView

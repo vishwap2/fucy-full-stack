@@ -186,7 +186,7 @@ import CyberRequire from '../../ui-component/custom/CyberRequire';
       [reactFlowInstance]
     );
     return (
-      <div style={{ height: '70svh',background:'white' }}>
+      <div style={{ height: '75svh',background:'white' }}>
           <ReactFlowProvider>
           {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
           <ReactFlow

@@ -12,16 +12,18 @@ import Breadcrumbs from '../../ui-component/extended/Breadcrumbs';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import navigation from '../../menu-items';
-import { navbarHeight, drawerWidth, colorTheme } from '../../store/constant';
+import { navbarHeight, drawerWidth } from '../../store/constant';
+import ColorTheme from '../../store/ColorTheme';
 import { SET_MENU } from '../../store/actions';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
+// import Customization from '../Customization';
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     ...theme.typography.mainContent,
-    background:colorTheme.canvasBG,
+    background:ColorTheme().canvasBG,
     border:'1px solid gray',
     maxWidth:'auto',
     marginTop:navbarHeight,
@@ -34,7 +36,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
             duration: theme.transitions.duration.leavingScreen
         }),
         [theme.breakpoints.up('md')]: {
-            marginLeft: -(drawerWidth - 20),
+            marginLeft: -(drawerWidth),
             width: `calc(100% - ${drawerWidth}px)`
         },
         [theme.breakpoints.down('md')]: {
@@ -96,7 +98,7 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
-                    bgcolor: colorTheme.navBG,
+                    bgcolor: ColorTheme().navBG,
                     height:navbarHeight,
                     border:'1px solid',
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
@@ -116,6 +118,7 @@ const MainLayout = () => {
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                 <Outlet />
             </Main>
+            {/* <Customization /> */}
         </Box>
     );
 };

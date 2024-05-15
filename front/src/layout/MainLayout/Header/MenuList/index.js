@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { colorTheme } from '../../../../store/constant';
+import  ColorTheme  from '../../../../store/ColorTheme';
 import AttackIcon from '../../../../assets/icons/attack.png';
 import ItemIcon from '../../../../assets/icons/item.png';
 import DamageIcon from '../../../../assets/icons/damage.png';
@@ -85,7 +85,7 @@ export default function MenuList() {
         return (
             <div>
                 {Image ? <img src={Image} alt={item.label} style={{ height: '25px', width: '25px' }} /> : null}
-                <Typography variant="body2" mt={0.5} sx={{ fontSize: 13, color:colorTheme.tabContentClr, fontFamily:'Inter', }}>
+                <Typography variant="body2" mt={0.5} sx={{ fontSize: 13, color:ColorTheme().tabContentClr, fontFamily:'Inter', }}>
                     {item?.label}
                 </Typography>
             </div>
@@ -101,14 +101,14 @@ export default function MenuList() {
                             '& .MuiTabs-scroller': {
                                 overflowX: 'auto !important',
                                 scrollbarWidth: 'none',
-                                background: colorTheme.tabBG,
+                                background: ColorTheme().tabBG,
                                 '& .Mui-selected': {
-                                    // background: colorTheme.selectedTab,
+                                    // background: ColorTheme.selectedTab,
                                     // border: '2px solid red',
-                                    color: `${colorTheme.tabContentClr} !important`
+                                    color: `${ColorTheme().tabContentClr} !important`
                                 },
                                 '& .MuiTabs-indicator ': {
-                                    backgroundColor: `${colorTheme.selectedTab} !important`
+                                    backgroundColor: `${ColorTheme().selectedTab} !important`
                                     //   display:'none'
                                 },
                                 '& .MuiButtonBase-root': {
@@ -133,7 +133,7 @@ export default function MenuList() {
                     <TabPanel
                         key={i}
                         value={item?.value}
-                        sx={{ overflow: 'auto', scrollbarWidth: 'none', color: colorTheme.tabContentClr, fontFamily:'Inter', }}
+                        sx={{ overflow: 'auto', scrollbarWidth: 'none', color: ColorTheme().tabContentClr, fontFamily:'Inter', }}
                     >
                         {item?.label}
                     </TabPanel>

@@ -18,6 +18,7 @@ import { closeAll } from '../../store/slices/CurrentIdSlice';
 import SelectLosses from '../Modal/SelectLosses';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
+import  ColorTheme  from '../../store/ColorTheme';
 
 const selector = (state) => ({
     modal: state.modal,
@@ -285,8 +286,8 @@ export default function DsTable() {
         <>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
-                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1 }} onClick={handleBack} />
-                    <Typography>Damage Scenario Table</Typography>
+                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }} onClick={handleBack} />
+                    <Typography sx={{color:ColorTheme().title}}>Damage Scenario Table</Typography>
                 </Box>
                 <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
                     Add New Scenario

@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { closeAll } from '../../store/slices/CurrentIdSlice';
 import AddThreatScenarios from '../Modal/AddThreatScenario';
 import { Box } from '@mui/system';
+import  ColorTheme  from '../../store/ColorTheme';
 
 const selector = (state) => ({
     modal: state.modal,
@@ -139,8 +140,8 @@ export default function Tstable() {
         <>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
-                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1 }} onClick={handleBack} />
-                    <Typography>Threat Scenario Table</Typography>
+                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color:ColorTheme().title }} onClick={handleBack} />
+                    <Typography sx={{color:ColorTheme().title}}>Threat Scenario Table</Typography>
                 </Box>
                 <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalTs}>
                     Add New Scenario

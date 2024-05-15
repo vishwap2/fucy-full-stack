@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
     currentId: '',
     isDsTableOpen: false,
@@ -8,7 +9,10 @@ const initialState = {
     isLevelOpen: false,
     isCyberBlockOpen: false,
     attackScene: {},
-    levelDts: {}
+    levelDts: {},
+    isRightDrawerOpen:false,
+    activeTab:'',
+    isDark:false,
 };
 
 const CurrentIdSlice = createSlice({
@@ -16,7 +20,6 @@ const CurrentIdSlice = createSlice({
     initialState,
     reducers: {
         storeCurrentId: (state, action) => {
-            console.log('action', action);
             return { ...state, currentId: action.payload };
         },
         DsTableOpen: (state) => {
@@ -27,7 +30,7 @@ const CurrentIdSlice = createSlice({
                 isAttackTreeOpen: false,
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
             };
         },
         TsTableOpen: (state) => {
@@ -88,6 +91,26 @@ const CurrentIdSlice = createSlice({
                 isLevelOpen: false
             };
         },
+        drawerOpen: (state, action) =>{
+         return {
+            ...state,
+            activeTab:action.payload,
+            isRightDrawerOpen:true,}
+
+        },
+        drawerClose:(state) =>{
+            return {
+            ...state,
+            activeTab:'',
+            isRightDrawerOpen:false,}
+   
+           },
+           changeMode:(state)=>{
+           return {
+            ...state,
+            isDark:!state.isDark
+           }
+           },
         closeAll: (state) => {
             return {
                 ...state,
@@ -111,6 +134,9 @@ export const {
     levelOpen,
     cyberBlockOpen,
     closeAll,
-    cyberTableOpen
+    cyberTableOpen,
+    drawerOpen,
+    drawerClose,
+    changeMode
 } = CurrentIdSlice.actions;
 export default CurrentIdSlice.reducer;

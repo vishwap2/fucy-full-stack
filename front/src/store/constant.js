@@ -1,3 +1,4 @@
+
 // theme constant
 export const gridSpacing = 3;
 export const drawerWidth = 430;
@@ -14,20 +15,24 @@ export const navbarHeight = 150;
 //     tabContentClr:'white'
 //  }
 
-//  export const colorTheme = {
-//    navBG:'#e3e3e3' ,
-//    tabBG:'#f2f2f2',
-//    selectedTab:'#5c636e',
-//    sidebarBG:'#f7f7f7',
-//    canvasBG:'#f7f7f7',
-//    tabContentClr:'#000'
-// }
+ export const lightTheme = {
+   navBG:'#e3e3e3' ,
+   tabBG:'#f7f7f7',
+   selectedTab:'#5c636e',
+   sidebarBG:'#f7f7f7',
+   canvasBG:'#f7f7f7',
+   tabContentClr:'#000',
+   title:'#000'
 
-export const colorTheme = {
+}
+
+ export const darkTheme = {
    navBG:'#000' , 
    tabBG:'#222831',
    selectedTab:'whitesmoke',
    sidebarBG:'#000',
    canvasBG:'#000',
-   tabContentClr:'white'
+   tabContentClr:'white',
+   title:'whitesmoke'
 }
+
