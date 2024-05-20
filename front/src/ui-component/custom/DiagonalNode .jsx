@@ -8,8 +8,8 @@ const DiagonalNode = ({ data, isConnectable,type}) => {
       <div
         className={`diagonal-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
+          ...data?.style
+           }}
       >
        
         <Handle

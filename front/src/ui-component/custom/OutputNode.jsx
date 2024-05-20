@@ -8,8 +8,8 @@ const OutputNode = ({ data, isConnectable,type}) => {
       <div
         className={`my-custom-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
+          ...data?.style
+           }}
       >
           <div>{data?.label}</div>
         <Handle

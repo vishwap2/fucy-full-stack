@@ -1,14 +1,15 @@
 import React from "react";
 import { Handle, NodeResizer, Position } from 'reactflow';
 
-const InputNode = ({ data, isConnectable,type}) => {
+const InputNode = ({ data, isConnectable,type,}) => {
+  console.log('style', data?.style)
   return (
     <>
-        <NodeResizer  />
+        <NodeResizer  minWidth={140} minHeight={50}/>
       <div
         className={`my-custom-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
+         ...data?.style
           }}
       >
         <Handle

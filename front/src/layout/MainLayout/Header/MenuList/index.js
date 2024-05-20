@@ -79,9 +79,9 @@ export default function MenuList() {
     ];
 
     const getImageLabel = (item) => {
-        console.log('item?.icon', item?.icon);
+        // console.log('item?.icon', item?.icon);
         const Image = imageComponents[item?.icon];
-        console.log('Image', Image);
+        // console.log('Image', Image);
         return (
             <div>
                 {Image ? <img src={Image} alt={item.label} style={{ height: '25px', width: '25px' }} /> : null}
@@ -102,6 +102,7 @@ export default function MenuList() {
                                 overflowX: 'auto !important',
                                 scrollbarWidth: 'none',
                                 background: ColorTheme().tabBG,
+                                marginRight:{sm:'2rem', md:'2rem', lg:'1rem'},
                                 '& .Mui-selected': {
                                     // background: ColorTheme.selectedTab,
                                     // border: '2px solid red',

@@ -8,8 +8,8 @@ const CustomNode = ({ data, isConnectable,type}) => {
       <div
         className={`my-custom-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
+          ...data?.style
+           }}
       >
         <Handle
           className="handle"

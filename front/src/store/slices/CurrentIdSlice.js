@@ -119,7 +119,9 @@ const CurrentIdSlice = createSlice({
                 isDsTableOpen: false,
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
+                activeTab:'',
+                isRightDrawerOpen:false,
             };
         }
     }

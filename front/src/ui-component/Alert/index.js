@@ -1,7 +1,7 @@
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-export default function AlertMessage({open,message, setOpen}){
+export default function AlertMessage({open,message, setOpen, success}){
 
       const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -16,7 +16,7 @@ export default function AlertMessage({open,message, setOpen}){
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
-          severity="success"
+          severity={success ? 'success':'error'}
           variant="filled"
           sx={{ width: '100%' }}
         >

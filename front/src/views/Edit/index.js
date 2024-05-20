@@ -35,9 +35,10 @@ import Memory from '../../ui-component/custom/Memory';
 import MicroController from '../../ui-component/custom/Microcontroller';
 import RightDrawer from '../../layout/MainLayout/RightSidebar';
 import CustomGroupNode from '../../ui-component/custom/GroupNode';
-import CustomEdge from '../../ui-component/custom/CustomEdge';
+// import CustomEdge from '../../ui-component/custom/CustomEdge';
 import { drawerClose, drawerOpen } from '../../store/slices/CurrentIdSlice';
 import AlertMessage from '../../ui-component/Alert';
+import Header from '../../ui-component/Header';
 
 const elk = new ELK();
 
@@ -99,7 +100,7 @@ const selector = (state) => ({
 //Edge line styling
 const connectionLineStyle = { stroke: 'black' };
 const edgeOptions = {
-    type: 'smoothstep',
+    type: 'step',
     markerEnd: {
         type: MarkerType.ArrowClosed,
         width: 20,
@@ -130,9 +131,9 @@ const nodetypes = {
     memory: Memory,
     group: CustomGroupNode
 };
-const edgeTypes = {
-    ' react-flow__edge': CustomEdge
-};
+// const edgeTypes = {
+//     'react-flow__edge': CustomEdge
+// };
 const flowKey = 'example-flow';
 
 export default function Edit() {
@@ -159,6 +160,7 @@ export default function Edit() {
     const [savedTemplate, setSavedTemplate] = useState({});
     const [selectedNode, setSelectedNode] = useState({});
     const [open, setOpen ] = useState(false);
+    const [success, setSuccess ] = useState(false);
     const [message, setMessage ] = useState('');
     const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab } =
         useSelector((state) => state?.currentId);
@@ -291,8 +293,18 @@ export default function Edit() {
                     properties: parsedNode.properties,
                     data: {
                         label: parsedNode.data['label'],
-                        bgColor: parsedNode.data['bgColor']
-                    }
+                        bgColor: parsedNode.data['bgColor'],
+                        style:{
+                            backgroundColor:parsedNode.data['bgColor'],
+                            fontSize:'16px',
+                            fontFamily:'Inter',
+                            fontStyle:'normal',
+                            fontWeight:500,
+                            textAlign:'center',
+                            color:'white',
+                            textDecoration:'none'
+                        }
+                    },
                 };
                 dragAdd(newNode);
             }
@@ -306,7 +318,19 @@ export default function Edit() {
                 parsedTemplate['nodes'].map((node) => {
                     newNodes.push({
                         id: `${node.id + randomId}`,
-                        data: node.data,
+                        data: {
+                            ...node?.data,
+                            style:{
+                                backgroundColor:node.data['bgColor'],
+                                fontSize:'16px',
+                                fontFamily:'Inter',
+                                fontStyle:'normal',
+                                fontWeight:500,
+                                textAlign:'center',
+                                color:'white',
+                                textDecoration:'none'
+                            }
+                        },
                         type: node.type,
                         position: {
                             x: node['position']['x'] + randomPos,
@@ -549,7 +573,8 @@ export default function Edit() {
                 if (res) {
                     setTimeout(() => {
                         setOpen(true);
-                        setMessage('Added Successfully');
+                        setMessage('Updated Successfully');
+                        setSuccess(true);
                         // window.location.reload();
                         handleClose();
                         getModals();
@@ -559,6 +584,7 @@ export default function Edit() {
             .catch((err) =>{
                 console.log('err', err);
                 setOpen(true);
+                setSuccess(false);
                 setMessage('Something went wrong');
             });
     };
@@ -571,6 +597,10 @@ export default function Edit() {
         setSelectedNode(node);
         toggleDrawerOpen('editTab');
     };
+
+    const handleSelectNode = (e, node)=>{
+        setSelectedNode(node);
+    }
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
     if (isAttackTreeOpen) return <AttackTree modal={modal} />;
@@ -580,6 +610,12 @@ export default function Edit() {
     return (
         <>
             <div style={{ width: '100%', height: '90%', border: '1px solid', background: 'white' }}>
+                <Header
+                 selectedNode={selectedNode}
+                 nodes={nodes}
+                 setNodes={setNodes}
+                 setSelectedNode={setSelectedNode}
+                />
                 <ReactFlowProvider>
                     {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
                     <ReactFlow
@@ -589,7 +625,7 @@ export default function Edit() {
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
                         nodeTypes={nodetypes}
-                        edgeTypes={edgeTypes}
+                        // edgeTypes={edgeTypes}
                         onLoad={onLoad}
                         onNodeDrag={onNodeDrag}
                         connectionLineStyle={connectionLineStyle}
@@ -599,6 +635,7 @@ export default function Edit() {
                         onDragOver={onDragOver}
                         fitView
                         onNodeDoubleClick={handleSidebarOpen}
+                        onNodeClick={handleSelectNode}
                         // style={{
                         //   " .react-flow__node": {
                         //     backgroundColor: "black",
@@ -645,7 +682,10 @@ export default function Edit() {
                             drawerOpen={toggleDrawerOpen}
                             drawerClose={toggleDrawerClose}
                             selectedNode={selectedNode}
+                            setSelectedNode={setSelectedNode}
                             modal={modal}
+                            nodes={nodes}
+                            setNodes={setNodes}
                         />
                     </ReactFlow>
                     {/* </div> */}
@@ -657,7 +697,7 @@ export default function Edit() {
                     setNodes={setNodes}
                     setEdges={setEdges}
                 />
-                <AlertMessage open={open} message={message} setOpen={setOpen}/>
+                <AlertMessage open={open} message={message} setOpen={setOpen} success={success}/>
             </div>
         </>
     );

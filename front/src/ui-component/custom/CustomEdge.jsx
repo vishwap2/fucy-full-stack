@@ -1,27 +1,73 @@
-
 import React, { useState } from 'react';
-import { EdgeLabelRenderer } from 'reactflow';
+import { getBezierPath } from 'react-flow-renderer';
 
-const CustomEdge = ({ id, source, target }) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+const CustomEdge = ({
+  id,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  style = {},
+  arrowHeadType,
+  markerEndId,
+  // data,
+}) => {
+  const [edgePath, setEdgePath] = useState(
+    getBezierPath({
+      sourceX,
+      sourceY,
+      sourcePosition,
+      targetX,
+      targetY,
+      targetPosition,
+    })
+  );
 
-  const onEdgeDrag = (event) => {
-    const newX = position.x + event.movementX;
-    const newY = position.y + event.movementY;
-    setPosition({ x: newX, y: newY });
+  const handleDrag = (event) => {
+    // Logic to update edge path during drag
+    const newPath = getBezierPath({
+      sourceX,
+      sourceY,
+      targetX: event.clientX,
+      targetY: event.clientY,
+      sourcePosition,
+      targetPosition,
+    });
+    setEdgePath(newPath);
   };
 
   return (
-    <EdgeLabelRenderer
-      id={id}
-      source={source}
-      target={target}
-      onClick={(event) => console.log('Edge clicked', event)}
-      onMouseDown={(event) => console.log('Edge mouse down', event)}
-      onEdgeDrag={onEdgeDrag}
-      style={{ stroke: '#000', strokeWidth: 2 }}
-      arrowHeadType="arrowclosed"
-    />
+    <>
+      <path
+        id={id}
+        style={style}
+        className="react-flow__edge-path"
+        d={edgePath}
+        markerEnd={markerEndId}
+        onMouseDown={(event) => {
+          event.stopPropagation();
+          document.addEventListener('mousemove', handleDrag);
+          document.addEventListener('mouseup', () => {
+            document.removeEventListener('mousemove', handleDrag);
+          }, { once: true });
+        }}
+      />
+      {arrowHeadType && (
+        <marker
+          id={markerEndId}
+          markerWidth="15"
+          markerHeight="15"
+          refX="0"
+          refY="3"
+          orient="auto"
+          markerUnits="strokeWidth"
+        >
+          <path d="M0,0 L0,6 L6,3 z" fill="#b1b1b7" />
+        </marker>
+      )}
+    </>
   );
 };
 

@@ -239,7 +239,7 @@ const useStore = createWithEqualityFn((set, get) => ({
     },
 
     dragAdd: (newNode) => {
-        console.log('newNode', newNode);
+        // console.log('newNode', newNode);
         set((state) => ({
             nodes: [...state.nodes, newNode]
         }));
@@ -261,7 +261,7 @@ const useStore = createWithEqualityFn((set, get) => ({
     },
     
     addNewNode: async (newNode) => {
-        console.log('newNode',newNode);
+        // console.log('newNode',newNode);
         const res = await axios.post(`${configuration.apiBaseUrl}sidebarNode`, newNode);
         console.log('res', res);
     },
@@ -283,7 +283,7 @@ const useStore = createWithEqualityFn((set, get) => ({
       },
 
       addCyberNode: (newNode) => {
-        console.log('newNode', newNode);
+        // console.log('newNode', newNode);
         set((state) => ({
             cyberNodes: [...state.cyberNodes, newNode]
         }));

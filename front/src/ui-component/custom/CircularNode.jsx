@@ -8,8 +8,8 @@ const CircularNode = ({ data, isConnectable,type}) => {
       <div
         className={`circular-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
+          ...data?.style
+           }}
       >
         <Handle
           className="handle"

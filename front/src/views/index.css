@@ -38,6 +38,9 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     border-radius: 50%;
     background-color: #784be8;
   }
+   .react-flow{
+    height : 94% !important; 
+  }
 
   .react-flow__node-group{
     height: auto !important;
@@ -48,20 +51,20 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
 
    .react-flow__node{
     padding: 0 !important;
-    color: white !important;
+    color: white;
     /* text-shadow: 1px 1px 1px black  !important; */
     display: flex ;
     align-items: center;
     justify-content: center;
     border: none !important;
-    background-color: inherit;
+    background-color: inherit !important;
     font-family: 'Inter', sans-serif ;
     
    }
    .selected{
     border: 2px solid black !important;
     border-radius: 5px !important;
-    box-shadow: black 1px 4px 15px !important;
+    box-shadow: black 0px 1px 20px !important;
   }
 
    .library{
@@ -78,8 +81,10 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
    }
 
    .my-custom-node{
-    width: 150px ;
-    height: 40px ;
+    width: inherit ;
+    height: inherit ;
+    min-width: 140px;
+    min-height: 50px;
     display:flex ;
     align-items: center ;
     justify-content: center;
