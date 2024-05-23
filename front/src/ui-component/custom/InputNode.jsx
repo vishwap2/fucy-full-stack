@@ -1,11 +1,12 @@
+
 import React from "react";
 import { Handle, NodeResizer, Position } from 'reactflow';
 
 const InputNode = ({ data, isConnectable,type,}) => {
-  console.log('style', data?.style)
+  // console.log('style', data?.style)
   return (
     <>
-        <NodeResizer  minWidth={140} minHeight={50}/>
+        <NodeResizer style={{borderColor:"transparent"}}  minWidth={140} minHeight={50}/>
       <div
         className={`my-custom-node ${type}`}
         style={{ 

@@ -17,9 +17,7 @@ import ColorTheme from '../../../store/ColorTheme';
 import BrowserCard from './BrowserCard/index1';
 import useStore from '../../../Zustand/store';
 import { useEffect, useState } from 'react';
-import CustomizedSwitches from '../../../ui-component/Buttons/Switch';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeMode } from '../../../store/slices/CurrentIdSlice';
+import { useSelector } from 'react-redux';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
@@ -27,15 +25,13 @@ const selector = (state) => ({
     template: state.template,
     modals: state.Modals,
     fetchAPI: state.fetchAPI,
-    fetchModals: state.getModals,
-
+    fetchModals: state.getModals
 });
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
-    const dispatch = useDispatch();
-    const { isDark } = useSelector(state=>state?.currentId)
     const [properties, setProperties] = useState([]);
-    const {  template, fetchAPI, fetchModals, modals } = useStore(selector);
+    const { template, fetchAPI, fetchModals, modals } = useStore(selector);
     const theme = useTheme();
+    const { isNavbarClose } = useSelector((state)=>state.currentId);
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
     // console.log('modals', modals);
     const handleClick = (node) => {
@@ -47,10 +43,6 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         fetchModals();
     }, []);
 
-    const handleChange=()=>{
-    dispatch(changeMode())
-    }
-    
     const drawer = (
         <>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -65,15 +57,11 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         // marginTop: '3rem',
                         height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
                         paddingLeft: '16px',
-                        paddingRight: '16px'
+                        paddingRight: '16px',
+                        marginTop: '1.4rem'
                     }}
                 >
-                    <CustomizedSwitches handleChange={handleChange} checked={isDark}/>
-                    <BrowserCard
-                        template={template}
-                        modals={modals}
-                        handleClick={handleClick}
-                    />
+                    <BrowserCard template={template} modals={modals} handleClick={handleClick} />
                     <MenuCard properties={properties} />
                 </PerfectScrollbar>
             </BrowserView>
@@ -88,7 +76,11 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const container = window !== undefined ? () => window.document.body : undefined;
 
     return (
-        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto', background:ColorTheme().sidebarBG }} aria-label="mailbox folders">
+        <Box
+            component="nav"
+            sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto', background: ColorTheme().sidebarBG, mt: !isNavbarClose ? navbarHeight :'0px' }}
+            aria-label="mailbox folders"
+        >
             <Drawer
                 container={container}
                 variant={matchUpMd ? 'persistent' : 'temporary'}
@@ -103,7 +95,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         color: theme.palette.text.primary,
                         borderRight: 'none',
                         [theme.breakpoints.up('md')]: {
-                            top: navbarHeight
+                            top: !isNavbarClose ? navbarHeight :'0px'
                         }
                     }
                 }}

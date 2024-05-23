@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import  ColorTheme  from '../../../../store/ColorTheme';
+import ColorTheme from '../../../../store/ColorTheme';
 import AttackIcon from '../../../../assets/icons/attack.png';
 import ItemIcon from '../../../../assets/icons/item.png';
 import DamageIcon from '../../../../assets/icons/damage.png';
@@ -12,6 +12,11 @@ import ThreatIcon from '../../../../assets/icons/threat.png';
 import CybersecurityIcon from '../../../../assets/icons/cybersecurity.png';
 import RiskIcon from '../../../../assets/icons/risk.png';
 import { Typography } from '@mui/material';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import NightsStayIcon from '@mui/icons-material/NightsStay';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeMode, navbarSlide } from '../../../../store/slices/CurrentIdSlice';
+import {  ArrowSquareDown, ArrowSquareUp } from 'iconsax-react';
 
 const imageComponents = {
     AttackIcon,
@@ -23,10 +28,14 @@ const imageComponents = {
 };
 
 export default function MenuList() {
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState('1');
-
+    const { isDark, isNavbarClose } = useSelector((state) => state?.currentId);
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+    const handleChangeMode = () => {
+        dispatch(changeMode());
     };
 
     const tabs = [
@@ -59,11 +68,11 @@ export default function MenuList() {
             label: 'Cybersecurity Goals and Requirements',
             value: '7',
             icon: 'CybersecurityIcon'
-        }
+        },
         // {
         //     label: 'User Authorization',
         //     value: '9'
-        // },
+        // }
         // {
         //     label: 'Collaboration',
         //     value: '10'
@@ -85,7 +94,7 @@ export default function MenuList() {
         return (
             <div>
                 {Image ? <img src={Image} alt={item.label} style={{ height: '25px', width: '25px' }} /> : null}
-                <Typography variant="body2" mt={0.5} sx={{ fontSize: 13, color:ColorTheme().tabContentClr, fontFamily:'Inter', }}>
+                <Typography variant="body2" mt={0.5} sx={{ fontSize: 13, color: ColorTheme().tabContentClr, fontFamily: 'Inter' }}>
                     {item?.label}
                 </Typography>
             </div>
@@ -95,14 +104,21 @@ export default function MenuList() {
     return (
         <Box sx={{ width: '100%', typography: 'body1', mt: 2 }}>
             <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, display: 'flex', borderColor: 'transparent !important' }}>
+                <Box
+                    sx={{
+                        borderBottom: 1,
+                        display: 'flex',
+                        borderColor: 'transparent !important',
+                        width: { xl: '99%', lg: '96%', md: '96%', sm: '92%', xs: '90%' }
+                    }}
+                >
                     <TabList
                         sx={{
                             '& .MuiTabs-scroller': {
                                 overflowX: 'auto !important',
                                 scrollbarWidth: 'none',
                                 background: ColorTheme().tabBG,
-                                marginRight:{sm:'2rem', md:'2rem', lg:'1rem'},
+                                marginRight: { sm: '2rem', md: '2rem', lg: '1rem' },
                                 '& .Mui-selected': {
                                     // background: ColorTheme.selectedTab,
                                     // border: '2px solid red',
@@ -129,12 +145,20 @@ export default function MenuList() {
                             />
                         ))}
                     </TabList>
+                    <Box display='flex' flexDirection='column' gap={2} alignItems='center'>
+                        <Box onClick={handleChangeMode} sx={{ cursor: 'pointer' }}>
+                            {isDark ? <NightsStayIcon /> : <LightModeIcon />}
+                        </Box>
+                        <Box onClick={()=>dispatch(navbarSlide())}>
+                          {!isNavbarClose ? <ArrowSquareUp size="20" color="#555555" /> : <ArrowSquareDown size="20" color="#555555" />}
+                        </Box>
+                    </Box>
                 </Box>
                 {tabs.map((item, i) => (
                     <TabPanel
                         key={i}
                         value={item?.value}
-                        sx={{ overflow: 'auto', scrollbarWidth: 'none', color: ColorTheme().tabContentClr, fontFamily:'Inter', }}
+                        sx={{ overflow: 'auto', scrollbarWidth: 'none', color: ColorTheme().tabContentClr, fontFamily: 'Inter' }}
                     >
                         {item?.label}
                     </TabPanel>

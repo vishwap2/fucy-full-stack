@@ -2,11 +2,11 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
-import Edit from '../views/Edit';
+import MainCanvas from '../views/MainCanvas';
 
 
 // sample page routing
-const Home = Loadable(lazy(() => import('../views/Home')));
+const Home = Loadable(lazy(() => import('../views/MainCanvas')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -20,7 +20,7 @@ const MainRoutes = {
         },
         {
             path: '/Modals/:id',
-            element: <Edit />
+            element: <MainCanvas />
         },
        
     ]

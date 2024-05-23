@@ -57,7 +57,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
             ...details,
             name: selectedNode?.data?.label ? selectedNode?.data?.label : '',
             properties: selectedNode?.properties ? selectedNode?.properties : [],
-            bgColor: selectedNode?.data?.bgColor ? selectedNode?.data?.bgColor : '#000000'
+            bgColor: selectedNode?.data?.style?.backgroundColor ? selectedNode?.data?.style?.backgroundColor : '#000000'
         });
     }, [selectedNode]);
 
@@ -74,9 +74,9 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
         // const index = mod.template?.nodes.findIndex(nd=>nd.id.slice(0, -6) === selectedNode.id.slice(0, -3));
         const node = mod.template?.nodes.find((nd) => nd.id === selectedNode.id);
         const index = mod.template?.nodes.findIndex((nd) => nd.id === selectedNode.id);
-        console.log('index', index);
+        // console.log('index', index);
         node.data.label = details.name;
-        node.data.bgColor = details.bgColor;
+        node.data.style.backgroundColor = details.bgColor;
         node.properties = details.properties;
         // console.log('node', node)
         mod.template.nodes[index] = node;
@@ -113,8 +113,8 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
     };
 
     const handleStyle = (e, name) => {
-        console.log('name', name)
-        console.log('e', e.target.value)
+        // console.log('name', name)
+        // console.log('e', e.target.value)
         const list = [...nodes];
         const node = list?.find(nd=>nd?.id === selectedNode?.id)
         const Index = list?.findIndex(nd=>nd?.id === selectedNode?.id);
@@ -131,7 +131,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
         setNodes(list);
     };
 
-    console.log('details', details)
+    // console.log('details', details)
     return (
         <>
             <TabContext value={value}>
@@ -151,7 +151,10 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
                             value={details?.name}
                             onChange={(e)=>handleStyle(e,'name')}
                             sx={{
-                                width: 'auto'
+                                width: 'auto',
+                                '& .MuiInputBase-input':{
+                                    height:'0.4rem'
+                                }
                             }}
                         />
                         <InputLabel>Properties :</InputLabel>
@@ -159,6 +162,11 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
                             <Select
                                 labelId="demo-multiple-chip-label"
                                 id="demo-multiple-chip"
+                                sx={{
+                                    '& .MuiSelect-select':{
+                                        padding: '7.5px 14px'
+                                    }
+                                }}
                                 multiple
                                 value={details.properties}
                                 onChange={handleChange}

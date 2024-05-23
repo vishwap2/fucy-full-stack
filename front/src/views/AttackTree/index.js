@@ -3,9 +3,9 @@ import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceR
 import { useDispatch, useSelector } from 'react-redux';
 import {  closeAll } from '../../store/slices/CurrentIdSlice';
 import { Box, Grid, Paper } from '@mui/material';
-import Home from '../Home';
+import Home from '../AttackSceneCanvas';
 import Properties from './Properties';
-import Levels from '../Home/Levels';
+import Levels from '../AttackSceneCanvas/Levels';
 
 const AttackTree = ({modal}) => {
     console.log('modal in attack tree', modal);

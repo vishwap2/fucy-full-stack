@@ -10,9 +10,10 @@ const initialState = {
     isCyberBlockOpen: false,
     attackScene: {},
     levelDts: {},
-    isRightDrawerOpen:false,
-    activeTab:'',
-    isDark:false,
+    isRightDrawerOpen: false,
+    isNavbarClose: false,
+    activeTab: '',
+    isDark: false
 };
 
 const CurrentIdSlice = createSlice({
@@ -30,7 +31,7 @@ const CurrentIdSlice = createSlice({
                 isAttackTreeOpen: false,
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false,
+                isCyberTableOpen: false
             };
         },
         TsTableOpen: (state) => {
@@ -91,26 +92,32 @@ const CurrentIdSlice = createSlice({
                 isLevelOpen: false
             };
         },
-        drawerOpen: (state, action) =>{
-         return {
-            ...state,
-            activeTab:action.payload,
-            isRightDrawerOpen:true,}
-
-        },
-        drawerClose:(state) =>{
+        drawerOpen: (state, action) => {
             return {
-            ...state,
-            activeTab:'',
-            isRightDrawerOpen:false,}
-   
-           },
-           changeMode:(state)=>{
-           return {
-            ...state,
-            isDark:!state.isDark
-           }
-           },
+                ...state,
+                activeTab: action.payload,
+                isRightDrawerOpen: true
+            };
+        },
+        drawerClose: (state) => {
+            return {
+                ...state,
+                activeTab: '',
+                isRightDrawerOpen: false
+            };
+        },
+        navbarSlide: (state) => {
+            return {
+                ...state,
+                isNavbarClose: !state.isNavbarClose
+            };
+        },
+        changeMode: (state) => {
+            return {
+                ...state,
+                isDark: !state.isDark
+            };
+        },
         closeAll: (state) => {
             return {
                 ...state,
@@ -120,8 +127,8 @@ const CurrentIdSlice = createSlice({
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
                 isCyberTableOpen: false,
-                activeTab:'',
-                isRightDrawerOpen:false,
+                activeTab: '',
+                isRightDrawerOpen: false
             };
         }
     }
@@ -139,6 +146,7 @@ export const {
     cyberTableOpen,
     drawerOpen,
     drawerClose,
-    changeMode
+    changeMode,
+    navbarSlide
 } = CurrentIdSlice.actions;
 export default CurrentIdSlice.reducer;

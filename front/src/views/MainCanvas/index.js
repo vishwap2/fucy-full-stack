@@ -35,7 +35,7 @@ import Memory from '../../ui-component/custom/Memory';
 import MicroController from '../../ui-component/custom/Microcontroller';
 import RightDrawer from '../../layout/MainLayout/RightSidebar';
 import CustomGroupNode from '../../ui-component/custom/GroupNode';
-// import CustomEdge from '../../ui-component/custom/CustomEdge';
+import CustomEdge from '../../ui-component/custom/CustomEdge';
 import { drawerClose, drawerOpen } from '../../store/slices/CurrentIdSlice';
 import AlertMessage from '../../ui-component/Alert';
 import Header from '../../ui-component/Header';
@@ -131,12 +131,12 @@ const nodetypes = {
     memory: Memory,
     group: CustomGroupNode
 };
-// const edgeTypes = {
-//     'react-flow__edge': CustomEdge
-// };
+const edgeTypes = {
+    custom: CustomEdge
+};
 const flowKey = 'example-flow';
 
-export default function Edit() {
+export default function MainCanvas() {
     const {
         nodes,
         edges,
@@ -302,7 +302,10 @@ export default function Edit() {
                             fontWeight:500,
                             textAlign:'center',
                             color:'white',
-                            textDecoration:'none'
+                            textDecoration:'none',
+                            borderColor:'black',
+                            borderWidth:'2px',
+                            borderStyle:'solid'
                         }
                     },
                 };
@@ -328,7 +331,10 @@ export default function Edit() {
                                 fontWeight:500,
                                 textAlign:'center',
                                 color:'white',
-                                textDecoration:'none'
+                                textDecoration:'none',
+                                borderColor:'black',
+                                borderWidth:'2px',
+                                borderStyle:'solid'
                             }
                         },
                         type: node.type,
@@ -595,7 +601,7 @@ export default function Edit() {
 
     const handleSidebarOpen = (e, node) => {
         setSelectedNode(node);
-        toggleDrawerOpen('editTab');
+        toggleDrawerOpen('MainCanvasTab');
     };
 
     const handleSelectNode = (e, node)=>{
@@ -609,7 +615,7 @@ export default function Edit() {
 
     return (
         <>
-            <div style={{ width: '100%', height: '90%', border: '1px solid', background: 'white' }}>
+            <div style={{ width: '100%', height: '100%', border: '1px solid', background: 'white' }}>
                 <Header
                  selectedNode={selectedNode}
                  nodes={nodes}
@@ -625,7 +631,7 @@ export default function Edit() {
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
                         nodeTypes={nodetypes}
-                        // edgeTypes={edgeTypes}
+                        edgeTypes={edgeTypes}
                         onLoad={onLoad}
                         onNodeDrag={onNodeDrag}
                         connectionLineStyle={connectionLineStyle}

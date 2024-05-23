@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getBezierPath } from 'react-flow-renderer';
 
 const CustomEdge = ({
@@ -14,16 +14,19 @@ const CustomEdge = ({
   markerEndId,
   // data,
 }) => {
-  const [edgePath, setEdgePath] = useState(
-    getBezierPath({
+  const [edgePath, setEdgePath] = useState('');
+
+  useEffect(() => {
+    const newPath = getBezierPath({
       sourceX,
       sourceY,
       sourcePosition,
       targetX,
       targetY,
       targetPosition,
-    })
-  );
+    });
+    setEdgePath(newPath);
+  }, [sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition]);
 
   const handleDrag = (event) => {
     // Logic to update edge path during drag

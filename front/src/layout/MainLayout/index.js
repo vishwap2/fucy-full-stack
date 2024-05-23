@@ -6,7 +6,6 @@ import { Outlet } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material';
 
-
 // project imports
 import Breadcrumbs from '../../ui-component/extended/Breadcrumbs';
 import Header from './Header';
@@ -18,16 +17,20 @@ import { SET_MENU } from '../../store/actions';
 
 // assets
 import { IconChevronRight } from '@tabler/icons';
+import { ArrowSquareDown } from 'iconsax-react';
+import { navbarSlide } from '../../store/slices/CurrentIdSlice';
 // import Customization from '../Customization';
 
 // styles
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open, isNavbarClose }) => ({
     ...theme.typography.mainContent,
-    background:ColorTheme().canvasBG,
-    border:'1px solid gray',
-    maxWidth:'auto',
-    marginTop:navbarHeight,
-    marginRight:0,
+    background: ColorTheme().canvasBG,
+    border: '1px solid gray',
+    maxWidth: 'auto',
+    marginTop: !isNavbarClose ? navbarHeight : '0px',
+    minHeight: !isNavbarClose ? `60svh` : `100svh`,
+    height:!isNavbarClose ? `80svh`:`auto`,
+    marginRight: 0,
     ...(!open && {
         borderRadius: 0,
         // borderBottomRightRadius: 0,
@@ -36,7 +39,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
             duration: theme.transitions.duration.leavingScreen
         }),
         [theme.breakpoints.up('md')]: {
-            marginLeft: -(drawerWidth),
+            marginLeft: -drawerWidth,
             width: `calc(100% - ${drawerWidth}px)`
         },
         [theme.breakpoints.down('md')]: {
@@ -78,6 +81,8 @@ const MainLayout = () => {
 
     // Handle left drawer
     const leftDrawerOpened = useSelector((state) => state.customization.opened);
+    const { isNavbarClose, isDark } = useSelector((state) => state.currentId);
+
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
@@ -85,11 +90,12 @@ const MainLayout = () => {
 
     useEffect(() => {
         dispatch({ type: SET_MENU, opened: !matchDownMd });
-
     }, [matchDownMd]);
 
+    console.log('isNavbarClose', isNavbarClose);
+
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', height:'80svh' }}>
             <CssBaseline />
             {/* header */}
             <AppBar
@@ -99,26 +105,31 @@ const MainLayout = () => {
                 elevation={0}
                 sx={{
                     bgcolor: ColorTheme().navBG,
-                    height:navbarHeight,
-                    border:'1px solid',
+                    height: !isNavbarClose ? navbarHeight : '0px',
+                    border: '1px solid',
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
                 }}
             >
-                <Toolbar sx={{border:'1px solid'}}>
+                {/* ----------------- Navbar ------------------- */}
+                <Toolbar sx={{ border: '1px solid', display: isNavbarClose ? 'none' : 'flex', transition: 'display 0.8s' }}>
                     <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
                 </Toolbar>
+                {isNavbarClose && (
+                    <Box display="flex" justifyContent="end" onClick={() => dispatch(navbarSlide())}>
+                        <ArrowSquareDown size="20" color={isDark ? 'white':'black'} />
+                    </Box>
+                )}
             </AppBar>
 
-            {/* drawer */}
+            {/*-------------------- drawer/sidebar ---------------------*/}
             <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
 
-            {/* main content */}
-            <Main theme={theme} open={leftDrawerOpened}>
+            {/* -------------------- main content -------------------------*/}
+            <Main theme={theme} open={leftDrawerOpened} isNavbarClose={isNavbarClose}>
                 {/* breadcrumb */}
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                 <Outlet />
             </Main>
-            {/* <Customization /> */}
         </Box>
     );
 };

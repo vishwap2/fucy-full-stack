@@ -42,13 +42,13 @@ export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab,
         <React.Fragment>
             <Box
                 sx={{
-                    backgroundColor: 'lightgrey',
+                    backgroundColor: '#e3e3e3',
                     position: 'sticky',
                     float: 'right',
                     // left: '50rem',
                     transition: 'width 0.8s',
                     width: state ? '270px' : '0px',
-                    height: '75svh',
+                    height: 'inherit',
                     zIndex: 1000,
                     display: 'flex'
                     // pr:1
