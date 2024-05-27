@@ -137,7 +137,11 @@ export default function Tstable() {
     };
     // console.log('selectedRow', selectedRow)
     return (
-        <>
+        <Box sx={{
+            overflow: "auto",
+            height: '-webkit-fill-available',
+            minHeight:'moz-available'
+            }}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
                     <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color:ColorTheme().title }} onClick={handleBack} />
@@ -175,6 +179,6 @@ export default function Tstable() {
                 </Table>
             </TableContainer>
             <AddThreatScenarios open={openTs} handleClose={handleCloseTs} modal={modal} id={id} />
-        </>
+        </Box>
     );
 }

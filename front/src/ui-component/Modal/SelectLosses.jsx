@@ -18,7 +18,8 @@ export default function SelectLosses({
     setRows,
     selectedRow,
     setSelectedRow,
-    getModal,
+    getModalById,
+    getModals,
     id,
     update
 }) {
@@ -132,7 +133,8 @@ export default function SelectLosses({
         .then(res=>{
             if(res){
              setTimeout(() => {
-                getModal(id)
+                getModalById(id);
+                getModals();
              }, 500);
             }
         })

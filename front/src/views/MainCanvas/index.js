@@ -579,7 +579,7 @@ export default function MainCanvas() {
                 if (res) {
                     setTimeout(() => {
                         setOpen(true);
-                        setMessage('Updated Successfully');
+                        setMessage('Saved Successfully');
                         setSuccess(true);
                         // window.location.reload();
                         handleClose();

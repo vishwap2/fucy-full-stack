@@ -137,11 +137,11 @@ const useStore = createWithEqualityFn((set, get) => ({
     },
 
     getModalById: async (id) => {
-        const res = await axios.get(`${configuration.apiBaseUrl}Modals/${id}`);
+        if(id){const res = await axios.get(`${configuration.apiBaseUrl}Modals/${id}`);
         console.log('res.data ...', res.data);
         set({
             modal: res.data
-        });
+        });}
     },
     getDamageScenarios: async () => {
         const res = await axios.get(`${configuration.apiBaseUrl}Damage-scenarios`);

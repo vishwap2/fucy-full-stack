@@ -2,25 +2,39 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
-import MainCanvas from '../views/MainCanvas';
+
 
 
 // sample page routing
-const Home = Loadable(lazy(() => import('../views/MainCanvas')));
-
+// const Home = Loadable(lazy(() => import('../views/Landing')));
+const MainCanvas = Loadable(lazy(() => import('../views/MainCanvas')));
+const Career = Loadable(lazy(()=>import('../views/CareerPage')));
+const ErrorPage = Loadable(lazy(()=>import('../views/ErrorPage')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
     path: '/',
     element: <MainLayout />,
     children: [
+        // {
+        //     path: '/',
+        //     element: <Home />
+        // },
         {
             path: '/',
-            element: <Home />
+            element: <MainCanvas />
         },
         {
             path: '/Modals/:id',
             element: <MainCanvas />
+        },
+        {
+            path: '/career',
+            element: <Career />
+        },
+        {
+            path: '/#',
+            element: <ErrorPage />
         },
        
     ]

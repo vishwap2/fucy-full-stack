@@ -22,6 +22,8 @@ import { v4 as uid } from 'uuid';
 import { shallow } from 'zustand/shallow';
 import { storeCurrentId } from '../../store/slices/CurrentIdSlice';
 import { useDispatch } from 'react-redux';
+import AlertMessage from '../Alert';
+import { useNavigate } from 'react-router';
 // import { useNavigate } from 'react-router';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -49,8 +51,12 @@ const selector = (state) => ({
 // }
 // const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorization', 'Non-repudiation', 'Availability'];
 
-export default function AddModal({ open, handleClose }) {
+export default function AddModal({ open, handleClose, getModals }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [openMsg, setOpenMsg ] =  React.useState(false);
+    const [success, setSuccess ] =  React.useState(false);
+    const [message, setMessage ] =  React.useState('');
     // const navigate = useNavigate();
     const { create } = useStore(selector, shallow);
     // const theme = useTheme();
@@ -79,16 +85,29 @@ export default function AddModal({ open, handleClose }) {
                     console.log('res in create', res);
                     const { id } = res.data;
                     dispatch (storeCurrentId(id));
-                    
                     setTimeout(() => {
-                        alert('Model Created Succesfully');
-                        // navigate(`/Modals/${id}`);
-                        window.location.href = `/Modals/${id}`;
+                        handleClose();
+                        setOpenMsg(true);
+                        setMessage('Created Successfully');
+                        setSuccess(true);
+                        navigate(`/Modals/${id}`)
+                        // window.location.href = `/Modals/${id}`;
+                        getModals();
                     }, 500);
                 }
             })
-            .catch((err) => console.log('err', err));
+            .catch((err) =>{
+                console.log('err', err);
+                setOpenMsg(true);
+                setSuccess(false);
+                setMessage('Something went wrong');
+            });
+            setTemplateDetails((state)=>({
+                ...state,
+                name:''
+            }));
     };
+    console.log('templateDetails', templateDetails)
     return (
         <React.Fragment>
             <Dialog
@@ -103,7 +122,7 @@ export default function AddModal({ open, handleClose }) {
                     <DialogContentText id="alert-dialog-slide-description">
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, my: 1 }}>
                             <TextField
-                            
+                                value={templateDetails?.name}
                                 id="outlined-basic"
                                 label="Name"
                                 variant="outlined"
@@ -151,6 +170,7 @@ export default function AddModal({ open, handleClose }) {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <AlertMessage open={openMsg} message={message} setOpen={setOpenMsg} success={success}/>
         </React.Fragment>
     );
 }

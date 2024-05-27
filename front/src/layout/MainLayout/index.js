@@ -19,6 +19,7 @@ import { SET_MENU } from '../../store/actions';
 import { IconChevronRight } from '@tabler/icons';
 import { ArrowSquareDown } from 'iconsax-react';
 import { navbarSlide } from '../../store/slices/CurrentIdSlice';
+import HomePage from '../../views/Landing';
 // import Customization from '../Customization';
 
 // styles
@@ -28,8 +29,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     border: '1px solid gray',
     maxWidth: 'auto',
     marginTop: !isNavbarClose ? navbarHeight : '0px',
-    minHeight: !isNavbarClose ? `60svh` : `100svh`,
-    height:!isNavbarClose ? `80svh`:`auto`,
+    // minHeight:'inherit',
+    minHeight: !isNavbarClose ? `80svh` : `100svh`,
+    // height:!isNavbarClose ? `80svh`:`auto`,
     marginRight: 0,
     ...(!open && {
         borderRadius: 0,
@@ -82,20 +84,30 @@ const MainLayout = () => {
     // Handle left drawer
     const leftDrawerOpened = useSelector((state) => state.customization.opened);
     const { isNavbarClose, isDark } = useSelector((state) => state.currentId);
+    const { isCanvasPage } = useSelector((state) => state.canvas);
+
 
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
     };
 
+    // const handleCanvasPage = ()=>{
+    //     dispatch(changeCanvasPage())
+    // }
+
     useEffect(() => {
         dispatch({ type: SET_MENU, opened: !matchDownMd });
     }, [matchDownMd]);
 
-    console.log('isNavbarClose', isNavbarClose);
+    // console.log('isNavbarClose', isNavbarClose);
 
     return (
-        <Box sx={{ display: 'flex', height:'80svh' }}>
+        <>
+        {!isCanvasPage ? <Box>
+          <HomePage/>
+        </Box>:
+        <Box sx={{ display: 'flex', height: isCanvasPage ? '80svh' : 'auto' }}>
             <CssBaseline />
             {/* header */}
             <AppBar
@@ -131,6 +143,8 @@ const MainLayout = () => {
                 <Outlet />
             </Main>
         </Box>
+        }
+        </>
     );
 };
 

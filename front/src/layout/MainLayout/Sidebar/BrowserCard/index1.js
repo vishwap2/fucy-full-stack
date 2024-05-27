@@ -119,12 +119,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const selector = (state) => ({
-    addNode: state.addCyberNode
+    addNode: state.addCyberNode,
+    getModals:state.getModals
 });
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const BrowserCard = ({ modals, handleClick }) => {
-    const { addNode } = useStore(selector);
+    const { addNode,getModals } = useStore(selector);
     const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -502,7 +503,7 @@ const BrowserCard = ({ modals, handleClick }) => {
                     </TreeView>
                 </CardContent>
             </CardStyle>
-            <AddModal open={open} handleClose={handleClose} />
+            <AddModal getModals={getModals} open={open} handleClose={handleClose} />
             <CyberSecurityModal open={openCyberModal} handleClose={handleCloseCyberModal} name={name} />
         </>
     );

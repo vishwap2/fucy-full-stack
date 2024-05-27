@@ -22,7 +22,8 @@ import  ColorTheme  from '../../store/ColorTheme';
 
 const selector = (state) => ({
     modal: state.modal,
-    getModal: state.getModalById,
+    getModalById: state.getModalById,
+    getModals:state.getModals,
     update: state.updateModal
 });
 const Head = [
@@ -118,7 +119,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 //   }
 
 export default function DsTable() {
-    const { modal, getModal, update } = useStore(selector, shallow);
+    const { modal, getModals, getModalById, update } = useStore(selector, shallow);
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -128,7 +129,7 @@ export default function DsTable() {
     const [selectedRow, setSelectedRow] = React.useState({});
 
     React.useEffect(() => {
-        getModal(id);
+        getModalById(id);
     }, [id]);
 
     const handleOpenCl = (row) => {
@@ -227,7 +228,7 @@ export default function DsTable() {
             .then((res) => {
                 if (res) {
                     setTimeout(() => {
-                        getModal(id);
+                        getModalById(id);
                     }, 500);
                 }
             })
@@ -283,7 +284,11 @@ export default function DsTable() {
     };
     // console.log('selectedRow', selectedRow)
     return (
-        <>
+        <Box sx={{
+            overflow: "auto",
+            height: '-webkit-fill-available',
+            minHeight:'moz-available'
+            }}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
                     <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }} onClick={handleBack} />
@@ -293,7 +298,7 @@ export default function DsTable() {
                     Add New Scenario
                 </Button>
             </Box>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} >
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -308,7 +313,7 @@ export default function DsTable() {
                                 <StyledTableCell component="th" scope="row">
                                     {row?.id?.slice(0, 6)}
                                 </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                                <StyledTableCell component="th" scop e="row">
                                     <Typography sx={{ width: 'max-content' }}>{` Damage Scenario for the ${row?.name}`}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
@@ -556,10 +561,11 @@ export default function DsTable() {
                     selectedRow={selectedRow}
                     setSelectedRow={setSelectedRow}
                     update={update}
-                    getModal={getModal}
+                    getModalById={getModalById}
+                    getModals={getModals}
                     id={id}
                 />
             )}
-        </>
+        </Box>
     );
 }
