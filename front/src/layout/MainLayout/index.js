@@ -19,7 +19,10 @@ import { SET_MENU } from '../../store/actions';
 import { IconChevronRight } from '@tabler/icons';
 import { ArrowSquareDown } from 'iconsax-react';
 import { navbarSlide } from '../../store/slices/CurrentIdSlice';
-import HomePage from '../../views/Landing';
+import Footer from '../../views/Landing/Footer';
+import HeaderSection from '../../views/Landing/HeaderSection';
+import FadeInDiv from '../../ui-component/FadeInDiv';
+
 // import Customization from '../Customization';
 
 // styles
@@ -77,7 +80,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -85,7 +88,6 @@ const MainLayout = () => {
     const leftDrawerOpened = useSelector((state) => state.customization.opened);
     const { isNavbarClose, isDark } = useSelector((state) => state.currentId);
     const { isCanvasPage } = useSelector((state) => state.canvas);
-
 
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
@@ -104,46 +106,56 @@ const MainLayout = () => {
 
     return (
         <>
-        {!isCanvasPage ? <Box>
-          <HomePage/>
-        </Box>:
-        <Box sx={{ display: 'flex', height: isCanvasPage ? '80svh' : 'auto' }}>
-            <CssBaseline />
-            {/* header */}
-            <AppBar
-                enableColorOnDark
-                position="fixed"
-                color="inherit"
-                elevation={0}
-                sx={{
-                    bgcolor: ColorTheme().navBG,
-                    height: !isNavbarClose ? navbarHeight : '0px',
-                    border: '1px solid',
-                    transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
-                }}
-            >
-                {/* ----------------- Navbar ------------------- */}
-                <Toolbar sx={{ border: '1px solid', display: isNavbarClose ? 'none' : 'flex', transition: 'display 0.8s' }}>
-                    <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
-                </Toolbar>
-                {isNavbarClose && (
-                    <Box display="flex" justifyContent="end" onClick={() => dispatch(navbarSlide())}>
-                        <ArrowSquareDown size="20" color={isDark ? 'white':'black'} />
+            {!isCanvasPage ? (
+                <Box>
+                    <HeaderSection />
+                    <Box>
+                        <FadeInDiv>
+                            {children}
+                            <Outlet />
+                        </FadeInDiv>
                     </Box>
-                )}
-            </AppBar>
 
-            {/*-------------------- drawer/sidebar ---------------------*/}
-            <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+                    <Footer />
+                </Box>
+            ) : (
+                <Box sx={{ display: 'flex', height: isCanvasPage ? '80svh' : 'auto' }}>
+                    <CssBaseline />
+                    {/* header */}
+                    <AppBar
+                        enableColorOnDark
+                        position="fixed"
+                        color="inherit"
+                        elevation={0}
+                        sx={{
+                            bgcolor: ColorTheme().navBG,
+                            height: !isNavbarClose ? navbarHeight : '0px',
+                            border: '1px solid',
+                            transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
+                        }}
+                    >
+                        {/* ----------------- Navbar ------------------- */}
+                        <Toolbar sx={{ border: '1px solid', display: isNavbarClose ? 'none' : 'flex', transition: 'display 0.8s' }}>
+                            <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+                        </Toolbar>
+                        {isNavbarClose && (
+                            <Box display="flex" justifyContent="end" onClick={() => dispatch(navbarSlide())}>
+                                <ArrowSquareDown size="20" color={isDark ? 'white' : 'black'} />
+                            </Box>
+                        )}
+                    </AppBar>
 
-            {/* -------------------- main content -------------------------*/}
-            <Main theme={theme} open={leftDrawerOpened} isNavbarClose={isNavbarClose}>
-                {/* breadcrumb */}
-                <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
-                <Outlet />
-            </Main>
-        </Box>
-        }
+                    {/*-------------------- drawer/sidebar ---------------------*/}
+                    <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+
+                    {/* -------------------- main content -------------------------*/}
+                    <Main theme={theme} open={leftDrawerOpened} isNavbarClose={isNavbarClose}>
+                        {/* breadcrumb */}
+                        <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
+                        <Outlet />
+                    </Main>
+                </Box>
+            )}
         </>
     );
 };

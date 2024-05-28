@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-export default function CareerPage (){
+export default function AboutPage (){
   return (
     <Box sx={{height:'70svh', marginTop:'6rem'}}>
       <Box textAlign="center" my={4}>
@@ -17,7 +17,7 @@ export default function CareerPage (){
                 fontSize={25}
                 fontWeight={700}
             >
-          No Open Position At This Time
+          About us
             </Typography>
       </Box>
       <Box  my={4} bgcolor="grey.100" p={4}>

@@ -23,7 +23,7 @@ export const navbarHeight = 150;
    canvasBG:'#f7f7f7',
    tabContentClr:'#000',
    title:'#000',
-   logo:'#000'
+   logo:'#5FBDFF'
 
 }
 
@@ -35,6 +35,6 @@ export const navbarHeight = 150;
    canvasBG:'#000',
    tabContentClr:'white',
    title:'whitesmoke',
-   logo:'white'
+   logo:'#5FBDFF'
 }
 

@@ -15,6 +15,12 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     font-size: 16px;   
   }
   
+  .pacifico-regular {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
    .reactflow-wrapper {
     flex-grow: 1;
     height: 100%;

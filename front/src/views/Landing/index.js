@@ -5,11 +5,11 @@ import CyberSecuritySection from "./LearnAboutUs";
 import CompliancePage from "./ComplianceSection";
 import WhyComponent from "./WhySection";
 import Footer from "./Footer";
-import Header from "./Header";
+import HeaderSection from "./HeaderSection";
 
 export default function HomePage() {
   return <>
-  <Header/>
+  <HeaderSection/>
   <MainSection/>
   <CyberSecuritySection/>
   <CompliancePage/>

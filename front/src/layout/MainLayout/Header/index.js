@@ -13,18 +13,18 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconMenu2 } from '@tabler/icons';
 import MenuList from './MenuList';
 import ColorTheme from '../../../store/ColorTheme';
-// import { useDispatch } from 'react-redux';
-// import { changeCanvasPage } from '../../../store/slices/CanvasSlice';
+import { useDispatch } from 'react-redux';
+import { changeCanvasPage } from '../../../store/slices/CanvasSlice';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle }) => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const theme = useTheme();
     const handleClick=()=>{
-        console.log('clicked')
-        // window.location.href='/';
-        // dispatch(changeCanvasPage());
+        // console.log('clicked')
+        window.location.href='/home';
+        dispatch(changeCanvasPage());
     }
 
     return (
@@ -74,7 +74,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     </Avatar>
                 </ButtonBase>
                 <Box onClick={handleClick}>
-                <ArrowBackIcon sx={{color:ColorTheme().logo}}/>
+                <ArrowBackIcon sx={{color:ColorTheme().title}}/>
                 </Box>
             </Box>
             <MenuList />

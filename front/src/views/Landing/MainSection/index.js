@@ -6,13 +6,15 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
+        
     },
     box: {
-        backgroundImage: 'url(https://source.unsplash.com/featured/?night,umbrella)',
+        backgroundImage: 'url(https://images.unsplash.com/photo-1634804658555-248d9e9a212f?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)', 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '85svh'
+        height: '85svh',
+        
     },
     menuButton: {
         marginRight: theme.spacing(2)
@@ -26,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'start',
         justifyContent: 'end',
         height: '75svh',
-        width: '60%'
+        width: '60%',
+        textShadow: '2px 1px 10px black',
     },
     content: {
         borderLeft: '2px solid #f5f5f5'

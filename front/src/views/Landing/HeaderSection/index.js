@@ -6,6 +6,7 @@ import { AppBar, Toolbar, Box, Typography, MenuItem, Menu } from '@mui/material'
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { changeCanvasPage } from "../../../store/slices/CanvasSlice";
+import ColorTheme from "../../../store/ColorTheme";
 
 const services = [
     'TARA Automation',
@@ -22,8 +23,8 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         flexGrow: 1,
-        color: 'white',
-        fontSize: '25px'
+        fontSize: '25px',
+        fontFamily:'Inter'
     },
     navlink: {
         textDecoration: 'none',
@@ -32,7 +33,8 @@ const useStyles = makeStyles(() => ({
         lineHeight: '23px',
 
         '&.active':{
-            textDecoration:'underline'
+            // textDecoration:'underline'
+            borderBottom:'2px solid white'
         }
     },
     dropdown: {
@@ -68,11 +70,11 @@ export default function Header(){
     return <>
                     <AppBar position="fixed" className={classes.header}>
                     <Toolbar>
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="h6" className={classes.title} color={ColorTheme()?.logo}>
                             FUCY TECH
                         </Typography>
                         <Box className={classes.links}>
-                            <NavLink className={classes.navlink} to="/">
+                            <NavLink className={classes.navlink} to="/home">
                                 Home
                             </NavLink>
                             <Box>

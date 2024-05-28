@@ -57,6 +57,11 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
+    const handleLogin =()=>{
+        localStorage.setItem('isLoggedIn',true);
+        window.location.href='/home';
+    }
+
     return (
         <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
@@ -227,6 +232,7 @@ const FirebaseLogin = ({ ...others }) => {
                                 <Button
                                     disableElevation
                                     disabled={isSubmitting}
+                                    onClick={handleLogin}
                                     fullWidth
                                     size="large"
                                     type="submit"
