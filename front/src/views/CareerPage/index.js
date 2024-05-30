@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { changePage } from '../../store/slices/PageSectionSlice';
 
 export default function CareerPage (){
+  const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(changePage('career'))
+    },[]);
   return (
     <Box sx={{height:'70svh', marginTop:'6rem'}}>
       <Box textAlign="center" my={4}>

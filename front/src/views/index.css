@@ -15,12 +15,6 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     font-size: 16px;   
   }
   
-  .pacifico-regular {
-    font-family: "Pacifico", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-
    .reactflow-wrapper {
     flex-grow: 1;
     height: 100%;
@@ -49,8 +43,10 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
   }
 
   .react-flow__node-group{
-    height: auto !important;
-    width: initial !important;
+    min-width: 250px;
+    min-height: 280px;
+    width: inherit;
+    height: inherit;
     align-items: flex-start;
     border: 1px solid black !important;
   }
@@ -62,7 +58,7 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     display: flex ;
     align-items: center;
     justify-content: center;
-    border: none !important;
+    border: none;
     background-color: inherit !important;
     font-family: 'Inter', sans-serif ;
     
@@ -97,6 +93,7 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     /* border: 1px solid black; */
     border-radius: 3px;
    }
+   
 
    .react-flow__resize-control{
     border-color: transparent !important ;

@@ -4,7 +4,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { AppBar, Toolbar, Box, Typography, MenuItem, Menu } from '@mui/material';
 import { makeStyles } from "@mui/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeCanvasPage } from "../../../store/slices/CanvasSlice";
 import ColorTheme from "../../../store/ColorTheme";
 
@@ -16,11 +16,8 @@ const services = [
     'Consulting Service'
 ];
 
-const useStyles = makeStyles(() => ({
-
-    header: {
-        background: 'rgb(0, 0, 0, 0.3)'
-    },
+const useStyles = makeStyles(() => {
+    return({
     title: {
         flexGrow: 1,
         fontSize: '25px',
@@ -47,18 +44,16 @@ const useStyles = makeStyles(() => ({
         gap: 25,
         marginRight: 40
     },
-}));
+})});
+
+
 export default function Header(){
     const classes = useStyles();
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        setMenuOpen((prev) => !prev);
-    };
-
+    const { pageName } = useSelector((state) => state.pageName);
+    
     const handleClose = (name) => {
         if(name === 'TARA Automation'){
             dispatch(changeCanvasPage());
@@ -67,8 +62,13 @@ export default function Header(){
         setAnchorEl(null);
         setMenuOpen(false);
     };
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        setMenuOpen((prev) => !prev);
+    };
+
     return <>
-                    <AppBar position="fixed" className={classes.header}>
+                    <AppBar position="fixed" className={classes.header} style={{background:pageName==='home' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(0, 0, 0, 0.9)'}}>
                     <Toolbar>
                         <Typography variant="h6" className={classes.title} color={ColorTheme()?.logo}>
                             FUCY TECH
@@ -95,7 +95,7 @@ export default function Header(){
                             <NavLink className={classes.navlink} to="/career" >
                                 Career
                             </NavLink>
-                            <NavLink className={classes.navlink} to="/contact">
+                            <NavLink className={classes.navlink} to="/contact"> 
                                 Contact
                             </NavLink>
                         </Box>

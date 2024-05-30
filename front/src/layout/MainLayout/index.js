@@ -85,9 +85,9 @@ const MainLayout = ({ children }) => {
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
     // Handle left drawer
-    const leftDrawerOpened = useSelector((state) => state.customization.opened);
-    const { isNavbarClose, isDark } = useSelector((state) => state.currentId);
-    const { isCanvasPage } = useSelector((state) => state.canvas);
+    const leftDrawerOpened = useSelector((state) => state?.customization?.opened);
+    const { isNavbarClose, isDark } = useSelector((state) => state?.currentId);
+    const { isCanvasPage } = useSelector((state) => state?.canvas);
 
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
@@ -115,11 +115,10 @@ const MainLayout = ({ children }) => {
                             <Outlet />
                         </FadeInDiv>
                     </Box>
-
                     <Footer />
                 </Box>
             ) : (
-                <Box sx={{ display: 'flex', height: isCanvasPage ? '80svh' : 'auto' }}>
+                <Box sx={{ display: 'flex', height:'80svh' }}>
                     <CssBaseline />
                     {/* header */}
                     <AppBar

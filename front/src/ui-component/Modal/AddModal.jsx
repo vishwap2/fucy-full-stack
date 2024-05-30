@@ -107,7 +107,7 @@ export default function AddModal({ open, handleClose, getModals }) {
                 name:''
             }));
     };
-    console.log('templateDetails', templateDetails)
+    // console.log('templateDetails', templateDetails);
     return (
         <React.Fragment>
             <Dialog

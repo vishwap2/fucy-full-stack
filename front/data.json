@@ -2738,10 +2738,10 @@
                     }
                   ],
                   "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
+                    "Financial": "Negligible",
+                    "Safety": "Major",
+                    "Operational": "Severe",
+                    "Privacy": "Major"
                   }
                 },
                 {
@@ -2885,8 +2885,13 @@
                 {
                   "id": "DS0014",
                   "name": "New 2",
-                  "Description": "mgh",
-                  "cyberLosses": []
+                  "cyberLosses": [],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
                 }
               ]
             }
@@ -3091,6 +3096,10 @@
           "scenes": []
         }
       ]
+    },
+    {
+      "id": "8e33437e-db4f-4b6c-bade-55f7d7854780",
+      "name": "New"
     }
   ]
 }

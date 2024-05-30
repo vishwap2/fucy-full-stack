@@ -567,7 +567,7 @@ const BrowserCard = ({ modals,
                                 )})}
                 </CardContent>
             </CardStyle>
-            <AddModal open={open} handleClose={handleClose} />
+            {open && <AddModal open={open} handleClose={handleClose} />}
             <CyberSecurityModal open={openCyberModal} handleClose={handleCloseCyberModal} name={name} />
         </>
     );

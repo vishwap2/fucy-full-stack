@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import ContactForm from './ContactForm';
+import { useDispatch } from 'react-redux';
+import { changePage } from '../../store/slices/PageSectionSlice';
 
 export default function ContactPage (){
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(changePage('contact'));
+    },[]);
   return (
     <Box sx={{ marginTop:'6rem'}}>
       <Box textAlign="center" my={4}>

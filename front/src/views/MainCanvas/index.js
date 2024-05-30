@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import ReactFlow, {
     MiniMap,
     Controls,
@@ -7,7 +7,7 @@ import ReactFlow, {
     Panel,
     getRectOfNodes,
     getTransformForBounds,
-    MarkerType
+    MarkerType,
 } from 'reactflow';
 import '../index.css';
 import 'reactflow/dist/style.css';
@@ -94,7 +94,7 @@ const selector = (state) => ({
     modal: state.modal,
     getModals: state.getModals,
     getModalById: state.getModalById,
-    updateModal: state.updateModal
+    updateModal: state.updateModal,
 });
 
 //Edge line styling
@@ -150,7 +150,7 @@ export default function MainCanvas() {
         getModalById,
         modal,
         getModals,
-        updateModal
+        updateModal,
     } = useStore(selector, shallow);
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -159,9 +159,11 @@ export default function MainCanvas() {
     const [openTemplate, setOpenTemplate] = useState(false);
     const [savedTemplate, setSavedTemplate] = useState({});
     const [selectedNode, setSelectedNode] = useState({});
-    const [open, setOpen ] = useState(false);
-    const [success, setSuccess ] = useState(false);
-    const [message, setMessage ] = useState('');
+    const [open, setOpen] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState('');
+    const dragRef = useRef  (null);
+    const [target, setTarget] = useState(null);
     const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab } =
         useSelector((state) => state?.currentId);
     const onLayout = useCallback(
@@ -188,33 +190,66 @@ export default function MainCanvas() {
         getModalById(id);
     }, [id]);
 
-    const onNodeDrag = (event, node) => {
-        const updatedNodes = nodes.map((n) => {
-            if (n.id === node.id) {
-                const deltaX = node.position.x - n.position.x;
-                const deltaY = node.position.y - n.position.y;
+    const onNodeDragStart= useCallback((_, node) => {
+     console.log('node', node);
+     if(node.type!=='group'){
+         dragRef.current = node;
+     }
+      }, []);
 
-                const updatedChildNodes = nodes.filter((child) => child.parentId === node.id);
-                updatedChildNodes.forEach((child) => {
-                    child.position = {
-                        x: child.position.x + deltaX,
-                        y: child.position.y + deltaY
-                    };
-                });
+    //   For default group
+    const onNodeDrag = (_, node) => {
+        // calculate the center point of the node from position and dimensions
+        const centerX = node.position.x ;
+        const centerY = node.position.y ;
+    
+        // find a node where the center point is inside
+        const targetNode = nodes.find(
+          (n) =>
+            centerX > n.position.x &&
+            centerX < n.position.x + n.width &&
+            centerY > n.position.y &&
+            centerY < n.position.y + n.height &&
+            n.id !== node.id // this is needed, otherwise we would always find the dragged node
+        );
+        console.log('targetNode', targetNode)
+    
+        setTarget(targetNode);
+      };
 
-                return {
-                    ...n,
-                    position: {
-                        x: node.position.x,
-                        y: node.position.y
-                    }
-                };
-            }
-            return n;
-        });
+      const onNodeDragStop = (_, node) => {
+        console.log('target', target);
+        console.log('node', node)
 
-        setNodes(updatedNodes);
-    };
+      }
+
+    // const onNodeDrag = (event, node) => {
+    //     const updatedNodes = nodes.map((n) => {
+    //         if (n.id === node.id) {
+    //             const deltaX = node.position.x - n.position.x;
+    //             const deltaY = node.position.y - n.position.y;
+                
+    //             const updatedChildNodes = nodes.filter((child) => child.parentId === node.id);
+    //             updatedChildNodes.forEach((child) => {
+    //                 child.position = {
+    //                     x: child.position.x + deltaX,
+    //                     y: child.position.y + deltaY
+    //                 };
+    //             });
+
+    //             return {
+    //                 ...n,
+    //                 position: {
+    //                     x: node.position.x,
+    //                     y: node.position.y
+    //                 }
+    //             };
+    //         }
+    //         return n;
+    //     });
+
+    //     setNodes(updatedNodes);
+    // };
 
     useEffect(() => {
         setEdges([]);
@@ -294,20 +329,20 @@ export default function MainCanvas() {
                     data: {
                         label: parsedNode.data['label'],
                         bgColor: parsedNode.data['bgColor'],
-                        style:{
-                            backgroundColor:parsedNode.data['bgColor'],
-                            fontSize:'16px',
-                            fontFamily:'Inter',
-                            fontStyle:'normal',
-                            fontWeight:500,
-                            textAlign:'center',
-                            color:'white',
-                            textDecoration:'none',
-                            borderColor:'black',
-                            borderWidth:'2px',
-                            borderStyle:'solid'
+                        style: {
+                            backgroundColor: parsedNode.data['bgColor'],
+                            fontSize: '16px',
+                            fontFamily: 'Inter',
+                            fontStyle: 'normal',
+                            fontWeight: 500,
+                            textAlign: 'center',
+                            color: 'white',
+                            textDecoration: 'none',
+                            borderColor: 'black',
+                            borderWidth: '2px',
+                            borderStyle: 'solid'
                         }
-                    },
+                    }
                 };
                 dragAdd(newNode);
             }
@@ -323,18 +358,18 @@ export default function MainCanvas() {
                         id: `${node.id + randomId}`,
                         data: {
                             ...node?.data,
-                            style:{
-                                backgroundColor:node.data['bgColor'],
-                                fontSize:'16px',
-                                fontFamily:'Inter',
-                                fontStyle:'normal',
-                                fontWeight:500,
-                                textAlign:'center',
-                                color:'white',
-                                textDecoration:'none',
-                                borderColor:'black',
-                                borderWidth:'2px',
-                                borderStyle:'solid'
+                            style: {
+                                backgroundColor: node.data['bgColor'],
+                                fontSize: '16px',
+                                fontFamily: 'Inter',
+                                fontStyle: 'normal',
+                                fontWeight: 500,
+                                textAlign: 'center',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderColor: 'black',
+                                borderWidth: '2px',
+                                borderStyle: 'solid'
                             }
                         },
                         type: node.type,
@@ -366,20 +401,6 @@ export default function MainCanvas() {
     const handleClose = () => {
         setOpenTemplate(false);
     };
-    // console.log("nodes",nodes);
-    // console.log('edges', edges);
-    //fn for save & restore
-
-    // let losses= nodes?.map(nd=>(
-    //     nd?.properties.map(pr=>(
-    //        {name: `loss of ${pr} for ${nd?.data?.label}`}
-    //     ))
-    // ))
-    // losses=losses.flat().map((loss,i)=>({
-    //     ...loss,
-    //     id:i+1
-    // }))
-    // console.log('losses', losses)
 
     const onSave = useCallback(() => {
         if (reactFlowInstance) {
@@ -573,7 +594,6 @@ export default function MainCanvas() {
             }
         ];
 
-        // console.log('mod', mod);
         updateModal(mod)
             .then((res) => {
                 if (res) {
@@ -587,7 +607,7 @@ export default function MainCanvas() {
                     }, 500);
                 }
             })
-            .catch((err) =>{
+            .catch((err) => {
                 console.log('err', err);
                 setOpen(true);
                 setSuccess(false);
@@ -604,9 +624,29 @@ export default function MainCanvas() {
         toggleDrawerOpen('MainCanvasTab');
     };
 
-    const handleSelectNode = (e, node)=>{
+    const handleSelectNode = (e, node) => {
         setSelectedNode(node);
-    }
+    };
+    
+
+    const createGroup = (e) => {
+        e.preventDefault();
+        // console.log('position', e.clientX, e.clientY);
+        const newNode = {
+                id: uid(),
+                type: 'group',
+                position:{
+                    x:e.clientX,
+                    y:e.clientY,
+                },
+                data: {
+                 label:'group'
+                }
+            };
+            dragAdd(newNode);
+        
+
+    };
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
     if (isAttackTreeOpen) return <AttackTree modal={modal} />;
@@ -616,12 +656,7 @@ export default function MainCanvas() {
     return (
         <>
             <div style={{ width: '100%', height: '100%', border: '1px solid', background: 'white' }}>
-                <Header
-                 selectedNode={selectedNode}
-                 nodes={nodes}
-                 setNodes={setNodes}
-                 setSelectedNode={setSelectedNode}
-                />
+                <Header selectedNode={selectedNode} nodes={nodes} setNodes={setNodes} setSelectedNode={setSelectedNode} />
                 <ReactFlowProvider>
                     {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
                     <ReactFlow
@@ -634,6 +669,8 @@ export default function MainCanvas() {
                         edgeTypes={edgeTypes}
                         onLoad={onLoad}
                         onNodeDrag={onNodeDrag}
+                        onNodeDragStart={onNodeDragStart}
+                        onNodeDragStop={onNodeDragStop}
                         connectionLineStyle={connectionLineStyle}
                         defaultEdgeOptions={edgeOptions}
                         onInit={setReactFlowInstance}
@@ -642,6 +679,7 @@ export default function MainCanvas() {
                         fitView
                         onNodeDoubleClick={handleSidebarOpen}
                         onNodeClick={handleSelectNode}
+                        onContextMenu={createGroup}
                         // style={{
                         //   " .react-flow__node": {
                         //     backgroundColor: "black",
@@ -673,7 +711,6 @@ export default function MainCanvas() {
                             <Button variant="outlined" onClick={() => onLayout({ direction: 'DOWN' })}>
                                 vertical layout
                             </Button>
-
                             <Button variant="outlined" onClick={() => onLayout({ direction: 'RIGHT' })}>
                                 horizontal layout
                             </Button>
@@ -696,14 +733,14 @@ export default function MainCanvas() {
                     </ReactFlow>
                     {/* </div> */}
                 </ReactFlowProvider>
-                <AddLibrary
+                {openTemplate && <AddLibrary
                     open={openTemplate}
                     handleClose={handleClose}
                     savedTemplate={savedTemplate}
                     setNodes={setNodes}
                     setEdges={setEdges}
-                />
-                <AlertMessage open={open} message={message} setOpen={setOpen} success={success}/>
+                />}
+                <AlertMessage open={open} message={message} setOpen={setOpen} success={success} />
             </div>
         </>
     );

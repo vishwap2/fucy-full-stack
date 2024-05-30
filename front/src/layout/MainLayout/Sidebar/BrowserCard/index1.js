@@ -284,7 +284,7 @@ const BrowserCard = ({ modals, handleClick }) => {
     };
     return (
         <>
-            <Typography variant="h4" sx={{color:ColorTheme().tabContentClr}}>Models</Typography>
+            <Typography variant="h4" sx={{color:ColorTheme().tabContentClr}}>Projects</Typography>
             <CardStyle sx={{ overflowY: 'auto' }}>
                 <CardContent sx={{ p: 2 }}>
                     <TreeView
@@ -503,7 +503,7 @@ const BrowserCard = ({ modals, handleClick }) => {
                     </TreeView>
                 </CardContent>
             </CardStyle>
-            <AddModal getModals={getModals} open={open} handleClose={handleClose} />
+           {open && <AddModal getModals={getModals} open={open} handleClose={handleClose} />}
             <CyberSecurityModal open={openCyberModal} handleClose={handleCloseCyberModal} name={name} />
         </>
     );

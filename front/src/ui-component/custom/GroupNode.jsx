@@ -7,19 +7,18 @@ const CustomGroupNode = ({ data }) => {
       <>
       <NodeResizer  />
         <div
-            style={{
-                padding: '10px',
-                borderRadius: '4px',
-                width: data?.width ?? '250px',
-                height: data?.height ?? '280px',
-                border: '1px solid black'
-            }}
+        className='group_node'
         >
-            <div style={{
+            <div 
+              style={{
               color:'black',
               textShadow:'none',
-              fontWeight:600
-            }}>{data?.label}</div>
+              fontWeight:600,
+              height:'inherit',
+              width:'inherit',
+            }}>
+                {data?.label}
+            </div>
         </div>
         </>
     );

@@ -25,7 +25,10 @@ export default function WhyComponent() {
             <Box
                 sx={{
                     display: 'flex',
+                    flexDirection:{ lg:'row',md:'column', sm:'column', xs:'column'},
                     justifyContent: 'space-around',
+                    alignItems:'center',
+                    gap:2,
                     marginTop: 4
                 }}
             >

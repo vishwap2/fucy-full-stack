@@ -109,7 +109,7 @@ export default function MenuList() {
                         borderBottom: 1,
                         display: 'flex',
                         borderColor: 'transparent !important',
-                        width: { xl: '99%', lg: '96%', md: '96%', sm: '92%', xs: '90%' }
+                        width: { xl: '100%', lg: '98%', md: '96%', sm: '92%', xs: '90%' }
                     }}
                 >
                     <TabList
