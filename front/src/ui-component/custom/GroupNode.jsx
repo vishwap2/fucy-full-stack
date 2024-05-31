@@ -1,7 +1,7 @@
 import React from 'react';
 import { NodeResizer } from 'reactflow';
 
-const CustomGroupNode = ({ data }) => {
+const CustomGroupNode = () => {
     // console.log('data', data)
     return (
       <>
@@ -17,7 +17,7 @@ const CustomGroupNode = ({ data }) => {
               height:'inherit',
               width:'inherit',
             }}>
-                {data?.label}
+                {/* {data?.label} */}
             </div>
         </div>
         </>

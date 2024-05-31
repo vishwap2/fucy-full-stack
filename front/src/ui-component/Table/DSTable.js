@@ -18,38 +18,15 @@ import { closeAll } from '../../store/slices/CurrentIdSlice';
 import SelectLosses from '../Modal/SelectLosses';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import  ColorTheme  from '../../store/ColorTheme';
+import ColorTheme from '../../store/ColorTheme';
 
 const selector = (state) => ({
     modal: state.modal,
     getModalById: state.getModalById,
-    getModals:state.getModals,
+    getModals: state.getModals,
     update: state.updateModal
 });
-const Head = [
-    { id: 1, name: 'ID' },
-    { id: 2, name: 'Name' },
-    { id: 3, name: 'Damage Scenario' },
-    { id: 4, name: 'Description/ Scalability' },
-    { id: 5, name: 'Losses of Cybersecurity Properties' },
-    { id: 6, name: 'Assets' },
-    { id: 7, name: 'Component/Message' },
-    { id: 8, name: 'Safety Impact per StakeHolder' },
-    { id: 9, name: 'Financial Impact per StakeHolder' },
-    { id: 10, name: 'Operational Impact per StakeHolder' },
-    { id: 11, name: 'Privacy Impact per StakeHolder' },
-    { id: 12, name: 'Impact Justification by Stakeholder' },
-    { id: 13, name: 'Safety Impact' },
-    { id: 14, name: 'Financial Impact' },
-    { id: 15, name: 'Operational Impact' },
-    { id: 16, name: 'Privacy Impact' },
-    { id: 17, name: 'Impact Justification' },
-    { id: 18, name: 'Associated Threat Scenarios' },
-    { id: 19, name: 'Overall Impact' },
-    { id: 20, name: 'Asset is Evaluated' },
-    { id: 21, name: 'Cybersecurity Properties are Evaluated' },
-    { id: 22, name: 'Unevaluated Cybersecurity Properties' }
-];
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -81,45 +58,48 @@ const StyledTableRow = styled(TableRow)(() => ({
     }
 }));
 
-//   const SelectableCell = ({row, options, handleChange, colorPickerTab, impact})=>{
-//   return <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(impact) }}>
-//   <FormControl
-//   sx={{
-//       width: 130,
-//       background: 'transparent',
-//       '& .MuiInputBase-root': {
-//           backgroundColor: 'transparent'
-//       },
-//       '& .MuiSelect-select': {
-//           backgroundColor: 'transparent'
-//       },
-//       '& .MuiSvgIcon-root': {
-//           display: 'none'
-//       },
-//       '& .MuiOutlinedInput-notchedOutline': {
-//           border: 'none'
-//       }
-//   }}
-// >
-//   <Select
-//       labelId="demo-simple-select-label"
-//       id="demo-simple-select"
-//       name="Privacy"
-//       // value={impacts?.Privacy}
-//       onChange={(e) => handleChange(e, row)}
-//   >
-//       {options?.map((item) => (
-//           <MenuItem key={item?.value} value={item?.value}>
-//               {item?.label}
-//           </MenuItem>
-//       ))}
-//   </Select>
-// </FormControl>
-// </StyledTableCell>
-//   }
+const SelectableCell = ({ row, options, handleChange, colorPickerTab, impact, name }) => {
+    return (
+        <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(impact) }}>
+            <FormControl
+                sx={{
+                    width: 130,
+                    background: 'transparent',
+                    '& .MuiInputBase-root': {
+                        backgroundColor: 'transparent'
+                    },
+                    '& .MuiSelect-select': {
+                        backgroundColor: 'transparent'
+                    },
+                    '& .MuiSvgIcon-root': {
+                        display: 'none'
+                    },
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        border: 'none'
+                    }
+                }}
+            >
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name={name}
+                    value={impact}
+                    onChange={(e) => handleChange(e, row)}
+                >
+                    {options?.map((item) => (
+                        <MenuItem key={item?.value} value={item?.value}>
+                            {item?.label}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </StyledTableCell>
+    );
+};
 
 export default function DsTable() {
     const { modal, getModals, getModalById, update } = useStore(selector, shallow);
+    const [ stakeHolder ]  = React.useState(false);
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -131,6 +111,54 @@ export default function DsTable() {
     React.useEffect(() => {
         getModalById(id);
     }, [id]);
+
+    const Head= React.useCallback(() =>{
+        if(stakeHolder){
+      return  [{ id: 1, name: 'ID' },
+        { id: 2, name: 'Name' },
+        { id: 3, name: 'Damage Scenario' },
+        { id: 4, name: 'Description/ Scalability' },
+        { id: 5, name: 'Losses of Cybersecurity Properties' },
+        { id: 6, name: 'Assets' },
+        { id: 7, name: 'Component/Message' },
+        { id: 8, name: 'Safety Impact per StakeHolder' },
+        { id: 9, name: 'Financial Impact per StakeHolder' },
+        { id: 10, name: 'Operational Impact per StakeHolder' },
+        { id: 11, name: 'Privacy Impact per StakeHolder' },
+        { id: 12, name: 'Impact Justification by Stakeholder' },
+        { id: 13, name: 'Safety Impact' },
+        { id: 14, name: 'Financial Impact' },
+        { id: 15, name: 'Operational Impact' },
+        { id: 16, name: 'Privacy Impact' },
+        { id: 17, name: 'Impact Justification' },
+        { id: 18, name: 'Associated Threat Scenarios' },
+        { id: 19, name: 'Overall Impact' },
+        { id: 20, name: 'Asset is Evaluated' },
+        { id: 21, name: 'Cybersecurity Properties are Evaluated' },
+        { id: 22, name: 'Unevaluated Cybersecurity Properties' }
+    ]
+    }else{
+        return [{ id: 1, name: 'ID' },
+        { id: 2, name: 'Name' },
+        { id: 3, name: 'Damage Scenario' },
+        { id: 4, name: 'Description/ Scalability' },
+        { id: 5, name: 'Losses of Cybersecurity Properties' },
+        { id: 6, name: 'Assets' },
+        { id: 7, name: 'Component/Message' },
+        { id: 13, name: 'Safety Impact' },
+        { id: 14, name: 'Financial Impact' },
+        { id: 15, name: 'Operational Impact' },
+        { id: 16, name: 'Privacy Impact' },
+        { id: 17, name: 'Impact Justification' },
+        { id: 18, name: 'Associated Threat Scenarios' },
+        { id: 19, name: 'Overall Impact' },
+        { id: 20, name: 'Asset is Evaluated' },
+        { id: 21, name: 'Cybersecurity Properties are Evaluated' },
+        { id: 22, name: 'Unevaluated Cybersecurity Properties' }
+    ]
+    }
+},[]);
+
 
     const handleOpenCl = (row) => {
         setSelectedRow(row);
@@ -158,11 +186,10 @@ export default function DsTable() {
                 }))
                 .flat();
 
-            const mod2 = modal?.scenarios[1]?.subs[1]?.scenes
-            ?.map((ls) => ({
+            const mod2 = modal?.scenarios[1]?.subs[1]?.scenes?.map((ls) => ({
                 id: ls?.id,
                 name: ls?.name,
-                Description: ls?.name,  
+                Description: ls?.name,
                 cyberLosses: ls?.cyberLosses ? ls.cyberLosses : [],
                 impacts: {
                     Financial: ls?.impacts?.Financial ? ls?.impacts?.Financial : '',
@@ -170,9 +197,9 @@ export default function DsTable() {
                     Operational: ls?.impacts?.Operational ? ls?.impacts?.Operational : '',
                     Privacy: ls?.impacts?.Privacy ? ls?.impacts?.Privacy : ''
                 }
-            }))
+            }));
             // console.log('mod2', mod2)
-            const combained = mod1.concat(mod2)
+            const combained = mod1.concat(mod2);
             // console.log('combained', combained)
             setRows(combained);
         }
@@ -203,21 +230,27 @@ export default function DsTable() {
         });
         // console.log('updated', updated);
         const mod = { ...modal };
-        const losses = mod?.scenarios[1]?.subs[0].losses
+        const losses = mod?.scenarios[1]?.subs[0].losses;
         const lossesEdit = mod?.scenarios[1]?.subs[1]?.scenes;
         // console.log('lossesEdit', lossesEdit);
-        const updatedLoss = losses.map(loss=>
-        updated.filter(update=>{
-            if(loss.id===update.id){
-             return{ ...loss,impacts:update.impacts }  
-            }
-        })).flat();
-        const updatedLossEdit = lossesEdit.map(loss=>
-            updated.filter(update=>{
-                if(loss.id===update.id){
-                 return{ ...loss, impacts:update.impacts }  
-                }
-            })).flat();
+        const updatedLoss = losses
+            .map((loss) =>
+                updated.filter((update) => {
+                    if (loss.id === update.id) {
+                        return { ...loss, impacts: update.impacts };
+                    }
+                })
+            )
+            .flat();
+        const updatedLossEdit = lossesEdit
+            .map((loss) =>
+                updated.filter((update) => {
+                    if (loss.id === update.id) {
+                        return { ...loss, impacts: update.impacts };
+                    }
+                })
+            )
+            .flat();
         //     console.log('updatedLoss', updatedLoss)
         // console.log('updatedLossEdit', updatedLossEdit)
         mod.scenarios[1].subs[0].losses = updatedLoss;
@@ -282,27 +315,67 @@ export default function DsTable() {
     const handleBack = () => {
         dispatch(closeAll());
     };
+
+    const OverallImpact = React.useCallback((impact) => {
+        const pattern=(it)=>{
+            // console.log('it', it);
+            return it === 'Negligible'
+            ?  it = 1
+            : it === 'Moderate'
+            ? (it = 2)
+            : it === 'Major'
+            ? (it = 3)
+            : it === 'Severe'
+            ? (it = 4)
+            :  it = 0;
+        }
+
+        const avgImpact=(ratio)=>{
+            return ratio === 1
+            ?  'Negligible'
+            : ratio === 2
+            ?  'Moderate'
+            : ratio === 3
+            ?  'Major'
+            : ratio === 4
+            ? 'Severe'
+            :  '';
+        }
+         const val = Object.values(impact).map((it) => {
+              return pattern(it)
+            })
+            // console.log('val', val)
+        const sum  = val.reduce((a,b)=>a+b);
+        const ratio = sum > 0 ? Math.floor(sum/Object.values(impact).length):0;
+        // console.log('ratio', ratio)
+        return avgImpact(ratio);
+    }, []);
     // console.log('selectedRow', selectedRow)
     return (
-        <Box sx={{
-            overflow: "auto",
-            height: '-webkit-fill-available',
-            minHeight:'moz-available'
-            }}>
+        <Box
+            sx={{
+                overflow: 'auto',
+                height: '-webkit-fill-available',
+                minHeight: 'moz-available'
+            }}
+        >
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
-                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }} onClick={handleBack} />
-                    <Typography sx={{color:ColorTheme().title}}>Damage Scenario Table</Typography>
+                    <KeyboardBackspaceRoundedIcon
+                        sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }}
+                        onClick={handleBack}
+                    />
+                    <Typography sx={{ color: ColorTheme().title }}>Damage Scenario Table</Typography>
                 </Box>
                 <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
                     Add New Scenario
                 </Button>
             </Box>
-            <TableContainer component={Paper} >
+            <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            {Head?.map((hd) => (
+                            {Head()?.map((hd) => (
                                 <StyledTableCell key={hd?.id}>{hd?.name}</StyledTableCell>
                             ))}
                         </TableRow>
@@ -370,25 +443,22 @@ export default function DsTable() {
                                         ))}
                                     </div>
                                 </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                              { stakeHolder && <StyledTableCell component="th" scope="row">
                                     Test
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                                </StyledTableCell>}
+                                { stakeHolder && <StyledTableCell component="th" scope="row">
                                     Test
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                                </StyledTableCell>}
+                                { stakeHolder && <StyledTableCell component="th" scope="row">
                                     Test
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                                </StyledTableCell>}
+                                { stakeHolder && <StyledTableCell component="th" scope="row">
                                     Test
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                                </StyledTableCell>}
+                                { stakeHolder && <StyledTableCell component="th" scope="row">
                                     Test
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
-                                    Test
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Safety) }}>
+                                </StyledTableCell>}
+                                {/* <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Safety) }}>
                                     <FormControl
                                         sx={{
                                             width: 130,
@@ -421,120 +491,48 @@ export default function DsTable() {
                                             ))}
                                         </Select>
                                     </FormControl>
-                                </StyledTableCell>
+                                </StyledTableCell> */}
 
-                                {/* <SelectableCell row={row} options={options} handleChange={handleChange} colorPickerTab={colorPickerTab} impact={row?.impacts?.Safety}/> */}
-
-                                <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Financial) }}>
-                                    <FormControl
-                                        sx={{
-                                            width: 130,
-                                            background: 'transparent',
-                                            '& .MuiInputBase-root': {
-                                                backgroundColor: 'transparent'
-                                            },
-                                            '& .MuiSelect-select': {
-                                                backgroundColor: 'transparent'
-                                            },
-                                            '& .MuiSvgIcon-root': {
-                                                display: 'none'
-                                            },
-                                            '& .MuiOutlinedInput-notchedOutline': {
-                                                border: 'none'
-                                            }
-                                        }}
-                                    >
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            name="Financial"
-                                            value={row?.impacts?.Financial}
-                                            onChange={(e) => handleChange(e, row)}
-                                        >
-                                            {options.map((item) => (
-                                                <MenuItem key={item?.value} value={item?.value}>
-                                                    {item?.label}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Operational) }}>
-                                    <FormControl
-                                        sx={{
-                                            width: 130,
-                                            background: 'transparent',
-                                            '& .MuiInputBase-root': {
-                                                backgroundColor: 'transparent'
-                                            },
-                                            '& .MuiSelect-select': {
-                                                backgroundColor: 'transparent'
-                                            },
-                                            '& .MuiSvgIcon-root': {
-                                                display: 'none'
-                                            },
-                                            '& .MuiOutlinedInput-notchedOutline': {
-                                                border: 'none'
-                                            }
-                                        }}
-                                    >
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            name="Operational"
-                                            value={row?.impacts?.Operational}
-                                            onChange={(e) => handleChange(e, row)}
-                                        >
-                                            {options.map((item) => (
-                                                <MenuItem key={item?.value} value={item?.value}>
-                                                    {item?.label}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Privacy) }}>
-                                    <FormControl
-                                        sx={{
-                                            width: 130,
-                                            background: 'transparent',
-                                            '& .MuiInputBase-root': {
-                                                backgroundColor: 'transparent'
-                                            },
-                                            '& .MuiSelect-select': {
-                                                backgroundColor: 'transparent'
-                                            },
-                                            '& .MuiSvgIcon-root': {
-                                                display: 'none'
-                                            },
-                                            '& .MuiOutlinedInput-notchedOutline': {
-                                                border: 'none'
-                                            }
-                                        }}
-                                    >
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            name="Privacy"
-                                            value={row?.impacts?.Privacy}
-                                            onChange={(e) => handleChange(e, row)}
-                                        >
-                                            {options.map((item) => (
-                                                <MenuItem key={item?.value} value={item?.value}>
-                                                    {item?.label}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </StyledTableCell>
+                                <SelectableCell
+                                    row={row}
+                                    options={options}
+                                    handleChange={handleChange}
+                                    colorPickerTab={colorPickerTab}
+                                    impact={row?.impacts?.Safety}
+                                    name="Safety"
+                                />
+                                <SelectableCell
+                                    row={row}
+                                    options={options}
+                                    handleChange={handleChange}
+                                    colorPickerTab={colorPickerTab}
+                                    impact={row?.impacts?.Financial}
+                                    name="Financial"
+                                />
+                                <SelectableCell
+                                    row={row}
+                                    options={options}
+                                    handleChange={handleChange}
+                                    colorPickerTab={colorPickerTab}
+                                    impact={row?.impacts?.Operational}
+                                    name="Operational"
+                                />
+                                <SelectableCell
+                                    row={row}
+                                    options={options}
+                                    handleChange={handleChange}
+                                    colorPickerTab={colorPickerTab}
+                                    impact={row?.impacts?.Privacy}
+                                    name="Privacy"
+                                />
                                 <StyledTableCell component="th" scope="row">
                                     Test
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
                                     Test
                                 </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
-                                    Test
+                                <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(OverallImpact(row?.impacts)) }}>
+                                    {OverallImpact(row?.impacts)}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
                                     <Checkbox {...label} />
@@ -550,7 +548,7 @@ export default function DsTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} rows={rows}/>
+            {openDs && <AddDamageScenarios open={openDs} handleClose={handleCloseDs} modal={modal} id={id} rows={rows} />}
             {openCl && (
                 <SelectLosses
                     open={openCl}

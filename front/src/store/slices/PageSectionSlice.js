@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState ={
     pageName:'',
+    Properties:[],
 }
 
 const PageSectionSlice = createSlice({
@@ -11,8 +12,14 @@ const PageSectionSlice = createSlice({
         changePage:(state,action)=>{
             return { ...state, pageName: action.payload};
         },
+        setProperties:(state,action)=>{
+            return { ...state, Properties: action.payload};
+        },
+        clearProperties:(state)=>{
+            return { ...state, Properties: []};
+        }
     }
 })
 
-export const { changePage } = PageSectionSlice.actions;
+export const { changePage, setProperties, clearProperties } = PageSectionSlice.actions;
 export default PageSectionSlice.reducer;

@@ -39,6 +39,7 @@ import CustomEdge from '../../ui-component/custom/CustomEdge';
 import { drawerClose, drawerOpen } from '../../store/slices/CurrentIdSlice';
 import AlertMessage from '../../ui-component/Alert';
 import Header from '../../ui-component/Header';
+import { setProperties } from '../../store/slices/PageSectionSlice';
 
 const elk = new ELK();
 
@@ -95,6 +96,7 @@ const selector = (state) => ({
     getModals: state.getModals,
     getModalById: state.getModalById,
     updateModal: state.updateModal,
+    getIntersectingNodes :state.getIntersectingNodes 
 });
 
 //Edge line styling
@@ -151,6 +153,7 @@ export default function MainCanvas() {
         modal,
         getModals,
         updateModal,
+        getIntersectingNodes,
     } = useStore(selector, shallow);
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -163,7 +166,8 @@ export default function MainCanvas() {
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState('');
     const dragRef = useRef  (null);
-    const [target, setTarget] = useState(null);
+
+    // const [target, setTarget] = useState(null);
     const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab } =
         useSelector((state) => state?.currentId);
     const onLayout = useCallback(
@@ -191,65 +195,65 @@ export default function MainCanvas() {
     }, [id]);
 
     const onNodeDragStart= useCallback((_, node) => {
-     console.log('node', node);
+    //  console.log('node', node);
      if(node.type!=='group'){
          dragRef.current = node;
      }
       }, []);
 
     //   For default group
-    const onNodeDrag = (_, node) => {
-        // calculate the center point of the node from position and dimensions
-        const centerX = node.position.x ;
-        const centerY = node.position.y ;
+    // const onNodeDrag = (_, node) => {
+    //     // calculate the center point of the node from position and dimensions
+    //     const centerX = node.position.x ;
+    //     const centerY = node.position.y ;
     
-        // find a node where the center point is inside
-        const targetNode = nodes.find(
-          (n) =>
-            centerX > n.position.x &&
-            centerX < n.position.x + n.width &&
-            centerY > n.position.y &&
-            centerY < n.position.y + n.height &&
-            n.id !== node.id // this is needed, otherwise we would always find the dragged node
-        );
-        console.log('targetNode', targetNode)
+    //     // find a node where the center point is inside
+    //     const targetNode = nodes.find(
+    //       (n) =>
+    //         centerX > n.position.x &&
+    //         centerX < n.position.x + n.width &&
+    //         centerY > n.position.y &&
+    //         centerY < n.position.y + n.height &&
+    //         n.id !== node.id // this is needed, otherwise we would always find the dragged node
+    //     );
+    //     // console.log('targetNode', targetNode)
     
-        setTarget(targetNode);
-      };
+    //     setTarget(targetNode);
+    //   };
 
-      const onNodeDragStop = (_, node) => {
-        console.log('target', target);
-        console.log('node', node)
+    //   const onNodeDragStop = () => {
+    //     console.log('target', target);
+    //     // console.log('node', node)
 
-      }
+    //   }
 
-    // const onNodeDrag = (event, node) => {
-    //     const updatedNodes = nodes.map((n) => {
-    //         if (n.id === node.id) {
-    //             const deltaX = node.position.x - n.position.x;
-    //             const deltaY = node.position.y - n.position.y;
+    const onNodeDrag = (event, node) => {
+        const updatedNodes = nodes.map((n) => {
+            if (n.id === node.id) {
+                const deltaX = node.position.x - n.position.x;
+                const deltaY = node.position.y - n.position.y;
                 
-    //             const updatedChildNodes = nodes.filter((child) => child.parentId === node.id);
-    //             updatedChildNodes.forEach((child) => {
-    //                 child.position = {
-    //                     x: child.position.x + deltaX,
-    //                     y: child.position.y + deltaY
-    //                 };
-    //             });
+                const updatedChildNodes = nodes.filter((child) => child.parentId === node.id);
+                updatedChildNodes.forEach((child) => {
+                    child.position = {
+                        x: child.position.x + deltaX,
+                        y: child.position.y + deltaY
+                    };
+                });
 
-    //             return {
-    //                 ...n,
-    //                 position: {
-    //                     x: node.position.x,
-    //                     y: node.position.y
-    //                 }
-    //             };
-    //         }
-    //         return n;
-    //     });
+                return {
+                    ...n,
+                    position: {
+                        x: node.position.x,
+                        y: node.position.y
+                    }
+                };
+            }
+            return n;
+        });
 
-    //     setNodes(updatedNodes);
-    // };
+        setNodes(updatedNodes);
+    };
 
     useEffect(() => {
         setEdges([]);
@@ -292,16 +296,43 @@ export default function MainCanvas() {
     //   setNodes([]);
     //   setEdges([]);
     // }, []);
-
+    
     //fn for Drag and drop
     const onDragOver = useCallback((event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     }, []);
-
+    
+    const checkForNodes =()=>{
+                 const [intersectingNodes, nodes ]= getIntersectingNodes();
+                //  console.log('intersectingNodes', intersectingNodes)
+                //  console.log('allNodes', nodes);
+                let nod=[...nodes];
+                let updated = [...intersectingNodes];
+                const ParentNode = intersectingNodes?.find(nd=>nd?.type === 'group');
+                let childNodes = intersectingNodes?.filter(nd=>nd?.type !== 'group');
+                updated = updated.map(item1 => {
+                    const match = childNodes.find(item2 => item2.id === item1.id);
+                    return match ? { 
+                        ...item1, 
+                        "parentId": ParentNode?.id,
+                        "extent": "parent",
+                     } : item1;
+                });
+                // console.log('updated', updated)
+                nod = nod?.map(item1 => {
+                    const match = updated.find(item2 => item2.id === item1.id);
+                    // console.log('match', match)
+                    return match ? match : item1;
+                });
+                // console.log('nod', nod);
+                setNodes(nod);
+    }
+    
+    // console.log('nodes', nodes);
     const onDrop = useCallback(
         (event) => {
-            event.preventDefault();
+            event.preventDefault(); 
             const file = event.dataTransfer.getData('application/parseFile');
             const template = event.dataTransfer.getData('application/template');
             let parsedNode;
@@ -313,7 +344,7 @@ export default function MainCanvas() {
             }
 
             // if (typeof parsedNode === "undefined" || !parsedNode || typeof parsedTemplate === "undefined" || !parsedTemplate) {
-            //   return;
+                //   return;
             // }
 
             const position = reactFlowInstance.screenToFlowPosition({
@@ -326,9 +357,10 @@ export default function MainCanvas() {
                     type: parsedNode.type,
                     position,
                     properties: parsedNode.properties,
+                    width:parsedNode?.width,
+                    height:parsedNode?.height,
                     data: {
                         label: parsedNode.data['label'],
-                        bgColor: parsedNode.data['bgColor'],
                         style: {
                             backgroundColor: parsedNode.data['bgColor'],
                             fontSize: '16px',
@@ -346,13 +378,13 @@ export default function MainCanvas() {
                 };
                 dragAdd(newNode);
             }
-
+            
             if (parsedTemplate) {
                 let newNodes = [];
                 let newEdges = [];
                 const randomId = Math.floor(Math.random() * 1000);
                 const randomPos = Math.floor(Math.random() * 500);
-
+                
                 parsedTemplate['nodes'].map((node) => {
                     newNodes.push({
                         id: `${node.id + randomId}`,
@@ -382,7 +414,7 @@ export default function MainCanvas() {
                         extent: node?.extent ? node?.extent : null
                     });
                 });
-
+                
                 parsedTemplate['edges'].map((edge) =>
                     newEdges.push({
                         id: uid(),
@@ -394,14 +426,15 @@ export default function MainCanvas() {
 
                 dragAddNode(newNodes, newEdges);
             }
+            checkForNodes();
         },
         [reactFlowInstance]
     );
-
+    
     const handleClose = () => {
         setOpenTemplate(false);
     };
-
+    
     const onSave = useCallback(() => {
         if (reactFlowInstance) {
             const flow = reactFlowInstance.toObject();
@@ -622,30 +655,30 @@ export default function MainCanvas() {
     const handleSidebarOpen = (e, node) => {
         setSelectedNode(node);
         toggleDrawerOpen('MainCanvasTab');
+        dispatch(setProperties(node?.properties))
     };
 
     const handleSelectNode = (e, node) => {
         setSelectedNode(node);
+        dispatch(setProperties(node?.properties))
     };
-    
 
     const createGroup = (e) => {
         e.preventDefault();
-        // console.log('position', e.clientX, e.clientY);
         const newNode = {
                 id: uid(),
                 type: 'group',
+                height:280,
+                width:250,
                 position:{
                     x:e.clientX,
                     y:e.clientY,
                 },
                 data: {
                  label:'group'
-                }
+                },
             };
             dragAdd(newNode);
-        
-
     };
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
@@ -670,7 +703,7 @@ export default function MainCanvas() {
                         onLoad={onLoad}
                         onNodeDrag={onNodeDrag}
                         onNodeDragStart={onNodeDragStart}
-                        onNodeDragStop={onNodeDragStop}
+                        // onNodeDragStop={onNodeDragStop}
                         connectionLineStyle={connectionLineStyle}
                         defaultEdgeOptions={edgeOptions}
                         onInit={setReactFlowInstance}

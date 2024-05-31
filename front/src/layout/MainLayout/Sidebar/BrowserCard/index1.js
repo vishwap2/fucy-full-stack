@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import AddModal from '../../../../ui-component/Modal/AddModal';
 import { v4 as uid } from 'uuid';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 import {
     AttackTreePageOpen,
     DsTableOpen,
@@ -49,8 +49,8 @@ import DocumentIcon from '../../../../assets/icons/document.png';
 import ReportIcon from '../../../../assets/icons/report.png';
 import LayoutIcon from '../../../../assets/icons/layout.png';
 import ModelIcon from '../../../../assets/icons/model.png';
-import  ColorTheme  from '../../../../store/ColorTheme';
-
+import ColorTheme from '../../../../store/ColorTheme';
+import { NavLink } from 'react-router-dom';
 
 const imageComponents = {
     AttackIcon,
@@ -66,8 +66,6 @@ const imageComponents = {
     LayoutIcon,
     ModelIcon
 };
-
-
 
 const iconComponents = {
     SecurityIcon,
@@ -104,6 +102,18 @@ const CardStyle = styled(Card)(() =>
     })
 );
 
+const NavigationTag = styled(NavLink)(() => ({
+    textDecoration: 'none',
+    display:'flex',
+    marginLeft: '-7px',
+    color:'black',
+
+    '&.active':{
+        color:'red'
+    }
+
+}));
+
 const useStyles = makeStyles((theme) => ({
     labelRoot: {
         display: 'flex',
@@ -114,20 +124,20 @@ const useStyles = makeStyles((theme) => ({
     labelTypo: {
         fontSize: 12,
         fontWeight: 600,
-        fontFamily:'Inter'
+        fontFamily: 'Inter'
     }
 }));
 
 const selector = (state) => ({
     addNode: state.addCyberNode,
-    getModals:state.getModals
+    getModals: state.getModals
 });
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
-const BrowserCard = ({ modals, handleClick }) => {
-    const { addNode,getModals } = useStore(selector);
+const BrowserCard = ({ modals }) => {
+    const { addNode, getModals } = useStore(selector);
     const classes = useStyles();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isCyberBlockOpen } = useSelector((state) => state?.currentId);
     const [name, setName] = useState('');
@@ -151,14 +161,25 @@ const BrowserCard = ({ modals, handleClick }) => {
         const Image = imageComponents[icon];
         return (
             <div className={classes.labelRoot}>
-                {Image ? <img src={Image} alt={name} style={{height:'18px', width:'18px'}}/> : null}
+                {Image ? <img src={Image} alt={name} style={{ height: '18px', width: '18px' }} /> : null}
                 <Typography variant="body2" ml={0.5} className={classes.labelTypo}>
                     {name}
                 </Typography>
             </div>
         );
     };
-
+    const getTitleLabel = (icon, name, id) => {
+        const Image = imageComponents[icon];
+        return (
+            <NavigationTag to={`/Modals/${id}`}>
+                {Image ? <img src={Image} alt={name} style={{ height: '18px', width: '18px' }} /> : null}
+                <Typography variant="body2" ml={0.5} className={classes.labelTypo} color='inherit'>
+                    {name}
+                </Typography>
+               </NavigationTag>
+            
+        );
+    };
 
     const threatType = (value) => {
         // console.log('value', value)
@@ -208,8 +229,8 @@ const BrowserCard = ({ modals, handleClick }) => {
         setOpen(false);
     };
 
-    const handleNavigate = (id) => {
-        navigate(`/Modals/${id}`, { replace: true });
+    const handleNavigate = () => {
+        // navigate(`/Modals/${id}`, { replace: true });
         dispatch(closeAll());
     };
     const handleSwicthDsTable = (name) => {
@@ -254,7 +275,7 @@ const BrowserCard = ({ modals, handleClick }) => {
         event.dataTransfer.effectAllowed = 'move';
     };
 
-    const handleDragStart = (event,req) => {
+    const handleDragStart = (event, req) => {
         // Initiating drag with req data
         onDragStart(event, req);
     };
@@ -284,7 +305,9 @@ const BrowserCard = ({ modals, handleClick }) => {
     };
     return (
         <>
-            <Typography variant="h4" sx={{color:ColorTheme().tabContentClr}}>Projects</Typography>
+            <Typography variant="h4" sx={{ color: ColorTheme().tabContentClr }}>
+                Projects
+            </Typography>
             <CardStyle sx={{ overflowY: 'auto' }}>
                 <CardContent sx={{ p: 2 }}>
                     <TreeView
@@ -300,16 +323,15 @@ const BrowserCard = ({ modals, handleClick }) => {
                                         key={modal?.id}
                                         nodeId={modal?.id}
                                         // label={getLabel('DriveFileMoveIcon', modal?.name)}
-                                        label ={getImageLabel('ModelIcon',modal?.name)}
-                                        onClick={() => handleNavigate(modal?.id)}
+                                        label={getTitleLabel('ModelIcon', modal?.name, modal?.id)}
+                                        onClick={handleNavigate}
                                     >
                                         {modal?.scenarios?.map((scene) => (
                                             <TreeItem
                                                 key={scene?.name}
                                                 nodeId={scene?.id}
                                                 // label={getLabel('FolderIcon', scene?.name)}
-                                                label ={getImageLabel(scene?.icon, scene?.name)}
-                                                onClick={() => handleClick(scene)}
+                                                label={getImageLabel(scene?.icon, scene?.name)}
                                                 sx={{
                                                     ml: -0.8,
                                                     '& .MuiTreeItem-label': {
@@ -331,20 +353,19 @@ const BrowserCard = ({ modals, handleClick }) => {
                                                               onClick={() => handleOpenTable(sub?.name)}
                                                           >
                                                               {sub?.name === 'Damage Scenarios Derivations' &&
-                                                                  sub?.losses?.map((ls) =>(
-                                                                              <TreeItem
-                                                                                  key={ls?.id}
-                                                                                  nodeId={ls.id}
-                                                                                  label={`[${ls?.id}] Damage Scenario for the ${ls?.name}`}
-                                                                                  sx={{
-                                                                                    ml:-2
-                                                                                  }}
-                                                                              ></TreeItem>
-                                                                          )                                                             
-                                                                  )}
+                                                                  sub?.losses?.map((ls) => (
+                                                                      <TreeItem
+                                                                          key={ls?.id}
+                                                                          nodeId={ls.id}
+                                                                          label={`[${ls?.id}] Damage Scenario for the ${ls?.name}`}
+                                                                          sx={{
+                                                                              ml: -2
+                                                                          }}
+                                                                      ></TreeItem>
+                                                                  ))}
                                                               {sub?.name === 'Damage Scenarios - Collection & Impact Ratings' &&
                                                                   sub?.scenes?.map((dm_scene) => {
-                                                                    // console.log('dm_scene', dm_scene)
+                                                                      // console.log('dm_scene', dm_scene)
                                                                       return (
                                                                           <TreeItem
                                                                               key={dm_scene?.id}
@@ -364,50 +385,54 @@ const BrowserCard = ({ modals, handleClick }) => {
                                                                   })}
                                                               {sub?.name === 'Threat Scenarios' &&
                                                                   sub?.losses?.map((dt) =>
-                                                                      dt?.cyberLosses?.map((pr,prin) => 
-                                                                          pr?.props?.map((pp,pin)=> (
+                                                                      dt?.cyberLosses?.map((pr, prin) =>
+                                                                          pr?.props?.map((pp, pin) => (
                                                                               <TreeItem
                                                                                   key={`${dt?.id}${prin}${pin}`}
                                                                                   nodeId={`${dt?.id}${prin}${pin}`}
-                                                                                  label={`[TS00${prin}${pin}] ${threatType(pp)} for the loss of ${pp} of ${pr?.name} for Damage Scene ${dt?.id}`}
+                                                                                  label={`[TS00${prin}${pin}] ${threatType(
+                                                                                      pp
+                                                                                  )} for the loss of ${pp} of ${
+                                                                                      pr?.name
+                                                                                  } for Damage Scene ${dt?.id}`}
                                                                               ></TreeItem>
-                                                                          )
+                                                                          ))
                                                                       )
-                                                                  ))}
+                                                                  )}
                                                               {sub?.name === 'CyberSecurity Goals and Requirements' &&
                                                                   sub?.subs?.map((s_sub) => (
                                                                       <TreeItem
-                                                                      key={s_sub?.id}
-                                                                      nodeId={s_sub?.id}
-                                                                      label={s_sub?.name}
-                                                                      onContextMenu={(e) => handleRightClick(e, s_sub?.name)}
+                                                                          key={s_sub?.id}
+                                                                          nodeId={s_sub?.id}
+                                                                          label={s_sub?.name}
+                                                                          onContextMenu={(e) => handleRightClick(e, s_sub?.name)}
                                                                       >
-                                                                        { s_sub?.name === 'CyberSecurity Goals' && s_sub.scenes.map(sce=>(
-                                                                        <TreeItem
-                                                                        key={sce?.id}
-                                                                      nodeId={sce?.id}
-                                                                      label={getLabel('BrightnessLowIcon',sce?.name)}
-                                                                      onClick={()=>handleAddComponent('goal',sce)}
-                                                                      onDragStart={()=>handleDragStart(e,sce)}
-                                                                      onCli
-                                                                        ></TreeItem>
-                                                                      ))
-                                                                      }
-                                                                      { s_sub?.name === 'CyberSecurity Requirements' && s_sub.scenes.map(sce=>(
-                                                                        <TreeItem
-                                                                        key={sce?.id}
-                                                                      nodeId={sce?.id}
-                                                                      label={getLabel('CalendarMonthIcon',sce?.name)}
-                                                                      onClick={()=>handleAddComponent('require',sce)}
-                                                                      onDragStart={()=>handleDragStart(e,sce)}
-                                                                        ></TreeItem>
-                                                                      ))
-                                                                      }
+                                                                          {s_sub?.name === 'CyberSecurity Goals' &&
+                                                                              s_sub.scenes.map((sce) => (
+                                                                                  <TreeItem
+                                                                                      key={sce?.id}
+                                                                                      nodeId={sce?.id}
+                                                                                      label={getLabel('BrightnessLowIcon', sce?.name)}
+                                                                                      onClick={() => handleAddComponent('goal', sce)}
+                                                                                      onDragStart={() => handleDragStart(e, sce)}
+                                                                                      onCli
+                                                                                  ></TreeItem>
+                                                                              ))}
+                                                                          {s_sub?.name === 'CyberSecurity Requirements' &&
+                                                                              s_sub.scenes.map((sce) => (
+                                                                                  <TreeItem
+                                                                                      key={sce?.id}
+                                                                                      nodeId={sce?.id}
+                                                                                      label={getLabel('CalendarMonthIcon', sce?.name)}
+                                                                                      onClick={() => handleAddComponent('require', sce)}
+                                                                                      onDragStart={() => handleDragStart(e, sce)}
+                                                                                  ></TreeItem>
+                                                                              ))}
                                                                       </TreeItem>
                                                                   ))}
-                                                             
+
                                                               {sub?.name === 'Derived Threat Scenarios' &&
-                                                                  sub?.scenes?.map((th_scene,i) => {
+                                                                  sub?.scenes?.map((th_scene, i) => {
                                                                       return (
                                                                           <TreeItem
                                                                               key={`${th_scene?.id}${i}`}
@@ -422,9 +447,8 @@ const BrowserCard = ({ modals, handleClick }) => {
                                                                           <TreeItem
                                                                               key={th_scene?.id}
                                                                               nodeId={th_scene?.id}
-                                                                            //   label={th_scene?.name}
+                                                                              //   label={th_scene?.name}
                                                                               label={getLabel('SecurityIcon', th_scene?.name)}
-                                                                              
                                                                           ></TreeItem>
                                                                       );
                                                                   })}
@@ -499,11 +523,11 @@ const BrowserCard = ({ modals, handleClick }) => {
                             <MenuItem onClick={() => openAddModal('Goals')}>Add Goals</MenuItem>
                             <MenuItem onClick={() => openAddModal('Require')}>Add Requirements</MenuItem>
                         </Menu>
-                        <TreeItem icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} className={classes.labelTypo}/>
+                        <TreeItem icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} className={classes.labelTypo} />
                     </TreeView>
                 </CardContent>
             </CardStyle>
-           {open && <AddModal getModals={getModals} open={open} handleClose={handleClose} />}
+            {open && <AddModal getModals={getModals} open={open} handleClose={handleClose} />}
             <CyberSecurityModal open={openCyberModal} handleClose={handleCloseCyberModal} name={name} />
         </>
     );

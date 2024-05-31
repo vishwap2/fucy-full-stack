@@ -36,7 +36,6 @@ const useStore = createWithEqualityFn((set, get) => ({
             edges: addEdge(connection, get().edges)
         });
     },
-
     setNodes: (newNodes) => {
         set({
             nodes: newNodes
@@ -105,6 +104,63 @@ const useStore = createWithEqualityFn((set, get) => ({
         });
     },
 
+    getIntersectingNodes: () => {
+        const nodes = get().nodes;
+        // console.log('nodes store', nodes)
+        const group = nodes?.find(nd=>nd?.type ==='group');
+        const area={};
+    
+        area.x=group?.position.x,
+        area.y=group?.position?.y,
+        area.width=group.width, 
+        area.height=group.height
+        
+        // console.log('area', area);
+        // console.log('nodes12', nodes)
+        // Check if two rectangles intersect based on their positions and dimensions
+        // const doRectanglesIntersect = (area, node) => {
+
+        //   return (
+        //     // rect1.x >= rect2.x + rect2.width || // rect1 is to the right of rect2
+        //     // rect1.x + rect1.width <= rect2.x || // rect1 is to the left of rect2
+        //     // rect1.y >= rect2.y + rect2.height || // rect1 is below rect2
+        //     // rect1.y + rect1.height <= rect2.y // rect1 is above rect2
+        //      area.x <= node.x
+
+        //   );
+        // };
+
+        function doNodesTouch(nodeA, nodeB) {
+            // console.log('nodeA', nodeA)
+            // console.log('nodeB', nodeB)
+            const aLeft = nodeA.x;
+            const aRight = nodeA.x + nodeA.width;
+            const aTop = nodeA.y;
+            const aBottom = nodeA.y + nodeA.height;
+          
+            const bLeft = nodeB.x;
+            const bRight = nodeB.x + nodeB.width;
+            const bTop = nodeB.y;
+            const bBottom = nodeB.y + nodeB.height;
+          
+            const horizontalOverlap = aRight >= bLeft && aLeft <= bRight;
+            const verticalOverlap = aBottom >= bTop && aTop <= bBottom;
+          
+            return horizontalOverlap && verticalOverlap;
+          }
+
+        const intersectingNodes = nodes.filter(node => {
+            const nodeRect = {
+              x: node.position.x,
+              y: node.position.y,
+              width: node.width,
+              height: node.height,
+            };
+            return doNodesTouch(area,nodeRect);
+          });
+       
+          return [intersectingNodes, nodes];
+        },
     //fetch or GET section
     fetchAPI: async () => {
         const res = await axios.get(`${configuration.apiBaseUrl}template`);
