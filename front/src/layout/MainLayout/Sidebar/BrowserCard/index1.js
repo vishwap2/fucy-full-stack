@@ -109,7 +109,8 @@ const NavigationTag = styled(NavLink)(() => ({
     color:'black',
 
     '&.active':{
-        color:'red'
+        color:'red',
+        backgroundColor:'lightgray'
     }
 
 }));
@@ -325,6 +326,11 @@ const BrowserCard = ({ modals }) => {
                                         // label={getLabel('DriveFileMoveIcon', modal?.name)}
                                         label={getTitleLabel('ModelIcon', modal?.name, modal?.id)}
                                         onClick={handleNavigate}
+                                        sx={{
+                                            '& .Mui-selected':{
+                                                backgroundColor:'none !important'
+                                            }
+                                        }}
                                     >
                                         {modal?.scenarios?.map((scene) => (
                                             <TreeItem

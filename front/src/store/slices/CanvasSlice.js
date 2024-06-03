@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState ={
-    isCanvasPage:false,
+    isCanvasPage:'',
 }
 
 const CanvasSlice = createSlice({
     name: 'Canvas',
     initialState,
     reducers:{
-        changeCanvasPage:(state)=>{
-            return { ...state, isCanvasPage:!state.isCanvasPage };
+        changeCanvasPage:(state, action)=>{
+            return { ...state, isCanvasPage:action.payload };
         },
     }
 })

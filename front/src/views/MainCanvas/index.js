@@ -650,7 +650,7 @@ export default function MainCanvas() {
 
     const toggleDrawerOpen = (tab) => dispatch(drawerOpen(tab));
     const toggleDrawerClose = () => dispatch(drawerClose());
-    const onLoad = (reactFlowInstance) => reactFlowInstance.fitView();
+    const onLoad = (reactFlowInstance) => reactFlowInstance.current.fitView();
 
     const handleSidebarOpen = (e, node) => {
         setSelectedNode(node);

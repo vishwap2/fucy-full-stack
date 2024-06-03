@@ -24,7 +24,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
     const handleClick=()=>{
         // console.log('clicked')
         window.location.href='/home';
-        dispatch(changeCanvasPage());
+        dispatch(changeCanvasPage('home'));
     }
 
     return (

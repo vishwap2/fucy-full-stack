@@ -14,7 +14,7 @@ const RequireAuth = ({ children }) => {
   }, [navigate]);
 
   const checkIfUserIsAuthenticated = () => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
     console.log('isLoggedIn', isLoggedIn)
     return isLoggedIn ;
   };

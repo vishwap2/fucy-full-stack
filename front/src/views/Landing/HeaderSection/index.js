@@ -56,7 +56,7 @@ export default function Header(){
     
     const handleClose = (name) => {
         if(name === 'TARA Automation'){
-            dispatch(changeCanvasPage());
+            dispatch(changeCanvasPage('canvas'));
             window.location.href = '/Modals';
         }
         setAnchorEl(null);

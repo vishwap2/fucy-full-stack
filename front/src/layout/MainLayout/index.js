@@ -106,7 +106,7 @@ const MainLayout = ({ children }) => {
 
     return (
         <>
-            {!isCanvasPage ? (
+            {isCanvasPage === 'home' ? (
                 <Box>
                     <HeaderSection />
                     <Box>
