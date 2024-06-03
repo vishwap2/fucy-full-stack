@@ -107,7 +107,7 @@ const MenuCard = ({properties}) => {
                             sx={{ mt: 0 }}
                             primary={
                                 <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
-                               {i+1} .{item}
+                               {i+1}. {item}
                                 </Typography>
                             }
                         />
