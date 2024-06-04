@@ -102,23 +102,27 @@ iframe#webpack-dev-server-client-overlay{display:none!important}; /* for window 
     }
    } 
    .circular-node{
-    width: 120px ;
-    height: 120px ;
+    width: inherit ;
+    height: inherit ;
+    min-width: 120px;
+    min-height: 120px;
     border-radius: 50%;
     display:flex ;
     align-items: center ;
     justify-content: center;
    }
 
-.diagonal-node{
-  width: 120px ;
-  height: 150px ;
+  .diagonal-node{
+  width: inherit ;
+  height: inherit ;
+  min-width: 120px;
+  min-height: 150px;
   border-radius: 5%;
   display:flex ;
   padding-top: 15%;
   align-items: start ;
   justify-content: center;
-}
+  }
 
 .attack_tree_node,.level_node{
  border: 1px solid black;

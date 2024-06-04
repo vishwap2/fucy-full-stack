@@ -40,6 +40,7 @@ import { drawerClose, drawerOpen } from '../../store/slices/CurrentIdSlice';
 import AlertMessage from '../../ui-component/Alert';
 import Header from '../../ui-component/Header';
 import { setProperties } from '../../store/slices/PageSectionSlice';
+import ColorTheme from '../../store/ColorTheme';
 
 const elk = new ELK();
 
@@ -751,7 +752,7 @@ export default function MainCanvas() {
 
                         <Controls />
                         <MiniMap zoomable pannable />
-                        <Background variant="dots" gap={12} size={1} />
+                        <Background variant="dots" gap={12} size={1} style={{backgroundColor:ColorTheme()?.canvasBG}}/>
                         <RightDrawer
                             state={isRightDrawerOpen}
                             activeTab={activeTab}

@@ -72,7 +72,7 @@ const Logo = () => {
                     component="h4"
                     sx={{ fontSize: 16, fontWeight: 600, color: ColorTheme().logo, marginLeft: '-55px', marginTop: '10px ' }}
                 >
-                    FUCY
+                    FUCY TECH
                 </Typography>
             </Box>
         </>

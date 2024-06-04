@@ -28,7 +28,7 @@ import FadeInDiv from '../../ui-component/FadeInDiv';
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open, isNavbarClose }) => ({
     ...theme.typography.mainContent,
-    background: ColorTheme().canvasBG,
+    background: ColorTheme().canvaSurroundsBG,
     border: '1px solid gray',
     maxWidth: 'auto',
     marginTop: !isNavbarClose ? navbarHeight : '0px',

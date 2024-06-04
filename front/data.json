@@ -2015,8 +2015,8 @@
         "label": "Power Manage",
         "bgColor": "#E9E955"
       },
-      "width":140,
-      "height":50,
+      "width": 140,
+      "height": 50,
       "type": "input",
       "icon": "CardEdit",
       "properties": [
@@ -2030,6 +2030,8 @@
         "label": "MCU",
         "bgColor": "#06f9f5"
       },
+      "width": 140,
+      "height": 50,
       "type": "default",
       "icon": "KyberNetwork",
       "properties": [
@@ -2043,6 +2045,8 @@
         "label": "PHY",
         "bgColor": "#16c260"
       },
+      "width": 140,
+      "height": 50,
       "type": "default",
       "icon": "TheGraph",
       "properties": [
@@ -2056,6 +2060,8 @@
         "label": "Vehicle",
         "bgColor": "#ff0072"
       },
+      "width": 140,
+      "height": 50,
       "type": "output",
       "icon": "Car",
       "properties": [
@@ -2069,6 +2075,8 @@
         "label": "Receiver",
         "bgColor": "#124faf"
       },
+      "width": 140,
+      "height": 50,
       "type": "receiver",
       "icon": "ArrowDown",
       "properties": [
@@ -2082,6 +2090,8 @@
         "label": "signal",
         "bgColor": "#f59b00"
       },
+      "width": 140,
+      "height": 50,
       "type": "signal",
       "icon": "ArrowUp",
       "properties": [
@@ -2095,6 +2105,8 @@
         "label": "transceiver",
         "bgColor": "#000"
       },
+      "width": 120,
+      "height": 150,
       "type": "transceiver",
       "icon": "Danger",
       "properties": [
@@ -2108,6 +2120,8 @@
         "label": "transmitter",
         "bgColor": "#ff00dd"
       },
+      "width": 120,
+      "height": 120,
       "type": "transmitter",
       "icon": "UserTag",
       "properties": [
@@ -2121,6 +2135,8 @@
         "label": "circuit",
         "bgColor": "#8ea9fb"
       },
+      "width": 140,
+      "height": 50,
       "type": "output",
       "icon": "AudioSquare",
       "properties": [
@@ -2208,7 +2224,8 @@
             },
             "properties": [
               "Integrity",
-              "Authorization"
+              "Authorization",
+              "Authenticity"
             ],
             "parentId": null,
             "extent": null,

@@ -346,7 +346,7 @@ export default function DsTable() {
             })
             // console.log('val', val)
         const sum  = val.reduce((a,b)=>a+b);
-        const ratio = sum > 0 ? Math.floor(sum/Object.values(impact).length):0;
+        const ratio = sum > 0 ? Math.floor(impact && sum/Object.values(impact).length):0;
         // console.log('ratio', ratio)
         return avgImpact(ratio);
     }, []);

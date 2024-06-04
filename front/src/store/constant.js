@@ -20,7 +20,10 @@ export const navbarHeight = 150;
    tabBG:'#f7f7f7',
    selectedTab:'#5c636e',
    sidebarBG:'#f7f7f7',
+   sidebarInnerBG:'#f7f7f7',
+   canvaSurroundsBG:'#f7f7f7',
    canvasBG:'#f7f7f7',
+   sidebarContent:'#000',
    tabContentClr:'#000',
    title:'#000',
    logo:'#5FBDFF'
@@ -32,7 +35,10 @@ export const navbarHeight = 150;
    tabBG:'#222831',
    selectedTab:'whitesmoke',
    sidebarBG:'#000',
-   canvasBG:'#000',
+   sidebarInnerBG:'#222831',
+   canvaSurroundsBG:'#000',
+   canvasBG:'#222831',
+   sidebarContent:'white',
    tabContentClr:'white',
    title:'whitesmoke',
    logo:'#5FBDFF'

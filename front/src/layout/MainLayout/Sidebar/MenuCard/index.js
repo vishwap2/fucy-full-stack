@@ -95,7 +95,7 @@ const MenuCard = ({properties}) => {
     return (
         <>
             <Typography variant='h4' sx={{color:ColorTheme().tabContentClr}}>Properties </Typography>
-        <CardStyle>
+        <CardStyle sx={{backgroundColor:ColorTheme()?.sidebarInnerBG}}>
             <CardContent sx={{ p: 2 }}>
                 
                 <List sx={{ p: 0, m: 0 }}>
