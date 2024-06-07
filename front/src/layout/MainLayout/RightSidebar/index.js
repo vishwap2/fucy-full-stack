@@ -10,6 +10,7 @@ import ComponentList from '../../../views/Libraries';
 import Components from '../../../views/NodeList';
 import { makeStyles } from '@mui/styles';
 import EditContent from '../../../ui-component/Drawer/EditContent';
+import ColorTheme from '../../../store/ColorTheme';
 // import CloseIcon from '@mui/icons-material/Close';
 
 
@@ -59,11 +60,11 @@ export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab,
                         onClick={() => drawerOpen('library')}
                         className={classes.arrow}
                     >
-                        <ArrowSquareLeft size="20px" />
+                        <ArrowSquareLeft size="20px" color={ColorTheme()?.iconColor}/>
                     </Box>
                 ) : (
                         <Box onClick={drawerClose} className={classes.arrow}>
-                            <ArrowSquareRight size="20px" />
+                            <ArrowSquareRight size="20px" color={ColorTheme()?.iconColor} />
                         </Box>
                     )
                 }

@@ -89,6 +89,11 @@ const MainLayout = ({ children }) => {
     const { isNavbarClose, isDark } = useSelector((state) => state?.currentId);
     const { isCanvasPage } = useSelector((state) => state?.canvas);
 
+    
+    useEffect(() => {
+        dispatch({ type: SET_MENU, opened: !matchDownMd });
+    }, [matchDownMd]);
+    
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
@@ -98,9 +103,6 @@ const MainLayout = ({ children }) => {
     //     dispatch(changeCanvasPage())
     // }
 
-    useEffect(() => {
-        dispatch({ type: SET_MENU, opened: !matchDownMd });
-    }, [matchDownMd]);
 
     // console.log('isNavbarClose', isNavbarClose);
 

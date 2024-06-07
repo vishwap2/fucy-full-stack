@@ -4,7 +4,7 @@ import ReactFlow, {
     Controls,
     Background,
     ReactFlowProvider,
-    Panel,
+    // Panel,
     getRectOfNodes,
     getTransformForBounds,
     MarkerType,
@@ -21,7 +21,7 @@ import DiagonalNode from '../../ui-component/custom/DiagonalNode ';
 import useStore from '../../Zustand/store';
 import { shallow } from 'zustand/shallow';
 import { toPng } from 'html-to-image';
-import { Button } from '@mui/material';
+// import { Button } from '@mui/material';
 import AddLibrary from '../../ui-component/Modal/AddLibrary';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -97,7 +97,7 @@ const selector = (state) => ({
     getModals: state.getModals,
     getModalById: state.getModalById,
     updateModal: state.updateModal,
-    getIntersectingNodes :state.getIntersectingNodes 
+    getIntersectingNodes: state.getIntersectingNodes
 });
 
 //Edge line styling
@@ -154,10 +154,11 @@ export default function MainCanvas() {
         modal,
         getModals,
         updateModal,
-        getIntersectingNodes,
+        getIntersectingNodes
     } = useStore(selector, shallow);
     const { id } = useParams();
     const dispatch = useDispatch();
+    const Color = ColorTheme();
     // const reactFlowWrapper = useRef(null);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const [openTemplate, setOpenTemplate] = useState(false);
@@ -166,7 +167,21 @@ export default function MainCanvas() {
     const [open, setOpen] = useState(false);
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState('');
-    const dragRef = useRef  (null);
+    const dragRef = useRef(null);
+
+    useEffect(() => {
+        getModalById(id);
+    }, [id]);
+
+    useEffect(() => {
+        const template = modal?.template;
+        setSavedTemplate(template);
+        onSaveInitial(template);
+        setTimeout(() => {
+            onRestore();
+        }, 500);
+    }, [modal]);
+
 
     // const [target, setTarget] = useState(null);
     const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab } =
@@ -176,38 +191,71 @@ export default function MainCanvas() {
             const opts = { 'elk.direction': direction, ...elkOptions };
             const ns = useInitialNodes ? nodes : nodes;
             const es = useInitialNodes ? nodes : edges;
-
+            //  console.log('nodes layout', nodes)
             getLayoutedElements(ns, es, opts).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
                 setNodes(layoutedNodes);
                 setEdges(layoutedEdges);
 
-                window.requestAnimationFrame(() => fitView());
+                // window.requestAnimationFrame(() => fitView());
             });
         },
         [nodes, edges]
     );
 
+    const checkForNodes = () => {
+        const [intersectingNodes, nodes] = getIntersectingNodes();
+        //  console.log('intersectingNodes', intersectingNodes)
+        //  console.log('allNodes', nodes);
+        let nod = [...nodes];
+        let updated = [...intersectingNodes];
+        const ParentNode = intersectingNodes?.find((nd) => nd?.type === 'group');
+        let childNodes = intersectingNodes?.filter((nd) => nd?.type !== 'group');
+        updated = updated.map((item1) => {
+            const match = childNodes.find((item2) => item2.id === item1.id);
+            return match
+                ? {
+                      ...item1,
+                      parentId: ParentNode?.id,
+                    extent: 'parent',
+                      groupedId:ParentNode?.id,
+                  }
+                : {
+                    ...item1,
+                    groupedId:ParentNode?.id,
+                      
+                };
+        });
+        // console.log('updated', updated)
+        nod = nod?.map((item1) => {
+            const match = updated.find((item2) => item2.id === item1.id);
+            // console.log('match', match)
+            return match ? match : item1;
+        });
+        // console.log('nod', nod);
+        setNodes(nod);
+    };
+
     useLayoutEffect(() => {
         onLayout({ direction: 'DOWN', useInitialNodes: true });
     }, []);
 
-    useEffect(() => {
-        getModalById(id);
-    }, [id]);
 
-    const onNodeDragStart= useCallback((_, node) => {
-    //  console.log('node', node);
-     if(node.type!=='group'){
-         dragRef.current = node;
-     }
-      }, []);
+    const onNodeDragStart = useCallback((_, node) => {
+        dragRef.current = node;
+    }, []);
 
+    const onNodeDragStop = useCallback(() => {
+        // if(dragRef.current.type !== 'group'){
+            checkForNodes();
+        // }
+        
+    }, [])
     //   For default group
     // const onNodeDrag = (_, node) => {
     //     // calculate the center point of the node from position and dimensions
     //     const centerX = node.position.x ;
     //     const centerY = node.position.y ;
-    
+
     //     // find a node where the center point is inside
     //     const targetNode = nodes.find(
     //       (n) =>
@@ -218,22 +266,16 @@ export default function MainCanvas() {
     //         n.id !== node.id // this is needed, otherwise we would always find the dragged node
     //     );
     //     // console.log('targetNode', targetNode)
-    
+
     //     setTarget(targetNode);
     //   };
-
-    //   const onNodeDragStop = () => {
-    //     console.log('target', target);
-    //     // console.log('node', node)
-
-    //   }
 
     const onNodeDrag = (event, node) => {
         const updatedNodes = nodes.map((n) => {
             if (n.id === node.id) {
                 const deltaX = node.position.x - n.position.x;
                 const deltaY = node.position.y - n.position.y;
-                
+
                 const updatedChildNodes = nodes.filter((child) => child.parentId === node.id);
                 updatedChildNodes.forEach((child) => {
                     child.position = {
@@ -256,14 +298,6 @@ export default function MainCanvas() {
         setNodes(updatedNodes);
     };
 
-    useEffect(() => {
-        setEdges([]);
-        setNodes([]);
-        const template = modal?.template;
-        setSavedTemplate(template);
-        onSaveInitial(template);
-        onRestore();
-    }, [modal]);
     // console.log('savedTemplate', savedTemplate);
     //for downloading the circuit and image
     function downloadImage(dataUrl) {
@@ -293,47 +327,17 @@ export default function MainCanvas() {
         }).then(downloadImage);
     };
 
-    // useEffect(() => {
-    //   setNodes([]);
-    //   setEdges([]);
-    // }, []);
-    
     //fn for Drag and drop
     const onDragOver = useCallback((event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     }, []);
-    
-    const checkForNodes =()=>{
-                 const [intersectingNodes, nodes ]= getIntersectingNodes();
-                //  console.log('intersectingNodes', intersectingNodes)
-                //  console.log('allNodes', nodes);
-                let nod=[...nodes];
-                let updated = [...intersectingNodes];
-                const ParentNode = intersectingNodes?.find(nd=>nd?.type === 'group');
-                let childNodes = intersectingNodes?.filter(nd=>nd?.type !== 'group');
-                updated = updated.map(item1 => {
-                    const match = childNodes.find(item2 => item2.id === item1.id);
-                    return match ? { 
-                        ...item1, 
-                        "parentId": ParentNode?.id,
-                        "extent": "parent",
-                     } : item1;
-                });
-                // console.log('updated', updated)
-                nod = nod?.map(item1 => {
-                    const match = updated.find(item2 => item2.id === item1.id);
-                    // console.log('match', match)
-                    return match ? match : item1;
-                });
-                // console.log('nod', nod);
-                setNodes(nod);
-    }
-    
+
+
     // console.log('nodes', nodes);
     const onDrop = useCallback(
         (event) => {
-            event.preventDefault(); 
+            event.preventDefault();
             const file = event.dataTransfer.getData('application/parseFile');
             const template = event.dataTransfer.getData('application/template');
             let parsedNode;
@@ -345,7 +349,7 @@ export default function MainCanvas() {
             }
 
             // if (typeof parsedNode === "undefined" || !parsedNode || typeof parsedTemplate === "undefined" || !parsedTemplate) {
-                //   return;
+            //   return;
             // }
 
             const position = reactFlowInstance.screenToFlowPosition({
@@ -358,8 +362,8 @@ export default function MainCanvas() {
                     type: parsedNode.type,
                     position,
                     properties: parsedNode.properties,
-                    width:parsedNode?.width,
-                    height:parsedNode?.height,
+                    width: parsedNode?.width,
+                    height: parsedNode?.height,
                     data: {
                         label: parsedNode.data['label'],
                         style: {
@@ -379,13 +383,13 @@ export default function MainCanvas() {
                 };
                 dragAdd(newNode);
             }
-            
+
             if (parsedTemplate) {
                 let newNodes = [];
                 let newEdges = [];
                 const randomId = Math.floor(Math.random() * 1000);
                 const randomPos = Math.floor(Math.random() * 500);
-                
+
                 parsedTemplate['nodes'].map((node) => {
                     newNodes.push({
                         id: `${node.id + randomId}`,
@@ -415,7 +419,7 @@ export default function MainCanvas() {
                         extent: node?.extent ? node?.extent : null
                     });
                 });
-                
+
                 parsedTemplate['edges'].map((edge) =>
                     newEdges.push({
                         id: uid(),
@@ -431,17 +435,17 @@ export default function MainCanvas() {
         },
         [reactFlowInstance]
     );
-    
+
     const handleClose = () => {
         setOpenTemplate(false);
     };
-    
-    const onSave = useCallback(() => {
-        if (reactFlowInstance) {
-            const flow = reactFlowInstance.toObject();
-            localStorage.setItem(flowKey, JSON.stringify(flow));
-        }
-    }, [reactFlowInstance]);
+
+    // const onSave = useCallback(() => {
+    //     if (reactFlowInstance) {
+    //         const flow = reactFlowInstance.toObject();
+    //         localStorage.setItem(flowKey, JSON.stringify(flow));
+    //     }
+    // }, [reactFlowInstance]);
 
     const onSaveInitial = useCallback((template) => {
         localStorage.removeItem(flowKey);
@@ -452,16 +456,15 @@ export default function MainCanvas() {
 
     const onRestore = useCallback(() => {
         const restoreFlow = async () => {
+            // console.log('savedTemplate', savedTemplate)
             const flow = JSON.parse(localStorage.getItem(flowKey));
             if (flow) {
                 setSavedTemplate(flow);
+                // console.log('flow', flow);
                 // const { x = 0, y = 0, zoom = 1 } = flow.viewport;
-                setNodes(flow.nodes || []);
-                setEdges(flow.edges || []);
-            } else {
-                setNodes([]);
-                setEdges([]);
-            }
+                setNodes(flow.nodes);
+                setEdges(flow.edges);
+            } 
         };
         restoreFlow();
     }, [reactFlowInstance]);
@@ -470,20 +473,21 @@ export default function MainCanvas() {
         setNodes([]);
         setEdges([]);
     };
-    const handleSave = () => {
-        setOpenTemplate(true);
-        onSave();
-        onRestore();
-    };
+    // const handleSave = () => {
+    //     setOpenTemplate(true);
+    //     onSave();
+    //     onRestore();
+    // };
 
     const handleSaveToModal = () => {
         let mod = { ...modal };
         // console.log('mod', mod);
-        let Details = nodes?.map((node) => ({
+        console.log('nodes', nodes)
+        let Details = nodes?.filter(nd=>nd?.type!=='group')?.map((node) => ({
             name: node?.data?.label,
             props: node?.properties
         }));
-        let losses = nodes?.map((nd) => nd?.properties.map((pr) => ({ name: `loss of ${pr} for ${nd?.data?.label}` })));
+        let losses =nodes?.filter(nd=>nd?.type!=='group')?.map((nd) => nd?.properties.map((pr) => ({ name: `loss of ${pr} for ${nd?.data?.label}` })));
         losses = losses.flat().map((loss, i) => ({
             ...loss,
             id: `DS00${i + 1}`
@@ -651,35 +655,39 @@ export default function MainCanvas() {
 
     const toggleDrawerOpen = (tab) => dispatch(drawerOpen(tab));
     const toggleDrawerClose = () => dispatch(drawerClose());
-    const onLoad = (reactFlowInstance) => reactFlowInstance.current.fitView();
+    const onLoad = (reactFlowInstance) => reactFlowInstance.current;
 
     const handleSidebarOpen = (e, node) => {
-        setSelectedNode(node);
-        toggleDrawerOpen('MainCanvasTab');
-        dispatch(setProperties(node?.properties))
+        if (node.type !== 'group') {
+            setSelectedNode(node);
+            toggleDrawerOpen('MainCanvasTab');
+            dispatch(setProperties(node?.properties));
+        }
     };
 
     const handleSelectNode = (e, node) => {
-        setSelectedNode(node);
-        dispatch(setProperties(node?.properties))
+        if (node.type !== 'group') {
+            setSelectedNode(node);
+            dispatch(setProperties(node?.properties));
+        }
     };
 
     const createGroup = (e) => {
         e.preventDefault();
         const newNode = {
-                id: uid(),
-                type: 'group',
-                height:280,
-                width:250,
-                position:{
-                    x:e.clientX,
-                    y:e.clientY,
-                },
-                data: {
-                 label:'group'
-                },
-            };
-            dragAdd(newNode);
+            id: uid(),
+            type: 'group',
+            height: 280,
+            width: 250,
+            position: {
+                x: e.clientX,
+                y: e.clientY
+            },
+            data: {
+                label: 'group'
+            }
+        };
+        dragAdd(newNode);
     };
     if (isDsTableOpen) return <DsTable />;
     if (isTsTableOpen) return <Tstable />;
@@ -690,7 +698,17 @@ export default function MainCanvas() {
     return (
         <>
             <div style={{ width: '100%', height: '100%', border: '1px solid', background: 'white' }}>
-                <Header selectedNode={selectedNode} nodes={nodes} setNodes={setNodes} setSelectedNode={setSelectedNode} />
+                <Header
+                    selectedNode={selectedNode}
+                    nodes={nodes}
+                    setNodes={setNodes}
+                    setSelectedNode={setSelectedNode}
+                    horizontal={() => onLayout({ direction: 'RIGHT' })}
+                    vertical={() => onLayout({ direction: 'DOWN' })}
+                    handleClear={handleClear}
+                    handleSave={handleSaveToModal}
+                    download={handleDownload}
+                />
                 <ReactFlowProvider>
                     {/* <div className="reactflow-wrapper" ref={reactFlowWrapper}> */}
                     <ReactFlow
@@ -704,7 +722,7 @@ export default function MainCanvas() {
                         onLoad={onLoad}
                         onNodeDrag={onNodeDrag}
                         onNodeDragStart={onNodeDragStart}
-                        // onNodeDragStop={onNodeDragStop}
+                        onNodeDragStop={onNodeDragStop}
                         connectionLineStyle={connectionLineStyle}
                         defaultEdgeOptions={edgeOptions}
                         onInit={setReactFlowInstance}
@@ -720,7 +738,7 @@ export default function MainCanvas() {
                         //   },
                         // }}
                     >
-                        <Panel
+                        {/* <Panel
                             position="top-left"
                             style={{
                                 display: 'flex',
@@ -748,11 +766,11 @@ export default function MainCanvas() {
                             <Button variant="outlined" onClick={() => onLayout({ direction: 'RIGHT' })}>
                                 horizontal layout
                             </Button>
-                        </Panel>
+                        </Panel> */}
 
                         <Controls />
-                        <MiniMap zoomable pannable />
-                        <Background variant="dots" gap={12} size={1} style={{backgroundColor:ColorTheme()?.canvasBG}}/>
+                        <MiniMap zoomable pannable style={{ background: Color.canvasBG }} />
+                        <Background variant="dots" gap={12} size={1} style={{ backgroundColor: Color?.canvasBG }} />
                         <RightDrawer
                             state={isRightDrawerOpen}
                             activeTab={activeTab}
@@ -767,15 +785,15 @@ export default function MainCanvas() {
                     </ReactFlow>
                     {/* </div> */}
                 </ReactFlowProvider>
-                {openTemplate && <AddLibrary
-                    open={openTemplate}
-                    handleClose={handleClose}
-                    savedTemplate={savedTemplate}
-                    setNodes={setNodes}
-                    setEdges={setEdges}
-                />}
+                {openTemplate && (
+                    <AddLibrary
+                        open={openTemplate}
+                        handleClose={handleClose}
+                        savedTemplate={savedTemplate}
+                        setNodes={setNodes}
+                        setEdges={setEdges}
+                    />
+                )}
                 <AlertMessage open={open} message={message} setOpen={setOpen} success={success} />
             </div>
-        </>
-    );
-}
+        </>)}

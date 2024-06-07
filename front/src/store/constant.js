@@ -26,7 +26,8 @@ export const navbarHeight = 150;
    sidebarContent:'#000',
    tabContentClr:'#000',
    title:'#000',
-   logo:'#5FBDFF'
+   logo:'#5FBDFF',
+   iconColor:'#555555'
 
 }
 
@@ -41,6 +42,7 @@ export const navbarHeight = 150;
    sidebarContent:'white',
    tabContentClr:'white',
    title:'whitesmoke',
-   logo:'#5FBDFF'
+   logo:'#5FBDFF',
+   iconColor:'white'
 }
 

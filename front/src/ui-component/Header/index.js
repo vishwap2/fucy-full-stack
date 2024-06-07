@@ -1,29 +1,58 @@
 import { makeStyles } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 import React, { useEffect, useState, useCallback } from 'react';
-import { TextBold, TextUnderline, TextItalic, ArrowForward, Back, TextalignJustifycenter, BrushBig } from 'iconsax-react';
+import {
+    TextBold,
+    TextUnderline,
+    TextItalic,
+    // ArrowForward,
+    // Back,
+    TextalignJustifycenter,
+    BrushBig
+} from 'iconsax-react';
 import FormatShapesIcon from '@mui/icons-material/FormatShapes';
+import VerticalAlignCenterIcon from '@mui/icons-material/VerticalAlignCenter';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import ClearIcon from '@mui/icons-material/Clear';
+import SaveIcon from '@mui/icons-material/Save';
 import FontSizeSelector from './FontResizer';
 import FontSelector from './FontSelector';
 import CreateIcon from '@mui/icons-material/Create';
+import ColorTheme from '../../store/ColorTheme';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     header: {
-        background: 'white',
         width: 'inherit',
         height: '2rem',
         borderBottom: '1px solid black',
         display: 'flex',
         alignItems: 'center',
-        gap: 20
+        gap: 20,
+        padding: '0 1rem',
+        [theme.breakpoints.down('md')]: {
+            overflow: 'auto',
+            scrollbarWidth:'none'
+        },
+
     },
     icons: {
-        fontSize: '20px',
-        color: '#555555'
+        fontSize: '20px'
     }
 }));
-export default function Header({ selectedNode, nodes, setSelectedNode, setNodes }) {
+export default function Header({
+    selectedNode,
+    nodes,
+    setSelectedNode,
+    setNodes,
+    horizontal,
+    vertical,
+    handleClear,
+    handleSave,
+    download
+}) {
+    const color = ColorTheme();
     const classes = useStyles();
+    const { iconColor } = color;
     // console.log('nodes', nodes);
     // console.log('selectedNode', selectedNode);
     const [highlight, setHighlight] = useState({
@@ -40,9 +69,9 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
         color: '',
         fontWeight: 0,
         textDecoration: '',
-        borderColor:'',
-        borderWidth:'',
-        borderStyle:''
+        borderColor: '',
+        borderWidth: '',
+        borderStyle: ''
     });
     const number = useCallback((size) => {
         let sum = size?.slice(0, size.indexOf('p'));
@@ -62,7 +91,6 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
             borderColor: selectedNode?.data?.style?.borderColor ?? 'none',
             borderWidth: selectedNode?.data?.style?.borderWidth ?? '2px',
             borderStyle: selectedNode?.data?.style?.borderStyle ?? 'solid'
-
         });
         setHighlight({
             ...highlight,
@@ -152,12 +180,10 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
         if (name === 'font') {
             setStyles((state) => ({ ...state, fontFamily: event.target.value }));
             style.fontFamily = event.target.value;
-        }
-        else if(name === 'border'){
+        } else if (name === 'border') {
             setStyles({ ...styles, borderColor: event.target.value });
             style.borderColor = event.target.value;
-        }
-         else {
+        } else {
             setStyles({ ...styles, color: event.target.value });
             style.color = event.target.value;
         }
@@ -169,9 +195,9 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
     // console.log('styles', styles)
     return (
         <>
-            <Box className={classes.header}>
-                <Back size="20" color="#555555" />
-                <ArrowForward color="#555555" />
+            <Box className={classes.header} sx={{ background: color?.canvasBG }}>
+                {/* <Back size="20" color={iconColor} />
+                <ArrowForward color={iconColor} /> */}
                 <FontSizeSelector fontSize={styles?.fontSize} handleFontSizeChange={handleFontSizeChange} changeFontSize={changeFontSize} />
                 <FontSelector font={styles?.fontFamily} handleChange={handleChange} />
                 <TextBold
@@ -182,7 +208,7 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
                         opacity: 0.8,
                         border: highlight?.bold ? '1px solid #2772db' : 'none',
                         padding: '1px',
-                        color: highlight?.bold ? 'black' : '#555555',
+                        color: highlight?.bold ? 'black' : iconColor,
                         fontWeight: highlight?.bold ? 700 : 500
                     }}
                 />
@@ -194,7 +220,7 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
                         opacity: 0.8,
                         border: highlight?.decor ? '1px solid #2772db' : 'none',
                         padding: '1px',
-                        color: highlight?.decor ? 'black' : '#555555',
+                        color: highlight?.decor ? 'black' : iconColor,
                         fontWeight: highlight?.decor ? 700 : 500
                     }}
                 />
@@ -206,13 +232,13 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
                         opacity: 0.8,
                         border: highlight?.italic ? '1px solid #2772db' : 'none',
                         padding: '1px',
-                        color: highlight?.italic ? 'black' : '#555555',
+                        color: highlight?.italic ? 'black' : iconColor,
                         fontWeight: highlight?.italic ? 700 : 500
                     }}
                 />
-                <TextalignJustifycenter size="20" color="#555555" />
+                <TextalignJustifycenter size="20" color={iconColor} />
                 <label htmlFor="color" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '1.8rem' }}>
-                    <BrushBig size="20" />
+                    <BrushBig size="20" color={iconColor} />
                     <span
                         style={{
                             height: '5px',
@@ -228,10 +254,10 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
                         onChange={(e) => handleChange(e, 'color')}
                     />
                 </label>
-                <FormatShapesIcon className={classes.icons} />
+                <FormatShapesIcon className={classes.icons} sx={{ color: iconColor }} />
                 {/* <Edit2 size="20" color="#555555" /> */}
                 <label htmlFor="border" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '1.8rem' }}>
-                <CreateIcon className={classes.icons} />
+                    <CreateIcon className={classes.icons} sx={{ color: iconColor }} />
                     <span
                         style={{
                             height: '5px',
@@ -247,6 +273,35 @@ export default function Header({ selectedNode, nodes, setSelectedNode, setNodes 
                         onChange={(e) => handleChange(e, 'border')}
                     />
                 </label>
+
+                <Tooltip title="Clear">
+                    <Typography sx={{ color: iconColor, alignSelf:'end' }} onClick={handleClear}>
+                        < ClearIcon/>
+                    </Typography>
+                </Tooltip>
+
+                <Tooltip title="Save">
+                    <Typography sx={{ color: iconColor ,alignSelf:'end' }} onClick={handleSave}>
+                    <SaveIcon />
+                    </Typography>
+                </Tooltip>
+
+                <Tooltip title="Vertical Align">
+                    <Typography sx={{ color: iconColor, alignSelf:'end' }} onClick={vertical}>
+                        <VerticalAlignCenterIcon />
+                    </Typography>
+                </Tooltip>
+
+                <Tooltip title="Horizontal Align">
+                    <Typography sx={{ color: iconColor, alignSelf:'end' }} onClick={horizontal}>
+                        <VerticalAlignCenterIcon sx={{ rotate: '90deg' }} />
+                    </Typography>
+                </Tooltip>
+                <Tooltip title="Download">
+                    <Typography sx={{ color: iconColor, alignSelf:'end' }} onClick={download}>
+                       <GetAppIcon/>
+                    </Typography>
+                </Tooltip>
             </Box>
         </>
     );

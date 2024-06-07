@@ -105,31 +105,17 @@ const useStore = createWithEqualityFn((set, get) => ({
     },
 
     getIntersectingNodes: () => {
-        const nodes = get().nodes;
-        // console.log('nodes store', nodes)
-        const group = nodes?.find(nd=>nd?.type ==='group');
+        let nodes = get().nodes;
+        // console.log('nodes store', nodes);
+        const group = nodes?.find(nd => nd?.type === 'group');
+        // console.log('group', group);
         const area={};
-    
+    if(group){ 
         area.x=group?.position.x,
         area.y=group?.position?.y,
         area.width=group.width, 
         area.height=group.height
-        
-        // console.log('area', area);
-        // console.log('nodes12', nodes)
-        // Check if two rectangles intersect based on their positions and dimensions
-        // const doRectanglesIntersect = (area, node) => {
-
-        //   return (
-        //     // rect1.x >= rect2.x + rect2.width || // rect1 is to the right of rect2
-        //     // rect1.x + rect1.width <= rect2.x || // rect1 is to the left of rect2
-        //     // rect1.y >= rect2.y + rect2.height || // rect1 is below rect2
-        //     // rect1.y + rect1.height <= rect2.y // rect1 is above rect2
-        //      area.x <= node.x
-
-        //   );
-        // };
-
+    }
         function doNodesTouch(nodeA, nodeB) {
             // console.log('nodeA', nodeA)
             // console.log('nodeB', nodeB)
@@ -160,6 +146,7 @@ const useStore = createWithEqualityFn((set, get) => ({
           });
        
           return [intersectingNodes, nodes];
+        
         },
     //fetch or GET section
     fetchAPI: async () => {
@@ -319,7 +306,7 @@ const useStore = createWithEqualityFn((set, get) => ({
     addNewNode: async (newNode) => {
         // console.log('newNode',newNode);
         const res = await axios.post(`${configuration.apiBaseUrl}sidebarNode`, newNode);
-        console.log('res', res);
+        return res; 
     },
 
     createModal: async (newModal) => {

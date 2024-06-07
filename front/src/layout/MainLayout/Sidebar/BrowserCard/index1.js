@@ -52,6 +52,8 @@ import ModelIcon from '../../../../assets/icons/model.png';
 import ColorTheme from '../../../../store/ColorTheme';
 import { NavLink } from 'react-router-dom';
 
+// const color = ColorTheme();
+
 const imageComponents = {
     AttackIcon,
     ItemIcon,
@@ -106,7 +108,7 @@ const NavigationTag = styled(NavLink)(() => ({
     textDecoration: 'none',
     display:'flex',
     marginLeft: '-7px',
-    color:'black',
+    color:ColorTheme()?.sidebarContent,
 
     '&.active':{
         color:'red',
@@ -120,12 +122,15 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(0, 0),
-        marginLeft: '-7px'
+        marginLeft: '-7px',
+        color:'inherit'
     },
     labelTypo: {
         fontSize: 12,
         fontWeight: 600,
-        fontFamily: 'Inter'
+        fontFamily: 'Inter',
+        color:'inherit'
+
     }
 }));
 
@@ -309,12 +314,12 @@ const BrowserCard = ({ modals }) => {
             <Typography variant="h4" sx={{ color: ColorTheme().tabContentClr }}>
                 Projects
             </Typography>
-            <CardStyle sx={{ overflowY: 'auto' }}>
-                <CardContent sx={{ p: 2 }}>
+            <CardStyle sx={{ overflowY: 'auto', backgroundColor:ColorTheme()?.sidebarInnerBG }}>
+                <CardContent sx={{ p: 2, color:ColorTheme()?.sidebarContent }}>
                     <TreeView
                         aria-label="file system navigator"
-                        defaultCollapseIcon={<ExpandMoreIcon />}
-                        defaultExpandIcon={<ChevronRightIcon />}
+                        defaultCollapseIcon={<ExpandMoreIcon sx={{color:'inherit'}}/>}
+                        defaultExpandIcon={<ChevronRightIcon sx={{color:'inherit'}}/>}
                     >
                         {ModalDetails &&
                             ModalDetails?.map((modal) => {

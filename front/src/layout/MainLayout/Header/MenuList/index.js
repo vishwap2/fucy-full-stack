@@ -147,10 +147,10 @@ export default function MenuList() {
                     </TabList>
                     <Box display='flex' flexDirection='column' gap={2} alignItems='center'>
                         <Box onClick={handleChangeMode} sx={{ cursor: 'pointer' }}>
-                            {isDark ? <NightsStayIcon /> : <LightModeIcon />}
+                            {isDark ? <NightsStayIcon sx={{color:'white'}}/> : <LightModeIcon />}
                         </Box>
                         <Box onClick={()=>dispatch(navbarSlide())}>
-                          {!isNavbarClose ? <ArrowSquareUp size="20" color="#555555" /> : <ArrowSquareDown size="20" color="#555555" />}
+                          {!isNavbarClose ? <ArrowSquareUp size="20" color={ColorTheme()?.iconColor} /> : <ArrowSquareDown size="20" color={ColorTheme()?.iconColor} />}
                         </Box>
                     </Box>
                 </Box>

@@ -2,7 +2,7 @@
 
 // material-ui
 import { styled
-    , useTheme 
+    // , useTheme 
 } from '@mui/material/styles';
 import {
     // Avatar,
@@ -90,7 +90,7 @@ const MenuCard = ({properties}) => {
 // console.log('ColorTheme', ColorTheme())
 
     // console.log('properties here', properties)
-    const theme = useTheme();
+    // const theme = useTheme();
 
     return (
         <>
@@ -106,7 +106,7 @@ const MenuCard = ({properties}) => {
                         key={i}
                             sx={{ mt: 0 }}
                             primary={
-                                <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
+                                <Typography variant="subtitle1" sx={{ color: ColorTheme()?.sidebarContent }}>
                                {i+1}. {item}
                                 </Typography>
                             }

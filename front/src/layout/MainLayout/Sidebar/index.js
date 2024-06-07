@@ -17,8 +17,8 @@ import ColorTheme from '../../../store/ColorTheme';
 import BrowserCard from './BrowserCard/index1';
 import useStore from '../../../Zustand/store';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { clearProperties } from '../../../store/slices/PageSectionSlice';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
@@ -26,9 +26,10 @@ const selector = (state) => ({
     template: state.template,
     modals: state.Modals,
     fetchAPI: state.fetchAPI,
-    fetchModals: state.getModals
+    fetchModals: state.getModals,
 });
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
+    const dispatch = useDispatch();
     const { template, fetchAPI, fetchModals, modals } = useStore(selector);
     const theme = useTheme();
     const { isNavbarClose } = useSelector((state)=>state.currentId);
@@ -38,6 +39,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     useEffect(() => {
         fetchAPI();
         fetchModals();
+        dispatch(clearProperties());
     }, []);
 
     const drawer = (
@@ -59,7 +61,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     }}
                 >
                     <BrowserCard template={template} modals={modals} />
-                    {Properties?.length && <MenuCard properties={Properties} />}
+                    {Properties && Properties?.length>0 && <MenuCard properties={Properties} />}
                 </PerfectScrollbar>
             </BrowserView>
             <MobileView>

@@ -10,23 +10,25 @@ const selector = (state) => ({
 export default function Event(props) {
     const { update } = useStore(selector);
     const [inputValue, setInputValue] = useState('');
-    const [open ,setOpen ] = useState(false);
+    const [open, setOpen] = useState(false);
     const handleopenModal = (e) => {
         e.preventDefault();
-    // console.log('props', props)
-      setOpen(true)
-    }
+        // console.log('props', props)
+        setOpen(true);
+    };
 
-    const handleClose = ()=> {
+    const handleClose = () => {
         setOpen(false);
-    }
+    };
     // console.log('data', data);
 
-    useEffect(()=>{
-        if(props.data.label) {setInputValue(props?.data?.label)}
-    })
+    useEffect(() => {
+        if (props.data.label) {
+            setInputValue(props?.data?.label);
+        }
+    }, [props.data]);
     const handleChange = (e) => {
-        const  {value}  = e.target;
+        const { value } = e.target;
         // console.log('value', value)
         setInputValue(value);
         update(props?.id, value);
@@ -34,13 +36,13 @@ export default function Event(props) {
 
     return (
         <>
-                <Handle type="target" position={Position.Top} style={{ top: '-12px',opacity:0}} />
-                    <div onContextMenu={handleopenModal}>
-                    <input
+            <Handle type="target" position={Position.Top} style={{ top: '-12px', opacity: 0 }} />
+            <div onContextMenu={handleopenModal}>
+                <input
                     type="text"
                     value={inputValue}
                     style={{
-                        borderRadius:'4px',
+                        borderRadius: '4px',
                         width: `${Math.max(100, inputValue.length * 7)}px`,
                         minWidth: '100px',
                         maxWidth: 'auto',
@@ -49,11 +51,10 @@ export default function Event(props) {
                         border: `1px solid ${colorPickerTab(props?.data?.status)}`
                     }}
                     onChange={handleChange}
-                    />
-                    </div>
-                <Handle type="source" position={Position.Bottom} style={{ bottom: '-12px',opacity:0}} />
-            {open && <AddPropertiesGate open={open} handleClose={handleClose} updateNode={props}/>}
-
+                />
+            </div>
+            <Handle type="source" position={Position.Bottom} style={{ bottom: '-12px', opacity: 0 }} />
+            {open && <AddPropertiesGate open={open} handleClose={handleClose} updateNode={props} />}
         </>
     );
 }
