@@ -11,7 +11,7 @@ import { shallow } from 'zustand/shallow';
 import { useParams } from 'react-router';
 import CircleIcon from '@mui/icons-material/Circle';
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
-import { Button, Checkbox, FormControl, MenuItem, Select, Typography, styled } from '@mui/material';
+import { Button, Checkbox, FormControl, MenuItem, Select, TextField, Typography, styled } from '@mui/material';
 import AddDamageScenarios from '../Modal/AddDamageScenario';
 import { useDispatch } from 'react-redux';
 import { closeAll } from '../../store/slices/CurrentIdSlice';
@@ -26,7 +26,6 @@ const selector = (state) => ({
     getModals: state.getModals,
     update: state.updateModal
 });
-
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -99,7 +98,7 @@ const SelectableCell = ({ row, options, handleChange, colorPickerTab, impact, na
 
 export default function DsTable() {
     const { modal, getModals, getModalById, update } = useStore(selector, shallow);
-    const [ stakeHolder ]  = React.useState(false);
+    const [stakeHolder] = React.useState(false);
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -107,58 +106,61 @@ export default function DsTable() {
     const [openCl, setOpenCl] = React.useState(false);
     const [rows, setRows] = React.useState([]);
     const [selectedRow, setSelectedRow] = React.useState({});
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [filtered, setFiltered] = React.useState([]);
 
     React.useEffect(() => {
         getModalById(id);
     }, [id]);
 
-    const Head= React.useCallback(() =>{
-        if(stakeHolder){
-      return  [{ id: 1, name: 'ID' },
-        { id: 2, name: 'Name' },
-        { id: 3, name: 'Damage Scenario' },
-        { id: 4, name: 'Description/ Scalability' },
-        { id: 5, name: 'Losses of Cybersecurity Properties' },
-        { id: 6, name: 'Assets' },
-        { id: 7, name: 'Component/Message' },
-        { id: 8, name: 'Safety Impact per StakeHolder' },
-        { id: 9, name: 'Financial Impact per StakeHolder' },
-        { id: 10, name: 'Operational Impact per StakeHolder' },
-        { id: 11, name: 'Privacy Impact per StakeHolder' },
-        { id: 12, name: 'Impact Justification by Stakeholder' },
-        { id: 13, name: 'Safety Impact' },
-        { id: 14, name: 'Financial Impact' },
-        { id: 15, name: 'Operational Impact' },
-        { id: 16, name: 'Privacy Impact' },
-        { id: 17, name: 'Impact Justification' },
-        { id: 18, name: 'Associated Threat Scenarios' },
-        { id: 19, name: 'Overall Impact' },
-        { id: 20, name: 'Asset is Evaluated' },
-        { id: 21, name: 'Cybersecurity Properties are Evaluated' },
-        { id: 22, name: 'Unevaluated Cybersecurity Properties' }
-    ]
-    }else{
-        return [{ id: 1, name: 'ID' },
-        { id: 2, name: 'Name' },
-        { id: 3, name: 'Damage Scenario' },
-        { id: 4, name: 'Description/ Scalability' },
-        { id: 5, name: 'Losses of Cybersecurity Properties' },
-        { id: 6, name: 'Assets' },
-        { id: 7, name: 'Component/Message' },
-        { id: 13, name: 'Safety Impact' },
-        { id: 14, name: 'Financial Impact' },
-        { id: 15, name: 'Operational Impact' },
-        { id: 16, name: 'Privacy Impact' },
-        { id: 17, name: 'Impact Justification' },
-        { id: 18, name: 'Associated Threat Scenarios' },
-        { id: 19, name: 'Overall Impact' },
-        { id: 20, name: 'Asset is Evaluated' },
-        { id: 21, name: 'Cybersecurity Properties are Evaluated' },
-        { id: 22, name: 'Unevaluated Cybersecurity Properties' }
-    ]
-    }
-},[]);
-
+    const Head = React.useCallback(() => {
+        if (stakeHolder) {
+            return [
+                { id: 1, name: 'ID' },
+                { id: 2, name: 'Name' },
+                { id: 3, name: 'Damage Scenario' },
+                { id: 4, name: 'Description/ Scalability' },
+                { id: 5, name: 'Losses of Cybersecurity Properties' },
+                { id: 6, name: 'Assets' },
+                { id: 7, name: 'Component/Message' },
+                { id: 8, name: 'Safety Impact per StakeHolder' },
+                { id: 9, name: 'Financial Impact per StakeHolder' },
+                { id: 10, name: 'Operational Impact per StakeHolder' },
+                { id: 11, name: 'Privacy Impact per StakeHolder' },
+                { id: 12, name: 'Impact Justification by Stakeholder' },
+                { id: 13, name: 'Safety Impact' },
+                { id: 14, name: 'Financial Impact' },
+                { id: 15, name: 'Operational Impact' },
+                { id: 16, name: 'Privacy Impact' },
+                { id: 17, name: 'Impact Justification' },
+                { id: 18, name: 'Associated Threat Scenarios' },
+                { id: 19, name: 'Overall Impact' },
+                { id: 20, name: 'Asset is Evaluated' },
+                { id: 21, name: 'Cybersecurity Properties are Evaluated' },
+                { id: 22, name: 'Unevaluated Cybersecurity Properties' }
+            ];
+        } else {
+            return [
+                { id: 1, name: 'ID' },
+                { id: 2, name: 'Name' },
+                { id: 3, name: 'Damage Scenario' },
+                { id: 4, name: 'Description/ Scalability' },
+                { id: 5, name: 'Losses of Cybersecurity Properties' },
+                { id: 6, name: 'Assets' },
+                { id: 7, name: 'Component/Message' },
+                { id: 13, name: 'Safety Impact' },
+                { id: 14, name: 'Financial Impact' },
+                { id: 15, name: 'Operational Impact' },
+                { id: 16, name: 'Privacy Impact' },
+                { id: 17, name: 'Impact Justification' },
+                { id: 18, name: 'Associated Threat Scenarios' },
+                { id: 19, name: 'Overall Impact' },
+                { id: 20, name: 'Asset is Evaluated' },
+                { id: 21, name: 'Cybersecurity Properties are Evaluated' },
+                { id: 22, name: 'Unevaluated Cybersecurity Properties' }
+            ];
+        }
+    }, []);
 
     const handleOpenCl = (row) => {
         setSelectedRow(row);
@@ -169,6 +171,26 @@ export default function DsTable() {
         setOpenCl(false);
         setSelectedRow({});
     };
+
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        // console.log('value', value);
+        // console.log("valuerows", rows);
+        if (value.length > 0) {
+            const filterValue = rows.filter(rw => {
+                if ((rw.name.toLowerCase()).includes(value) || rw.Description.toLowerCase().includes(value)) {
+                    return rw
+                }
+            })
+            setFiltered(filterValue);
+        } else {
+            setFiltered(rows)
+        }
+
+        setSearchTerm(value);
+
+    }
+
     React.useEffect(() => {
         if (modal.scenarios) {
             const mod1 = modal?.scenarios[1]?.subs[0]?.losses
@@ -202,6 +224,7 @@ export default function DsTable() {
             const combained = mod1.concat(mod2);
             // console.log('combained', combained)
             setRows(combained);
+            setFiltered(combained);
         }
     }, [modal]);
 
@@ -317,36 +340,28 @@ export default function DsTable() {
     };
 
     const OverallImpact = React.useCallback((impact) => {
-        const pattern=(it)=>{
+        const pattern = (it) => {
             // console.log('it', it);
             return it === 'Negligible'
-            ?  it = 1
-            : it === 'Moderate'
-            ? (it = 2)
-            : it === 'Major'
-            ? (it = 3)
-            : it === 'Severe'
-            ? (it = 4)
-            :  it = 0;
-        }
+                ? (it = 1)
+                : it === 'Moderate'
+                ? (it = 2)
+                : it === 'Major'
+                ? (it = 3)
+                : it === 'Severe'
+                ? (it = 4)
+                : (it = 0);
+        };
 
-        const avgImpact=(ratio)=>{
-            return ratio === 1
-            ?  'Negligible'
-            : ratio === 2
-            ?  'Moderate'
-            : ratio === 3
-            ?  'Major'
-            : ratio === 4
-            ? 'Severe'
-            :  '';
-        }
-         const val = Object.values(impact).map((it) => {
-              return pattern(it)
-            })
-            // console.log('val', val)
-        const sum  = val.reduce((a,b)=>a+b);
-        const ratio = sum > 0 ? Math.floor(impact && sum/Object.values(impact).length):0;
+        const avgImpact = (ratio) => {
+            return ratio === 1 ? 'Negligible' : ratio === 2 ? 'Moderate' : ratio === 3 ? 'Major' : ratio === 4 ? 'Severe' : '';
+        };
+        const val = Object.values(impact).map((it) => {
+            return pattern(it);
+        });
+        // console.log('val', val)
+        const sum = val.reduce((a, b) => a + b);
+        const ratio = sum > 0 ? Math.floor(impact && sum / Object.values(impact).length) : 0;
         // console.log('ratio', ratio)
         return avgImpact(ratio);
     }, []);
@@ -365,11 +380,14 @@ export default function DsTable() {
                         sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }}
                         onClick={handleBack}
                     />
-                    <Typography sx={{ color: ColorTheme().title }}>Damage Scenario Table</Typography>
+                    <Typography sx={{ color: ColorTheme().title, fontWeight:600, fontSize:'18px' }}>Damage Scenario Table</Typography>
                 </Box>
+                    <Box display='flex' gap={3}>
+                        <TextField id="outlined-size-small" placeholder='Search' size="small" value={searchTerm} onChange={handleSearch} />
                 <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
                     Add New Scenario
                 </Button>
+                    </Box>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -381,7 +399,7 @@ export default function DsTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows?.map((row) => (
+                        {filtered?.map((row) => (
                             <StyledTableRow key={row?.id}>
                                 <StyledTableCell component="th" scope="row">
                                     {row?.id?.slice(0, 6)}
@@ -443,21 +461,31 @@ export default function DsTable() {
                                         ))}
                                     </div>
                                 </StyledTableCell>
-                              { stakeHolder && <StyledTableCell component="th" scope="row">
-                                    Test
-                                </StyledTableCell>}
-                                { stakeHolder && <StyledTableCell component="th" scope="row">
-                                    Test
-                                </StyledTableCell>}
-                                { stakeHolder && <StyledTableCell component="th" scope="row">
-                                    Test
-                                </StyledTableCell>}
-                                { stakeHolder && <StyledTableCell component="th" scope="row">
-                                    Test
-                                </StyledTableCell>}
-                                { stakeHolder && <StyledTableCell component="th" scope="row">
-                                    Test
-                                </StyledTableCell>}
+                                {stakeHolder && (
+                                    <StyledTableCell component="th" scope="row">
+                                        Test
+                                    </StyledTableCell>
+                                )}
+                                {stakeHolder && (
+                                    <StyledTableCell component="th" scope="row">
+                                        Test
+                                    </StyledTableCell>
+                                )}
+                                {stakeHolder && (
+                                    <StyledTableCell component="th" scope="row">
+                                        Test
+                                    </StyledTableCell>
+                                )}
+                                {stakeHolder && (
+                                    <StyledTableCell component="th" scope="row">
+                                        Test
+                                    </StyledTableCell>
+                                )}
+                                {stakeHolder && (
+                                    <StyledTableCell component="th" scope="row">
+                                        Test
+                                    </StyledTableCell>
+                                )}
                                 {/* <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Safety) }}>
                                     <FormControl
                                         sx={{
@@ -531,7 +559,11 @@ export default function DsTable() {
                                 <StyledTableCell component="th" scope="row">
                                     Test
                                 </StyledTableCell>
-                                <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(OverallImpact(row?.impacts)) }}>
+                                <StyledTableCell
+                                    component="th"
+                                    scope="row"
+                                    sx={{ background: colorPickerTab(OverallImpact(row?.impacts)) }}
+                                >
                                     {OverallImpact(row?.impacts)}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">

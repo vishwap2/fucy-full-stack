@@ -4495,7 +4495,14 @@
                 {
                   "id": "DS002",
                   "name": "loss of Authorization for Power Management",
-                  "cyberLosses": [],
+                  "cyberLosses": [
+                    {
+                      "name": "Vehicle",
+                      "props": [
+                        "Authenticity"
+                      ]
+                    }
+                  ],
                   "impacts": {
                     "Financial": "",
                     "Safety": "",
@@ -4690,6 +4697,25 @@
                       "name": "Power Management",
                       "props": [
                         "Integrity"
+                      ]
+                    }
+                  ],
+                  "impacts": {
+                    "Financial": "",
+                    "Safety": "",
+                    "Operational": "",
+                    "Privacy": ""
+                  }
+                },
+                {
+                  "id": "DS002",
+                  "name": "loss of Authorization for Power Management",
+                  "Description": "loss of Authorization for Power Management",
+                  "cyberLosses": [
+                    {
+                      "name": "Vehicle",
+                      "props": [
+                        "Authenticity"
                       ]
                     }
                   ],

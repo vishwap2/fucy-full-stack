@@ -10,7 +10,7 @@ import useStore from '../../Zustand/store';
 import { shallow } from 'zustand/shallow';
 import { useParams } from 'react-router';
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
-import { Button, Typography, styled } from '@mui/material';
+import { Button, TextField, Typography, styled } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
 import { closeAll } from '../../store/slices/CurrentIdSlice';
@@ -92,6 +92,8 @@ export default function Tstable() {
     const [openTs, setOpenTs] = React.useState(false);
     const { modal, getModal } = useStore(selector, shallow);
     const [rows, setRows] = React.useState([]);
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [filtered, setFiltered] = React.useState([]);
 
     React.useEffect(() => {
         getModal(id);
@@ -117,24 +119,39 @@ export default function Tstable() {
             // console.log('mod2', mod2)
             const combained = mod1.concat(mod2);
             setRows(combained);
+            setFiltered(combained);
         }
     }, [modal]);
-    console.log('rows', rows);
+    // console.log('rows', rows);
 
     const handleOpenModalTs = () => {
         setOpenTs(true);
     };
+
     const handleCloseTs = () => {
         setOpenTs(false);
     };
 
-    console.log('rows', rows);
-
-    console.log('modal12', modal);
-
     const handleBack = () => {
         dispatch(closeAll());
     };
+
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        if (value.length > 0) {
+            const filterValue = rows.filter(rw => {
+                if ((rw.name.toLowerCase()).includes(value) || rw.Description.toLowerCase().includes(value)) {
+                    return rw
+                }
+            })
+            setFiltered(filterValue);
+        } else {
+            setFiltered(rows)
+        }
+
+        setSearchTerm(value);
+
+    }
     // console.log('selectedRow', selectedRow)
     return (
         <Box sx={{
@@ -145,11 +162,15 @@ export default function Tstable() {
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
                     <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color:ColorTheme().title }} onClick={handleBack} />
-                    <Typography sx={{color:ColorTheme().title}}>Threat Scenario Table</Typography>
+                    <Typography sx={{ color: ColorTheme().title ,fontWeight:600, fontSize:'18px' }}>Threat Scenario Table</Typography>
+                    
                 </Box>
+                <Box display='flex' gap={3}>
+                        <TextField id="outlined-size-small" placeholder='Search' size="small" value={searchTerm} onChange={handleSearch} />
                 <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalTs}>
                     Add New Scenario
                 </Button>
+                    </Box>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -161,7 +182,7 @@ export default function Tstable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows?.map((row) => (
+                        {filtered?.map((row) => (
                             <StyledTableRow key={row?.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <StyledTableCell component="td" scope="row">
                                     {row?.id?.slice(0, 6)}
