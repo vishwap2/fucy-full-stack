@@ -166,7 +166,11 @@ export default function Tstable() {
                     
                 </Box>
                 <Box display='flex' gap={3}>
-                        <TextField id="outlined-size-small" placeholder='Search' size="small" value={searchTerm} onChange={handleSearch} />
+                        <TextField id="outlined-size-small" placeholder='Search' size="small" value={searchTerm} onChange={handleSearch}  sx={{
+                        '& .MuiInputBase-input': {
+                            border:'1px solid black'
+                        }
+                    }}/>
                 <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalTs}>
                     Add New Scenario
                 </Button>

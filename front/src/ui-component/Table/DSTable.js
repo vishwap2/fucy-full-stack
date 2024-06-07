@@ -177,19 +177,18 @@ export default function DsTable() {
         // console.log('value', value);
         // console.log("valuerows", rows);
         if (value.length > 0) {
-            const filterValue = rows.filter(rw => {
-                if ((rw.name.toLowerCase()).includes(value) || rw.Description.toLowerCase().includes(value)) {
-                    return rw
+            const filterValue = rows.filter((rw) => {
+                if (rw.name.toLowerCase().includes(value) || rw.Description.toLowerCase().includes(value)) {
+                    return rw;
                 }
-            })
+            });
             setFiltered(filterValue);
         } else {
-            setFiltered(rows)
+            setFiltered(rows);
         }
 
         setSearchTerm(value);
-
-    }
+    };
 
     React.useEffect(() => {
         if (modal.scenarios) {
@@ -380,14 +379,18 @@ export default function DsTable() {
                         sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }}
                         onClick={handleBack}
                     />
-                    <Typography sx={{ color: ColorTheme().title, fontWeight:600, fontSize:'18px' }}>Damage Scenario Table</Typography>
+                    <Typography sx={{ color: ColorTheme().title, fontWeight: 600, fontSize: '18px' }}>Damage Scenario Table</Typography>
                 </Box>
-                    <Box display='flex' gap={3}>
-                        <TextField id="outlined-size-small" placeholder='Search' size="small" value={searchTerm} onChange={handleSearch} />
-                <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
-                    Add New Scenario
-                </Button>
-                    </Box>
+                <Box display="flex" gap={3}>
+                    <TextField id="outlined-size-small" placeholder="Search" size="small" value={searchTerm} onChange={handleSearch} sx={{
+                        '& .MuiInputBase-input': {
+                            border:'1px solid black'
+                        }
+                    }}/>
+                    <Button sx={{ float: 'right', mb: 2 }} variant="contained" onClick={handleOpenModalDs}>
+                        Add New Scenario
+                    </Button>
+                </Box>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -463,27 +466,27 @@ export default function DsTable() {
                                 </StyledTableCell>
                                 {stakeHolder && (
                                     <StyledTableCell component="th" scope="row">
-                                        Test
+                                        -
                                     </StyledTableCell>
                                 )}
                                 {stakeHolder && (
                                     <StyledTableCell component="th" scope="row">
-                                        Test
+                                        -
                                     </StyledTableCell>
                                 )}
                                 {stakeHolder && (
                                     <StyledTableCell component="th" scope="row">
-                                        Test
+                                        -
                                     </StyledTableCell>
                                 )}
                                 {stakeHolder && (
                                     <StyledTableCell component="th" scope="row">
-                                        Test
+                                        -
                                     </StyledTableCell>
                                 )}
                                 {stakeHolder && (
                                     <StyledTableCell component="th" scope="row">
-                                        Test
+                                        -
                                     </StyledTableCell>
                                 )}
                                 {/* <StyledTableCell component="th" scope="row" sx={{ background: colorPickerTab(row?.impacts?.Safety) }}>
@@ -554,10 +557,13 @@ export default function DsTable() {
                                     name="Privacy"
                                 />
                                 <StyledTableCell component="th" scope="row">
-                                    Test
+                                    -
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    Test
+                                    -
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    -
                                 </StyledTableCell>
                                 <StyledTableCell
                                     component="th"
@@ -573,7 +579,7 @@ export default function DsTable() {
                                     <Checkbox {...label} />
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    Test
+                                    -
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}
