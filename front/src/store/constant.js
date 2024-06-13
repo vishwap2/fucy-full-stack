@@ -17,7 +17,9 @@ export const navbarHeight = 150;
 
  export const lightTheme = {
    navBG:'#e3e3e3' ,
-   tabBG:'#f7f7f7',
+   //  tabBG:'#f7f7f7',
+   tabBorder:'#f7f7f7',
+   tabBG:'#e3e3e3',
    selectedTab:'#5c636e',
    sidebarBG:'#f7f7f7',
    sidebarInnerBG:'#f7f7f7',
@@ -33,7 +35,9 @@ export const navbarHeight = 150;
 
  export const darkTheme = {
    navBG:'#000' , 
-   tabBG:'#222831',
+   //  tabBG:'#222831',
+   tabBorder:'#222831',
+   tabBG:'#000',
    selectedTab:'whitesmoke',
    sidebarBG:'#000',
    sidebarInnerBG:'#222831',

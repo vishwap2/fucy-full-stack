@@ -104,50 +104,107 @@ const useStore = createWithEqualityFn((set, get) => ({
         });
     },
 
+    // getIntersectingNodes: () => {
+    //     let nodes = get().nodes;
+    //     // console.log('nodes store', nodes);
+    //     const group = nodes?.find(nd => nd?.type === 'group');
+    //     // console.log('group', group);
+    //     const area={};
+    // if(group){ 
+    //     area.x=group?.position.x,
+    //     area.y=group?.position?.y,
+    //     area.width=group.width, 
+    //     area.height=group.height
+    // }
+    //     function doNodesTouch(nodeA, nodeB) {
+    //         // console.log('nodeA', nodeA)
+    //         // console.log('nodeB', nodeB)
+    //         const aLeft = nodeA.x;
+    //         const aRight = nodeA.x + nodeA.width;
+    //         const aTop = nodeA.y;
+    //         const aBottom = nodeA.y + nodeA.height;
+          
+    //         const bLeft = nodeB.x;
+    //         const bRight = nodeB.x + nodeB.width;
+    //         const bTop = nodeB.y;
+    //         const bBottom = nodeB.y + nodeB.height;
+          
+    //         const horizontalOverlap = aRight >= bLeft && aLeft <= bRight;
+    //         const verticalOverlap = aBottom >= bTop && aTop <= bBottom;
+          
+    //         return horizontalOverlap && verticalOverlap;
+    //       }
+
+    //     const intersectingNodes = nodes.filter(node => {
+    //         const nodeRect = {
+    //           x: node.position.x,
+    //           y: node.position.y,
+    //           width: node.width,
+    //           height: node.height,
+    //         };
+    //         return doNodesTouch(area,nodeRect);
+    //       });
+       
+    //       return [intersectingNodes, nodes];
+        
+    //     },
+    
     getIntersectingNodes: () => {
         let nodes = get().nodes;
-        // console.log('nodes store', nodes);
-        const group = nodes?.find(nd => nd?.type === 'group');
-        // console.log('group', group);
-        const area={};
-    if(group){ 
-        area.x=group?.position.x,
-        area.y=group?.position?.y,
-        area.width=group.width, 
-        area.height=group.height
-    }
+        const groups = nodes?.filter(nd => nd?.type === 'group');
+        const intersectingNodesMap = {};
+    
         function doNodesTouch(nodeA, nodeB) {
-            // console.log('nodeA', nodeA)
-            // console.log('nodeB', nodeB)
             const aLeft = nodeA.x;
             const aRight = nodeA.x + nodeA.width;
             const aTop = nodeA.y;
             const aBottom = nodeA.y + nodeA.height;
-          
+    
             const bLeft = nodeB.x;
             const bRight = nodeB.x + nodeB.width;
             const bTop = nodeB.y;
             const bBottom = nodeB.y + nodeB.height;
-          
+    
             const horizontalOverlap = aRight >= bLeft && aLeft <= bRight;
             const verticalOverlap = aBottom >= bTop && aTop <= bBottom;
-          
+    
             return horizontalOverlap && verticalOverlap;
-          }
-
-        const intersectingNodes = nodes.filter(node => {
-            const nodeRect = {
-              x: node.position.x,
-              y: node.position.y,
-              width: node.width,
-              height: node.height,
-            };
-            return doNodesTouch(area,nodeRect);
-          });
-       
-          return [intersectingNodes, nodes];
-        
-        },
+        }
+    
+        if(groups) {
+            groups.forEach(group => {
+                const area = {
+                    x: group?.position?.x,
+                    y: group?.position?.y,
+                    width: group?.width,
+                    height: group?.height
+                };
+    
+                const intersectingNodes = nodes.filter(node => {
+                    if (node.type !== 'group') {
+                        const nodeRect = {
+                            x: node.position.x,
+                            y: node.position.y,
+                            width: node.width,
+                            height: node.height,
+                        };
+                        return doNodesTouch(area, nodeRect);
+                    }
+                    return false;
+                }).map(node => ({
+                    ...node,
+                    parentId: group.id,
+                    extent: 'parent'
+                }));
+    
+                intersectingNodesMap[group.id] = intersectingNodes;
+            });
+        }
+    
+        return [intersectingNodesMap, nodes];
+    },
+    
+    
     //fetch or GET section
     fetchAPI: async () => {
         const res = await axios.get(`${configuration.apiBaseUrl}template`);

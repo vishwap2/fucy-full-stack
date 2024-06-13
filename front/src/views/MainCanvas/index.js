@@ -178,14 +178,15 @@ export default function MainCanvas() {
         setSavedTemplate(template);
         onSaveInitial(template);
         setTimeout(() => {
-            onRestore();
-        }, 500);
+            onRestore(template);
+        }, 100);
     }, [modal]);
 
 
     // const [target, setTarget] = useState(null);
     const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab } =
         useSelector((state) => state?.currentId);
+    
     const onLayout = useCallback(
         ({ direction, useInitialNodes = false }) => {
             const opts = { 'elk.direction': direction, ...elkOptions };
@@ -203,36 +204,33 @@ export default function MainCanvas() {
     );
 
     const checkForNodes = () => {
-        const [intersectingNodes, nodes] = getIntersectingNodes();
-        //  console.log('intersectingNodes', intersectingNodes)
-        //  console.log('allNodes', nodes);
-        let nod = [...nodes];
-        let updated = [...intersectingNodes];
-        const ParentNode = intersectingNodes?.find((nd) => nd?.type === 'group');
-        let childNodes = intersectingNodes?.filter((nd) => nd?.type !== 'group');
-        updated = updated.map((item1) => {
-            const match = childNodes.find((item2) => item2.id === item1.id);
+        const [intersectingNodesMap, nodes ]= getIntersectingNodes();
+        // console.log('intersectingNodesMap', intersectingNodesMap);
+        let values = Object.values(intersectingNodesMap).flat();
+        // console.log('values', values);
+        // console.log('nodes', nodes)
+        // const [intersectingNodes, nodes] = getIntersectingNodes();
+        // //  console.log('intersectingNodes', intersectingNodes)
+        // //  console.log('allNodes', nodes);
+        // let nod = [...nodes];
+        // let updated = [...intersectingNodes];
+        // const ParentNode = intersectingNodes?.find((nd) => nd?.type === 'group');
+        // let childNodes = intersectingNodes?.filter((nd) => nd?.type !== 'group');
+        let updated = nodes.map((item1) => {
+            const match = values.find((item2) => item2.id === item1.id);
             return match
-                ? {
-                      ...item1,
-                      parentId: ParentNode?.id,
-                    extent: 'parent',
-                      groupedId:ParentNode?.id,
-                  }
-                : {
-                    ...item1,
-                    groupedId:ParentNode?.id,
-                      
-                };
+                ? match
+                : item1
         });
-        // console.log('updated', updated)
-        nod = nod?.map((item1) => {
-            const match = updated.find((item2) => item2.id === item1.id);
-            // console.log('match', match)
-            return match ? match : item1;
-        });
-        // console.log('nod', nod);
-        setNodes(nod);
+        // console.log('updated', updated);
+        // console.log('nodes', nodes);
+        // nod = nod?.map((item1) => {
+        //     const match = updated.find((item2) => item2.id === item1.id);
+        //     // console.log('match', match)
+        //     return match ? match : item1;
+        // });
+        // // console.log('nod', nod);
+        setNodes(updated);
     };
 
     useLayoutEffect(() => {
@@ -447,26 +445,22 @@ export default function MainCanvas() {
     //     }
     // }, [reactFlowInstance]);
 
-    const onSaveInitial = useCallback((template) => {
+    const onSaveInitial = useCallback((temp) => {
+        // console.log('temp', temp);
         localStorage.removeItem(flowKey);
-        if (template) {
-            localStorage.setItem(flowKey, JSON.stringify(template));
+        if (temp) {
+            localStorage.setItem(flowKey, JSON.stringify(temp));
         }
     }, []);
 
-    const onRestore = useCallback(() => {
-        const restoreFlow = async () => {
-            // console.log('savedTemplate', savedTemplate)
-            const flow = JSON.parse(localStorage.getItem(flowKey));
-            if (flow) {
-                setSavedTemplate(flow);
-                // console.log('flow', flow);
+    const onRestore = useCallback((temp) => {
+            if (temp) {
                 // const { x = 0, y = 0, zoom = 1 } = flow.viewport;
-                setNodes(flow.nodes);
-                setEdges(flow.edges);
-            } 
-        };
-        restoreFlow();
+                setNodes(temp.nodes);
+                setEdges(temp.edges);
+            } else {
+                handleClear();
+            }
     }, [reactFlowInstance]);
 
     const handleClear = () => {
