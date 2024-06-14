@@ -26,9 +26,9 @@ import FadeInDiv from '../../ui-component/FadeInDiv';
 // import Customization from '../Customization';
 
 // styles
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open, isNavbarClose }) => ({
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open, isNavbarClose, color }) => ({
     ...theme.typography.mainContent,
-    background: ColorTheme().canvaSurroundsBG,
+    background: color?.canvaSurroundsBG,
     border: '1px solid gray',
     maxWidth: 'auto',
     marginTop: !isNavbarClose ? navbarHeight : '0px',
@@ -81,6 +81,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = ({ children }) => {
+    const color = ColorTheme();
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -89,74 +90,68 @@ const MainLayout = ({ children }) => {
     const { isNavbarClose, isDark } = useSelector((state) => state?.currentId);
     const { isCanvasPage } = useSelector((state) => state?.canvas);
 
-    
     useEffect(() => {
         dispatch({ type: SET_MENU, opened: !matchDownMd });
     }, [matchDownMd]);
-    
+
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
     };
 
-    // const handleCanvasPage = ()=>{
-    //     dispatch(changeCanvasPage())
-    // }
-
-
-    // console.log('isNavbarClose', isNavbarClose);
+    if (isCanvasPage === 'home')
+        return <>
+            <Box>
+                <HeaderSection />
+                <Box>
+                    <FadeInDiv>
+                        {children}
+                        <Outlet />
+                    </FadeInDiv>
+                </Box>
+                <Footer />
+            </Box>
+            </>
 
     return (
         <>
-            {isCanvasPage === 'home' ? (
-                <Box>
-                    <HeaderSection />
-                    <Box>
-                        <FadeInDiv>
-                            {children}
-                            <Outlet />
-                        </FadeInDiv>
-                    </Box>
-                    <Footer />
-                </Box>
-            ) : (
-                <Box sx={{ display: 'flex', height:'80svh' }}>
-                    <CssBaseline />
-                    {/* header */}
-                    <AppBar
-                        enableColorOnDark
-                        position="fixed"
-                        color="inherit"
-                        elevation={0}
-                        sx={{
-                            bgcolor: ColorTheme().navBG,
-                            height: !isNavbarClose ? navbarHeight : '0px',
-                            border: '1px solid',
-                            transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
-                        }}
-                    >
-                        {/* ----------------- Navbar ------------------- */}
-                        <Toolbar sx={{ border: '1px solid', display: isNavbarClose ? 'none' : 'flex', transition: 'display 0.8s' }}>
-                            <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
-                        </Toolbar>
-                        {isNavbarClose && (
-                            <Box display="flex" justifyContent="end" onClick={() => dispatch(navbarSlide())}>
-                                <ArrowSquareDown size="20" color={isDark ? 'white' : 'black'} />
-                            </Box>
-                        )}
-                    </AppBar>
+            <Box sx={{ display: 'flex', height: '80svh' }}>
+                <CssBaseline />
+                {/* header */}
+                <AppBar
+                    enableColorOnDark
+                    position="fixed"
+                    color="inherit"
+                    elevation={0}
+                    sx={{
+                        bgcolor: color?.navBG,
+                        height: !isNavbarClose ? navbarHeight : '0px',
+                        border: '1px solid',
+                        transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
+                    }}
+                >
+                    {/* ----------------- Navbar ------------------- */}
+                    <Toolbar sx={{ border: '1px solid', display: isNavbarClose ? 'none' : 'flex', transition: 'display 0.8s' }}>
+                        <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+                    </Toolbar>
+                    {isNavbarClose && (
+                        <Box display="flex" justifyContent="end" onClick={() => dispatch(navbarSlide())}>
+                            <ArrowSquareDown size="20" color={isDark ? 'white' : 'black'} />
+                        </Box>
+                    )}
+                </AppBar>
 
-                    {/*-------------------- drawer/sidebar ---------------------*/}
-                    <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+                {/*-------------------- drawer/sidebar ---------------------*/}
+                <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
 
-                    {/* -------------------- main content -------------------------*/}
-                    <Main theme={theme} open={leftDrawerOpened} isNavbarClose={isNavbarClose}>
-                        {/* breadcrumb */}
-                        <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
-                        <Outlet />
-                    </Main>
-                </Box>
-            )}
+                {/* -------------------- main content -------------------------*/}
+                <Main theme={theme} open={leftDrawerOpened} isNavbarClose={isNavbarClose}>
+                    {/* breadcrumb */}
+                    <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
+                    <Outlet />
+                </Main>
+            </Box>
+            
         </>
     );
 };

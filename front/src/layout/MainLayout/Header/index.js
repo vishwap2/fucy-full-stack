@@ -15,16 +15,21 @@ import MenuList from './MenuList';
 import ColorTheme from '../../../store/ColorTheme';
 import { useDispatch } from 'react-redux';
 import { changeCanvasPage } from '../../../store/slices/CanvasSlice';
+import { useNavigate } from 'react-router';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const theme = useTheme();
     const handleClick=()=>{
         // console.log('clicked')
-        window.location.href='/home';
         dispatch(changeCanvasPage('home'));
+        navigate('/home', { replace: true });
+        // setTimeout(() => {
+            // window.location.href = '/home';
+        // }, 200);
     }
 
     return (

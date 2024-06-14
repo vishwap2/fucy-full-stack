@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { AppBar, Toolbar, Box, Typography, MenuItem, Menu } from '@mui/material';
@@ -49,6 +49,7 @@ const useStyles = makeStyles(() => {
 
 export default function Header(){
     const classes = useStyles();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -57,7 +58,11 @@ export default function Header(){
     const handleClose = (name) => {
         if(name === 'TARA Automation'){
             dispatch(changeCanvasPage('canvas'));
-            window.location.href = '/Modals';
+            navigate('/Modals', { replace: true });
+            // setTimeout(() => {
+                // window.location.href = '/Modals';
+
+            // }, 100);
         }
         setAnchorEl(null);
         setMenuOpen(false);
