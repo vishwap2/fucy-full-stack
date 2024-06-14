@@ -534,7 +534,7 @@ const BrowserCard = ({ modals }) => {
                             <MenuItem onClick={() => openAddModal('Goals')}>Add Goals</MenuItem>
                             <MenuItem onClick={() => openAddModal('Require')}>Add Requirements</MenuItem>
                         </Menu>
-                        <TreeItem icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} className={classes.labelTypo} />
+                        <TreeItem nodeId='add' icon={<AddIcon />} onClick={handleOpenModal} label={'Add'} className={classes.labelTypo} />
                     </TreeView>
                 </CardContent>
             </CardStyle>

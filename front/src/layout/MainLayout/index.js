@@ -26,62 +26,67 @@ import FadeInDiv from '../../ui-component/FadeInDiv';
 // import Customization from '../Customization';
 
 // styles
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open, isNavbarClose, color }) => ({
-    ...theme.typography.mainContent,
-    background: color?.canvaSurroundsBG,
-    border: '1px solid gray',
-    maxWidth: 'auto',
-    marginTop: !isNavbarClose ? navbarHeight : '0px',
-    // minHeight:'inherit',
-    minHeight: !isNavbarClose ? `80svh` : `100svh`,
-    // height:!isNavbarClose ? `80svh`:`auto`,
-    marginRight: 0,
-    ...(!open && {
-        borderRadius: 0,
-        // borderBottomRightRadius: 0,
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open, isclose, color }) => {
+    // console.log('color', color)
+    // console.log('isclose', isclose)
+    return({
+        ...theme.typography.mainContent,
+        background: color?.canvaSurroundsBG,
+        border: '1px solid gray',
+        maxWidth: 'auto',
+        marginTop: isclose == 'true' ? '0px': navbarHeight ,
+        // minHeight:'inherit',
+        minHeight: isclose == 'true' ? `100svh` : `80svh`,
+        // height:!isNavbarClose ? `80svh`:`auto`,
+        marginRight: 0,
+        ...(!open && {
+            borderRadius: 0,
+            // borderBottomRightRadius: 0,
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen
+            }),
+            [theme.breakpoints.up('md')]: {
+                marginLeft: -drawerWidth,
+                width: `calc(100% - ${drawerWidth}px)`
+            },
+            [theme.breakpoints.down('md')]: {
+                // marginLeft: '20px',
+                width: `calc(100% - ${drawerWidth}px)`,
+                padding: '16px'
+            },
+            [theme.breakpoints.down('sm')]: {
+                marginLeft: '10px',
+                width: `calc(100% - ${drawerWidth}px)`,
+                padding: '16px',
+                marginRight: '10px'
+            }
         }),
-        [theme.breakpoints.up('md')]: {
-            marginLeft: -drawerWidth,
-            width: `calc(100% - ${drawerWidth}px)`
-        },
-        [theme.breakpoints.down('md')]: {
-            // marginLeft: '20px',
+        ...(open && {
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen
+            }),
+            marginLeft: 0,
+            // borderBottomLeftRadius: 0,
+            // borderBottomRightRadius: 0,
+            borderRadius: 0,
             width: `calc(100% - ${drawerWidth}px)`,
-            padding: '16px'
-        },
-        [theme.breakpoints.down('sm')]: {
-            marginLeft: '10px',
-            width: `calc(100% - ${drawerWidth}px)`,
-            padding: '16px',
-            marginRight: '10px'
-        }
-    }),
-    ...(open && {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen
-        }),
-        marginLeft: 0,
-        // borderBottomLeftRadius: 0,
-        // borderBottomRightRadius: 0,
-        borderRadius: 0,
-        width: `calc(100% - ${drawerWidth}px)`,
-        [theme.breakpoints.down('md')]: {
-            marginLeft: '20px'
-        },
-        [theme.breakpoints.down('sm')]: {
-            marginLeft: '10px'
-        }
+            [theme.breakpoints.down('md')]: {
+                marginLeft: '20px'
+            },
+            [theme.breakpoints.down('sm')]: {
+                marginLeft: '10px'
+            }
+        })
     })
-}));
+})
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = ({ children }) => {
     const color = ColorTheme();
+    // console.log('color main', color)
     const theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -145,7 +150,7 @@ const MainLayout = ({ children }) => {
                 <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
 
                 {/* -------------------- main content -------------------------*/}
-                <Main theme={theme} open={leftDrawerOpened} isNavbarClose={isNavbarClose}>
+                <Main theme={theme} open={leftDrawerOpened} isclose={isNavbarClose.toString()} color={color}>
                     {/* breadcrumb */}
                     <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                     <Outlet />

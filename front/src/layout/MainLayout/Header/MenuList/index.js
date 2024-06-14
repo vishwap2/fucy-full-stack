@@ -28,6 +28,7 @@ const imageComponents = {
 };
 
 export default function MenuList() {
+    const color = ColorTheme();
     const dispatch = useDispatch();
     const [value, setValue] = React.useState('1');
     const { isDark, isNavbarClose } = useSelector((state) => state?.currentId);
@@ -94,7 +95,7 @@ export default function MenuList() {
         return (
             <div>
                 {Image ? <img src={Image} alt={item.label} style={{ height: '25px', width: '25px' }} /> : null}
-                <Typography variant="body2" mt={0.5} sx={{ fontSize: 13, color: ColorTheme().tabContentClr, fontFamily: 'Inter' }}>
+                <Typography variant="body2" mt={0.5} sx={{ fontSize: 13, color: color?.tabContentClr, fontFamily: 'Inter' }}>
                     {item?.label}
                 </Typography>
             </div>
@@ -114,18 +115,19 @@ export default function MenuList() {
                 >
                     <TabList
                         sx={{
+                            border:`1px solid ${color?.tabBorder}`,
                             '& .MuiTabs-scroller': {
                                 overflowX: 'auto !important',
                                 scrollbarWidth: 'none',
-                                background: ColorTheme().tabBG,
+                                background: color?.tabBG,
                                 marginRight: { sm: '2rem', md: '2rem', lg: '1rem' },
                                 '& .Mui-selected': {
                                     // background: ColorTheme.selectedTab,
                                     // border: '2px solid red',
-                                    color: `${ColorTheme().tabContentClr} !important`
+                                    color: `${color?.tabContentClr} !important`
                                 },
                                 '& .MuiTabs-indicator ': {
-                                    backgroundColor: `${ColorTheme().selectedTab} !important`
+                                    backgroundColor: `${color?.selectedTab} !important`
                                     //   display:'none'
                                 },
                                 '& .MuiButtonBase-root': {
@@ -150,7 +152,7 @@ export default function MenuList() {
                             {isDark ? <NightsStayIcon sx={{color:'white'}}/> : <LightModeIcon />}
                         </Box>
                         <Box onClick={()=>dispatch(navbarSlide())}>
-                          {!isNavbarClose ? <ArrowSquareUp size="20" color={ColorTheme()?.iconColor} /> : <ArrowSquareDown size="20" color={ColorTheme()?.iconColor} />}
+                          {!isNavbarClose ? <ArrowSquareUp size="20" color={color?.iconColor} /> : <ArrowSquareDown size="20" color={color?.iconColor} />}
                         </Box>
                     </Box>
                 </Box>
@@ -158,7 +160,7 @@ export default function MenuList() {
                     <TabPanel
                         key={i}
                         value={item?.value}
-                        sx={{ overflow: 'auto', scrollbarWidth: 'none', color: ColorTheme().tabContentClr, fontFamily: 'Inter' }}
+                        sx={{ overflow: 'auto', scrollbarWidth: 'none', color: color?.tabContentClr, fontFamily: 'Inter' }}
                     >
                         {item?.label}
                     </TabPanel>
