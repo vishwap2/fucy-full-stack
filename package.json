@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "elkjs": "^0.9.3",
+    "react-flow-renderer": "^10.3.17"
+  }
+}

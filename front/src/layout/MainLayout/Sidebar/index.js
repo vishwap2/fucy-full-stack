@@ -12,37 +12,35 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import LogoSection from '../LogoSection';
 import MenuCard from './MenuCard';
 import { drawerWidth, navbarHeight } from '../../../store/constant';
-import BrowserCard from './BrowserCard';
+import ColorTheme from '../../../store/ColorTheme';
+// import BrowserCard from './BrowserCard';
+import BrowserCard from './BrowserCard/index1';
 import useStore from '../../../Zustand/store';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearProperties } from '../../../store/slices/PageSectionSlice';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
 const selector = (state) => ({
-    nodes: state.nodes,
     template: state.template,
     modals: state.Modals,
-    modal: state.modal,
     fetchAPI: state.fetchAPI,
     fetchModals: state.getModals,
-    updateModal: state.updateModal
-
 });
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
-    const [properties, setProperties] = useState([]);
-    const { nodes, template, fetchAPI, fetchModals, modals, modal, updateModal } = useStore(selector);
+    const dispatch = useDispatch();
+    const { template, fetchAPI, fetchModals, modals } = useStore(selector);
     const theme = useTheme();
+    const { isNavbarClose } = useSelector((state)=>state.currentId);
+    const { Properties } = useSelector(state=>state?.pageName);
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
-    console.log('modals', modals);
-    const handleClick = (node) => {
-        // console.log('node', )
-        setProperties(node?.properties);
-    };
+
     useEffect(() => {
         fetchAPI();
         fetchModals();
+        dispatch(clearProperties());
     }, []);
-
 
     const drawer = (
         <>
@@ -55,21 +53,15 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                 <PerfectScrollbar
                     component="div"
                     style={{
-                        marginTop: '3rem',
+                        // marginTop: '3rem',
                         height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
                         paddingLeft: '16px',
-                        paddingRight: '16px'
+                        paddingRight: '16px',
+                        marginTop: '1.4rem'
                     }}
                 >
-                    <BrowserCard
-                        template={template}
-                        modals={modals}
-                        handleClick={handleClick}
-                        nodes={nodes}
-                        modal={modal}
-                        updateModal={updateModal}
-                    />
-                    <MenuCard properties={properties} />
+                    <BrowserCard template={template} modals={modals} />
+                    {Properties && Properties?.length>0 && <MenuCard properties={Properties} />}
                 </PerfectScrollbar>
             </BrowserView>
             <MobileView>
@@ -83,7 +75,11 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const container = window !== undefined ? () => window.document.body : undefined;
 
     return (
-        <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto' }} aria-label="mailbox folders">
+        <Box
+            component="nav"
+            sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto', background: ColorTheme().sidebarBG, mt: !isNavbarClose ? navbarHeight :'0px' }}
+            aria-label="mailbox folders"
+        >
             <Drawer
                 container={container}
                 variant={matchUpMd ? 'persistent' : 'temporary'}
@@ -94,11 +90,11 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         // background: theme.palette.background.default,
-                        background: '#eef2e2',
+                        background: ColorTheme().sidebarBG,
                         color: theme.palette.text.primary,
                         borderRight: 'none',
                         [theme.breakpoints.up('md')]: {
-                            top: navbarHeight
+                            top: !isNavbarClose ? navbarHeight :'0px'
                         }
                     }
                 }}

@@ -1,6 +1,7 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // project imports
 // import LogoSection from '../LogoSection';
@@ -11,11 +12,25 @@ import { Avatar, Box, ButtonBase } from '@mui/material';
 // assets
 import { IconMenu2 } from '@tabler/icons';
 import MenuList from './MenuList';
+import ColorTheme from '../../../store/ColorTheme';
+import { useDispatch } from 'react-redux';
+import { changeCanvasPage } from '../../../store/slices/CanvasSlice';
+import { useNavigate } from 'react-router';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const theme = useTheme();
+    const handleClick=()=>{
+        // console.log('clicked')
+        dispatch(changeCanvasPage('home'));
+        navigate('/home', { replace: true });
+        // setTimeout(() => {
+            // window.location.href = '/home';
+        // }, 200);
+    }
 
     return (
         <>
@@ -23,10 +38,19 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <Box
                 sx={{
                     width: 228,
-                    display: { xs: 'block', md: 'none' },
+                    marginBottom: '4.5rem',
+                    display:  'flex' ,
+                    flexDirection:'column',
+                    alignItems:'center',
+                    gap:2,
                     [theme.breakpoints.down('md')]: {
                         width: 'auto',
-                        mb: 8,
+                        mb: 4,
+                        mr: 2
+                    },
+                    [theme.breakpoints.up('md')]: {
+                        width: 'auto',
+                        mb: 4,
                         mr: 2
                     }
                 }}
@@ -41,11 +65,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                             ...theme.typography.commonAvatar,
                             ...theme.typography.mediumAvatar,
                             transition: 'all .2s ease-in-out',
-                            background: theme.palette.secondary.light,
-                            color: theme.palette.secondary.dark,
+                            background: 'white',
+                            color: 'black',
                             '&:hover': {
-                                background: theme.palette.secondary.dark,
-                                color: theme.palette.secondary.light
+                                background: 'black',
+                                color: 'white'
                             }
                         }}
                         onClick={handleLeftDrawerToggle}
@@ -54,6 +78,9 @@ const Header = ({ handleLeftDrawerToggle }) => {
                         <IconMenu2 stroke={1.5} size="1.3rem" />
                     </Avatar>
                 </ButtonBase>
+                <Box onClick={handleClick}>
+                <ArrowBackIcon sx={{color:ColorTheme().title}}/>
+                </Box>
             </Box>
             <MenuList />
         </>

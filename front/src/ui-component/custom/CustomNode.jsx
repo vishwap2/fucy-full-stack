@@ -1,31 +1,24 @@
-import React from "react";
-import { Handle, Position } from 'reactflow';
+import React from 'react';
+import { Handle, NodeResizer, Position } from 'reactflow';
 
-const CustomNode = ({ data, isConnectable,type}) => {
-  return (
-    <>
-      <div
-        className={`my-custom-node ${type}`}
-        style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
-      >
-        <Handle
-          classname="handle"
-          type="target"
-          position={Position.Left}
-          isConnectable={isConnectable}
-        />
-          <div>{data?.label}</div>
-        <Handle
-          classname="handle"
-          type="range"
-          position={Position.Right}
-          isConnectable={isConnectable}
-        />
-      </div>
-    </>
-  );
+const CustomNode = ({ data, isConnectable, type }) => {
+    return (
+        <>
+            <NodeResizer />
+            <div
+                className={`my-custom-node ${type}`}
+                style={{
+                    ...data?.style
+                }}
+            >
+                <Handle className="handle" type="range" id="a" position={Position.Top} isConnectable={isConnectable} />
+                <Handle className="handle" type="range" id="b" position={Position.Left} isConnectable={isConnectable} />
+                <div>{data?.label}</div>
+                <Handle className="handle" type="range" id="c" position={Position.Bottom} isConnectable={isConnectable} />
+                <Handle className="handle" type="range" id="d" position={Position.Right} isConnectable={isConnectable} />
+            </div>
+        </>
+    );
 };
 
 export default CustomNode;

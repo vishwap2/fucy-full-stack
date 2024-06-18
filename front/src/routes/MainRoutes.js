@@ -2,27 +2,54 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
-import Edit from '../views/Edit';
-
+import RequireAuth from './Protected';
 
 // sample page routing
-const Home = Loadable(lazy(() => import('../views/Home')));
+const Home = Loadable(lazy(() => import('../views/HomePage')));
+const MainCanvas = Loadable(lazy(() => import('../views/MainCanvas')));
+const Career = Loadable(lazy(() => import('../views/CareerPage')));
+const Contact = Loadable(lazy(() => import('../views/ContactPage')));
+const About = Loadable(lazy(() => import('../views/AboutPage')));
 
+const ErrorPage = Loadable(lazy(() => import('../views/ErrorPage')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
     path: '/',
-    element: <MainLayout />,
+    element: (
+        <RequireAuth>
+            <MainLayout />
+        </RequireAuth>
+    ),
     children: [
         {
-            path: '/',
+            path: '/home',
             element: <Home />
         },
         {
-            path: '/Modals/:id',
-            element: <Edit />
+            path: 'Modals',
+            element: <MainCanvas />
         },
-       
+        {
+            path: 'Modals/:id',
+            element: <MainCanvas />
+        },
+        {
+            path: 'career',
+            element: <Career />
+        },
+        {
+            path: 'contact',
+            element: <Contact />
+        },
+        {
+            path: 'about',
+            element: <About />
+        },
+        {
+            path: '*',
+            element: <ErrorPage />
+        }
     ]
 };
 

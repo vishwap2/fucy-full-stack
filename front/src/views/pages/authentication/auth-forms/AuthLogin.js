@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -34,10 +34,12 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from '../../../../assets/images/icons/social-google.svg';
+import { changeCanvasPage } from '../../../../store/slices/CanvasSlice';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
+    const dispatch = useDispatch();
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -56,6 +58,12 @@ const FirebaseLogin = ({ ...others }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const handleLogin =()=>{
+        sessionStorage.setItem('isLoggedIn',true);
+        window.location.href='/home';
+        dispatch(changeCanvasPage('home'));
+    }
 
     return (
         <>
@@ -227,6 +235,7 @@ const FirebaseLogin = ({ ...others }) => {
                                 <Button
                                     disableElevation
                                     disabled={isSubmitting}
+                                    onClick={handleLogin}
                                     fullWidth
                                     size="large"
                                     type="submit"

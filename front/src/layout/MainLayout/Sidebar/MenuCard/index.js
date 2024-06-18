@@ -2,7 +2,7 @@
 
 // material-ui
 import { styled
-    , useTheme 
+    // , useTheme 
 } from '@mui/material/styles';
 import {
     // Avatar,
@@ -17,6 +17,7 @@ import {
     ListItemText,
     // linearProgressClasses
 } from '@mui/material';
+import  ColorTheme  from '../../../../store/ColorTheme';
 
 // assets
 // import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -86,13 +87,15 @@ const CardStyle = styled(Card)((
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const MenuCard = ({properties}) => {
+// console.log('ColorTheme', ColorTheme())
+
     // console.log('properties here', properties)
-    const theme = useTheme();
+    // const theme = useTheme();
 
     return (
         <>
-            <Typography variant='h4'>Properties </Typography>
-        <CardStyle>
+            <Typography variant='h4' sx={{color:ColorTheme().tabContentClr}}>Properties </Typography>
+        <CardStyle sx={{backgroundColor:ColorTheme()?.sidebarInnerBG}}>
             <CardContent sx={{ p: 2 }}>
                 
                 <List sx={{ p: 0, m: 0 }}>
@@ -103,8 +106,8 @@ const MenuCard = ({properties}) => {
                         key={i}
                             sx={{ mt: 0 }}
                             primary={
-                                <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
-                               {i+1} .{item}
+                                <Typography variant="subtitle1" sx={{ color: ColorTheme()?.sidebarContent }}>
+                               {i+1}. {item}
                                 </Typography>
                             }
                         />

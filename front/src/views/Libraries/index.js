@@ -14,7 +14,7 @@ const selector = (state) => ({
 export default function ComponentList() {
   const { template, fetchAPI } = useStore(selector,shallow);
  
-  console.log('template', template)
+  // console.log('template', template)
 //   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function ComponentList() {
       <Box
       component="nav"
       aria-label="sidebar"
-      sx={{display:'flex', gap:1.5, alignItems:'center'}}
+      sx={{display:'flex',flexDirection:'column', alignItems:'start'}}
       >
         {template.map((text, index) => (
           <div

@@ -29,6 +29,7 @@ const selector = (state) => ({
   sidebarNodes: state.sidebarNodes,
   getSidebarNode: state.getSidebarNode,
   deleteNode: state.deleteNode,
+  getComponent:state.getComponent
 });
 
 const iconComponents = {
@@ -51,9 +52,10 @@ const iconComponents = {
   
 const Components = () => {
   const [open, setOpen] = useState(false);
-  const { sidebarNodes, getSidebarNode } = useStore(selector);
+  const { sidebarNodes, getSidebarNode,getComponent } = useStore(selector);
   useEffect(() => {
     getSidebarNode();
+    getComponent();
   }, []);
 
   // open & closing fn for Dialog
@@ -83,7 +85,7 @@ const Icon = ({ name, ...rest }) => {
       <Box
         component="nav"
         aria-label="sidebar"
-        sx={{display:'flex', gap:1.5, alignItems:'center'}}
+        sx={{display:'flex',gap:0.5, flexDirection:'column', alignItems:'start'}}
       >
         
           {sidebarNodes.map((item, i) => (

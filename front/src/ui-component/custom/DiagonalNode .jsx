@@ -1,18 +1,20 @@
 import React from "react";
-import { Handle, Position } from 'reactflow';
+import { Handle, NodeResizer, Position } from 'reactflow';
 
 const DiagonalNode = ({ data, isConnectable,type}) => {
+  // console.log('data', data)
   return (
     <>
+        <NodeResizer  />
       <div
         className={`diagonal-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
+          ...data?.style
+           }}
       >
        
         <Handle
-          classname="handle"
+          className="handle"
           type="target"
           position={Position.Top}
           isConnectable={isConnectable}
@@ -21,7 +23,7 @@ const DiagonalNode = ({ data, isConnectable,type}) => {
 
 
         <Handle
-          classname="handle"
+          className="handle"
           type="source"
           position={Position.Bottom}
           isConnectable={isConnectable}

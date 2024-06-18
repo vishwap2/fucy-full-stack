@@ -1,24 +1,25 @@
 import React from "react";
-import { Handle, Position } from 'reactflow';
+import { Handle, NodeResizer, Position } from 'reactflow';
 
 const CircularNode = ({ data, isConnectable,type}) => {
   return (
     <>
+        <NodeResizer  />
       <div
         className={`circular-node ${type}`}
         style={{ 
-          backgroundColor:`${data['bgColor']}`
-          }}
+          ...data?.style
+           }}
       >
         <Handle
-          classname="handle"
+          className="handle"
           type="target"
           position={Position.Left}
           isConnectable={isConnectable}
         />
           <div>{data?.label}</div>
         <Handle
-          classname="handle"
+          className="handle"
           type="range"
           position={Position.Right}
           isConnectable={isConnectable}
