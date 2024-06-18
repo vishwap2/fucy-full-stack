@@ -2,9 +2,9 @@ import { makeStyles } from '@mui/styles';
 import { Box, Tooltip, Typography } from '@mui/material';
 import React, { useEffect, useState, useCallback } from 'react';
 import {
-    TextBold,
-    TextUnderline,
-    TextItalic,
+    // TextBold,
+    // TextUnderline,
+    // TextItalic,
     // ArrowForward,
     // Back,
     TextalignJustifycenter,
@@ -19,6 +19,10 @@ import FontSizeSelector from './FontResizer';
 import FontSelector from './FontSelector';
 import CreateIcon from '@mui/icons-material/Create';
 import ColorTheme from '../../store/ColorTheme';
+import BorderOuterIcon from '@mui/icons-material/BorderOuter';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
 
 const useStyles = makeStyles((theme) => ({
     header: {
@@ -81,6 +85,7 @@ export default function Header({
     useEffect(() => {
         setStyles({
             ...styles,
+            backgroundColor:selectedNode?.data?.style?.backgroundColor,
             fontSize: number(selectedNode?.data?.style?.fontSize) ?? 12,
             fontFamily: selectedNode?.data?.style?.fontFamily ?? 'Inter',
             fontStyle: selectedNode?.data?.style?.fontStyle ?? 'normal',
@@ -180,10 +185,16 @@ export default function Header({
         if (name === 'font') {
             setStyles((state) => ({ ...state, fontFamily: event.target.value }));
             style.fontFamily = event.target.value;
-        } else if (name === 'border') {
+        }
+        else if (name === 'border') {
             setStyles({ ...styles, borderColor: event.target.value });
             style.borderColor = event.target.value;
-        } else {
+        }
+        else if (name === 'bgColor') {
+            setStyles({ ...styles, backgroundColor: event.target.value });
+            style.backgroundColor = event.target.value;
+        }
+        else {
             setStyles({ ...styles, color: event.target.value });
             style.color = event.target.value;
         }
@@ -200,10 +211,9 @@ export default function Header({
                 <ArrowForward color={iconColor} /> */}
                 <FontSizeSelector fontSize={styles?.fontSize} handleFontSizeChange={handleFontSizeChange} changeFontSize={changeFontSize} />
                 <FontSelector font={styles?.fontFamily} handleChange={handleChange} />
-                <TextBold
-                    size="20"
+                <FormatBoldIcon
                     onClick={() => handleFontStyle('bold')}
-                    style={{
+                    sx={{
                         backgroundColor: highlight?.bold ? '#5fc9f3' : 'transparent',
                         opacity: 0.8,
                         border: highlight?.bold ? '1px solid #2772db' : 'none',
@@ -212,10 +222,9 @@ export default function Header({
                         fontWeight: highlight?.bold ? 700 : 500
                     }}
                 />
-                <TextUnderline
-                    size="20"
+                <FormatUnderlinedIcon
                     onClick={() => handleFontStyle('underline')}
-                    style={{
+                    sx={{
                         backgroundColor: highlight?.decor ? '#5fc9f3' : 'transparent',
                         opacity: 0.8,
                         border: highlight?.decor ? '1px solid #2772db' : 'none',
@@ -224,10 +233,9 @@ export default function Header({
                         fontWeight: highlight?.decor ? 700 : 500
                     }}
                 />
-                <TextItalic
-                    size="20"
+                <FormatItalicIcon
                     onClick={() => handleFontStyle('italic')}
-                    style={{
+                    sx={{
                         backgroundColor: highlight?.italic ? '#5fc9f3' : 'transparent',
                         opacity: 0.8,
                         border: highlight?.italic ? '1px solid #2772db' : 'none',
@@ -238,7 +246,7 @@ export default function Header({
                 />
                 <TextalignJustifycenter size="20" color={iconColor} />
                 <label htmlFor="color" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '1.8rem' }}>
-                    <BrushBig size="20" color={iconColor} />
+                    <CreateIcon color={iconColor} sx={{ fontSize:'1.3rem' }} />
                     <span
                         style={{
                             height: '5px',
@@ -254,10 +262,27 @@ export default function Header({
                         onChange={(e) => handleChange(e, 'color')}
                     />
                 </label>
+                <label htmlFor="bgColor" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '1.8rem' }}>
+                    <BrushBig size="20" color={iconColor} />
+                    <span
+                        style={{
+                            height: '5px',
+                            width: '1.1rem',
+                            backgroundColor: styles?.backgroundColor,
+                            border: '0.5px solid black'
+                        }}
+                    ></span>
+                    <input
+                        type="color"
+                        id="bgColor"
+                        style={{ visibility: 'hidden', width: '0px' }}
+                        onChange={(e) => handleChange(e, 'bgColor')}
+                    />
+                </label>
                 <FormatShapesIcon className={classes.icons} sx={{ color: iconColor }} />
                 {/* <Edit2 size="20" color="#555555" /> */}
                 <label htmlFor="border" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '1.8rem' }}>
-                    <CreateIcon className={classes.icons} sx={{ color: iconColor }} />
+                    <BorderOuterIcon className={classes.icons} sx={{ color: iconColor }} />
                     <span
                         style={{
                             height: '5px',

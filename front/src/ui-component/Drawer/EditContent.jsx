@@ -32,14 +32,14 @@ const selector = (state) => ({
     getModalById: state.getModalById,
     update: state.updateModal
 });
-const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) => {
+const EditContent = ({ selectedNode, modal, nodes, setNodes, setSelectedNode }) => {
     const { getModals, update, getModalById } = useStore(selector, shallow);
     const theme = useTheme();
     const { id } = useParams();
     const [details, setDetails] = useState({
         name: '',
-        properties: [],
-        bgColor: '#000000'
+        properties: []
+        // bgColor: '#000000'
     });
     const [open, setOpen] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -56,8 +56,8 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
         setDetails({
             ...details,
             name: selectedNode?.data?.label ? selectedNode?.data?.label : '',
-            properties: selectedNode?.properties ? selectedNode?.properties : [],
-            bgColor: selectedNode?.data?.style?.backgroundColor ? selectedNode?.data?.style?.backgroundColor : '#000000'
+            properties: selectedNode?.properties ? selectedNode?.properties : []
+            // bgColor: selectedNode?.data?.style?.backgroundColor ? selectedNode?.data?.style?.backgroundColor : '#000000'
         });
     }, [selectedNode]);
 
@@ -76,7 +76,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
         const index = mod.template?.nodes.findIndex((nd) => nd.id === selectedNode.id);
         // console.log('index', index);
         node.data.label = details.name;
-        node.data.style.backgroundColor = details.bgColor;
+        // node.data.style.backgroundColor = details.bgColor;
         node.properties = details.properties;
         // console.log('node', node)
         mod.template.nodes[index] = node;
@@ -116,17 +116,18 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
         // console.log('name', name)
         // console.log('e', e.target.value)
         const list = [...nodes];
-        const node = list?.find(nd=>nd?.id === selectedNode?.id)
-        const Index = list?.findIndex(nd=>nd?.id === selectedNode?.id);
-        const {style} = node.data;
-        if(name==='name'){
+        const node = list?.find((nd) => nd?.id === selectedNode?.id);
+        const Index = list?.findIndex((nd) => nd?.id === selectedNode?.id);
+        // const {style} = node.data;
+        if (name === 'name') {
             setDetails({ ...details, name: e.target.value });
-            node.data.label=e.target.value;
-        }else{
-            setDetails({ ...details, bgColor: e.target.value });
-            style.backgroundColor = e.target.value;
+            node.data.label = e.target.value;
         }
-        setSelectedNode(node);  
+        // else {
+        //     setDetails({ ...details, bgColor: e.target.value });
+        //     style.backgroundColor = e.target.value;
+        // }
+        setSelectedNode(node);
         list[Index] = node;
         setNodes(list);
     };
@@ -135,7 +136,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
     return (
         <>
             <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider', width:'230px' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '230px' }}>
                     <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
                         <Tab label="Text" value="1" sx={{ minWidth: '73px' }} />
                         <Tab label="Diagram" value="2" sx={{ minWidth: '73px' }} />
@@ -143,17 +144,17 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
                     </TabList>
                 </Box>
                 <TabPanel value="1" sx={{ p: 0 }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, pr: 1.5, mt:1 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, pr: 1.5, mt: 1 }}>
                         <InputLabel>Name :</InputLabel>
                         <TextField
                             id="outlined-basic"
                             variant="outlined"
                             value={details?.name}
-                            onChange={(e)=>handleStyle(e,'name')}
+                            onChange={(e) => handleStyle(e, 'name')}
                             sx={{
                                 width: 'auto',
-                                '& .MuiInputBase-input':{
-                                    height:'0.4rem'
+                                '& .MuiInputBase-input': {
+                                    height: '0.4rem'
                                 }
                             }}
                         />
@@ -163,7 +164,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
                                 labelId="demo-multiple-chip-label"
                                 id="demo-multiple-chip"
                                 sx={{
-                                    '& .MuiSelect-select':{
+                                    '& .MuiSelect-select': {
                                         padding: '7.5px 14px'
                                     }
                                 }}
@@ -187,7 +188,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes,setSelectedNode }) =
                                 ))}
                             </Select>
                         </FormControl>
-                        <input type="color" value={details?.bgColor} onChange={(e)=>handleStyle(e,'bgColor')} />
+                        {/* <input type="color" value={details?.bgColor} onChange={(e)=>handleStyle(e,'bgColor')} /> */}
                         <Button onClick={handleSubmit} variant="outlined" sx={{ width: 'fit-content' }}>
                             Update
                         </Button>
