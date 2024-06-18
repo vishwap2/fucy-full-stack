@@ -34,9 +34,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
         background: color?.canvaSurroundsBG,
         border: '1px solid gray',
         maxWidth: 'auto',
-        marginTop: isclose == 'true' ? '0px': navbarHeight ,
+        marginTop: isclose == true ? '0px': navbarHeight ,
         // minHeight:'inherit',
-        minHeight: isclose == 'true' ? `100svh` : `80svh`,
+        minHeight: isclose == true ? `100svh` : `80svh`,
         // height:!isNavbarClose ? `80svh`:`auto`,
         marginRight: 0,
         ...(!open && {
@@ -150,7 +150,7 @@ const MainLayout = ({ children }) => {
                 <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
 
                 {/* -------------------- main content -------------------------*/}
-                <Main theme={theme} open={leftDrawerOpened} isclose={isNavbarClose.toString()} color={color}>
+                <Main theme={theme} open={leftDrawerOpened} isclose={isNavbarClose} color={color}>
                     {/* breadcrumb */}
                     <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                     <Outlet />
