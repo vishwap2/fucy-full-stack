@@ -21,7 +21,8 @@ import {
     closeAll,
     cyberBlockOpen,
     cyberTableOpen,
-    setAttackScene
+    setAttackScene,
+    DerivationTableOpen,
 } from '../../../../store/slices/CurrentIdSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import CyberSecurityModal from '../../../../ui-component/Modal/CyberSecurityModal';
@@ -51,8 +52,6 @@ import LayoutIcon from '../../../../assets/icons/layout.png';
 import ModelIcon from '../../../../assets/icons/model.png';
 import ColorTheme from '../../../../store/ColorTheme';
 import { NavLink } from 'react-router-dom';
-
-// const color = ColorTheme();
 
 const imageComponents = {
     AttackIcon,
@@ -104,18 +103,19 @@ const CardStyle = styled(Card)(() =>
     })
 );
 
-const NavigationTag = styled(NavLink)(() => ({
+const NavigationTag = styled(NavLink)(({ color }) => {
+    return({
     textDecoration: 'none',
     display:'flex',
     marginLeft: '-7px',
-    color:ColorTheme()?.sidebarContent,
+    color:color?.sidebarContent,
 
     '&.active':{
         color:'red',
         backgroundColor:'lightgray'
     }
 
-}));
+})});
 
 const useStyles = makeStyles((theme) => ({
     labelRoot: {
@@ -141,6 +141,7 @@ const selector = (state) => ({
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const BrowserCard = ({ modals }) => {
+    const color = ColorTheme();
     const { addNode, getModals } = useStore(selector);
     const classes = useStyles();
     // const navigate = useNavigate();
@@ -177,7 +178,7 @@ const BrowserCard = ({ modals }) => {
     const getTitleLabel = (icon, name, id) => {
         const Image = imageComponents[icon];
         return (
-            <NavigationTag to={`/Modals/${id}`}>
+            <NavigationTag to={`/Modals/${id}`} color={color}>
                 {Image ? <img src={Image} alt={name} style={{ height: '18px', width: '18px' }} /> : null}
                 <Typography variant="body2" ml={0.5} className={classes.labelTypo} color='inherit'>
                     {name}
@@ -207,7 +208,7 @@ const BrowserCard = ({ modals }) => {
         }
     };
     const openAddModal = (name) => {
-        console.log('name', name);
+        // console.log('name', name);
         setAnchorEl(null);
         setName(name);
         setOpenCyberModal(true);
@@ -241,7 +242,11 @@ const BrowserCard = ({ modals }) => {
     };
     const handleSwicthDsTable = (name) => {
         console.log('name', name);
-        if (name.includes('Damage')) {
+        if (name.includes('Derivations')) {
+            console.log('here')
+            dispatch(DerivationTableOpen());
+        }
+        if (name.includes('Collection & Impact Ratings')) {
             dispatch(DsTableOpen());
         }
         if (name.includes('Threat')) {
@@ -311,11 +316,11 @@ const BrowserCard = ({ modals }) => {
     };
     return (
         <>
-            <Typography variant="h4" sx={{ color: ColorTheme().tabContentClr }}>
+            <Typography variant="h4" sx={{ color: color?.tabContentClr }}>
                 Projects
             </Typography>
-            <CardStyle sx={{ overflowY: 'auto', backgroundColor:ColorTheme()?.sidebarInnerBG }}>
-                <CardContent sx={{ p: 2, color:ColorTheme()?.sidebarContent }}>
+            <CardStyle sx={{ overflowY: 'auto', backgroundColor:color?.sidebarInnerBG }}>
+                <CardContent sx={{ p: 2, color:color?.sidebarContent }}>
                     <TreeView
                         aria-label="file system navigator"
                         defaultCollapseIcon={<ExpandMoreIcon sx={{color:'inherit'}}/>}
@@ -364,11 +369,11 @@ const BrowserCard = ({ modals }) => {
                                                               onClick={() => handleOpenTable(sub?.name)}
                                                           >
                                                               {sub?.name === 'Damage Scenarios Derivations' &&
-                                                                  sub?.losses?.map((ls) => (
+                                                                  sub?.Details?.map((ls) => (
                                                                       <TreeItem
                                                                           key={ls?.id}
                                                                           nodeId={ls.id}
-                                                                          label={`[${ls?.id}] Damage Scenario for the ${ls?.name}`}
+                                                                          label={`[${ls?.id}] ${ls?.name}`}
                                                                           sx={{
                                                                               ml: -2
                                                                           }}

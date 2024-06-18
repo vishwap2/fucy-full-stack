@@ -97,6 +97,7 @@ const SelectableCell = ({ row, options, handleChange, colorPickerTab, impact, na
 };
 
 export default function DsTable() {
+    const color = ColorTheme();
     const { modal, getModals, getModalById, update } = useStore(selector, shallow);
     const [stakeHolder] = React.useState(false);
     const classes = useStyles();
@@ -192,21 +193,6 @@ export default function DsTable() {
 
     React.useEffect(() => {
         if (modal.scenarios) {
-            const mod1 = modal?.scenarios[1]?.subs[0]?.losses
-                ?.map((ls) => ({
-                    id: ls?.id,
-                    name: ls?.name,
-                    Description: ls?.name,
-                    cyberLosses: ls?.cyberLosses ? ls.cyberLosses : [],
-                    impacts: {
-                        Financial: ls?.impacts?.Financial ? ls?.impacts?.Financial : '',
-                        Safety: ls?.impacts?.Safety ? ls?.impacts?.Safety : '',
-                        Operational: ls?.impacts?.Operational ? ls?.impacts?.Operational : '',
-                        Privacy: ls?.impacts?.Privacy ? ls?.impacts?.Privacy : ''
-                    }
-                }))
-                .flat();
-
             const mod2 = modal?.scenarios[1]?.subs[1]?.scenes?.map((ls) => ({
                 id: ls?.id,
                 name: ls?.name,
@@ -220,10 +206,10 @@ export default function DsTable() {
                 }
             }));
             // console.log('mod2', mod2)
-            const combained = mod1.concat(mod2);
+            // const combained = mod1.concat(mod2);
             // console.log('combained', combained)
-            setRows(combained);
-            setFiltered(combained);
+            setRows(mod2);
+            setFiltered(mod2);
         }
     }, [modal]);
 
@@ -376,10 +362,10 @@ export default function DsTable() {
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
                     <KeyboardBackspaceRoundedIcon
-                        sx={{ float: 'left', cursor: 'pointer', ml: 1, color: ColorTheme().title }}
+                        sx={{ float: 'left', cursor: 'pointer', ml: 1, color: color?.title }}
                         onClick={handleBack}
                     />
-                    <Typography sx={{ color: ColorTheme().title, fontWeight: 600, fontSize: '18px' }}>Damage Scenario Table</Typography>
+                    <Typography sx={{ color: color?.title, fontWeight: 600, fontSize: '18px' }}>Damage Scenario Table</Typography>
                 </Box>
                 <Box display="flex" gap={3}>
                     <TextField id="outlined-size-small" placeholder="Search" size="small" value={searchTerm} onChange={handleSearch} sx={{
@@ -408,13 +394,13 @@ export default function DsTable() {
                                     {row?.id?.slice(0, 6)}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scop e="row">
-                                    <Typography sx={{ width: 'max-content' }}>{` Damage Scenario for the ${row?.name}`}</Typography>
+                                    <Typography sx={{ width: 'max-content' }}>{row?.name}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    <Typography sx={{ width: 'max-content' }}>{` Damage Scenario for the ${row?.name}`}</Typography>
+                                    <Typography sx={{ width: 'max-content' }}>{row?.name}</Typography>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                    <div className={classes.div}>{` This is the Description for the ${row?.Description}`}</div>
+                                    <div className={classes.div}>{row?.Description}</div>
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row" onClick={() => handleOpenCl(row)}>
                                     {row?.cyberLosses?.map((loss) => (

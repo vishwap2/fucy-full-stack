@@ -115,7 +115,7 @@ export default function MenuList() {
                 >
                     <TabList
                         sx={{
-                            border:`1px solid ${color?.tabBorder}`,
+                            border:`2px solid ${color?.tabBorder}`,
                             '& .MuiTabs-scroller': {
                                 overflowX: 'auto !important',
                                 scrollbarWidth: 'none',

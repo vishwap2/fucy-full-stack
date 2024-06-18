@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     currentId: '',
+    isDerivationTableOpen:false,
     isDsTableOpen: false,
     isTsTableOpen: false,
     isCyberTableOpen: false,
@@ -31,7 +32,8 @@ const CurrentIdSlice = createSlice({
                 isAttackTreeOpen: false,
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
+                isDerivationTableOpen:false,
             };
         },
         TsTableOpen: (state) => {
@@ -42,8 +44,22 @@ const CurrentIdSlice = createSlice({
                 isAttackTreeOpen: false,
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
+                isDerivationTableOpen:false,
             };
+        },
+        DerivationTableOpen: (state) => {
+            return {
+                ...state,
+                isDerivationTableOpen:true,
+                isAttackTreeOpen: false,
+                isTsTableOpen: false,
+                isDsTableOpen: false,
+                isLevelOpen: false,
+                isCyberBlockOpen: false,
+                isCyberTableOpen: false,
+                isRightDrawerOpen: false
+            }
         },
         AttackTreePageOpen: (state) => {
             return {
@@ -53,7 +69,8 @@ const CurrentIdSlice = createSlice({
                 isDsTableOpen: false,
                 isLevelOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
+                isDerivationTableOpen:false,
             };
         },
         setAttackScene: (state, action) => {
@@ -67,7 +84,8 @@ const CurrentIdSlice = createSlice({
                 isTsTableOpen: false,
                 isDsTableOpen: false,
                 isCyberBlockOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
+                isDerivationTableOpen:false,
             };
         },
         cyberBlockOpen: (state) => {
@@ -78,7 +96,8 @@ const CurrentIdSlice = createSlice({
                 isTsTableOpen: false,
                 isDsTableOpen: false,
                 isLevelOpen: false,
-                isCyberTableOpen: false
+                isCyberTableOpen: false,
+                isDerivationTableOpen:false,
             };
         },
         cyberTableOpen: (state) => {
@@ -89,7 +108,9 @@ const CurrentIdSlice = createSlice({
                 isAttackTreeOpen: false,
                 isTsTableOpen: false,
                 isDsTableOpen: false,
-                isLevelOpen: false
+                isLevelOpen: false,
+                isDerivationTableOpen:false,
+
             };
         },
         drawerOpen: (state, action) => {
@@ -121,6 +142,7 @@ const CurrentIdSlice = createSlice({
         closeAll: (state) => {
             return {
                 ...state,
+                isDerivationTableOpen:false,
                 isAttackTreeOpen: false,
                 isTsTableOpen: false,
                 isDsTableOpen: false,
@@ -138,6 +160,7 @@ export const {
     storeCurrentId,
     DsTableOpen,
     TsTableOpen,
+    DerivationTableOpen,
     AttackTreePageOpen,
     setAttackScene,
     levelOpen,
@@ -147,6 +170,6 @@ export const {
     drawerOpen,
     drawerClose,
     changeMode,
-    navbarSlide
+    navbarSlide,
 } = CurrentIdSlice.actions;
 export default CurrentIdSlice.reducer;

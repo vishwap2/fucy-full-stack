@@ -2093,12 +2093,12 @@
   ],
   "Modals": [
     {
-      "id": "9648393d-2c7b-4084-99b1-6403816c8871",
+      "id": "19123f75-4cc2-41a0-94b1-ad45c813ea89",
       "name": "Security",
       "template": {
         "nodes": [
           {
-            "id": "f8155ccc-ba39-4839-bd1a-161500ed6fd6920",
+            "id": "98627b79-96ac-4226-ab08-ab5e3019bd3b446",
             "data": {
               "label": "Power Manage",
               "bgColor": "#E9E955",
@@ -2118,8 +2118,8 @@
             },
             "type": "input",
             "position": {
-              "x": 366.25240724002526,
-              "y": 313.6728491404798
+              "x": 598.8625030517578,
+              "y": 473.07500076293945
             },
             "properties": [
               "Integrity",
@@ -2128,76 +2128,10 @@
             "parentId": null,
             "extent": null,
             "width": 150,
-            "height": 50
+            "height": 43
           },
           {
-            "id": "7e3fd44c-521c-49cc-8241-ceb966b66ef7920",
-            "data": {
-              "label": "MCU",
-              "bgColor": "#06f9f5",
-              "style": {
-                "backgroundColor": "#06f9f5",
-                "fontSize": "16px",
-                "fontFamily": "Inter",
-                "fontStyle": "normal",
-                "fontWeight": 500,
-                "textAlign": "center",
-                "color": "white",
-                "textDecoration": "none",
-                "borderColor": "black",
-                "borderWidth": "2px",
-                "borderStyle": "solid"
-              }
-            },
-            "type": "default",
-            "position": {
-              "x": 313.08648721151985,
-              "y": 457.81156566220557
-            },
-            "properties": [
-              "Integrity",
-              "Authorization"
-            ],
-            "parentId": null,
-            "extent": null,
-            "width": 150,
-            "height": 50
-          },
-          {
-            "id": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64920",
-            "data": {
-              "label": "PHY",
-              "bgColor": "#16c260",
-              "style": {
-                "backgroundColor": "#16c260",
-                "fontSize": "16px",
-                "fontFamily": "Inter",
-                "fontStyle": "normal",
-                "fontWeight": 500,
-                "textAlign": "center",
-                "color": "white",
-                "textDecoration": "none",
-                "borderColor": "black",
-                "borderWidth": "2px",
-                "borderStyle": "solid"
-              }
-            },
-            "type": "default",
-            "position": {
-              "x": 396.2827291942765,
-              "y": 566.2017601154038
-            },
-            "properties": [
-              "Integrity",
-              "Authenticity"
-            ],
-            "parentId": null,
-            "extent": null,
-            "width": 150,
-            "height": 50
-          },
-          {
-            "id": "212528af-2aca-4df6-bc01-9b3e4b6e7507920",
+            "id": "e25bdc35-67b0-4869-b6a7-a7782cf1249d446",
             "data": {
               "label": "Vehicle",
               "bgColor": "#ff0072",
@@ -2217,8 +2151,8 @@
             },
             "type": "output",
             "position": {
-              "x": 999.0505308576976,
-              "y": 580.7296316643992
+              "x": 925.2937545776367,
+              "y": 635.6125011444092
             },
             "properties": [
               "Authenticity",
@@ -2227,15 +2161,15 @@
             "parentId": null,
             "extent": null,
             "width": 150,
-            "height": 50
+            "height": 43
           },
           {
-            "id": "2a4df59e-0856-466f-852f-fbff39d0d899920",
+            "id": "583f8758-c0c8-4529-ae61-6f55eda88a73446",
             "data": {
-              "label": "Receiver",
-              "bgColor": "#124faf",
+              "label": "transceiver",
+              "bgColor": "#000",
               "style": {
-                "backgroundColor": "#124faf",
+                "backgroundColor": "#000",
                 "fontSize": "16px",
                 "fontFamily": "Inter",
                 "fontStyle": "normal",
@@ -2248,29 +2182,60 @@
                 "borderStyle": "solid"
               }
             },
-            "type": "receiver",
+            "type": "transceiver",
             "position": {
-              "x": 782.4122355507128,
-              "y": 528.3695543428532
+              "x": 671.3417041781067,
+              "y": 650.8952950379927
             },
             "properties": [
-              "Confidentiality",
-              "Availability"
+              "Authenticity",
+              "Authorization"
             ],
             "parentId": null,
             "extent": null,
-            "width": 140,
-            "height": 50,
-            "selected": true,
-            "dragging": false
+            "width": 119,
+            "height": 42
           },
           {
-            "id": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0920",
+            "id": "16f89daa-0aab-4147-9e7d-671699e6da52446",
+            "data": {
+              "label": "circuit",
+              "bgColor": "#8ea9fb",
+              "style": {
+                "backgroundColor": "#8ea9fb",
+                "fontSize": "16px",
+                "fontFamily": "Inter",
+                "fontStyle": "normal",
+                "fontWeight": 500,
+                "textAlign": "center",
+                "color": "white",
+                "textDecoration": "none",
+                "borderColor": "black",
+                "borderWidth": "2px",
+                "borderStyle": "solid"
+              }
+            },
+            "type": "output",
+            "position": {
+              "x": 957.8096085461679,
+              "y": 757.9339344384438
+            },
+            "properties": [
+              "Integrity",
+              "Authenticity"
+            ],
+            "parentId": null,
+            "extent": null,
+            "width": 150,
+            "height": 43
+          },
+          {
+            "id": "c36579ed-b437-46e9-979d-d32f56b27f44446",
             "data": {
               "label": "signal",
               "bgColor": "#f59b00",
               "style": {
-                "backgroundColor": "#0080c0",
+                "backgroundColor": "#f59b00",
                 "fontSize": "16px",
                 "fontFamily": "Inter",
                 "fontStyle": "normal",
@@ -2285,8 +2250,8 @@
             },
             "type": "signal",
             "position": {
-              "x": 605.9832096135023,
-              "y": 456.82810595598187
+              "x": 835.9438834159793,
+              "y": 530.755731285401
             },
             "properties": [
               "Non-repudiation",
@@ -2294,17 +2259,15 @@
             ],
             "parentId": null,
             "extent": null,
-            "width": 140,
-            "height": 50,
-            "selected": false,
-            "dragging": false
+            "width": 78,
+            "height": 42
           }
         ],
         "edges": [
           {
-            "id": "f520de1e-a13e-4ea3-a772-48b12f9572e8",
-            "source": "f8155ccc-ba39-4839-bd1a-161500ed6fd6920",
-            "target": "7e3fd44c-521c-49cc-8241-ceb966b66ef7920",
+            "id": "27d9a061-970f-40be-aab6-443a1166ccb4",
+            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b446",
+            "target": "583f8758-c0c8-4529-ae61-6f55eda88a73446",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2318,9 +2281,9 @@
             }
           },
           {
-            "id": "5008eb2e-f92f-44d9-be10-01ff9fb25968",
-            "source": "7e3fd44c-521c-49cc-8241-ceb966b66ef7920",
-            "target": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64920",
+            "id": "fc8f4acb-dcfa-4c67-ac3c-c91e6cf29014",
+            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b446",
+            "target": "c36579ed-b437-46e9-979d-d32f56b27f44446",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2334,9 +2297,9 @@
             }
           },
           {
-            "id": "730ebbf8-76de-4814-8567-e76ffe7ce6fd",
-            "source": "c3fa1e6d-11cc-497e-8e90-5db2c4593e64920",
-            "target": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0920",
+            "id": "0bc9f7c0-7797-4759-abce-737b25653b86",
+            "source": "c36579ed-b437-46e9-979d-d32f56b27f44446",
+            "target": "e25bdc35-67b0-4869-b6a7-a7782cf1249d446",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2350,25 +2313,9 @@
             }
           },
           {
-            "id": "782e2243-fe9f-4b3c-8196-23120aaa345d",
-            "source": "bce619fc-0c32-4c42-ac0a-2b1b75a01fc0920",
-            "target": "2a4df59e-0856-466f-852f-fbff39d0d899920",
-            "type": "step",
-            "markerEnd": {
-              "type": "arrowclosed",
-              "width": 20,
-              "height": 20,
-              "color": "black"
-            },
-            "animated": false,
-            "style": {
-              "stroke": "grey"
-            }
-          },
-          {
-            "id": "104655f5-9475-440f-9051-3f9a558a2584",
-            "source": "2a4df59e-0856-466f-852f-fbff39d0d899920",
-            "target": "212528af-2aca-4df6-bc01-9b3e4b6e7507920",
+            "id": "32a95a03-c97c-4f80-b79c-7d859482364c",
+            "source": "583f8758-c0c8-4529-ae61-6f55eda88a73446",
+            "target": "16f89daa-0aab-4147-9e7d-671699e6da52446",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -2385,7 +2332,7 @@
       },
       "scenarios": [
         {
-          "id": "c3d00923-550c-4700-a3be-d43ba01f7050",
+          "id": "a3cee711-79e4-4cdd-a4a1-2a483f1aadd7",
           "name": "Item Modal & Assets",
           "icon": "ItemIcon",
           "Details": [
@@ -2397,20 +2344,6 @@
               ]
             },
             {
-              "name": "MCU",
-              "props": [
-                "Integrity",
-                "Authorization"
-              ]
-            },
-            {
-              "name": "PHY",
-              "props": [
-                "Integrity",
-                "Authenticity"
-              ]
-            },
-            {
               "name": "Vehicle",
               "props": [
                 "Authenticity",
@@ -2418,10 +2351,17 @@
               ]
             },
             {
-              "name": "Receiver",
+              "name": "transceiver",
               "props": [
-                "Confidentiality",
-                "Availability"
+                "Authenticity",
+                "Authorization"
+              ]
+            },
+            {
+              "name": "circuit",
+              "props": [
+                "Integrity",
+                "Authenticity"
               ]
             },
             {
@@ -2434,248 +2374,90 @@
           ]
         },
         {
-          "id": "c51ccb4f-7f55-4379-b87d-09462169eabf",
+          "id": "1fc9f95f-e1df-4f43-b66a-30fdf4719587",
           "name": "Damage Scenarios Identification and Impact Ratings",
           "icon": "DamageIcon",
           "subs": [
             {
-              "id": "3ff15425-802f-4081-826a-c70539a687e3",
+              "id": "06d79e1f-ad5b-4a21-bf6b-a36d17937ec8",
               "name": "Damage Scenarios Derivations",
               "Details": [
                 {
-                  "name": "Power Manage",
-                  "props": [
-                    "Integrity",
-                    "Authorization"
-                  ]
+                  "task": "Check for Damage Scenario for loss of Integrity for Power Manage",
+                  "loss": "loss of Integrity",
+                  "damageScene": [],
+                  "id": "DS001"
                 },
                 {
-                  "name": "MCU",
-                  "props": [
-                    "Integrity",
-                    "Authorization"
-                  ]
+                  "task": "Check for Damage Scenario for loss of Authorization for Power Manage",
+                  "loss": "loss of Authorization",
+                  "damageScene": [],
+                  "id": "DS002"
                 },
                 {
-                  "name": "PHY",
-                  "props": [
-                    "Integrity",
-                    "Authenticity"
-                  ]
+                  "task": "Check for Damage Scenario for loss of Authenticity for Vehicle",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
+                  "id": "DS003"
                 },
                 {
-                  "name": "Vehicle",
-                  "props": [
-                    "Authenticity",
-                    "Availability"
-                  ]
+                  "task": "Check for Damage Scenario for loss of Availability for Vehicle",
+                  "loss": "loss of Availability",
+                  "damageScene": [],
+                  "id": "DS004"
                 },
                 {
-                  "name": "Receiver",
-                  "props": [
-                    "Confidentiality",
-                    "Availability"
-                  ]
+                  "task": "Check for Damage Scenario for loss of Authenticity for transceiver",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
+                  "id": "DS005"
                 },
                 {
-                  "name": "signal",
-                  "props": [
-                    "Non-repudiation",
-                    "Authenticity"
-                  ]
-                }
-              ],
-              "losses": [
-                {
-                  "id": "DS001",
-                  "name": "loss of Integrity for Power Manage",
-                  "cyberLosses": [
-                    {
-                      "name": "Power Manage",
-                      "props": [
-                        "Integrity"
-                      ]
-                    },
-                    {
-                      "name": "MCU",
-                      "props": [
-                        "Integrity"
-                      ]
-                    },
-                    {
-                      "name": "Vehicle",
-                      "props": [
-                        "Authenticity"
-                      ]
-                    }
-                  ],
-                  "impacts": {
-                    "Financial": "Severe",
-                    "Safety": "Negligible",
-                    "Operational": "Severe",
-                    "Privacy": "Negligible"
-                  }
+                  "task": "Check for Damage Scenario for loss of Authorization for transceiver",
+                  "loss": "loss of Authorization",
+                  "damageScene": [],
+                  "id": "DS006"
                 },
                 {
-                  "id": "DS002",
-                  "name": "loss of Authorization for Power Manage",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "Severe",
-                    "Safety": "Severe",
-                    "Operational": "Severe",
-                    "Privacy": "Major"
-                  }
+                  "task": "Check for Damage Scenario for loss of Integrity for circuit",
+                  "loss": "loss of Integrity",
+                  "damageScene": [],
+                  "id": "DS007"
                 },
                 {
-                  "id": "DS003",
-                  "name": "loss of Integrity for MCU",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
+                  "task": "Check for Damage Scenario for loss of Authenticity for circuit",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
+                  "id": "DS008"
                 },
                 {
-                  "id": "DS004",
-                  "name": "loss of Authorization for MCU",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
+                  "task": "Check for Damage Scenario for loss of Non-repudiation for signal",
+                  "loss": "loss of Non-repudiation",
+                  "damageScene": [],
+                  "id": "DS009"
                 },
                 {
-                  "id": "DS005",
-                  "name": "loss of Integrity for PHY",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS006",
-                  "name": "loss of Authenticity for PHY",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS007",
-                  "name": "loss of Authenticity for Vehicle",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS008",
-                  "name": "loss of Availability for Vehicle",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS009",
-                  "name": "loss of Confidentiality for Receiver",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS0010",
-                  "name": "loss of Availability for Receiver",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS0011",
-                  "name": "loss of Non-repudiation for signal",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS0012",
-                  "name": "loss of Authenticity for signal",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
+                  "task": "Check for Damage Scenario for loss of Authenticity for signal",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
+                  "id": "DS0010"
                 }
               ]
             },
             {
-              "id": "965bcd8b-8d75-4e7e-aa17-f67e73affc94",
+              "id": "c453af89-0499-41cd-bf89-65a5f17e5832",
               "name": "Damage Scenarios - Collection & Impact Ratings",
-              "scenes": [
-                {
-                  "id": "DS0013",
-                  "name": "New Scene",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                },
-                {
-                  "id": "DS0014",
-                  "name": "New 2",
-                  "cyberLosses": [],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                }
-              ]
+              "scenes": []
             }
           ]
         },
         {
-          "id": "af728043-17bf-410c-ada3-ba96a336ab84",
+          "id": "91053876-b21a-4760-b7df-b4472fb2d32c",
           "name": "Threat Scenarios Identification",
           "icon": "ThreatIcon",
           "subs": [
             {
-              "id": "427f74d3-2b6c-4a23-8e20-adb65fb833f6",
+              "id": "acbeedcc-971d-49f9-8fb1-2b7b3f038d82",
               "name": "Threat Scenarios",
               "Details": [
                 {
@@ -2686,20 +2468,6 @@
                   ]
                 },
                 {
-                  "name": "MCU",
-                  "props": [
-                    "Integrity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "PHY",
-                  "props": [
-                    "Integrity",
-                    "Authenticity"
-                  ]
-                },
-                {
                   "name": "Vehicle",
                   "props": [
                     "Authenticity",
@@ -2707,10 +2475,17 @@
                   ]
                 },
                 {
-                  "name": "Receiver",
+                  "name": "transceiver",
                   "props": [
-                    "Confidentiality",
-                    "Availability"
+                    "Authenticity",
+                    "Authorization"
+                  ]
+                },
+                {
+                  "name": "circuit",
+                  "props": [
+                    "Integrity",
+                    "Authenticity"
                   ]
                 },
                 {
@@ -2721,121 +2496,77 @@
                   ]
                 }
               ],
-              "losses": [
-                {
-                  "id": "DS001",
-                  "name": "loss of Integrity for Power Manage",
-                  "Description": "loss of Integrity for Power Manage",
-                  "cyberLosses": [
-                    {
-                      "name": "Power Manage",
-                      "props": [
-                        "Integrity"
-                      ]
-                    },
-                    {
-                      "name": "MCU",
-                      "props": [
-                        "Integrity"
-                      ]
-                    },
-                    {
-                      "name": "Vehicle",
-                      "props": [
-                        "Authenticity"
-                      ]
-                    }
-                  ],
-                  "impacts": {
-                    "Financial": "",
-                    "Safety": "",
-                    "Operational": "",
-                    "Privacy": ""
-                  }
-                }
-              ]
+              "losses": []
             },
             {
-              "id": "e12cef7b-1b94-4ee5-bcdd-5439728e8516",
+              "id": "3a775c6b-e882-42c8-b875-3036bc70e5bc",
               "name": "Derived Threat Scenarios",
-              "scenes": [
-                {
-                  "id": "17917dc1-4915-4f7d-841d-8865bfdf7c3d",
-                  "name": "New Threat",
-                  "Description": "desc"
-                }
-              ]
+              "scenes": []
             }
           ]
         },
         {
-          "id": "04fc55fd-2025-448d-9c0e-a0b3eab8aaf9",
+          "id": "b17ca021-e93f-4432-9c9b-edfda65c0733",
           "name": "Attack Path Analysis and Attack Feasability Rating",
           "icon": "AttackIcon",
           "subs": [
             {
-              "id": "cc86b36d-a238-410b-b1c5-4334ee935925",
+              "id": "2fc247c7-01ab-4b96-9d14-3a669e94f697",
               "name": "Attack Trees",
-              "scenes": [
-                {
-                  "id": "17917dc1-4915-4f7d-841d-8865bfdf7c3d",
-                  "name": "New Threat",
-                  "Description": "desc"
-                }
-              ]
+              "scenes": []
             },
             {
-              "id": "db75495a-cf8b-4022-9c24-bc8a5f7fd263",
+              "id": "6dbccaf4-f2dc-48f3-a480-27088d8f322e",
               "name": "Vulnerability Analysis",
               "scenes": []
             }
           ]
         },
         {
-          "id": "e88fc324-ba74-4a4d-9a7f-8f09e209f5e6",
+          "id": "7c77ad53-bc52-4ffc-862a-7b1901e731ad",
           "name": "CyberSecurity Goals, Claims and Requirements",
           "icon": "CybersecurityIcon",
           "subs": [
             {
-              "id": "acf0d77f-23fa-4969-91fb-d8cd96c8ac40",
+              "id": "87c0e458-63ba-44df-9b61-089e5e3f86d5",
               "name": "CyberSecurity Goals and Requirements",
               "subs": [
                 {
-                  "id": "354bceff-7f24-4ae4-b167-f79b32233d0b",
+                  "id": "7b44f126-58f7-412c-9586-e159cb9613f4",
                   "name": "CyberSecurity Goals",
                   "scenes": []
                 },
                 {
-                  "id": "55f07a71-a6f3-4c5c-bf8d-ad25f8e2f15b",
+                  "id": "3e00a054-56df-469f-ae1d-7862a7d66b74",
                   "name": "CyberSecurity Requirements",
                   "scenes": []
                 }
               ]
             },
             {
-              "id": "64b246ec-cc15-4e84-a354-d433e94276eb",
+              "id": "748bf8a9-1df0-4d79-8833-8d5cb704cb8c",
               "name": "CyberSecurity Controls",
               "scenes": []
             }
           ]
         },
         {
-          "id": "5baf26d1-afdb-4223-a30c-9b4274dcf951",
+          "id": "96f69b5f-18b6-4ffb-a047-a2b292689771",
           "name": "System Design",
           "icon": "SystemIcon",
           "subs": [
             {
-              "id": "486f2bd6-2f12-4d03-b61d-fd46ec6eb57c",
+              "id": "87fa2cd9-7e54-4043-b096-e83dbb5b7038",
               "name": "Hardware Models"
             },
             {
-              "id": "979affaf-d302-4c7f-9d77-7a49d861bea5",
+              "id": "1ed92ca0-912e-46e1-b236-4f4ab968658e",
               "name": "Software Models"
             }
           ]
         },
         {
-          "id": "f67cfba8-66e5-46ee-986f-a81b6604b3b1",
+          "id": "01d6d7f1-fd05-47b9-804c-e6c5eb9f7986",
           "name": "Catalogs",
           "icon": "CatalogIcon",
           "subs": [
@@ -2846,23 +2577,23 @@
           ]
         },
         {
-          "id": "4128014d-4778-4e77-a6c0-b3c6912febdb",
+          "id": "288134a6-888c-4fd0-8c6f-5aa37c4c3522",
           "name": "Risk Determination and Risk Treatment Decision",
           "icon": "RiskIcon"
         },
         {
-          "id": "ef8be604-d257-4054-9ef1-f229c148e8db",
+          "id": "a4c83e1d-74c3-4059-8608-72584e9e3baf",
           "name": "Documents",
           "icon": "DocumentIcon"
         },
         {
-          "id": "6e0a3702-53f2-43f7-acf4-d17d7762ebfd",
+          "id": "afeb473a-78f8-4593-9e48-4deccc88f1b2",
           "name": "Reporting",
           "icon": "ReportIcon",
           "scenes": []
         },
         {
-          "id": "e5600436-06ce-48cf-b852-63532cd528d2",
+          "id": "a1dbb604-6cad-4d21-9612-8e897e9c7965",
           "name": "Layouts",
           "icon": "LayoutIcon",
           "scenes": []
@@ -2870,49 +2601,15 @@
       ]
     },
     {
-      "id": "970f625b-e0b3-465e-82ea-33e916890e31",
-      "name": "New Circuit",
+      "id": "b68e64ee-1c7f-407a-8823-09eb082aa05c",
+      "name": "Security",
       "template": {
         "nodes": [
           {
-            "id": "062d492b-a927-4459-901d-d4e60cf47cc7",
-            "type": "group",
-            "height": 450,
-            "width": 368,
-            "position": {
-              "x": 96,
-              "y": 235
-            },
+            "id": "98627b79-96ac-4226-ab08-ab5e3019bd3b260",
             "data": {
-              "label": "Internal"
-            },
-            "selected": false,
-            "positionAbsolute": {
-              "x": 390,
-              "y": 271
-            },
-            "dragging": false,
-            "style": {
-              "width": 368,
-              "height": 450
-            },
-            "resizing": false
-          },
-          {
-            "id": "cd53158e-60a2-4c3d-b9cb-b52b364d1c5b",
-            "type": "input",
-            "position": {
-              "x": 157.5018370098012,
-              "y": 321.20188588610586
-            },
-            "properties": [
-              "Integrity",
-              "Authorization"
-            ],
-            "width": 150,
-            "height": 62,
-            "data": {
-              "label": "Power Management",
+              "label": "Power Manage",
+              "bgColor": "#E9E955",
               "style": {
                 "backgroundColor": "#E9E955",
                 "fontSize": "16px",
@@ -2927,26 +2624,27 @@
                 "borderStyle": "solid"
               }
             },
-            "parentId": "062d492b-a927-4459-901d-d4e60cf47cc7",
-            "extent": "parent"
-          },
-          {
-            "id": "77864087-149e-49f6-a4e9-c35c0c387b83",
-            "type": "default",
+            "type": "input",
             "position": {
-              "x": 217.5018370098012,
-              "y": 489.20188588610586
+              "x": 677.8625030517578,
+              "y": 552.0750007629395
             },
             "properties": [
               "Integrity",
               "Authorization"
             ],
+            "parentId": null,
+            "extent": null,
             "width": 150,
-            "height": 43,
+            "height": 43
+          },
+          {
+            "id": "e25bdc35-67b0-4869-b6a7-a7782cf1249d260",
             "data": {
-              "label": "MCU",
+              "label": "Vehicle",
+              "bgColor": "#ff0072",
               "style": {
-                "backgroundColor": "#06f9f5",
+                "backgroundColor": "#ff0072",
                 "fontSize": "16px",
                 "fontFamily": "Inter",
                 "fontStyle": "normal",
@@ -2959,24 +2657,91 @@
                 "borderStyle": "solid"
               }
             },
-            "parentId": "062d492b-a927-4459-901d-d4e60cf47cc7",
-            "extent": "parent"
-          },
-          {
-            "id": "a7139b45-c2d8-44e7-b32b-663048263e69",
-            "type": "signal",
+            "type": "output",
             "position": {
-              "x": 273.5018370098012,
-              "y": 595.2018858861059
+              "x": 1004.2937545776367,
+              "y": 714.6125011444092
             },
             "properties": [
-              "Non-repudiation",
+              "Authenticity",
+              "Availability"
+            ],
+            "parentId": null,
+            "extent": null,
+            "width": 150,
+            "height": 43
+          },
+          {
+            "id": "583f8758-c0c8-4529-ae61-6f55eda88a73260",
+            "data": {
+              "label": "transceiver",
+              "bgColor": "#000",
+              "style": {
+                "backgroundColor": "#000",
+                "fontSize": "16px",
+                "fontFamily": "Inter",
+                "fontStyle": "normal",
+                "fontWeight": 500,
+                "textAlign": "center",
+                "color": "white",
+                "textDecoration": "none",
+                "borderColor": "black",
+                "borderWidth": "2px",
+                "borderStyle": "solid"
+              }
+            },
+            "type": "transceiver",
+            "position": {
+              "x": 750.3417041781067,
+              "y": 729.8952950379927
+            },
+            "properties": [
+              "Authenticity",
+              "Authorization"
+            ],
+            "parentId": null,
+            "extent": null,
+            "width": 119,
+            "height": 42
+          },
+          {
+            "id": "16f89daa-0aab-4147-9e7d-671699e6da52260",
+            "data": {
+              "label": "circuit",
+              "bgColor": "#8ea9fb",
+              "style": {
+                "backgroundColor": "#8ea9fb",
+                "fontSize": "16px",
+                "fontFamily": "Inter",
+                "fontStyle": "normal",
+                "fontWeight": 500,
+                "textAlign": "center",
+                "color": "white",
+                "textDecoration": "none",
+                "borderColor": "black",
+                "borderWidth": "2px",
+                "borderStyle": "solid"
+              }
+            },
+            "type": "output",
+            "position": {
+              "x": 1036.809608546168,
+              "y": 836.9339344384438
+            },
+            "properties": [
+              "Integrity",
               "Authenticity"
             ],
-            "width": 78,
-            "height": 42,
+            "parentId": null,
+            "extent": null,
+            "width": 150,
+            "height": 43
+          },
+          {
+            "id": "c36579ed-b437-46e9-979d-d32f56b27f44260",
             "data": {
               "label": "signal",
+              "bgColor": "#f59b00",
               "style": {
                 "backgroundColor": "#f59b00",
                 "fontSize": "16px",
@@ -2991,201 +2756,26 @@
                 "borderStyle": "solid"
               }
             },
-            "parentId": "062d492b-a927-4459-901d-d4e60cf47cc7",
-            "extent": "parent"
-          },
-          {
-            "id": "ddea0a58-d658-43bd-ba96-6d4f18c3a30b",
-            "type": "group",
-            "height": 420,
-            "width": 326,
-            "position": {
-              "x": 578,
-              "y": 215
-            },
-            "data": {
-              "label": "Memory"
-            },
-            "selected": false,
-            "positionAbsolute": {
-              "x": 570,
-              "y": 413
-            },
-            "dragging": false,
-            "style": {
-              "width": 326,
-              "height": 420
-            },
-            "resizing": false
-          },
-          {
-            "id": "8eed08a0-1f37-4545-91e8-9aa7c3664d54",
             "type": "signal",
             "position": {
-              "x": 677.5018370098012,
-              "y": 473.20188588610586
+              "x": 914.9438834159793,
+              "y": 609.755731285401
             },
             "properties": [
               "Non-repudiation",
               "Authenticity"
             ],
+            "parentId": null,
+            "extent": null,
             "width": 78,
-            "height": 42,
-            "data": {
-              "label": "signal",
-              "style": {
-                "backgroundColor": "#f59b00",
-                "fontSize": "16px",
-                "fontFamily": "Inter",
-                "fontStyle": "normal",
-                "fontWeight": 500,
-                "textAlign": "center",
-                "color": "white",
-                "textDecoration": "none",
-                "borderColor": "black",
-                "borderWidth": "2px",
-                "borderStyle": "solid"
-              }
-            },
-            "parentId": "ddea0a58-d658-43bd-ba96-6d4f18c3a30b",
-            "extent": "parent",
-            "selected": false,
-            "positionAbsolute": {
-              "x": 675.5018370098012,
-              "y": 473.20188588610586
-            },
-            "dragging": false
-          },
-          {
-            "id": "806a26a8-2c4a-48b7-990f-b4d71a0cd0c7",
-            "type": "transceiver",
-            "position": {
-              "x": 653.5018370098012,
-              "y": 333.20188588610586
-            },
-            "properties": [
-              "Authenticity",
-              "Authorization"
-            ],
-            "width": 119,
-            "height": 42,
-            "data": {
-              "label": "transceiver",
-              "style": {
-                "backgroundColor": "#000",
-                "fontSize": "16px",
-                "fontFamily": "Inter",
-                "fontStyle": "normal",
-                "fontWeight": 500,
-                "textAlign": "center",
-                "color": "white",
-                "textDecoration": "none",
-                "borderColor": "black",
-                "borderWidth": "2px",
-                "borderStyle": "solid"
-              }
-            },
-            "parentId": "ddea0a58-d658-43bd-ba96-6d4f18c3a30b",
-            "extent": "parent",
-            "selected": false,
-            "positionAbsolute": {
-              "x": 653.5018370098012,
-              "y": 335.20188588610586
-            },
-            "dragging": false
-          },
-          {
-            "id": "6c0ebff6-ffbc-4d05-ab4b-6f049cf611cb",
-            "type": "group",
-            "height": 300,
-            "width": 300,
-            "position": {
-              "x": 981.9999999999998,
-              "y": 420
-            },
-            "data": {
-              "label": "External"
-            },
-            "selected": false,
-            "dragging": false,
-            "positionAbsolute": {
-              "x": 985.9999999999998,
-              "y": 414
-            }
-          },
-          {
-            "id": "56521af1-09de-43c3-bf6a-d134de808c8f",
-            "type": "default",
-            "position": {
-              "x": 1081.501837009801,
-              "y": 619.2018858861059
-            },
-            "properties": [
-              "Confidentiality",
-              "Non-repudiation"
-            ],
-            "width": 150,
-            "height": 43,
-            "data": {
-              "label": "Camera",
-              "style": {
-                "backgroundColor": "#000",
-                "fontSize": "16px",
-                "fontFamily": "Inter",
-                "fontStyle": "normal",
-                "fontWeight": 500,
-                "textAlign": "center",
-                "color": "white",
-                "textDecoration": "none",
-                "borderColor": "black",
-                "borderWidth": "2px",
-                "borderStyle": "solid"
-              }
-            },
-            "parentId": "6c0ebff6-ffbc-4d05-ab4b-6f049cf611cb",
-            "extent": "parent",
-            "selected": false,
-            "positionAbsolute": {
-              "x": 1069.501837009801,
-              "y": 523.2018858861059
-            },
-            "dragging": false
-          },
-          {
-            "id": "16d5ff59-fbd9-41bb-bc7e-0b81b94338da",
-            "type": "transceiver",
-            "position": {
-              "x": 1135.5018370098012,
-              "y": 533.2018858861059
-            },
-            "properties": [
-              "Authenticity",
-              "Authorization"
-            ],
-            "width": 119,
-            "height": 42,
-            "data": {
-              "label": "transceiver",
-              "style": {
-                "backgroundColor": "#000",
-                "fontSize": "16px",
-                "fontFamily": "Inter",
-                "fontStyle": "normal",
-                "fontWeight": 500,
-                "textAlign": "center",
-                "color": "white",
-                "textDecoration": "none",
-                "borderColor": "black",
-                "borderWidth": "2px",
-                "borderStyle": "solid"
-              }
-            },
-            "parentId": "6c0ebff6-ffbc-4d05-ab4b-6f049cf611cb",
-            "extent": "parent"
+            "height": 42
           }
         ],
         "edges": [
           {
+            "id": "274c2e3a-1d89-4d32-9ac3-757ffedc902f",
+            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b260",
+            "target": "583f8758-c0c8-4529-ae61-6f55eda88a73260",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3196,14 +2786,12 @@
             "animated": false,
             "style": {
               "stroke": "grey"
-            },
-            "source": "cd53158e-60a2-4c3d-b9cb-b52b364d1c5b",
-            "sourceHandle": null,
-            "target": "77864087-149e-49f6-a4e9-c35c0c387b83",
-            "targetHandle": null,
-            "id": "reactflow__edge-cd53158e-60a2-4c3d-b9cb-b52b364d1c5b-77864087-149e-49f6-a4e9-c35c0c387b83"
+            }
           },
           {
+            "id": "27066a61-d345-43cf-a5a9-8f5a1e70237b",
+            "source": "98627b79-96ac-4226-ab08-ab5e3019bd3b260",
+            "target": "c36579ed-b437-46e9-979d-d32f56b27f44260",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3214,14 +2802,12 @@
             "animated": false,
             "style": {
               "stroke": "grey"
-            },
-            "source": "77864087-149e-49f6-a4e9-c35c0c387b83",
-            "sourceHandle": null,
-            "target": "a7139b45-c2d8-44e7-b32b-663048263e69",
-            "targetHandle": null,
-            "id": "reactflow__edge-77864087-149e-49f6-a4e9-c35c0c387b83-a7139b45-c2d8-44e7-b32b-663048263e69"
+            }
           },
           {
+            "id": "1f6c830c-72cf-4767-8f27-05d4a11971bf",
+            "source": "c36579ed-b437-46e9-979d-d32f56b27f44260",
+            "target": "e25bdc35-67b0-4869-b6a7-a7782cf1249d260",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3232,14 +2818,12 @@
             "animated": false,
             "style": {
               "stroke": "grey"
-            },
-            "source": "a7139b45-c2d8-44e7-b32b-663048263e69",
-            "sourceHandle": null,
-            "target": "806a26a8-2c4a-48b7-990f-b4d71a0cd0c7",
-            "targetHandle": null,
-            "id": "reactflow__edge-a7139b45-c2d8-44e7-b32b-663048263e69-806a26a8-2c4a-48b7-990f-b4d71a0cd0c7"
+            }
           },
           {
+            "id": "6173d267-da5d-43f7-9665-83b8e62e6e2c",
+            "source": "583f8758-c0c8-4529-ae61-6f55eda88a73260",
+            "target": "16f89daa-0aab-4147-9e7d-671699e6da52260",
             "type": "step",
             "markerEnd": {
               "type": "arrowclosed",
@@ -3250,83 +2834,28 @@
             "animated": false,
             "style": {
               "stroke": "grey"
-            },
-            "source": "806a26a8-2c4a-48b7-990f-b4d71a0cd0c7",
-            "sourceHandle": null,
-            "target": "8eed08a0-1f37-4545-91e8-9aa7c3664d54",
-            "targetHandle": null,
-            "id": "reactflow__edge-806a26a8-2c4a-48b7-990f-b4d71a0cd0c7-8eed08a0-1f37-4545-91e8-9aa7c3664d54"
-          },
-          {
-            "type": "step",
-            "markerEnd": {
-              "type": "arrowclosed",
-              "width": 20,
-              "height": 20,
-              "color": "black"
-            },
-            "animated": false,
-            "style": {
-              "stroke": "grey"
-            },
-            "source": "8eed08a0-1f37-4545-91e8-9aa7c3664d54",
-            "sourceHandle": null,
-            "target": "16d5ff59-fbd9-41bb-bc7e-0b81b94338da",
-            "targetHandle": null,
-            "id": "reactflow__edge-8eed08a0-1f37-4545-91e8-9aa7c3664d54-16d5ff59-fbd9-41bb-bc7e-0b81b94338da"
-          },
-          {
-            "type": "step",
-            "markerEnd": {
-              "type": "arrowclosed",
-              "width": 20,
-              "height": 20,
-              "color": "black"
-            },
-            "animated": false,
-            "style": {
-              "stroke": "grey"
-            },
-            "source": "16d5ff59-fbd9-41bb-bc7e-0b81b94338da",
-            "sourceHandle": null,
-            "target": "56521af1-09de-43c3-bf6a-d134de808c8f",
-            "targetHandle": null,
-            "id": "reactflow__edge-16d5ff59-fbd9-41bb-bc7e-0b81b94338da-56521af1-09de-43c3-bf6a-d134de808c8f"
+            }
           }
         ]
       },
       "scenarios": [
         {
-          "id": "04d77e71-ed30-4135-8c8c-03f770e27e6b",
+          "id": "19bd6d15-5979-41d7-884f-d02bd5000240",
           "name": "Item Modal & Assets",
           "icon": "ItemIcon",
           "Details": [
             {
-              "name": "Power Management",
+              "name": "Power Manage",
               "props": [
                 "Integrity",
                 "Authorization"
               ]
             },
             {
-              "name": "MCU",
+              "name": "Vehicle",
               "props": [
-                "Integrity",
-                "Authorization"
-              ]
-            },
-            {
-              "name": "signal",
-              "props": [
-                "Non-repudiation",
-                "Authenticity"
-              ]
-            },
-            {
-              "name": "signal",
-              "props": [
-                "Non-repudiation",
-                "Authenticity"
+                "Authenticity",
+                "Availability"
               ]
             },
             {
@@ -3337,181 +2866,130 @@
               ]
             },
             {
-              "name": "Camera",
+              "name": "circuit",
               "props": [
-                "Confidentiality",
-                "Non-repudiation"
+                "Integrity",
+                "Authenticity"
               ]
             },
             {
-              "name": "transceiver",
+              "name": "signal",
               "props": [
-                "Authenticity",
-                "Authorization"
+                "Non-repudiation",
+                "Authenticity"
               ]
             }
           ]
         },
         {
-          "id": "fcb6c9dd-ce7a-4def-bf44-a9d09c8b5705",
+          "id": "b63f28eb-267d-4a12-a013-6a4442306901",
           "name": "Damage Scenarios Identification and Impact Ratings",
           "icon": "DamageIcon",
           "subs": [
             {
-              "id": "212dae5f-9d5e-4325-926a-3ab1525b0c6e",
+              "id": "73a4801a-88e1-4444-ae98-4b159004676c",
               "name": "Damage Scenarios Derivations",
               "Details": [
                 {
-                  "name": "Power Management",
-                  "props": [
-                    "Integrity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "MCU",
-                  "props": [
-                    "Integrity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "signal",
-                  "props": [
-                    "Non-repudiation",
-                    "Authenticity"
-                  ]
-                },
-                {
-                  "name": "signal",
-                  "props": [
-                    "Non-repudiation",
-                    "Authenticity"
-                  ]
-                },
-                {
-                  "name": "transceiver",
-                  "props": [
-                    "Authenticity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "Camera",
-                  "props": [
-                    "Confidentiality",
-                    "Non-repudiation"
-                  ]
-                },
-                {
-                  "name": "transceiver",
-                  "props": [
-                    "Authenticity",
-                    "Authorization"
-                  ]
-                }
-              ],
-              "losses": [
-                {
-                  "name": "loss of Integrity for Power Management",
+                  "task": "Check for Damage Scenario for loss of Integrity for Power Manage",
+                  "name": "Damage Scenario for loss of Integrity for Power Manage",
+                  "loss": "loss of Integrity",
+                  "damageScene": [],
                   "id": "DS001"
                 },
                 {
-                  "name": "loss of Authorization for Power Management",
+                  "task": "Check for Damage Scenario for loss of Authorization for Power Manage",
+                  "name": "Damage Scenario for loss of Authorization for Power Manage",
+                  "loss": "loss of Authorization",
+                  "damageScene": [],
                   "id": "DS002"
                 },
                 {
-                  "name": "loss of Integrity for MCU",
+                  "task": "Check for Damage Scenario for loss of Authenticity for Vehicle",
+                  "name": "Damage Scenario for loss of Authenticity for Vehicle",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
                   "id": "DS003"
                 },
                 {
-                  "name": "loss of Authorization for MCU",
+                  "task": "Check for Damage Scenario for loss of Availability for Vehicle",
+                  "name": "Damage Scenario for loss of Availability for Vehicle",
+                  "loss": "loss of Availability",
+                  "damageScene": [],
                   "id": "DS004"
                 },
                 {
-                  "name": "loss of Non-repudiation for signal",
+                  "task": "Check for Damage Scenario for loss of Authenticity for transceiver",
+                  "name": "Damage Scenario for loss of Authenticity for transceiver",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
                   "id": "DS005"
                 },
                 {
-                  "name": "loss of Authenticity for signal",
+                  "task": "Check for Damage Scenario for loss of Authorization for transceiver",
+                  "name": "Damage Scenario for loss of Authorization for transceiver",
+                  "loss": "loss of Authorization",
+                  "damageScene": [],
                   "id": "DS006"
                 },
                 {
-                  "name": "loss of Non-repudiation for signal",
+                  "task": "Check for Damage Scenario for loss of Integrity for circuit",
+                  "name": "Damage Scenario for loss of Integrity for circuit",
+                  "loss": "loss of Integrity",
+                  "damageScene": [],
                   "id": "DS007"
                 },
                 {
-                  "name": "loss of Authenticity for signal",
+                  "task": "Check for Damage Scenario for loss of Authenticity for circuit",
+                  "name": "Damage Scenario for loss of Authenticity for circuit",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
                   "id": "DS008"
                 },
                 {
-                  "name": "loss of Authenticity for transceiver",
+                  "task": "Check for Damage Scenario for loss of Non-repudiation for signal",
+                  "name": "Damage Scenario for loss of Non-repudiation for signal",
+                  "loss": "loss of Non-repudiation",
+                  "damageScene": [],
                   "id": "DS009"
                 },
                 {
-                  "name": "loss of Authorization for transceiver",
+                  "task": "Check for Damage Scenario for loss of Authenticity for signal",
+                  "name": "Damage Scenario for loss of Authenticity for signal",
+                  "loss": "loss of Authenticity",
+                  "damageScene": [],
                   "id": "DS0010"
-                },
-                {
-                  "name": "loss of Confidentiality for Camera",
-                  "id": "DS0011"
-                },
-                {
-                  "name": "loss of Non-repudiation for Camera",
-                  "id": "DS0012"
-                },
-                {
-                  "name": "loss of Authenticity for transceiver",
-                  "id": "DS0013"
-                },
-                {
-                  "name": "loss of Authorization for transceiver",
-                  "id": "DS0014"
                 }
               ]
             },
             {
-              "id": "ff115e5f-cff4-45bf-a9fd-5833a2e12f32",
+              "id": "7a618a64-f534-4592-ae1d-a5af250cca09",
               "name": "Damage Scenarios - Collection & Impact Ratings",
               "scenes": []
             }
           ]
         },
         {
-          "id": "9426c0a7-2194-4873-8e0b-78f5b0fa5bf9",
+          "id": "370f40b5-8b4a-43bb-9742-7d4647b6b1e4",
           "name": "Threat Scenarios Identification",
           "icon": "ThreatIcon",
           "subs": [
             {
-              "id": "0a6de6c5-f8ba-4222-927c-d5ff6f2e9939",
+              "id": "3cfdcb54-21c2-4e33-b98e-62997a283439",
               "name": "Threat Scenarios",
               "Details": [
                 {
-                  "name": "Power Management",
+                  "name": "Power Manage",
                   "props": [
                     "Integrity",
                     "Authorization"
                   ]
                 },
                 {
-                  "name": "MCU",
+                  "name": "Vehicle",
                   "props": [
-                    "Integrity",
-                    "Authorization"
-                  ]
-                },
-                {
-                  "name": "signal",
-                  "props": [
-                    "Non-repudiation",
-                    "Authenticity"
-                  ]
-                },
-                {
-                  "name": "signal",
-                  "props": [
-                    "Non-repudiation",
-                    "Authenticity"
+                    "Authenticity",
+                    "Availability"
                   ]
                 },
                 {
@@ -3522,91 +3000,91 @@
                   ]
                 },
                 {
-                  "name": "Camera",
+                  "name": "circuit",
                   "props": [
-                    "Confidentiality",
-                    "Non-repudiation"
+                    "Integrity",
+                    "Authenticity"
                   ]
                 },
                 {
-                  "name": "transceiver",
+                  "name": "signal",
                   "props": [
-                    "Authenticity",
-                    "Authorization"
+                    "Non-repudiation",
+                    "Authenticity"
                   ]
                 }
               ],
               "losses": []
             },
             {
-              "id": "6cad1365-01ee-40d9-93c9-f33f4ceb81c7",
+              "id": "a54fb3cc-8835-4724-ae09-bbf654bde923",
               "name": "Derived Threat Scenarios",
               "scenes": []
             }
           ]
         },
         {
-          "id": "1f2b47a5-2ce9-4a54-9ad9-c236bae44df1",
+          "id": "0d025afe-57cb-4852-a495-674a34f6119b",
           "name": "Attack Path Analysis and Attack Feasability Rating",
           "icon": "AttackIcon",
           "subs": [
             {
-              "id": "84fb4def-45f3-4c3d-ac61-c926c36c010f",
+              "id": "e041de0e-9b72-4424-b96a-5efc8b71fe22",
               "name": "Attack Trees",
               "scenes": []
             },
             {
-              "id": "90c97ebd-4404-4071-8dce-ddb01480547d",
+              "id": "ebb126fb-d6f0-41bf-bc1b-35eea2282d5b",
               "name": "Vulnerability Analysis",
               "scenes": []
             }
           ]
         },
         {
-          "id": "1b88725e-281d-4e84-a75d-b35e7294c63d",
+          "id": "cd4357e5-e428-4360-8259-63eaca81f081",
           "name": "CyberSecurity Goals, Claims and Requirements",
           "icon": "CybersecurityIcon",
           "subs": [
             {
-              "id": "e203ddef-5cf6-4a55-b49d-31306cc6c87a",
+              "id": "d7342e22-007c-425b-9542-de9e225e05f9",
               "name": "CyberSecurity Goals and Requirements",
               "subs": [
                 {
-                  "id": "15ecf54e-e903-428e-9a03-d9014d415b4f",
+                  "id": "f616742e-9f41-415a-b07b-3cc130a239ad",
                   "name": "CyberSecurity Goals",
                   "scenes": []
                 },
                 {
-                  "id": "7dcdbf84-918c-423c-aff8-b9c14e05649c",
+                  "id": "84e5dc22-dd50-43de-bc0b-7b74355a4a3f",
                   "name": "CyberSecurity Requirements",
                   "scenes": []
                 }
               ]
             },
             {
-              "id": "b5deb3ab-2223-4c6d-a50f-475f46f57383",
+              "id": "9ce11e67-ed4f-4397-9d4c-993dba3b126f",
               "name": "CyberSecurity Controls",
               "scenes": []
             }
           ]
         },
         {
-          "id": "56bd332a-9c9a-4ec7-bcfc-a10a1fd705c9",
+          "id": "d633d806-35e7-4b41-88da-1043a90a40e1",
           "name": "System Design",
           "icon": "SystemIcon",
           "subs": [
             {
-              "id": "50d3c004-98d2-4ad3-902c-e9fead469978",
+              "id": "83578962-2167-4ae3-a471-9d1b803de37a",
               "name": "Hardware Models"
             },
             {
-              "id": "f29ad079-0765-4d51-821e-c712b86cee4e",
+              "id": "c36d45d1-d0c6-4acc-a015-ad3bb7600aa2",
               "name": "Software Models"
             }
           ]
         },
         {
-          "id": "c5a3827e-f5e4-4f1b-b941-97f72fbc2f4a",
+          "id": "b05549b0-abc5-4599-8e95-f18680188ffd",
           "name": "Catalogs",
           "icon": "CatalogIcon",
           "subs": [
@@ -3617,23 +3095,23 @@
           ]
         },
         {
-          "id": "2cf598b4-4b93-493c-9a2c-b41b1e494057",
+          "id": "09c15b09-78a0-4df2-9a82-e7a5a35a3027",
           "name": "Risk Determination and Risk Treatment Decision",
           "icon": "RiskIcon"
         },
         {
-          "id": "a59b5415-6fc5-4988-af2d-757d42db2d4e",
+          "id": "b1409fce-9fff-4e75-bdf2-d028fec3e611",
           "name": "Documents",
           "icon": "DocumentIcon"
         },
         {
-          "id": "fcd6793a-c312-474e-950c-a64568927b5d",
+          "id": "d7de838d-e60c-4012-b643-bc61e09f41cf",
           "name": "Reporting",
           "icon": "ReportIcon",
           "scenes": []
         },
         {
-          "id": "19c89309-9a27-4e7d-a90f-bc22ae933e8f",
+          "id": "2d8f198b-760d-42c8-a0dd-d2e5a8340f4e",
           "name": "Layouts",
           "icon": "LayoutIcon",
           "scenes": []
@@ -3641,8 +3119,8 @@
       ]
     },
     {
-      "id": "5cf03f8a-ff37-4c10-9291-c80c037b169b",
-      "name": "New 1"
+      "id": "ff966d48-233d-45f0-99f4-2f734bf109ce",
+      "name": "LIDAR"
     }
   ]
 }

@@ -86,6 +86,7 @@ const StyledTableRow = styled(TableRow)(() => ({
     }
 }));
 export default function Tstable() {
+    const color = ColorTheme();
     const classes = useStyles();
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -161,8 +162,8 @@ export default function Tstable() {
             }}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box display="flex" alignItems="center" gap={1}>
-                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color:ColorTheme().title }} onClick={handleBack} />
-                    <Typography sx={{ color: ColorTheme().title ,fontWeight:600, fontSize:'18px' }}>Threat Scenario Table</Typography>
+                    <KeyboardBackspaceRoundedIcon sx={{ float: 'left', cursor: 'pointer', ml: 1, color:color?.title }} onClick={handleBack} />
+                    <Typography sx={{ color: color?.title ,fontWeight:600, fontSize:'18px' }}>Threat Scenario Table</Typography>
                     
                 </Box>
                 <Box display='flex' gap={3}>

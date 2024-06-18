@@ -41,6 +41,7 @@ import AlertMessage from '../../ui-component/Alert';
 import Header from '../../ui-component/Header';
 import { setProperties } from '../../store/slices/PageSectionSlice';
 import ColorTheme from '../../store/ColorTheme';
+import DsDerivationTable from '../../ui-component/Table/DsDerivationTable';
 
 const elk = new ELK();
 
@@ -184,7 +185,7 @@ export default function MainCanvas() {
 
 
     // const [target, setTarget] = useState(null);
-    const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab } =
+    const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab, isDerivationTableOpen } =
         useSelector((state) => state?.currentId);
     
     const onLayout = useCallback(
@@ -476,16 +477,29 @@ export default function MainCanvas() {
     const handleSaveToModal = () => {
         let mod = { ...modal };
         // console.log('mod', mod);
-        console.log('nodes', nodes)
+        // console.log('nodes', nodes);
+
+        let Derivations = nodes?.filter(nd => nd?.type !== 'group')?.map((node) => {
+            return node?.properties.map((pr)=> ({
+                task: `Check for Damage Scenario for loss of ${pr} for ${node?.data?.label}`,
+                name:`Damage Scenario for loss of ${pr} for ${node?.data?.label}`,
+                loss: `loss of ${pr}`,
+                assets: node?.assets,
+                damageScene: []
+            }))
+        }).flat().map((dr,i)=>({...dr, id: `DS00${i + 1}`}));
+
+        // console.log('Derivations', Derivations);
+        
         let Details = nodes?.filter(nd=>nd?.type!=='group')?.map((node) => ({
             name: node?.data?.label,
             props: node?.properties
         }));
-        let losses =nodes?.filter(nd=>nd?.type!=='group')?.map((nd) => nd?.properties.map((pr) => ({ name: `loss of ${pr} for ${nd?.data?.label}` })));
-        losses = losses.flat().map((loss, i) => ({
-            ...loss,
-            id: `DS00${i + 1}`
-        }));
+        // let losses =nodes?.filter(nd=>nd?.type!=='group')?.map((nd) => nd?.properties.map((pr) => ({ name: `loss of ${pr} for ${nd?.data?.label}` })));
+        // losses = losses.flat().map((loss, i) => ({
+        //     ...loss,
+        //     id: `DS00${i + 1}`
+        // }));
         // console.log('Details', Details);
         mod.template = { nodes, edges };
         mod.scenarios = [
@@ -503,8 +517,7 @@ export default function MainCanvas() {
                     {
                         id: uid(),
                         name: 'Damage Scenarios Derivations',
-                        Details: Details,
-                        losses: losses
+                        Details: Derivations,
                     },
                     {
                         id: uid(),
@@ -626,6 +639,7 @@ export default function MainCanvas() {
             }
         ];
 
+        // console.log('mod', mod)
         updateModal(mod)
             .then((res) => {
                 if (res) {
@@ -684,6 +698,7 @@ export default function MainCanvas() {
         dragAdd(newNode);
     };
     if (isDsTableOpen) return <DsTable />;
+    if (isDerivationTableOpen) return <DsDerivationTable />;
     if (isTsTableOpen) return <Tstable />;
     if (isAttackTreeOpen) return <AttackTree modal={modal} />;
     if (isCyberBlockOpen) return <CyberSecurityBlock />;
