@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, Box, TextField, useTheme } from '@mui/material';
+import { Button, Chip, InputLabel, Box, TextField, Autocomplete } from '@mui/material';
 import useStore from '../../Zustand/store';
 import { shallow } from 'zustand/shallow';
 import AlertMessage from '../Alert';
@@ -9,23 +9,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-function getStyles(name, nodes, theme) {
-    return {
-        fontWeight: nodes.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
-    };
-}
 const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorization', 'Non-repudiation', 'Availability'];
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 300
-        }
-    }
-};
 
 const selector = (state) => ({
     getModals: state.getModals,
@@ -34,7 +18,6 @@ const selector = (state) => ({
 });
 const EditContent = ({ selectedNode, modal, nodes, setNodes, setSelectedNode }) => {
     const { getModals, update, getModalById } = useStore(selector, shallow);
-    const theme = useTheme();
     const { id } = useParams();
     const [details, setDetails] = useState({
         name: '',
@@ -45,6 +28,13 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes, setSelectedNode }) 
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState('');
     const [value, setValue] = React.useState('1');
+
+    const handleDelete = (valueToDelete) => () => {
+        setDetails((prevDetails) => ({
+            ...prevDetails,
+            properties: prevDetails.properties.filter((property) => property !== valueToDelete)
+        }));
+    };
 
     const handleChangeTab = (event, newValue) => {
         setValue(newValue);
@@ -102,13 +92,10 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes, setSelectedNode }) 
             });
     };
 
-    const handleChange = (event) => {
-        const {
-            target: { value }
-        } = event;
+    const handleChange = (event, newValue) => {
         setDetails({
             ...details,
-            properties: typeof value === 'string' ? value.split(',') : value
+            properties: newValue
         });
     };
 
@@ -132,7 +119,7 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes, setSelectedNode }) 
         setNodes(list);
     };
 
-    // console.log('details', details)
+    // console.log('details', details);
     return (
         <>
             <TabContext value={value}>
@@ -159,35 +146,31 @@ const EditContent = ({ selectedNode, modal, nodes, setNodes, setSelectedNode }) 
                             }}
                         />
                         <InputLabel>Properties :</InputLabel>
-                        <FormControl sx={{ width: 'auto' }}>
-                            <Select
-                                labelId="demo-multiple-chip-label"
-                                id="demo-multiple-chip"
-                                sx={{
-                                    '& .MuiSelect-select': {
-                                        padding: '7.5px 14px'
-                                    }
-                                }}
-                                multiple
-                                value={details.properties}
-                                onChange={handleChange}
-                                input={<OutlinedInput id="select-multiple-chip" />}
-                                renderValue={(selected) => (
-                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                        {selected.map((value) => (
-                                            <Chip key={value} label={value} />
-                                        ))}
-                                    </Box>
-                                )}
-                                MenuProps={MenuProps}
-                            >
-                                {Properties.map((name) => (
-                                    <MenuItem key={name} value={name} style={getStyles(name, details.properties, theme)}>
-                                        {name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+
+                        <Autocomplete
+                            multiple
+                            id="tags-filled"
+                            options={Properties}
+                            value={details.properties}
+                            onChange={handleChange}
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    padding: '3px'
+                                }
+                            }}
+                            renderTags={(value, getTagProps) =>
+                                value.map((option, index) => (
+                                    <Chip
+                                        key={option}
+                                        variant="outlined"
+                                        label={option}
+                                        {...getTagProps({ index })}
+                                        onDelete={handleDelete(option)}
+                                    />
+                                ))
+                            }
+                            renderInput={(params) => <TextField {...params} variant="outlined" />}
+                        />
                         {/* <input type="color" value={details?.bgColor} onChange={(e)=>handleStyle(e,'bgColor')} /> */}
                         <Button onClick={handleSubmit} variant="outlined" sx={{ width: 'fit-content' }}>
                             Update

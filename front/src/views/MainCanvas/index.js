@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import ReactFlow, {
     MiniMap,
@@ -7,7 +8,7 @@ import ReactFlow, {
     // Panel,
     getRectOfNodes,
     getTransformForBounds,
-    MarkerType,
+    MarkerType
 } from 'reactflow';
 import '../index.css';
 import 'reactflow/dist/style.css';
@@ -42,6 +43,7 @@ import Header from '../../ui-component/Header';
 import { setProperties } from '../../store/slices/PageSectionSlice';
 import ColorTheme from '../../store/ColorTheme';
 import DsDerivationTable from '../../ui-component/Table/DsDerivationTable';
+import MultiHandleNode from '../../ui-component/custom/MultiHandleNode';
 
 const elk = new ELK();
 
@@ -98,7 +100,8 @@ const selector = (state) => ({
     getModals: state.getModals,
     getModalById: state.getModalById,
     updateModal: state.updateModal,
-    getIntersectingNodes: state.getIntersectingNodes
+    getIntersectingNodes: state.getIntersectingNodes,
+    getGroupedNodes:state.getGroupedNodes,
 });
 
 //Edge line styling
@@ -133,7 +136,8 @@ const nodetypes = {
     transceiver: DiagonalNode,
     mcu: MicroController,
     memory: Memory,
-    group: CustomGroupNode
+    group: CustomGroupNode,
+    multihandle:MultiHandleNode,
 };
 const edgeTypes = {
     custom: CustomEdge
@@ -155,7 +159,8 @@ export default function MainCanvas() {
         modal,
         getModals,
         updateModal,
-        getIntersectingNodes
+        getIntersectingNodes,
+        getGroupedNodes,
     } = useStore(selector, shallow);
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -169,6 +174,7 @@ export default function MainCanvas() {
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState('');
     const dragRef = useRef(null);
+    const [groupList, setGroupList] = useState([]);
 
     useEffect(() => {
         getModalById(id);
@@ -183,11 +189,18 @@ export default function MainCanvas() {
         }, 100);
     }, [modal]);
 
-
     // const [target, setTarget] = useState(null);
-    const { isDsTableOpen, isTsTableOpen, isAttackTreeOpen, isCyberBlockOpen, isCyberTableOpen, isRightDrawerOpen, activeTab, isDerivationTableOpen } =
-        useSelector((state) => state?.currentId);
-    
+    const {
+        isDsTableOpen,
+        isTsTableOpen,
+        isAttackTreeOpen,
+        isCyberBlockOpen,
+        isCyberTableOpen,
+        isRightDrawerOpen,
+        activeTab,
+        isDerivationTableOpen
+    } = useSelector((state) => state?.currentId);
+
     const onLayout = useCallback(
         ({ direction, useInitialNodes = false }) => {
             const opts = { 'elk.direction': direction, ...elkOptions };
@@ -205,32 +218,14 @@ export default function MainCanvas() {
     );
 
     const checkForNodes = () => {
-        const [intersectingNodesMap, nodes ]= getIntersectingNodes();
+        const [intersectingNodesMap, nodes] = getIntersectingNodes();
         // console.log('intersectingNodesMap', intersectingNodesMap);
         let values = Object.values(intersectingNodesMap).flat();
-        // console.log('values', values);
-        // console.log('nodes', nodes)
-        // const [intersectingNodes, nodes] = getIntersectingNodes();
-        // //  console.log('intersectingNodes', intersectingNodes)
-        // //  console.log('allNodes', nodes);
-        // let nod = [...nodes];
-        // let updated = [...intersectingNodes];
-        // const ParentNode = intersectingNodes?.find((nd) => nd?.type === 'group');
-        // let childNodes = intersectingNodes?.filter((nd) => nd?.type !== 'group');
+
         let updated = nodes.map((item1) => {
             const match = values.find((item2) => item2.id === item1.id);
-            return match
-                ? match
-                : item1
+            return match ? match : item1;
         });
-        // console.log('updated', updated);
-        // console.log('nodes', nodes);
-        // nod = nod?.map((item1) => {
-        //     const match = updated.find((item2) => item2.id === item1.id);
-        //     // console.log('match', match)
-        //     return match ? match : item1;
-        // });
-        // // console.log('nod', nod);
         setNodes(updated);
     };
 
@@ -238,36 +233,15 @@ export default function MainCanvas() {
         onLayout({ direction: 'DOWN', useInitialNodes: true });
     }, []);
 
-
     const onNodeDragStart = useCallback((_, node) => {
         dragRef.current = node;
     }, []);
 
     const onNodeDragStop = useCallback(() => {
         // if(dragRef.current.type !== 'group'){
-            checkForNodes();
+        checkForNodes();
         // }
-        
-    }, [])
-    //   For default group
-    // const onNodeDrag = (_, node) => {
-    //     // calculate the center point of the node from position and dimensions
-    //     const centerX = node.position.x ;
-    //     const centerY = node.position.y ;
-
-    //     // find a node where the center point is inside
-    //     const targetNode = nodes.find(
-    //       (n) =>
-    //         centerX > n.position.x &&
-    //         centerX < n.position.x + n.width &&
-    //         centerY > n.position.y &&
-    //         centerY < n.position.y + n.height &&
-    //         n.id !== node.id // this is needed, otherwise we would always find the dragged node
-    //     );
-    //     // console.log('targetNode', targetNode)
-
-    //     setTarget(targetNode);
-    //   };
+    }, []);
 
     const onNodeDrag = (event, node) => {
         const updatedNodes = nodes.map((n) => {
@@ -331,7 +305,6 @@ export default function MainCanvas() {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     }, []);
-
 
     // console.log('nodes', nodes);
     const onDrop = useCallback(
@@ -454,7 +427,8 @@ export default function MainCanvas() {
         }
     }, []);
 
-    const onRestore = useCallback((temp) => {
+    const onRestore = useCallback(
+        (temp) => {
             if (temp) {
                 // const { x = 0, y = 0, zoom = 1 } = flow.viewport;
                 setNodes(temp.nodes);
@@ -462,7 +436,9 @@ export default function MainCanvas() {
             } else {
                 handleClear();
             }
-    }, [reactFlowInstance]);
+        },
+        [reactFlowInstance]
+    );
 
     const handleClear = () => {
         setNodes([]);
@@ -479,22 +455,28 @@ export default function MainCanvas() {
         // console.log('mod', mod);
         // console.log('nodes', nodes);
 
-        let Derivations = nodes?.filter(nd => nd?.type !== 'group')?.map((node) => {
-            return node?.properties.map((pr)=> ({
-                task: `Check for Damage Scenario for loss of ${pr} for ${node?.data?.label}`,
-                name:`Damage Scenario for loss of ${pr} for ${node?.data?.label}`,
-                loss: `loss of ${pr}`,
-                assets: node?.assets,
-                damageScene: []
-            }))
-        }).flat().map((dr,i)=>({...dr, id: `DS00${i + 1}`}));
+        let Derivations = nodes
+            ?.filter((nd) => nd?.type !== 'group')
+            ?.map((node) => {
+                return node?.properties.map((pr) => ({
+                    task: `Check for Damage Scenario for loss of ${pr} for ${node?.data?.label}`,
+                    name: `Damage Scenario for loss of ${pr} for ${node?.data?.label}`,
+                    loss: `loss of ${pr}`,
+                    assets: node?.assets,
+                    damageScene: []
+                }));
+            })
+            .flat()
+            .map((dr, i) => ({ ...dr, id: `DS00${i + 1}` }));
 
         // console.log('Derivations', Derivations);
-        
-        let Details = nodes?.filter(nd=>nd?.type!=='group')?.map((node) => ({
-            name: node?.data?.label,
-            props: node?.properties
-        }));
+
+        let Details = nodes
+            ?.filter((nd) => nd?.type !== 'group')
+            ?.map((node) => ({
+                name: node?.data?.label,
+                props: node?.properties
+            }));
         // let losses =nodes?.filter(nd=>nd?.type!=='group')?.map((nd) => nd?.properties.map((pr) => ({ name: `loss of ${pr} for ${nd?.data?.label}` })));
         // losses = losses.flat().map((loss, i) => ({
         //     ...loss,
@@ -517,7 +499,7 @@ export default function MainCanvas() {
                     {
                         id: uid(),
                         name: 'Damage Scenarios Derivations',
-                        Details: Derivations,
+                        Details: Derivations
                     },
                     {
                         id: uid(),
@@ -674,29 +656,53 @@ export default function MainCanvas() {
     };
 
     const handleSelectNode = (e, node) => {
+        let grp = [...groupList];
+        function addNodeToArray(node) {
+            const existingNode = grp.find(obj => obj.id === node.id);
+          
+            if (!existingNode) {
+                grp.push(node);
+            } 
+          }
         if (node.type !== 'group') {
             setSelectedNode(node);
             dispatch(setProperties(node?.properties));
+        
+            if (!grp.length) {
+                grp.push(node);
+            } else {
+                addNodeToArray(node);
+            }
+            // console.log('grp', grp)
+            setGroupList(grp);
         }
     };
 
+    // console.log('groupList', groupList)
+
     const createGroup = (e) => {
         e.preventDefault();
-        const newNode = {
-            id: uid(),
-            type: 'group',
-            height: 280,
-            width: 250,
-            position: {
-                x: e.clientX,
-                y: e.clientY
-            },
-            data: {
-                label: 'group'
-            }
-        };
-        dragAdd(newNode);
+
+        // if (groupList.length) {
+        //     const [intersectingNodesMap, nodes] = getGroupedNodes();
+        // } else {   
+            const newNode = {
+                id: uid(),
+                type: 'group',
+                height: 280,
+                width: 250,
+                position: {
+                    x: e.clientX,
+                    y: e.clientY
+                },
+                data: {
+                    label: 'group'
+                }
+            };
+            dragAdd(newNode);
+        // }
     };
+
     if (isDsTableOpen) return <DsTable />;
     if (isDerivationTableOpen) return <DsDerivationTable />;
     if (isTsTableOpen) return <Tstable />;
@@ -805,4 +811,6 @@ export default function MainCanvas() {
                 )}
                 <AlertMessage open={open} message={message} setOpen={setOpen} success={success} />
             </div>
-        </>)}
+        </>
+    );
+}

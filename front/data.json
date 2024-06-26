@@ -2089,6 +2089,48 @@
       ],
       "width": 120,
       "height": 50
+    },
+    {
+      "id": "b71735af-17f4-4af2-b2ab-6d5ec78f6bfa",
+      "data": {
+        "label": "test",
+        "bgColor": "transparent"
+      },
+      "type": "default",
+      "properties": [
+        "Confidentiality",
+        "Integrity",
+        "Authenticity"
+      ],
+      "width": 120,
+      "height": 50
+    },
+    {
+      "id": "45a4f527-2edc-4452-b684-ebb296adf911",
+      "data": {
+        "label": "Test",
+        "bgColor": "#dadada"
+      },
+      "type": "default",
+      "properties": [
+        "Integrity"
+      ],
+      "width": 120,
+      "height": 50
+    },
+    {
+      "id": "f63b41d7-5d02-4274-9deb-80daa4739062",
+      "data": {
+        "label": "Multi",
+        "bgColor": "#dadada"
+      },
+      "type": "multihandle",
+      "properties": [
+        "Authorization",
+        "Integrity"
+      ],
+      "width": 120,
+      "height": 50
     }
   ],
   "Modals": [
