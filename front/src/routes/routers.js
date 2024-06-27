@@ -8,6 +8,8 @@ const MainCanvas = Loadable(lazy(() => import('../views/MainCanvas')));
 const Career = Loadable(lazy(() => import('../views/CareerPage')));
 const Contact = Loadable(lazy(() => import('../views/ContactPage')));
 const About = Loadable(lazy(() => import('../views/AboutPage')));
+const Dashboard = Loadable(lazy(() => import('../views/Dashboard')));
+
 
 // const ErrorPage = Loadable(lazy(()=>import('../views/ErrorPage')));
 
@@ -32,7 +34,10 @@ const commonRoutes = [
         path: '/Modals',
         element: <MainCanvas />
     },
-
+    {
+        path: '/dashboard',
+        element: <Dashboard />
+    },
     {
         path: '/Modals/:id',
         element: <MainCanvas />
