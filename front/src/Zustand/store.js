@@ -223,7 +223,7 @@ const useStore = createWithEqualityFn((set, get) => ({
     },
 
     getSidebarNode: async () => {
-        const res = await axios.get(`${configuration.apiBaseUrl}sidebarNode`);
+        const res = await axios.get(`${configuration.apiBaseUrl}sidebarNode2`);
         set({
             sidebarNodes: res.data
         });

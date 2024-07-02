@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab, selectedNode, modal, nodes, setNodes, setSelectedNode }) {
+export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab, selectedNode, nodes, setNodes, setSelectedNode }) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -85,7 +85,7 @@ export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab,
                                             aria-controls="panel1bh-content"
                                             id="panel1bh-header"
                                         >
-                                            <Typography sx={{ width: '50%', flexShrink: 0 }}> Component Library</Typography>
+                                            <Typography sx={{ width: '100%', flexShrink: 0 }}> Component Library</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
                                             <Components />
@@ -102,7 +102,7 @@ export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab,
                                             aria-controls="panel2bh-content"
                                             id="panel2bh-header"
                                         >
-                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>System Library</Typography>
+                                            <Typography sx={{ width: '100%', flexShrink: 0 }}>System Library</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
                                             <ComponentList />
@@ -113,7 +113,6 @@ export default function RightDrawer({ state, drawerOpen, drawerClose, activeTab,
                     ) : (
                         <EditContent 
                         selectedNode={selectedNode} 
-                        modal={modal} 
                         nodes={nodes}
                         setNodes={setNodes}
                         setSelectedNode={setSelectedNode}/>

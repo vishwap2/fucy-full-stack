@@ -1849,6 +1849,297 @@
     ],
     "sidebarNode": [
         {
+            "id": "1",
+            "name": "inputs",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "defaults",
+            "nodes": [
+                {
+                    "id": "3e0e20b9-184b-4901-aaab-ea46928befc8",
+                    "data": {
+                        "label": "MCU",
+                        "bgColor": "#06f9f5"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "default",
+                    "properties": ["Integrity", "Authorization"]
+                },
+                {
+                    "id": "c45d5278-d811-4817-81b0-c41b6d268c24",
+                    "data": {
+                        "label": "signal",
+                        "bgColor": "#f59b00"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "signal",
+                    "properties": ["Non-repudiation", "Authenticity"]
+                },
+                {
+                    "id": "3d5b0556-da52-4a9e-9bc3-343637883d73",
+                    "data": {
+                        "label": "transceiver",
+                        "bgColor": "#000"
+                    },
+                    "width": 120,
+                    "height": 150,
+                    "type": "transceiver",
+                    "properties": ["Authenticity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "outputs",
+            "nodes": [
+                {
+                    "id": "e2818c56-b1da-49c9-8791-663879dddd4d",
+                    "data": {
+                        "label": "Memory",
+                        "bgColor": "#000"
+                    },
+                    "width": 120,
+                    "height": 150,
+                    "type": "memory",
+                    "properties": ["Confidentiality"]
+                },
+                {
+                    "id": "3bb0bab5-8edf-4e1f-aaf2-d05c58173645",
+                    "data": {
+                        "label": "Camera",
+                        "bgColor": "#000"
+                    },
+                    "type": "default",
+                    "properties": ["Confidentiality", "Non-repudiation"],
+                    "width": 120,
+                    "height": 50
+                }
+            ]
+        }
+    ],
+    "sidebarNode2": [
+        {
+            "id": "1",
+            "name": "MicroController",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "CPU",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Module",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "name": "Communication Line",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "name": "Sensor Input",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "name": "User/Attacker",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "7",
+            "name": "Module Boundry",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "8",
+            "name": "Web Browser",
+            "nodes": [
+                {
+                    "id": "d308ecf8-8016-4074-9c79-2f795469c253",
+                    "data": {
+                        "label": "Power Management",
+                        "bgColor": "#E9E955"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "input",
+                    "properties": ["Integrity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "9",
+            "name": "Software",
+            "nodes": [
+                {
+                    "id": "3e0e20b9-184b-4901-aaab-ea46928befc8",
+                    "data": {
+                        "label": "MCU",
+                        "bgColor": "#06f9f5"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "default",
+                    "properties": ["Integrity", "Authorization"]
+                },
+                {
+                    "id": "c45d5278-d811-4817-81b0-c41b6d268c24",
+                    "data": {
+                        "label": "signal",
+                        "bgColor": "#f59b00"
+                    },
+                    "width": 140,
+                    "height": 50,
+                    "type": "signal",
+                    "properties": ["Non-repudiation", "Authenticity"]
+                },
+                {
+                    "id": "3d5b0556-da52-4a9e-9bc3-343637883d73",
+                    "data": {
+                        "label": "transceiver",
+                        "bgColor": "#000"
+                    },
+                    "width": 120,
+                    "height": 150,
+                    "type": "transceiver",
+                    "properties": ["Authenticity", "Authorization"]
+                }
+            ]
+        },
+        {
+            "id": "10",
+            "name": "DFD Process",
+            "nodes": [
+                {
+                    "id": "e2818c56-b1da-49c9-8791-663879dddd4d",
+                    "data": {
+                        "label": "Memory",
+                        "bgColor": "#000"
+                    },
+                    "width": 120,
+                    "height": 150,
+                    "type": "memory",
+                    "properties": ["Confidentiality"]
+                },
+                {
+                    "id": "3bb0bab5-8edf-4e1f-aaf2-d05c58173645",
+                    "data": {
+                        "label": "Camera",
+                        "bgColor": "#000"
+                    },
+                    "type": "default",
+                    "properties": ["Confidentiality", "Non-repudiation"],
+                    "width": 120,
+                    "height": 50
+                }
+            ]
+        }
+    ],
+    "sidebarNode1": [
+        {
             "id": "d308ecf8-8016-4074-9c79-2f795469c253",
             "data": {
                 "label": "Power Management",
@@ -2385,7 +2676,7 @@
                     {
                         "id": "98627b79-96ac-4226-ab08-ab5e3019bd3b260",
                         "data": {
-                            "label": "Power Manage",
+                            "label": "Power Management",
                             "bgColor": "#E9E955",
                             "style": {
                                 "backgroundColor": "#E9E955",
@@ -2410,7 +2701,9 @@
                         "parentId": null,
                         "extent": null,
                         "width": 150,
-                        "height": 43
+                        "height": 61,
+                        "selected": true,
+                        "dragging": false
                     },
                     {
                         "id": "e25bdc35-67b0-4869-b6a7-a7782cf1249d260",
@@ -2440,7 +2733,7 @@
                         "parentId": null,
                         "extent": null,
                         "width": 150,
-                        "height": 43
+                        "height": 42
                     },
                     {
                         "id": "583f8758-c0c8-4529-ae61-6f55eda88a73260",
@@ -2500,7 +2793,7 @@
                         "parentId": null,
                         "extent": null,
                         "width": 150,
-                        "height": 43
+                        "height": 42
                     },
                     {
                         "id": "c36579ed-b437-46e9-979d-d32f56b27f44260",
@@ -2602,12 +2895,12 @@
             },
             "scenarios": [
                 {
-                    "id": "19bd6d15-5979-41d7-884f-d02bd5000240",
+                    "id": "dfd8a6a5-a862-40c6-887a-ddf3007ad7a1",
                     "name": "Item Modal & Assets",
                     "icon": "ItemIcon",
                     "Details": [
                         {
-                            "name": "Power Manage",
+                            "name": "Power Management",
                             "props": ["Integrity", "Authorization"]
                         },
                         {
@@ -2629,24 +2922,24 @@
                     ]
                 },
                 {
-                    "id": "b63f28eb-267d-4a12-a013-6a4442306901",
+                    "id": "f36420d6-9f10-4081-a023-17ee65d6d18e",
                     "name": "Damage Scenarios Identification and Impact Ratings",
                     "icon": "DamageIcon",
                     "subs": [
                         {
-                            "id": "73a4801a-88e1-4444-ae98-4b159004676c",
+                            "id": "aa10e2d7-25d5-4a87-9603-faddfa9948c6",
                             "name": "Damage Scenarios Derivations",
                             "Details": [
                                 {
-                                    "task": "Check for Damage Scenario for loss of Integrity for Power Manage",
-                                    "name": "Damage Scenario for loss of Integrity for Power Manage",
+                                    "task": "Check for Damage Scenario for loss of Integrity for Power Management",
+                                    "name": "Damage Scenario for loss of Integrity for Power Management",
                                     "loss": "loss of Integrity",
                                     "damageScene": [],
                                     "id": "DS001"
                                 },
                                 {
-                                    "task": "Check for Damage Scenario for loss of Authorization for Power Manage",
-                                    "name": "Damage Scenario for loss of Authorization for Power Manage",
+                                    "task": "Check for Damage Scenario for loss of Authorization for Power Management",
+                                    "name": "Damage Scenario for loss of Authorization for Power Management",
                                     "loss": "loss of Authorization",
                                     "damageScene": [],
                                     "id": "DS002"
@@ -2710,23 +3003,23 @@
                             ]
                         },
                         {
-                            "id": "7a618a64-f534-4592-ae1d-a5af250cca09",
+                            "id": "5e2bbe12-4033-4eb4-bacf-7c292a3524a0",
                             "name": "Damage Scenarios - Collection & Impact Ratings",
                             "scenes": []
                         }
                     ]
                 },
                 {
-                    "id": "370f40b5-8b4a-43bb-9742-7d4647b6b1e4",
+                    "id": "87c3efe7-aecb-44d3-a178-9e81454f400f",
                     "name": "Threat Scenarios Identification",
                     "icon": "ThreatIcon",
                     "subs": [
                         {
-                            "id": "3cfdcb54-21c2-4e33-b98e-62997a283439",
+                            "id": "c0d07bd9-0f40-447c-b720-4685d2b06248",
                             "name": "Threat Scenarios",
                             "Details": [
                                 {
-                                    "name": "Power Manage",
+                                    "name": "Power Management",
                                     "props": ["Integrity", "Authorization"]
                                 },
                                 {
@@ -2749,74 +3042,74 @@
                             "losses": []
                         },
                         {
-                            "id": "a54fb3cc-8835-4724-ae09-bbf654bde923",
+                            "id": "a957c694-06cd-4a9d-9446-cc6ed725be01",
                             "name": "Derived Threat Scenarios",
                             "scenes": []
                         }
                     ]
                 },
                 {
-                    "id": "0d025afe-57cb-4852-a495-674a34f6119b",
+                    "id": "224b5384-02e4-4c44-9248-b5c34b4290c5",
                     "name": "Attack Path Analysis and Attack Feasability Rating",
                     "icon": "AttackIcon",
                     "subs": [
                         {
-                            "id": "e041de0e-9b72-4424-b96a-5efc8b71fe22",
+                            "id": "b8a80aba-27ea-4d7f-9f77-0edf71eb8915",
                             "name": "Attack Trees",
                             "scenes": []
                         },
                         {
-                            "id": "ebb126fb-d6f0-41bf-bc1b-35eea2282d5b",
+                            "id": "727ac378-32de-42fc-b463-3138ae7b0dd0",
                             "name": "Vulnerability Analysis",
                             "scenes": []
                         }
                     ]
                 },
                 {
-                    "id": "cd4357e5-e428-4360-8259-63eaca81f081",
+                    "id": "fe9ae415-3539-47b5-92ab-7ee754a6bd29",
                     "name": "CyberSecurity Goals, Claims and Requirements",
                     "icon": "CybersecurityIcon",
                     "subs": [
                         {
-                            "id": "d7342e22-007c-425b-9542-de9e225e05f9",
+                            "id": "bb607a05-be16-4e1f-a912-4af414eef867",
                             "name": "CyberSecurity Goals and Requirements",
                             "subs": [
                                 {
-                                    "id": "f616742e-9f41-415a-b07b-3cc130a239ad",
+                                    "id": "a4d77977-a9f5-4e4c-b093-b8149ccc7894",
                                     "name": "CyberSecurity Goals",
                                     "scenes": []
                                 },
                                 {
-                                    "id": "84e5dc22-dd50-43de-bc0b-7b74355a4a3f",
+                                    "id": "14c9fd68-4c86-4c9c-8387-1da14b96f49c",
                                     "name": "CyberSecurity Requirements",
                                     "scenes": []
                                 }
                             ]
                         },
                         {
-                            "id": "9ce11e67-ed4f-4397-9d4c-993dba3b126f",
+                            "id": "d88982e4-8e91-4719-b841-05af6e94f642",
                             "name": "CyberSecurity Controls",
                             "scenes": []
                         }
                     ]
                 },
                 {
-                    "id": "d633d806-35e7-4b41-88da-1043a90a40e1",
+                    "id": "126b50ea-634a-423b-8b86-4073b2658d54",
                     "name": "System Design",
                     "icon": "SystemIcon",
                     "subs": [
                         {
-                            "id": "83578962-2167-4ae3-a471-9d1b803de37a",
+                            "id": "bb0f323b-fdd8-4b25-977b-4aa6ea473104",
                             "name": "Hardware Models"
                         },
                         {
-                            "id": "c36d45d1-d0c6-4acc-a015-ad3bb7600aa2",
+                            "id": "99fd19ac-76ee-4672-9a4e-d13da2a6d688",
                             "name": "Software Models"
                         }
                     ]
                 },
                 {
-                    "id": "b05549b0-abc5-4599-8e95-f18680188ffd",
+                    "id": "9f2aa630-3449-44b6-9f6a-f6240243d3b9",
                     "name": "Catalogs",
                     "icon": "CatalogIcon",
                     "subs": [
@@ -2827,23 +3120,23 @@
                     ]
                 },
                 {
-                    "id": "09c15b09-78a0-4df2-9a82-e7a5a35a3027",
+                    "id": "08cf7152-700a-4ab5-be42-4101ac4d2eb3",
                     "name": "Risk Determination and Risk Treatment Decision",
                     "icon": "RiskIcon"
                 },
                 {
-                    "id": "b1409fce-9fff-4e75-bdf2-d028fec3e611",
+                    "id": "94655b1f-748a-49eb-8e54-4a8d384b24a3",
                     "name": "Documents",
                     "icon": "DocumentIcon"
                 },
                 {
-                    "id": "d7de838d-e60c-4012-b643-bc61e09f41cf",
+                    "id": "8e05d889-b63d-44b4-b9f7-1a59b87281b9",
                     "name": "Reporting",
                     "icon": "ReportIcon",
                     "scenes": []
                 },
                 {
-                    "id": "2d8f198b-760d-42c8-a0dd-d2e5a8340f4e",
+                    "id": "a6846a7d-d0a4-4e8d-ac77-756be8ddad7c",
                     "name": "Layouts",
                     "icon": "LayoutIcon",
                     "scenes": []

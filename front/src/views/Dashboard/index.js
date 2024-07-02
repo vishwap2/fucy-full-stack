@@ -17,7 +17,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const props = {
-    width: 500,
+    minWidth: 250,
+    maxWidth: 500,
     height: 300,
     xAxis: [{ data: ['A', 'B', 'C'], scaleType: 'band' }]
 };
@@ -36,7 +37,7 @@ const DashBoard = () => {
                     <Grid item xs={4}>
                         <Item elevation={2}>
                             <Typography align="left">Threat Review Completion rate</Typography>
-                            <Box alignSelf="center" display="grid" height="inherit" sx={{placeItems:'center'}}>
+                            <Box alignSelf="center" display="grid" height="inherit" sx={{ placeItems: 'center' }}>
                                 <Gauge width={150} height={150} value={60} />
                             </Box>
                         </Item>
@@ -44,7 +45,7 @@ const DashBoard = () => {
                     <Grid item xs={4}>
                         <Item elevation={2}>
                             <Typography align="left">Risk Treatement Completion rate</Typography>
-                            <Box alignSelf="center" display="grid" height="inherit" sx={{placeItems:'center'}}>
+                            <Box alignSelf="center" display="grid" height="inherit" sx={{ placeItems: 'center' }}>
                                 <Gauge width={150} height={150} value={10} />
                             </Box>
                         </Item>
@@ -52,7 +53,7 @@ const DashBoard = () => {
                     <Grid item xs={4}>
                         <Item elevation={2}>
                             <Typography align="left">Threat validation Completion rate</Typography>
-                            <Box alignSelf="center" display="grid" height="inherit" sx={{placeItems:'center'}}>
+                            <Box alignSelf="center" display="grid" height="inherit" sx={{ placeItems: 'center' }}>
                                 <Gauge width={150} height={150} value={20} />
                             </Box>
                         </Item>

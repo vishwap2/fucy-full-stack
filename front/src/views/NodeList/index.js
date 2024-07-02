@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+/* eslint-disable */
 // import { 
     // Button,Drawer,
     //  IconButton } from "@mui/material";
@@ -24,6 +25,7 @@ import {
     TheGraph
   } from 'iconsax-react';
 import AddNewNode from "../../ui-component/Modal/AddNewNode";
+
 
 const selector = (state) => ({
   sidebarNodes: state.sidebarNodes,
@@ -52,7 +54,39 @@ const iconComponents = {
   
 const Components = () => {
   const [open, setOpen] = useState(false);
-  const { sidebarNodes, getSidebarNode,getComponent } = useStore(selector);
+  const { sidebarNodes, getSidebarNode, getComponent } = useStore(selector);
+
+  const [hoveredItem, setHoveredItem] = useState(null);
+
+  const handleMouseEnter = (item) => {
+    setHoveredItem(item);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
+    //To drag a element the data can be retrieved by using the setData's key
+    const onDragStart = (event, item) => {
+        const parseFile = JSON.stringify(item);
+        event.dataTransfer.setData('application/parseFile', parseFile);
+        event.dataTransfer.effectAllowed = 'move';
+    };
+
+  const getListContent = (item) => {
+    // console.log('item', item)
+    if (item.nodes) {
+      return (
+        item?.nodes.map(node => (
+        <ul key={node?.id} style={{marginLeft:'-1rem'}}>
+            <li draggable onDragStart={(event) => onDragStart(event, node)} style={{listStyle:'none'}}>{node?.data['label'] }</li>
+        </ul>
+        ))
+      );
+    } else {
+      return null;
+    }
+  };
+
   useEffect(() => {
     getSidebarNode();
     getComponent();
@@ -73,13 +107,6 @@ const Icon = ({ name, ...rest }) => {
     return IconComponent ? <IconComponent {...rest} style={{ padding: 4 }} /> : null;
   };
 
-  //To drag a element the data can be retrieved by using the setData's key
-  const onDragStart = (event, item) => {
-    const parseFile = JSON.stringify(item);
-    event.dataTransfer.setData("application/parseFile", parseFile);
-    event.dataTransfer.effectAllowed = "move";
-  };
-
   return (
     <>
       <Box
@@ -91,7 +118,7 @@ const Icon = ({ name, ...rest }) => {
           {sidebarNodes.map((item, i) => (
             <div
               key={i}
-              className={`dndnode ${item.type}`}
+              className={`dndnode`}
               style={{
                 display:'flex',
                 placeItems:'center'
@@ -100,50 +127,23 @@ const Icon = ({ name, ...rest }) => {
             //     border: `0.5px solid ${item?.data?.bgColor}`,
             //     boxShadow: `0px 0px 5px ${item?.data?.bgColor}`,
             //   }}
-              onDragStart={(event) => onDragStart(event, item)}
-              draggable
+              // onDragStart={(event) => onDragStart(event, item)}
+              onMouseEnter={() => handleMouseEnter(item)}
+              onMouseLeave={handleMouseLeave}
             >
                 <Icon name={item?.icon} color='black'/>
-              {item.data["label"]}
-              {/* <span role = "button" aria-hidden="true" >
-                <RemoveIcon
-                  sx={{
-                    fontSize: 16,
-                    ml: 1,
-                    cursor: "pointer",
-                    background: "#aeaeae",
-                    borderRadius: 10,
-                    color: "white",
-                    display: "grid",
-                  }}
-                />
-              </span> */}
+              {item?.name}
+              {hoveredItem === item && <div className="modal">{getListContent(item)}</div>}
             </div>
           ))}
-          {/* <IconButton
-            aria-label="add"
-            color="primary"
-            // onClick={handleOpen}
-            sx={{
-              width: "fit-content",
-              height: "fit-content",
-              border: "2px solid",
-              p: "4px",
-            }}
-          > */}
             <AddIcon sx={{ fontSize: 20 ,color:'blue',cursor:'pointer' }}   onClick={handleOpen}/>
-          {/* </IconButton> */}
       </Box>
-      {/* <AddComponentNew
-        open={open}
-        handleClose={handleClose}
-        getSidebarNode={getSidebarNode}
-      /> */}
       <AddNewNode
         open={open}
         handleClose={handleClose}
         getSidebarNode={getSidebarNode}
       />
+      
     </>
   );
 };

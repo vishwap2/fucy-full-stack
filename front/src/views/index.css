@@ -60,7 +60,7 @@ iframe#webpack-dev-server-client-overlay {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
+    border: none !important;
     background-color: inherit !important;
     font-family: 'Inter', sans-serif;
     height: initial;
@@ -171,4 +171,17 @@ iframe#webpack-dev-server-client-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.modal {
+    position: absolute;
+    border-radius: 5px;
+    left: 10svh;
+    width: 20svh;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border: 1px solid #ccc;
+    z-index: 1;
+    box-shadow: 0px 0px 4px 2px gray;
 }

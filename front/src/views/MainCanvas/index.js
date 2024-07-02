@@ -785,7 +785,7 @@ export default function MainCanvas() {
 
                         <Controls />
                         <MiniMap zoomable pannable style={{ background: Color.canvasBG }} />
-                        <Background variant="dots" gap={12} size={1} style={{ backgroundColor: Color?.canvasBG }} />
+                        <Background variant="none" gap={12} size={1} style={{ backgroundColor: Color?.canvasBG }} />
                         <RightDrawer
                             state={isRightDrawerOpen}
                             activeTab={activeTab}
@@ -793,7 +793,6 @@ export default function MainCanvas() {
                             drawerClose={toggleDrawerClose}
                             selectedNode={selectedNode}
                             setSelectedNode={setSelectedNode}
-                            modal={modal}
                             nodes={nodes}
                             setNodes={setNodes}
                         />

@@ -128,10 +128,10 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/x-charts@^7.7.1":
-  version "7.7.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.7.1.tgz#968eb4a52eb9f53e11e36c21ff0cea88eded8269"
-  integrity sha512-qUvkGGxBukHXLUqoTUs2rJZz1t+gK0P+bZzQWFbxN93XQyAhrjrOU8VN0x+G7nO3qcXrC2P6s0nevms7ZRSDrA==
+"@mui/x-charts@^7.8.0":
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.8.0.tgz#22188364eaa528041cc21b759b80cbc5bf838c41"
+  integrity sha512-SosaVtx4Ig1nu/loH6Mq4peH5Pq5UvVEnsMfe4G2IEVrMxfwrktWJo+86t9LxiHTERt4wxPKnsqlhkgBIf9ePQ==
   dependencies:
     "@babel/runtime" "^7.24.7"
     "@mui/base" "^5.0.0-beta.40"
