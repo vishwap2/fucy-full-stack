@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Chip, InputLabel, Box, TextField, Autocomplete } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -7,12 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 const Properties = ['Confidentiality', 'Integrity', 'Authenticity', 'Authorization', 'Non-repudiation', 'Availability'];
 
-const EditContent = ({ selectedNode, nodes, setNodes, setSelectedNode }) => {
-    const [details, setDetails] = useState({
-        name: '',
-        properties: []
-        // bgColor: '#000000'
-    });
+const EditContent = ({ selectedNode, nodes, setNodes, setSelectedNode, details, setDetails }) => {
     const [value, setValue] = React.useState('1');
 
     const handleDelete = (valueToDelete) => () => {

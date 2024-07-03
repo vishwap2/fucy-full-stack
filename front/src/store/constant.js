@@ -29,7 +29,8 @@ export const navbarHeight = 150;
    tabContentClr:'#000',
    title:'#000',
    logo:'#5FBDFF',
-   iconColor:'#555555'
+   iconColor: '#555555',
+   leftbarBG:'#f5f5f5'
 
 }
 
@@ -47,6 +48,7 @@ export const navbarHeight = 150;
    tabContentClr:'white',
    title:'whitesmoke',
    logo:'#5FBDFF',
-   iconColor:'white'
+   iconColor: 'white',
+   leftbarBG:'#222831'
 }
 

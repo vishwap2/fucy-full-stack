@@ -1,9 +1,9 @@
 import { Box, Grid, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
-import { Gauge } from '@mui/x-charts/Gauge';
-import { BarChart } from '@mui/x-charts/BarChart';
-import { PieChart } from '@mui/x-charts/PieChart';
+import { Gauge } from '@mui/x-charts'; 
+import { BarChart } from '@mui/x-charts';
+import { PieChart } from '@mui/x-charts'; 
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

@@ -37,13 +37,14 @@ import MicroController from '../../ui-component/custom/Microcontroller';
 import RightDrawer from '../../layout/MainLayout/RightSidebar';
 import CustomGroupNode from '../../ui-component/custom/GroupNode';
 import CustomEdge from '../../ui-component/custom/CustomEdge';
-import { drawerClose, drawerOpen } from '../../store/slices/CurrentIdSlice';
+import { drawerClose, drawerOpen, leftDrawerClose, leftDrawerOpen } from '../../store/slices/CurrentIdSlice';
 import AlertMessage from '../../ui-component/Alert';
 import Header from '../../ui-component/Header';
 import { setProperties } from '../../store/slices/PageSectionSlice';
 import ColorTheme from '../../store/ColorTheme';
 import DsDerivationTable from '../../ui-component/Table/DsDerivationTable';
 import MultiHandleNode from '../../ui-component/custom/MultiHandleNode';
+import LeftDrawer from '../../layout/MainLayout/LeftDrawer';
 
 const elk = new ELK();
 
@@ -197,7 +198,7 @@ export default function MainCanvas() {
         isCyberBlockOpen,
         isCyberTableOpen,
         isRightDrawerOpen,
-        activeTab,
+        isLeftDrawerOpen,
         isDerivationTableOpen
     } = useSelector((state) => state?.currentId);
 
@@ -645,6 +646,8 @@ export default function MainCanvas() {
 
     const toggleDrawerOpen = (tab) => dispatch(drawerOpen(tab));
     const toggleDrawerClose = () => dispatch(drawerClose());
+    const toggleLeftDrawerOpen = () => dispatch(leftDrawerOpen());
+    const toggleLeftDrawerClose = () => dispatch(leftDrawerClose());
     const onLoad = (reactFlowInstance) => reactFlowInstance.current;
 
     const handleSidebarOpen = (e, node) => {
@@ -786,9 +789,13 @@ export default function MainCanvas() {
                         <Controls />
                         <MiniMap zoomable pannable style={{ background: Color.canvasBG }} />
                         <Background variant="none" gap={12} size={1} style={{ backgroundColor: Color?.canvasBG }} />
+                        <LeftDrawer
+                          state={isLeftDrawerOpen}
+                          drawerOpen={toggleLeftDrawerOpen}
+                            drawerClose={toggleLeftDrawerClose}
+                        />
                         <RightDrawer
                             state={isRightDrawerOpen}
-                            activeTab={activeTab}
                             drawerOpen={toggleDrawerOpen}
                             drawerClose={toggleDrawerClose}
                             selectedNode={selectedNode}

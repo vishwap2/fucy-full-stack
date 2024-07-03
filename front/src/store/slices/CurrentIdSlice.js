@@ -12,8 +12,8 @@ const initialState = {
     attackScene: {},
     levelDts: {},
     isRightDrawerOpen: false,
+    isLeftDrawerOpen:false,
     isNavbarClose: false,
-    activeTab: '',
     isDark: false
 };
 
@@ -113,18 +113,28 @@ const CurrentIdSlice = createSlice({
 
             };
         },
-        drawerOpen: (state, action) => {
+        drawerOpen: (state) => {
             return {
                 ...state,
-                activeTab: action.payload,
                 isRightDrawerOpen: true
             };
         },
         drawerClose: (state) => {
             return {
                 ...state,
-                activeTab: '',
                 isRightDrawerOpen: false
+            };
+        },
+        leftDrawerOpen: (state) => {
+            return {
+                ...state,
+                isLeftDrawerOpen: true
+            };
+        },
+        leftDrawerClose: (state) => {
+            return {
+                ...state,
+                isLeftDrawerOpen: false
             };
         },
         navbarSlide: (state) => {
@@ -150,7 +160,8 @@ const CurrentIdSlice = createSlice({
                 isCyberBlockOpen: false,
                 isCyberTableOpen: false,
                 activeTab: '',
-                isRightDrawerOpen: false
+                isRightDrawerOpen: false,
+                isLeftDrawerOpen:false
             };
         }
     }
@@ -169,6 +180,8 @@ export const {
     cyberTableOpen,
     drawerOpen,
     drawerClose,
+    leftDrawerOpen,
+    leftDrawerClose,
     changeMode,
     navbarSlide,
 } = CurrentIdSlice.actions;
